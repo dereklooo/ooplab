@@ -2,16 +2,24 @@
 #define APP_HPP
 
 #include "pch.hpp" // IWYU pragma: export
+#include "StillObject.hpp"
+#include "Util/Renderer.hpp"
 
 class App {
 public:
     enum class State {
+        Title,
+        TitleUpdate,
         START,
         UPDATE,
         END,
     };
 
     State GetCurrentState() const { return m_CurrentState; }
+
+    void Title();
+
+    void TitleUpgrade();
 
     void Start();
 
@@ -23,7 +31,12 @@ private:
     void ValidTask();
 
 private:
-    State m_CurrentState = State::START;
-};
+    std::shared_ptr<StillCharacter> m_Background;
 
+    std::shared_ptr <Util::Renderer> m_renderer;
+
+    std::shared_ptr <StillCharacter> m_Mario;
+
+    State m_CurrentState = State::Title;
+};
 #endif
