@@ -13,6 +13,11 @@ class StillCharacter : public Util::GameObject {
 public:
     StillCharacter(std::string ImagePath) : ImagePath(ImagePath) {m_Drawable = std::make_shared<Util::Image>(ImagePath);};
 
+    void SetPosition(const glm::vec2 &position) {m_Transform.translation = position;}
+
+    void SetSize(glm::vec2 size) {m_Transform.scale = size;}
+
+
 private:
     std::string ImagePath;
 };

@@ -18,6 +18,10 @@ public:
         Animations.push_back(std::make_shared<Util::Animation>(AnimationPaths,true,50,true,20));
     }
 
+    void SetPosition(const glm::vec2 &position) {m_Transform.translation = position;}
+
+    void SetSize(glm::vec2 size) {m_Transform.scale = size;}
+
     void AddImagePath(std::string ImagePath) {
         AnimationPaths.push_back(ImagePath);
     }
