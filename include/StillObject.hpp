@@ -11,13 +11,7 @@
 
 class StillCharacter : public Util::GameObject {
 public:
-    StillCharacter(std::string ImagePath) :ImagePath(ImagePath) {SetImagePath(ImagePath);};
-
-    void SetImagePath(const std::string& ImagePath) {
-        this->ImagePath = ImagePath;
-
-        m_Drawable = std::make_shared<Util::Image>(ImagePath);
-    }
+    StillCharacter(std::string ImagePath) : ImagePath(ImagePath) {m_Drawable = std::make_shared<Util::Image>(ImagePath);};
 
 private:
     std::string ImagePath;

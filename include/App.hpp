@@ -3,6 +3,7 @@
 
 #include "pch.hpp" // IWYU pragma: export
 #include "StillObject.hpp"
+#include "AnimationObject.hpp"
 #include "Util/Renderer.hpp"
 
 class App {
@@ -34,8 +35,6 @@ private:
     std::shared_ptr<StillCharacter> m_Background;
 
     std::shared_ptr <Util::Renderer> m_renderer;
-
-    std::shared_ptr <StillCharacter> m_Mario;
 
     State m_CurrentState = State::Title;
 };

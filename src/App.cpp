@@ -4,6 +4,7 @@
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+
 #include "StillObject.hpp"
 
 void App::Title() {
@@ -11,7 +12,7 @@ void App::Title() {
     m_Background = std::make_shared<StillCharacter> (RESOURCE_DIR "/image/Background/Title/The_Title.png");
     m_Background->SetPosition({0,0});
     m_Background->SetZIndex(50);
-    m_Background->SetSize({1,1});
+    m_Background->SetSize({1.6,1.2});
     m_renderer = std::make_shared<Util::Renderer>();
     m_renderer->AddChild(m_Background);
 
@@ -29,12 +30,6 @@ void App::TitleUpgrade() {
 void App::Start() {
     LOG_TRACE("Start");
 
-    m_Mario = std::make_shared<StillCharacter>(RESOURCE_DIR"image/character/mario/big/big_stand.png");
-    m_Mario->SetZIndex(1);
-    m_Mario->SetPosition({0,0});
-    m_Mario->SetSize({0.5,0.5});
-
-    m_renderer->AddChild(m_Mario);
     m_renderer = std::make_shared<Util::Renderer>();
     m_CurrentState = State::UPDATE;
 }
