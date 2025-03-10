@@ -15,7 +15,7 @@ public:
         for(size_t i = 1;i <= size;i++) {
             AddImagePath(Path + std::to_string(i) + ".png");
         }
-        Animations.push_back(std::make_shared<Util::Animation>(AnimationPaths,true,50,true,20));
+        m_Drawable = std::make_shared<Util::Animation>(AnimationPaths,true,100,true,20);
     }
 
     void SetPosition(const glm::vec2 &position) {m_Transform.translation = position;}
@@ -28,7 +28,7 @@ public:
 
 
 private:
-    std::vector<std::shared_ptr<Util::Animation>> Animations;
+    std::shared_ptr<Util::Animation> Animations;
     std::vector<std::string> AnimationPaths;
 };
 #endif //ANIMATIONOBJECT_HPP

@@ -5,6 +5,7 @@
 #include "StillObject.hpp"
 #include "AnimationObject.hpp"
 #include "Util/Renderer.hpp"
+#include "m_mariO.hpp"
 
 class App {
 public:
@@ -32,8 +33,12 @@ private:
     void ValidTask();
 
 private:
+    std::shared_ptr<AnimationObject> m_TitleMashroom;
+    std::shared_ptr<AnimationObject> m_TitleWord;
+
     std::shared_ptr<StillCharacter> m_Background;
 
+    std::shared_ptr<m_mariO> m_MariO;
     std::shared_ptr <Util::Renderer> m_renderer;
 
     State m_CurrentState = State::Title;

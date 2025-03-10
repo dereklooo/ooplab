@@ -16,10 +16,27 @@ void App::Title() {
     m_renderer = std::make_shared<Util::Renderer>();
     m_renderer->AddChild(m_Background);
 
+    m_TitleMashroom = std::make_shared<AnimationObject>(2,RESOURCE_DIR "/image/character/TitleMashroom/mushroom");
+    m_TitleMashroom->SetPosition({-220,-103});
+    m_TitleMashroom->SetSize({0.15,0.15});
+    m_TitleMashroom->SetZIndex(51);
+    m_renderer->AddChild(m_TitleMashroom);
+
+    m_TitleWord = std::make_shared<AnimationObject>(2,RESOURCE_DIR "/image/character/TitleWord/EnterContinue");
+    m_TitleWord->SetPosition({0,-200});
+    m_TitleWord->SetZIndex(52);
+    m_TitleWord->SetSize({4.5,3});
+    m_renderer->AddChild(m_TitleWord);
+
     m_CurrentState = State::TitleUpdate;
 }
 void App::TitleUpgrade() {
     LOG_TRACE("TitleUpgrade");
+    if (Util::Input::IsKeyPressed(Util::Keycode::KP_ENTER)) {
+        m_renderer->RemoveChild(m_Background);
+        m_renderer->AddChild(m_TitleMashroom);
+        m_CurrentState = State::START;
+    }
     m_renderer->Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
@@ -29,8 +46,14 @@ void App::TitleUpgrade() {
 
 void App::Start() {
     LOG_TRACE("Start");
-
     m_renderer = std::make_shared<Util::Renderer>();
+    m_MariO = std::make_shared<m_mariO> ();
+    m_MariO->SetPosition({0,0});
+    m_MariO->SetCurrentState(Action::Stand);
+    m_MariO->SetZIndex(50);
+    m_MariO->SetSize({1.6,1.2});
+
+    m_renderer->AddChild(m_MariO);
     m_CurrentState = State::UPDATE;
 }
 

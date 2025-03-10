@@ -2,10 +2,10 @@
 // Created by Benson on 2025/3/9.
 //
 
-#ifndef M_MARIO_HPP
-#define M_MARIO_HPP
+#ifndef m_MARIO_HPP
+#define m_MARIO_HPP
 #include "AnimationObject.hpp"
-enum State{
+enum Action{
     Run,
     Jump,
     BigToSmall,
@@ -13,8 +13,14 @@ enum State{
     Swim,
     Stand
  };
-class M_mariO : public AnimationObject {
+class m_mariO : public AnimationObject {
       public:
+
+          void SetCurrentState(Action state);
+
+          Action GetCurrentState();
+
+          std::shared_ptr<Core::Drawable> GetCurrentAnimation();
 
       private:
         std::shared_ptr<Util::Animation> Run;
@@ -25,8 +31,8 @@ class M_mariO : public AnimationObject {
         std::shared_ptr<Util::Image> Stand;
         std::shared_ptr<Util::Image> down;
 
-        State state = State::Stand;
+        Action CurrentState = Action::Stand;
 
 
 };
-#endif //M_MARIO_HPP
+#endif //m_MARIO_HPP
