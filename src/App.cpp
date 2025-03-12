@@ -9,7 +9,7 @@
 
 void App::Title() {
     LOG_TRACE("Title");
-    m_Background = std::make_shared<StillCharacter> (RESOURCE_DIR "/image/Background/Title/The_Title.png");
+    m_Background = std::make_shared<StillObject> (RESOURCE_DIR "/image/Background/Title/The_Title.png");
     m_Background->SetPosition({0,0});
     m_Background->SetZIndex(50);
     m_Background->SetSize({1.6,1.2});
@@ -47,7 +47,7 @@ void App::TitleUpgrade() {
 void App::Start() {
     LOG_TRACE("Start");
     m_renderer = std::make_shared<Util::Renderer>();
-    m_MariO = std::make_shared<m_mariO> ();
+    m_MariO = std::make_shared<m_mariO>();
     m_MariO->SetPosition({0,0});
     m_MariO->SetCurrentState(Action::Stand);
     m_MariO->SetZIndex(50);
@@ -63,6 +63,10 @@ void App::Update() {
      * Do not touch the code below as they serve the purpose for
      * closing the window.
      */
+
+    if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
+        m_mariO->Set
+    }
     m_renderer->Update();
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||

@@ -2,35 +2,35 @@
 // Created by benson on 2025/3/10.
 //
 #include "m_mariO.hpp"
-
         void m_mariO::SetCurrentState(Action state){
             CurrentState = state;
-            m_Drawable = GetCurrentAnimation();
+            m_Drawable = GetCurrentAnimation()->GetDrawable();
         };
 
         Action m_mariO::GetCurrentState(){
             return CurrentState;
         };
 
-        std::shared_ptr<Core::Drawable> GetCurrentAnimation(){
-            switch(this->GetCurrentState()){
+        std::shared_ptr<AnimationObject> m_mariO::GetCurrentAnimation(){
+            switch(CurrentState){
                 case(Action::Run):
                     return Run;
-                break;
+                    break;
                 case (Action::Jump):
                     return Jump;
-                break;
+                    break;
                 case(Action::BigToSmall):
                     return BigToSmall;
-                break;
+                    break;
                 case(Action::Stop):
                     return Stop;
-                break;
+                    break;
                 case(Action::Swim):
                     return Swim;
-                break;
+                    break;
                 case(Action::Stand):
                     return Stand;
+                    break;
                 break;
             }
-
+        }
