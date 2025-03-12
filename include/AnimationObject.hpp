@@ -20,6 +20,8 @@ public:
 
     Way GetWay(){return way;}
 
+    glm::vec2 GetPosition() {return m_Transform.translation;}
+
     void SetWay(Way way){this->way = way;}
 
     void SetPosition(const glm::vec2 &position) {m_Transform.translation = position;}

@@ -17,6 +17,8 @@ public:
 
     void SetSize(glm::vec2 size) {m_Transform.scale = size;}
 
+    glm::vec2 GetPosition() {return m_Transform.translation;}
+
     std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
 private:
     std::string ImagePath;

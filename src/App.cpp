@@ -11,7 +11,7 @@ void App::Title() {
     LOG_TRACE("Title");
     m_Background = std::make_shared<StillObject> (RESOURCE_DIR "/image/Background/Title/The_Title.png");
     m_Background->SetPosition({0,0});
-    m_Background->SetZIndex(50);
+    m_Background->SetZIndex(49);
     m_Background->SetSize({1.6,1.2});
     m_renderer = std::make_shared<Util::Renderer>();
     m_renderer->AddChild(m_Background);
@@ -33,8 +33,6 @@ void App::Title() {
 void App::TitleUpgrade() {
     LOG_TRACE("TitleUpgrade");
     if (Util::Input::IsKeyPressed(Util::Keycode::KP_ENTER)) {
-        m_renderer->RemoveChild(m_Background);
-        m_renderer->AddChild(m_TitleMashroom);
         m_CurrentState = State::START;
     }
     m_renderer->Update();
@@ -47,12 +45,17 @@ void App::TitleUpgrade() {
 void App::Start() {
     LOG_TRACE("Start");
     m_renderer = std::make_shared<Util::Renderer>();
+
     m_MariO = std::make_shared<m_mariO>();
     m_MariO->SetPosition({0,0});
     m_MariO->SetCurrentState(Action::Stand);
     m_MariO->SetZIndex(50);
     m_MariO->SetSize({1.6,1.2});
 
+    m_Background->SetDrawable(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/Level1/level_1.png"));
+    m_Background->SetSize({3.5,3.5});
+
+    m_renderer->AddChild(m_Background);
     m_renderer->AddChild(m_MariO);
     m_CurrentState = State::UPDATE;
 }
@@ -63,11 +66,36 @@ void App::Update() {
      * Do not touch the code below as they serve the purpose for
      * closing the window.
      */
+    if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
+        m_Background->SetPosition({m_Background->GetPosition().x - 1,m_Background->GetPosition().y});
+        m_MariO->SetCurrentState(Action::Run);
+    }
 
-    // if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
-    //     m_mariO->Set
-    // }
+
+    if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
+        m_Background->SetPosition({m_Background->GetPosition().x + 1,m_Background->GetPosition().y});
+        m_MariO->SetCurrentState(Action::Run);
+    }
+
+    if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+        m_MariO->SetCurrentState(Action::Down);
+        m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y - 1});
+    }
+
+    if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+        m_MariO->SetCurrentState(Action::Jump);
+        m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 1});
+    }
+
+    if(!Util::Input::IsKeyPressed(Util::Keycode::S) &&
+        !Util::Input::IsKeyPressed(Util::Keycode::W) &&
+        !Util::Input::IsKeyPressed(Util::Keycode::A) &&
+        !Util::Input::IsKeyPressed(Util::Keycode::D)) {
+        m_MariO->SetCurrentState(Action::Stand);
+
+    }
     m_renderer->Update();
+
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {

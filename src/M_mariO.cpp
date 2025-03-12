@@ -2,9 +2,9 @@
 // Created by benson on 2025/3/10.
 //
 #include "m_mariO.hpp"
-        void m_mariO::SetCurrentState(Action state){
+        void m_mariO::SetCurrentState(const Action state){
             CurrentState = state;
-            m_Drawable = GetCurrentAnimation()->GetDrawable();
+            this->SetDrawable(GetCurrentAnimation()->GetDrawable());
         };
 
         Action m_mariO::GetCurrentState(){
@@ -31,6 +31,11 @@
                 case(Action::Stand):
                     return Stand;
                     break;
-                break;
+                case(Action::Down):
+                    return Down;
+                    break;
+                default:
+                    return nullptr;
+                    break;
             }
         }
