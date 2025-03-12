@@ -15,7 +15,7 @@ enum Action{
  };
 class m_mariO final : public AnimationObject {
       public:
-          m_mariO() : AnimationObject(1,RESOURCE_DIR"/image/character/mario/big/StandAndDown"){};
+          m_mariO() : AnimationObject(1,RESOURCE_DIR"/image/character/mario/big/StandAndDown/big_stand"){};
 
           void SetCurrentState(Action state);
 
@@ -24,8 +24,8 @@ class m_mariO final : public AnimationObject {
           std::shared_ptr<AnimationObject> GetCurrentAnimation();
 
       private:
-        std::shared_ptr<AnimationObject> Run = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/run");
-        std::shared_ptr<AnimationObject> Jump = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/jump");
+        std::shared_ptr<AnimationObject> Run = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/run/big_run");
+        std::shared_ptr<AnimationObject> Jump = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/jump/big_jump");
         std::shared_ptr<AnimationObject> BigToSmall;
         std::shared_ptr<AnimationObject> Stop;
         std::shared_ptr<AnimationObject> Swim;

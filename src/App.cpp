@@ -64,9 +64,9 @@ void App::Update() {
      * closing the window.
      */
 
-    if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
-        m_mariO->Set
-    }
+    // if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
+    //     m_mariO->Set
+    // }
     m_renderer->Update();
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
