@@ -5,20 +5,51 @@
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
 #include "StillObject.hpp"
-#include "ScenceObject.hpp"
-#include "AnimationObject.hpp"
-#include "m_mariO.hpp"
 #include "Monster.hpp"
+#include "ScenceObject.hpp"
+#include "m_mariO.hpp"
+#include "App.hpp"
+
 class Level{
-  public:
-    Level();
+public:
     void SetBackGround(std::shared_ptr<StillObject> Background);
     void SetMonster(std::vector<std::shared_ptr<Monster>> Monsters);
     void SetScenceObject(std::shared_ptr<ScenceObject> ScenceObject);
 
-    void update();
-  private:
+    void update() {
+        if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
+        m_Background->SetPosition({m_Background->GetPosition().x - 1,m_Background->GetPosition().y});
+        m_MariO->SetCurrentState(Action::Run);
+    }
 
-      std::shared_ptr<m_mariO> m_Mari;
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
+            m_Background->SetPosition({m_Background->GetPosition().x + 1,m_Background->GetPosition().y});
+            m_MariO->SetCurrentState(Action::Run);
+        }
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+            m_MariO->SetCurrentState(Action::Down);
+            m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y - 1});
+        }
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+            m_MariO->SetCurrentState(Action::Jump);
+            m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 1});
+        }
+        if (m_mariO->GetPosition().x > m_Background->GetPosition().x + m_Background->GetWidth() / 2)
+
+        if(!Util::Input::IsKeyPressed(Util::Keycode::S) &&
+            !Util::Input::IsKeyPressed(Util::Keycode::W) &&
+            !Util::Input::IsKeyPressed(Util::Keycode::A) &&
+            !Util::Input::IsKeyPressed(Util::Keycode::D)) {
+            m_MariO->SetCurrentState(Action::Stand);
+            }
+    };
+private:
+    std::shared_ptr<m_mariO> m_MariO;
+    std::shared_ptr<StillObject> m_Background;
+    std::vector<std::shared_ptr<Monster>> Monsters;
+    std::shared_ptr<ScenceObject> ScenceObject;
 };
 #endif //LEVEL_HPP

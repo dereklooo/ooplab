@@ -7,6 +7,12 @@
 #include "Util/Renderer.hpp"
 #include "m_mariO.hpp"
 #include "Util/Time.hpp"
+#include "Level.hpp"
+
+namespace Util::Logger {
+    enum class Level;
+}
+
 class App {
 public:
     enum class State {
@@ -36,13 +42,7 @@ private:
     std::shared_ptr<AnimationObject> m_TitleMashroom;
     std::shared_ptr<AnimationObject> m_TitleWord;
 
-    std::shared_ptr<Level1> m_Level1
-
-    std::shared_ptr<Level2> m_Level2
-
-    std::shared_ptr<Level3> m_Level3
-
-    std::shared_ptr<StillObject> m_Background;
+    std::shared_ptr<Level> m_level;
 
     std::shared_ptr<m_mariO> m_MariO;
 
