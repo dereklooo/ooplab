@@ -6,7 +6,7 @@
 #include "AnimationObject.hpp"
 #include "Util/Renderer.hpp"
 #include "m_mariO.hpp"
-
+#include "Util/Time.hpp"
 class App {
 public:
     enum class State {
@@ -35,6 +35,12 @@ private:
 private:
     std::shared_ptr<AnimationObject> m_TitleMashroom;
     std::shared_ptr<AnimationObject> m_TitleWord;
+
+    std::shared_ptr<Level1> m_Level1
+
+    std::shared_ptr<Level2> m_Level2
+
+    std::shared_ptr<Level3> m_Level3
 
     std::shared_ptr<StillObject> m_Background;
 

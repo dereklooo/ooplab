@@ -66,6 +66,7 @@ void App::Update() {
      * Do not touch the code below as they serve the purpose for
      * closing the window.
      */
+    m_level->update();
     if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
         m_Background->SetPosition({m_Background->GetPosition().x - 1,m_Background->GetPosition().y});
         m_MariO->SetCurrentState(Action::Run);
@@ -92,7 +93,6 @@ void App::Update() {
         !Util::Input::IsKeyPressed(Util::Keycode::A) &&
         !Util::Input::IsKeyPressed(Util::Keycode::D)) {
         m_MariO->SetCurrentState(Action::Stand);
-
     }
     m_renderer->Update();
 

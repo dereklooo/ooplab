@@ -20,6 +20,8 @@ public:
     glm::vec2 GetPosition() {return m_Transform.translation;}
 
     std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
+
+    void SetImagePath(std::string){this->ImagePath = ImagePath;}
 private:
     std::string ImagePath;
 };

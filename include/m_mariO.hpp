@@ -24,6 +24,7 @@ class m_mariO final : public AnimationObject {
 
           std::shared_ptr<AnimationObject> GetCurrentAnimation();
 
+          bool Ifcolide(std::shared_ptr<GameObject> Object);
       private:
         std::shared_ptr<AnimationObject> Run = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/run/big_run");
         std::shared_ptr<AnimationObject> Jump = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/jump/big_jump");

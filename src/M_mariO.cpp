@@ -39,3 +39,12 @@
                     break;
             }
         }
+        bool m_mariO::Ifcolide(std::shared_ptr<GameObject> Object) {
+            if (Object->GetTransform().translation.x <= this->GetPosition().x + this->GetScaledSize().x / 2 &&
+                Object->GetTransform().translation.x >= this->GetPosition().x - this->GetScaledSize().x / 2 &&
+                Object->GetTransform().translation.y <= this->GetPosition().y + this->GetScaledSize().y / 2 &&
+                Object->GetTransform().translation.y >= this->GetPosition().x - this->GetScaledSize().x / 2) {
+                return true;
+            }
+            return false;
+        }
