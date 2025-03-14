@@ -48,3 +48,7 @@
             }
             return false;
         }
+
+        void update() {
+
+        }

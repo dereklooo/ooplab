@@ -8,7 +8,7 @@
 #include "Monster.hpp"
 #include "ScenceObject.hpp"
 #include "m_mariO.hpp"
-#include "App.hpp"
+#include "Util/Input.hpp"
 
 class Level{
 public:
@@ -37,7 +37,7 @@ public:
             m_MariO->SetCurrentState(Action::Jump);
             m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 1});
         }
-        if (m_mariO->GetPosition().x > m_Background->GetPosition().x + m_Background->GetWidth() / 2)
+
 
         if(!Util::Input::IsKeyPressed(Util::Keycode::S) &&
             !Util::Input::IsKeyPressed(Util::Keycode::W) &&

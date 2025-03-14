@@ -41,6 +41,7 @@ private:
 private:
     std::shared_ptr<AnimationObject> m_TitleMashroom;
     std::shared_ptr<AnimationObject> m_TitleWord;
+    std::shared_ptr<StillObject> m_Background;
 
     std::shared_ptr<Level> m_level;
 

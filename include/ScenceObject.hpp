@@ -5,5 +5,5 @@
 #ifndef SCENCEOBJECT_HPP
 #define SCENCEOBJECT_HPP
 #include "StillObject.hpp"
-class ScenceObject : public StillObject {}
+class ScenceObject : public StillObject {};
 #endif //SCENCEOBJECT_HPP
