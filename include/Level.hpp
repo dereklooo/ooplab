@@ -18,6 +18,7 @@ public:
 
     void update() {
         if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
+            moveDistange+=1;
         m_Background->SetPosition({m_Background->GetPosition().x - 1,m_Background->GetPosition().y});
         m_MariO->SetCurrentState(Action::Run);
     }
@@ -30,7 +31,7 @@ public:
 
         if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
             m_MariO->SetCurrentState(Action::Down);
-            m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y - 1});
+            ;
         }
 
         if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
@@ -51,5 +52,6 @@ private:
     std::shared_ptr<StillObject> m_Background;
     std::vector<std::shared_ptr<Monster>> Monsters;
     std::shared_ptr<ScenceObject> ScenceObject;
+    int moveDistange=0;
 };
 #endif //LEVEL_HPP

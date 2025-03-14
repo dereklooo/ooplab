@@ -33,7 +33,7 @@ void App::Title() {
 void App::TitleUpgrade() {
     LOG_TRACE("TitleUpgrade");
     if (Util::Input::IsKeyPressed(Util::Keycode::KP_ENTER)|| Util::Input::IsKeyPressed(Util::Keycode::RETURN)) {
-        m_CurrentState = State::START;
+        m_CurrentState = State::END;
     }
     m_renderer->Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
