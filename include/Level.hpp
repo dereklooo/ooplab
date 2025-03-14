@@ -9,13 +9,16 @@
 #include "ScenceObject.hpp"
 #include "m_mariO.hpp"
 #include "Util/Input.hpp"
+#include "Util/Renderer.hpp"
 
 class Level{
 public:
     void SetBackGround(std::shared_ptr<StillObject> Background);
     void SetMonster(std::vector<std::shared_ptr<Monster>> Monsters);
     void SetScenceObject(std::shared_ptr<ScenceObject> ScenceObject);
-
+    void Start() {
+        m_renderer->AddChildren(Monsters);
+    }
     void update() {
         if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
             moveDistange+=1;
@@ -46,8 +49,10 @@ public:
             !Util::Input::IsKeyPressed(Util::Keycode::D)) {
             m_MariO->SetCurrentState(Action::Stand);
             }
+        m_renderer->Update();
     };
 private:
+    std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
     std::shared_ptr<m_mariO> m_MariO;
     std::shared_ptr<StillObject> m_Background;
     std::vector<std::shared_ptr<Monster>> Monsters;
