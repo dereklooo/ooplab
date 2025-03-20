@@ -1,14 +1,7 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "pch.hpp" // IWYU pragma: export
-#include "StillObject.hpp"
-#include "AnimationObject.hpp"
-#include "Util/Renderer.hpp"
-#include "m_mariO.hpp"
-#include "Util/Time.hpp"
-#include "Level.hpp"
-
+#include "AllInclude.hpp"
 namespace Util::Logger {
     enum class Level;
 }
@@ -40,15 +33,17 @@ private:
 
 private:
     std::shared_ptr<AnimationObject> m_TitleMashroom;
+
     std::shared_ptr<AnimationObject> m_TitleWord;
+
     std::shared_ptr<StillObject> m_Background;
 
     std::shared_ptr<Level> m_level;
 
-    std::shared_ptr<m_mariO> m_MariO;
-
     std::shared_ptr <Util::Renderer> m_renderer;
 
     State m_CurrentState = State::Title;
+
+    size_t level = 1;
 };
 #endif

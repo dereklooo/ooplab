@@ -5,5 +5,7 @@
 #ifndef LEVEL2_HPP
 #define LEVEL2_HPP
 #include "Level.hpp"
+class Level2 : public Level {
 
+};
 #endif //LEVEL2_HPP

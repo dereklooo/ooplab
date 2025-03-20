@@ -14,27 +14,35 @@
 class Level{
 public:
     void SetBackGround(std::shared_ptr<StillObject> Background);
-    void SetMonster(std::vector<std::shared_ptr<Monster>> Monsters);
     void SetScenceObject(std::shared_ptr<ScenceObject> ScenceObject);
     void Start() {
-        m_renderer->AddChildren(Monsters);
+        m_MariO->SetPosition({0,0});
+        m_MariO->SetCurrentState(Action::Stand);
+        m_MariO->SetZIndex(50);
+        m_MariO->SetSize({1.6,1.2});
+
+        m_Background->SetSize({3.5,3.5});
+
+        m_renderer->AddChild(m_Background);
+        m_renderer->AddChild(m_MariO);
     }
     void update() {
         if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
-            moveDistange+=1;
-        m_Background->SetPosition({m_Background->GetPosition().x - 1,m_Background->GetPosition().y});
-        m_MariO->SetCurrentState(Action::Run);
+            m_Background->SetPosition({m_Background->GetPosition().x - 1,m_Background->GetPosition().y});
+            m_MariO->SetSize({1.6,1.2});
+            m_MariO->SetCurrentState(Action::Run);
     }
 
 
         if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
             m_Background->SetPosition({m_Background->GetPosition().x + 1,m_Background->GetPosition().y});
+            m_MariO->SetSize({-1.6,1.2});
             m_MariO->SetCurrentState(Action::Run);
         }
 
         if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
             m_MariO->SetCurrentState(Action::Down);
-            ;
+
         }
 
         if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
@@ -50,10 +58,12 @@ public:
             m_MariO->SetCurrentState(Action::Stand);
             }
         m_renderer->Update();
-    };
-private:
+    }
+
+
+protected:
     std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
-    std::shared_ptr<m_mariO> m_MariO;
+    std::shared_ptr<m_mariO> m_MariO = std::make_shared<m_mariO>();
     std::shared_ptr<StillObject> m_Background;
     std::vector<std::shared_ptr<Monster>> Monsters;
     std::shared_ptr<ScenceObject> ScenceObject;

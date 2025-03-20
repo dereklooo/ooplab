@@ -36,6 +36,10 @@ add_executable(${PROJECT_NAME}
     ${SRC_DIR}/M_mariO.cpp
     ${SRC_FILES}
     ${HEADER_FILES}
+        include/Monsters/Black_turtle.hpp
+        include/Monsters/Fly_turtle.hpp
+        include/Monsters/Eat_flower.hpp
+        include/Monsters/Kooper.hpp
 )
 
 if(MSVC)

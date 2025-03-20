@@ -48,7 +48,3 @@
             }
             return false;
         }
-
-        void update() {
-
-        }

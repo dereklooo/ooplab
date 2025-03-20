@@ -4,7 +4,7 @@
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
-
+#include "iostream"
 #include "StillObject.hpp"
 
 void App::Title() {
@@ -33,7 +33,7 @@ void App::Title() {
 void App::TitleUpgrade() {
     LOG_TRACE("TitleUpgrade");
     if (Util::Input::IsKeyPressed(Util::Keycode::KP_ENTER)|| Util::Input::IsKeyPressed(Util::Keycode::RETURN)) {
-        m_CurrentState = State::END;
+        m_CurrentState = State::START;
     }
     m_renderer->Update();
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
@@ -44,19 +44,18 @@ void App::TitleUpgrade() {
 
 void App::Start() {
     LOG_TRACE("Start");
-    m_renderer = std::make_shared<Util::Renderer>();
-
-    m_MariO = std::make_shared<m_mariO>();
-    m_MariO->SetPosition({0,0});
-    m_MariO->SetCurrentState(Action::Stand);
-    m_MariO->SetZIndex(50);
-    m_MariO->SetSize({1.6,1.2});
-
-    m_Background->SetDrawable(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/Level1/level_1.png"));
-    m_Background->SetSize({3.5,3.5});
-
-    m_renderer->AddChild(m_Background);
-    m_renderer->AddChild(m_MariO);
+    switch(level) {
+        case 1:
+            m_level = std::make_shared<Level1>();
+            break;
+        case 2:
+            m_level = std::make_shared<Level2>();
+            break;
+        case 3:
+            m_level = std::make_shared<Level3>();
+            break;
+    }
+    m_level->Start();
     m_CurrentState = State::UPDATE;
 }
 
