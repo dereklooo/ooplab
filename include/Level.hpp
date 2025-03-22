@@ -17,25 +17,25 @@ public:
     void SetScenceObject(std::shared_ptr<ScenceObject> ScenceObject);
     virtual void condition() = 0;
     void Start() {
-        m_MariO->SetPosition({0,0});
+        m_MariO->SetPosition({-620,-257});
         m_MariO->SetCurrentState(Action::Stand);
         m_MariO->SetZIndex(50);
         m_MariO->SetSize({1,1});
-        m_Background->SetPosition({5200,0});
+        m_Background->SetPosition({4700,0});
         m_renderer->AddChild(m_Background);
         m_renderer->AddChild(m_MariO);
     }
     void update() {
         this->condition();
         if (Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-            std::cout<<m_Background->GetPosition().x<<" "<<m_Background->GetPosition().y<<std::endl;
+            std::cout<<m_MariO->GetPosition().x<<" "<<m_Background->GetPosition().y<<std::endl;
         }
         if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
             if (m_MariO->GetPosition().x >= 0) {
-                m_Background->SetPosition({m_Background->GetPosition().x - 2,m_Background->GetPosition().y});
+                m_Background->SetPosition({m_Background->GetPosition().x - 4,m_Background->GetPosition().y});
             }
             else {
-                m_MariO->SetPosition({m_MariO->GetPosition().x + 2,m_MariO->GetPosition().y});
+                m_MariO->SetPosition({m_MariO->GetPosition().x + 4,m_MariO->GetPosition().y});
             }
             m_MariO->SetSize({1,1});
             m_MariO->SetCurrentState(Action::Run);
@@ -43,7 +43,10 @@ public:
 
 
         if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
-            m_MariO->SetPosition({m_MariO->GetPosition().x - 2,m_MariO->GetPosition().y});
+            if(m_MariO->GetPosition().x - 1 <= -620) {
+                m_MariO->SetPosition({-620,m_MariO->GetPosition().y});
+            }
+            m_MariO->SetPosition({m_MariO->GetPosition().x - 4,m_MariO->GetPosition().y});
             m_MariO->SetSize({-1,1});
             m_MariO->SetCurrentState(Action::Run);
         }

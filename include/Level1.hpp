@@ -16,16 +16,19 @@ class Level1 : public Level{
         void condition() override {
             switch (Condition_num) {
                 case 1:
-                    if (m_Background->GetPosition().x == 5200) {
+                    if (m_Background->GetPosition().x == 4700) {
                         Monsters.push_back(std::make_shared<Mushroom>(2,
                         RESOURCE_DIR "/image/character/monster/mushroom/mushroom_walk",
-                        glm::vec2(m_MariO->GetPosition().x + 500, m_MariO->GetPosition().y)));
+                        glm::vec2{600,-275}));
+                    }
                         for (auto monster : Monsters) {
                             m_renderer->AddChild(monster);
                         }
                         Condition_num += 1;
                         break;
-                    }
+                case 2:
+                    break;
+
             }
         }
 
