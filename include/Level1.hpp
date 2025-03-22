@@ -11,14 +11,23 @@ class Level1 : public Level{
       public:
         Level1() {
             m_Background = std::make_shared<StillObject>(RESOURCE_DIR "/image/Background/Level1/level_1.png");
-            m_Background->SetSize({0.8,0.8});
-            Monsters.push_back(std::make_shared<Mushroom>());
-            Monsters.push_back(std::make_shared<Turtle>());
+            m_Background->SetSize({2.92,3.3});
         };
-        void condition() {
-
+        void condition() override {
+            switch (Condition_num) {
+                case 1:
+                    if (m_Background->GetPosition().x == 5200) {
+                        Monsters.push_back(std::make_shared<Mushroom>(2,
+                        RESOURCE_DIR "/image/character/monster/mushroom/mushroom_walk",
+                        glm::vec2(m_MariO->GetPosition().x + 500, m_MariO->GetPosition().y)));
+                        for (auto monster : Monsters) {
+                            m_renderer->AddChild(monster);
+                        }
+                        Condition_num += 1;
+                        break;
+                    }
+            }
         }
-
 
 };
 #endif //LEVEL1_HPP

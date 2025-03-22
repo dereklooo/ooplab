@@ -40,6 +40,9 @@ add_executable(${PROJECT_NAME}
         include/Monsters/Fly_turtle.hpp
         include/Monsters/Eat_flower.hpp
         include/Monsters/Kooper.hpp
+        src/Mushroom.cpp
+        src/Turtle.cpp
+        include/SceneObject.hpp
 )
 
 if(MSVC)

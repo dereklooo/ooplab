@@ -34,9 +34,18 @@ public:
 
     std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
 
+    bool collition(const GameObject& other) {
+        if(other.GetTransform().translation.x + (other.GetScaledSize().x / 2) >= this->GetPosition().x &&
+            other.GetTransform().translation.x - (other.GetScaledSize().x / 2) <= this->GetPosition().x &&
+            other.GetTransform().translation.y - (other.GetScaledSize().y / 2) <= this->GetPosition().x &&
+            other.GetTransform().translation.y + (other.GetScaledSize().y / 2) >= this->GetPosition().x) {
+            return true;
+        }
+        return false;
+    }
 protected:
     std::shared_ptr<Util::Animation> Animations;
     std::vector<std::string> AnimationPaths;
-    Way way;
+    Way way = left;
 };
 #endif //ANIMATIONOBJECT_HPP

@@ -60,13 +60,11 @@ void App::Start() {
 }
 
 void App::Update() {
-
     /*
      * Do not touch the code below as they serve the purpose for
      * closing the window.
      */
     m_level->update();
-
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {

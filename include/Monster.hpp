@@ -5,6 +5,7 @@
 #ifndef MONSTER_HPP
 #define MONSTER_HPP
 #include "AnimationObject.hpp"
+#include "StillObject.hpp"
 
 // #include "Monsters/Black_turtle.hpp"
 // #include "Monsters/Eat_flower.hpp"
@@ -16,7 +17,7 @@
 
 class Monster : public AnimationObject {
     public:
-      Monster();
+      Monster(const size_t size,std::string Path) : AnimationObject(size,Path) {};
       void SetMonsterVect(std::vector<std::shared_ptr<Monster>> monsters) {
           this->monsters() = monsters;
       };

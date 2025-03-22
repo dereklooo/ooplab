@@ -6,43 +6,50 @@
 #define LEVEL_HPP
 #include "StillObject.hpp"
 #include "Monster.hpp"
-#include "ScenceObject.hpp"
+#include "SceneObject.hpp"
 #include "m_mariO.hpp"
 #include "Util/Input.hpp"
 #include "Util/Renderer.hpp"
-
+#include <iostream>
 class Level{
 public:
     void SetBackGround(std::shared_ptr<StillObject> Background);
     void SetScenceObject(std::shared_ptr<ScenceObject> ScenceObject);
+    virtual void condition() = 0;
     void Start() {
         m_MariO->SetPosition({0,0});
         m_MariO->SetCurrentState(Action::Stand);
         m_MariO->SetZIndex(50);
-        m_MariO->SetSize({1.6,1.2});
-
-        m_Background->SetSize({3.5,3.5});
-
+        m_MariO->SetSize({1,1});
+        m_Background->SetPosition({5200,0});
         m_renderer->AddChild(m_Background);
         m_renderer->AddChild(m_MariO);
     }
     void update() {
+        this->condition();
+        if (Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
+            std::cout<<m_Background->GetPosition().x<<" "<<m_Background->GetPosition().y<<std::endl;
+        }
         if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
-            m_Background->SetPosition({m_Background->GetPosition().x - 1,m_Background->GetPosition().y});
-            m_MariO->SetSize({1.6,1.2});
+            if (m_MariO->GetPosition().x >= 0) {
+                m_Background->SetPosition({m_Background->GetPosition().x - 2,m_Background->GetPosition().y});
+            }
+            else {
+                m_MariO->SetPosition({m_MariO->GetPosition().x + 2,m_MariO->GetPosition().y});
+            }
+            m_MariO->SetSize({1,1});
             m_MariO->SetCurrentState(Action::Run);
     }
 
 
         if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
-            m_Background->SetPosition({m_Background->GetPosition().x + 1,m_Background->GetPosition().y});
-            m_MariO->SetSize({-1.6,1.2});
+            m_MariO->SetPosition({m_MariO->GetPosition().x - 2,m_MariO->GetPosition().y});
+            m_MariO->SetSize({-1,1});
             m_MariO->SetCurrentState(Action::Run);
         }
 
         if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
             m_MariO->SetCurrentState(Action::Down);
-
         }
 
         if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
@@ -57,7 +64,11 @@ public:
             !Util::Input::IsKeyPressed(Util::Keycode::D)) {
             m_MariO->SetCurrentState(Action::Stand);
             }
+        for (auto& monster : Monsters) {
+            monster->Action();
+        }
         m_renderer->Update();
+
     }
 
 
@@ -67,6 +78,7 @@ protected:
     std::shared_ptr<StillObject> m_Background;
     std::vector<std::shared_ptr<Monster>> Monsters;
     std::shared_ptr<ScenceObject> ScenceObject;
-    int moveDistange=0;
+    size_t Condition_num = 1;
+    int moveDistange = 0;
 };
 #endif //LEVEL_HPP

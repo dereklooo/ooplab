@@ -6,6 +6,6 @@
 #define LEVEL3_HPP
 #include "Level.hpp"
 class Level3 : public Level {
-
+    void condition() override{};
 };
 #endif //LEVEL3_HPP
