@@ -43,6 +43,13 @@ add_executable(${PROJECT_NAME}
         src/Mushroom.cpp
         src/Turtle.cpp
         include/SceneObject.hpp
+        include/Block/Pipe_64_128.hpp
+        include/Block/LuckyBlock.hpp
+        include/Block/LuckyBlock.hpp
+        include/Block/FootBlock.hpp
+        include/Block/Pipe_64_96.hpp
+        include/Block/Pipe_64_64.hpp
+        include/Block/OriginalBlock.hpp
 )
 
 if(MSVC)

@@ -5,9 +5,9 @@
 #ifndef SCENEOBJECT_HPP
 #define SCENEOBJECT_HPP
 #include "StillObject.hpp"
-class ScenceObject : public StillObject{
+class SceneObject : public StillObject{
     public:
-        ScenceObject(std::string path,glm::vec2 position) : StillObject(path) {
+        SceneObject(std::string path,glm::vec2 position) : StillObject(path) {
             this->SetPosition(position);
         }
 
