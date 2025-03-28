@@ -14,16 +14,12 @@
 // #include "Monsters/Kooper.hpp"
 // #include "Monsters/Mushroom.hpp"
 // #include "Monsters/Turtle.hpp"
-
 class Monster : public AnimationObject {
     public:
       Monster(const size_t size,std::string Path) : AnimationObject(size,Path) {};
-      void SetMonsterVect(std::vector<std::shared_ptr<Monster>> monsters) {
-          this->monsters() = monsters;
-      };
       virtual void Action() = 0;
-      virtual void GotHit() = 0;
-    private:
-        std::vector<std::shared_ptr<Monster>> monsters();
+      virtual void Hurt() = 0;
+    protected:
+
 };
 #endif //MONSTER_HPP

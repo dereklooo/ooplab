@@ -10,6 +10,6 @@ void Turtle::Action() {
         this->SetPosition({this->GetPosition().x + 1,this->GetPosition().y});
     }
 }
-void Turtle::GotHit() {
-
+void Turtle::Hurt() {
+    this->SetDrawable(this->die->GetDrawable());
 }

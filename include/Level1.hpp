@@ -17,8 +17,8 @@ class Level1 : public Level{
             m_Background->SetPosition({-640,360});
 
             MapManerger = std::make_shared<MapManager>(m_Background->GetPosition());
-            ScenceManager = MapManerger->SetBlock(LuckyBlockPosition,RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock.png");
-            for (auto object : ScenceManager) {
+            SceneManager = MapManerger->SetBlock(LuckyBlockPosition,RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock.png");
+            for (auto &object : SceneManager) {
                 std::cout<<object->GetPosition().x << " "<<object->GetPosition().y<<std::endl;
             }
         }
@@ -29,7 +29,7 @@ class Level1 : public Level{
                         Monsters.push_back(std::make_shared<Mushroom>(2,
                         RESOURCE_DIR "/image/character/monster/mushroom/mushroom_walk",
                         glm::vec2{600,-247}));
-                        for (auto monster : Monsters) {
+                        for (auto &monster : Monsters) {
                             m_renderer->AddChild(monster);
                         }
                         Condition_num += 1;

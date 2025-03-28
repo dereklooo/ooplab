@@ -31,7 +31,7 @@ public:
 private:
     void ValidTask();
 
-private:
+
     std::shared_ptr<AnimationObject> m_TitleMashroom;
 
     std::shared_ptr<AnimationObject> m_TitleWord;

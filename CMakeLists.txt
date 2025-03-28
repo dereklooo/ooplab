@@ -50,6 +50,9 @@ add_executable(${PROJECT_NAME}
         include/Block/Pipe_64_96.hpp
         include/Block/Pipe_64_64.hpp
         include/Block/OriginalBlock.hpp
+        src/m_mariO.cpp
+        src/m_mariO.cpp
+        src/m_mariO.cpp
 )
 
 if(MSVC)

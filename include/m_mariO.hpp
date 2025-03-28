@@ -5,6 +5,8 @@
 #ifndef m_MARIO_HPP
 #define m_MARIO_HPP
 #include "AnimationObject.hpp"
+#include "StillObject.hpp"
+enum Size{Big ,Small};
 enum Action{
     Run,
     Down,
@@ -12,11 +14,12 @@ enum Action{
     BigToSmall,
     Stop,
     Swim,
-    Stand
+    Stand,
+    Die
  };
 class m_mariO final : public AnimationObject {
       public:
-          m_mariO() : AnimationObject(1,RESOURCE_DIR"/image/character/mario/big/StandAndDown/big_stand"){};
+          m_mariO();
 
           void SetCurrentState(Action state);
 
@@ -24,19 +27,33 @@ class m_mariO final : public AnimationObject {
 
           std::shared_ptr<AnimationObject> GetCurrentAnimation();
 
-          bool Ifcolide(std::shared_ptr<GameObject> Object);
-          void update() ;
+          void Hurt() {
+              if(size == Big) {
+                  this->SetCurrentState(Action::BigToSmall);
+                  size = Small;
+              }
+              else {
+                  this->SetCurrentState(Action::Die);
+              }
+          }
+        bool Collision(const std::shared_ptr<GameObject> &other) {
+            if (
+                other->GetTransform().translation.x + (other->GetScaledSize().x / 2) >= this->GetPosition().x - (this->GetScaledSize().x / 2) &&
+                other->GetTransform().translation.x - (other->GetScaledSize().x / 2) <= this->GetPosition().x + (this->GetScaledSize().x / 2) &&
+                other->GetTransform().translation.y + (other->GetScaledSize().y / 2) >= this->GetPosition().y - (this->GetScaledSize().y / 2) &&
+                other->GetTransform().translation.y - (other->GetScaledSize().y / 2) <= this->GetPosition().y + (this->GetScaledSize().y / 2)
+            ) {
+                return true;
+            }
+            return false;
+        }
       private:
-        std::shared_ptr<AnimationObject> Run = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/run/big_run");
-        std::shared_ptr<AnimationObject> Jump = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/jump/big_jump");
-        std::shared_ptr<AnimationObject> BigToSmall = std::make_shared<AnimationObject>(3,RESOURCE_DIR"/image/character/mario/big/BigToSmall/big_to_small");
-        std::shared_ptr<AnimationObject> Stop = std::make_shared<AnimationObject>(2,RESOURCE_DIR"/image/character/mario/big/stop/big_stop");
-        std::shared_ptr<AnimationObject> Swim = std::make_shared<AnimationObject>(5,RESOURCE_DIR"/image/character/mario/big/swim/big_swim");
-        std::shared_ptr<AnimationObject> Stand = std::make_shared<AnimationObject>(1,RESOURCE_DIR"/image/character/mario/big/StandAndDown/big_stand");
-        std::shared_ptr<AnimationObject> Down = std::make_shared<AnimationObject>(1,RESOURCE_DIR"/image/character/mario/big/StandAndDown/big_down");
+        std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
+        std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
+
 
         Action CurrentState = Action::Stand;
-
+        Size size = Big;
 
 };
 #endif //m_MARIO_HPP

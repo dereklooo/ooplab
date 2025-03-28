@@ -5,7 +5,9 @@
 #ifndef MAPMANAGER_HPP
 #define MAPMANAGER_HPP
 #include "SceneObject.hpp"
-
+#include "Monster.hpp"
+#include "m_mariO.hpp"
+#include <iostream>
 class MapManager {
     public:
         MapManager(glm::vec2 MapPosition) {
@@ -20,6 +22,38 @@ class MapManager {
                 ScenceManager.push_back(temp);
             }
             return ScenceManager;
+        }
+        void MonsterCollision(std::vector<std::shared_ptr<Monster>>) {
+
+        }
+        void SceneObjectCollision(std::vector<std::shared_ptr<SceneObject>>) {
+
+        }
+        static void Update(const std::shared_ptr<m_mariO>& Mario,
+            const std::vector<std::shared_ptr<Monster>>& Monsters,
+            const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
+
+            for(auto &monster : Monsters) {
+                if(Mario->Collision(monster)) {
+                    if(Mario->GetPosition().y - Mario->GetScaledSize().y / 2 >= monster->GetPosition().y) {
+                        monster->Hurt();
+                    }
+                    else {
+                        Mario->Hurt();
+                    }
+                }
+            }
+
+            for(auto &SceneObject : SceneObjects) {
+                if(Mario->Collision(SceneObject)) {
+                    if(Mario->GetPosition().y > SceneObject->GetPosition().y) {
+                        Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y + SceneObject->GetScaledSize().y / 2 + Mario->GetScaledSize().y / 2});
+                    }
+                    else if(Mario->GetPosition().y < SceneObject->GetPosition().y) {
+                        Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y - SceneObject->GetScaledSize().y / 2 - Mario->GetScaledSize().y / 2});
+                    }
+                }
+            }
         }
     private:
         glm::vec2 MapPosition;

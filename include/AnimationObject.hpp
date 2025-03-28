@@ -11,7 +11,7 @@
 enum Way {left,right};
 class AnimationObject : public Util::GameObject{
 public:
-    AnimationObject(const size_t size,std::string Path){
+    AnimationObject(const size_t size,const std::string &Path){
         for(size_t i = 1;i <= size;i++) {
             AddImagePath(Path + std::to_string(i) + ".png");
         }
@@ -22,27 +22,25 @@ public:
 
     glm::vec2 GetPosition() {return m_Transform.translation;}
 
+    std::shared_ptr<Util::Animation> GenerateAnimation(const size_t size,const std::string &Path,size_t interval,size_t cooldown) {
+        std::vector<std::string> Paths;
+        for(size_t i = 1;i <= size;i++) {
+            Paths.push_back(Path + std::to_string(i) + ".png");
+        }
+        return  std::make_shared<Util::Animation>(Paths,true,interval,true,cooldown);
+    }
     void SetWay(Way way){this->way = way;}
 
     void SetPosition(const glm::vec2 &position) {m_Transform.translation = position;}
 
     void SetSize(glm::vec2 size) {m_Transform.scale = size;}
 
-    void AddImagePath(std::string ImagePath) {
+    void AddImagePath(const std::string &ImagePath) {
         AnimationPaths.push_back(ImagePath);
     }
 
     std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
 
-    bool collition(const GameObject& other) {
-        if(other.GetTransform().translation.x + (other.GetScaledSize().x / 2) >= this->GetPosition().x &&
-            other.GetTransform().translation.x - (other.GetScaledSize().x / 2) <= this->GetPosition().x &&
-            other.GetTransform().translation.y - (other.GetScaledSize().y / 2) <= this->GetPosition().x &&
-            other.GetTransform().translation.y + (other.GetScaledSize().y / 2) >= this->GetPosition().x) {
-            return true;
-        }
-        return false;
-    }
 protected:
     std::shared_ptr<Util::Animation> Animations;
     std::vector<std::string> AnimationPaths;

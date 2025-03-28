@@ -23,15 +23,8 @@ public:
 
     void SetImagePath(std::string){this->ImagePath = ImagePath;}
 
-    bool collition(const GameObject& other) {
-        if(other.GetTransform().translation.x + (other.GetScaledSize().x / 2) >= this->GetPosition().x &&
-            other.GetTransform().translation.x - (other.GetScaledSize().x / 2) <= this->GetPosition().x &&
-            other.GetTransform().translation.y - (other.GetScaledSize().y / 2) <= this->GetPosition().x &&
-            other.GetTransform().translation.y + (other.GetScaledSize().y / 2) >= this->GetPosition().x) {
-            return true;
-            }
-        return false;
-    }
+
+
 protected:
     std::string ImagePath;
 };

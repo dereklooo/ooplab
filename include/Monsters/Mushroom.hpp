@@ -12,8 +12,9 @@ class Mushroom : public Monster{
             this->SetZIndex(100);
             this->SetPosition(position);
         };
+        void Hurt() override;
         void Action() override;
-        void GotHit() override;
+
     private:
         std::shared_ptr<AnimationObject> walk = std::make_shared<AnimationObject>(2,RESOURCE_DIR "/image/character/monster/mushroom/mushroom_walk");
         std::shared_ptr<StillObject> die = std::make_shared<StillObject>(RESOURCE_DIR "/image/character/monster/mushroom/mushroom_die.png");

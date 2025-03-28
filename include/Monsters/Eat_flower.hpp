@@ -5,7 +5,5 @@
 #ifndef EAT_FLOWER_HPP
 #define EAT_FLOWER_HPP
 #include "Monster.hpp"
-class Eat_flower : public Monster{
 
-};
 #endif //EAT_FLOWER_HPP

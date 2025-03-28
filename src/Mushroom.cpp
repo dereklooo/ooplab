@@ -11,6 +11,6 @@ void Mushroom::Action() {
 	}
 
 }
-void Mushroom::GotHit() {
-
+void Mushroom::Hurt() {
+	this->SetDrawable(this->die->GetDrawable());
 }
