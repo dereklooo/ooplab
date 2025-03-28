@@ -3,6 +3,10 @@
 //
 #include "Mario/Mario_small.hpp"
 
+#include <shobjidl.h>
+
+#include "Util/Renderer.hpp"
+
 Mario_small::Mario_small() : Mario(){
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand",400,100)); // stand
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/run/small_run",400,100)); //run
@@ -10,9 +14,13 @@ Mario_small::Mario_small() : Mario(){
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/die/die",400,100)); // die
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/SmalltoBig/SmalltoBig",800,200)); //smalltobig
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stop/small_stop",400,100)); //stop
-
+    this->SetSize({1.5,1.5});
 }
 void Mario_small::Hurt() {
+    this->SetCurrentState(Action::Die);
+    for(float i = this->GetPosition().y ;i >= -40 ;i -= 4) {
+        this->SetPosition({this->GetPosition().x,i});
+    }
 
 }
 void Mario_small::SetCurrentState(int num) {

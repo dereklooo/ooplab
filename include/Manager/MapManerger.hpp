@@ -25,11 +25,25 @@ enum BlockType {
 };
 class MapManager {
     public:
-        MapManager(glm::vec2 MapPosition) {
+        MapManager(const glm::vec2 MapPosition, const glm::vec2 MapSize) {
             this->MapPosition = MapPosition;
+            this->MapSize = MapSize;
         }
-        void SetFloor(std::vector<glm::vec2> &Position,size_t Floor_y) {
-
+        void SetFloor(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<float> &Position,float Floor_y) {
+            for(float i = 0.5f ; i <= MapSize.x / 32 ; i++) {
+                bool Build = true;
+                for(float position : Position) {
+                    if(position == i) {
+                        Build = false;
+                    }
+                }
+                if(Build) {
+                    auto temp = std::make_shared<SceneObject>(RESOURCE_DIR"/image/Background/Level1/Block/AirBlock.png",glm::vec2(MapPosition.x + i * 48 , MapPosition.y + Floor_y * 48));
+                    SceneManager.push_back(temp);
+                    temp = std::make_shared<SceneObject>(RESOURCE_DIR"/image/Background/Level1/Block/AirBlock.png",glm::vec2(MapPosition.x + i * 48 , MapPosition.y + (Floor_y - 1) * 48));
+                    SceneManager.push_back(temp);
+                }
+            }
         }
         void SetBlock(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<glm::vec2> &Position,BlockType type) {
             for (const auto position : Position) {
@@ -87,16 +101,24 @@ class MapManager {
 
             for(auto &SceneObject : SceneObjects) {
                 if(Mario->Collision(SceneObject)) {
-                    if(Mario->GetPosition().y > SceneObject->GetPosition().y) {
-                        Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y + SceneObject->GetScaledSize().y / 2 + Mario->GetScaledSize().y / 2});
-                    }
-                    else if(Mario->GetPosition().y < SceneObject->GetPosition().y) {
-                        Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y - SceneObject->GetScaledSize().y / 2 - Mario->GetScaledSize().y / 2});
+                    glm::vec2 SceneObject_right_up = {SceneObject->GetPosition().x + SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y + SceneObject->GetScaledSize().y / 2};
+                    glm::vec2 SceneObject_right_down = {SceneObject->GetPosition().x + SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y - SceneObject->GetScaledSize().y / 2};
+                    glm::vec2 SceneObject_left_up = {SceneObject->GetPosition().x - SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y + SceneObject->GetScaledSize().y / 2};
+                    glm::vec2 SceneObject_left_down = {SceneObject->GetPosition().x - SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y - SceneObject->GetScaledSize().y / 2};
+
+                    glm::vec2 Mario_right_up = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + abs(Mario->GetScaledSize().y / 2)};
+                    glm::vec2 Mario_right_down = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
+                    glm::vec2 Mario_left_up = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + Mario->GetScaledSize().y / 2};
+                    glm::vec2 Mario_left_down = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
+
+                    if(Mario_right_up.x >= SceneObject_left_up.x && Mario_right_up.x <= SceneObject_right_up.x) {
+
                     }
                 }
             }
         }
     private:
         glm::vec2 MapPosition;
+        glm::vec2 MapSize;
 };
 #endif //MAPMANERGER_HPP

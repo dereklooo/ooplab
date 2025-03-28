@@ -6,6 +6,8 @@
 #define m_MARIO_HPP
 #include "Object/AnimationObject.hpp"
 #include "Object/StillObject.hpp"
+#include "Util/Time.hpp"
+
 #include "Util/Input.hpp"
 class Mario : public AnimationObject{
     public:
@@ -19,10 +21,10 @@ class Mario : public AnimationObject{
 
         bool Collision(const std::shared_ptr<GameObject> &other) {
             if (
-                other->GetTransform().translation.x + (other->GetScaledSize().x / 2) >= this->GetTransform().translation.x - (this->GetScaledSize().x / 2) &&
-                other->GetTransform().translation.x - (other->GetScaledSize().x / 2) <= this->GetTransform().translation.x + (this->GetScaledSize().x / 2) &&
-                other->GetTransform().translation.y + (other->GetScaledSize().y / 2) >= this->GetTransform().translation.y - (this->GetScaledSize().y / 2) &&
-                other->GetTransform().translation.y - (other->GetScaledSize().y / 2) <= this->GetTransform().translation.y + (this->GetScaledSize().y / 2)
+                other->GetTransform().translation.x + (other->GetScaledSize().x / 2) >= this->GetTransform().translation.x - abs(this->GetScaledSize().x / 2) &&
+                other->GetTransform().translation.x - (other->GetScaledSize().x / 2) <= this->GetTransform().translation.x + abs(this->GetScaledSize().x / 2) &&
+                other->GetTransform().translation.y + (other->GetScaledSize().y / 2) >= this->GetTransform().translation.y - abs(this->GetScaledSize().y / 2) &&
+                other->GetTransform().translation.y - (other->GetScaledSize().y / 2) <= this->GetTransform().translation.y + abs(this->GetScaledSize().y / 2)
             ) {
                 return true;
             }
