@@ -29,7 +29,7 @@ class MapManager {
         void SceneObjectCollision(std::vector<std::shared_ptr<SceneObject>>) {
 
         }
-        static void Update(const std::shared_ptr<m_mariO>& Mario,
+        static void Update(const std::shared_ptr<Mario>& Mario,
             const std::vector<std::shared_ptr<Monster>>& Monsters,
             const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
 

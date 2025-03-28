@@ -88,7 +88,7 @@ public:
 
 protected:
     std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
-    std::shared_ptr<m_mariO> m_MariO = std::make_shared<m_mariO>();
+    std::shared_ptr<Mario> m_MariO = std::make_shared<Mario>();
     std::shared_ptr<StillObject> m_Background;
     std::vector<std::shared_ptr<SceneObject>> SceneManager;
     std::vector<std::shared_ptr<Monster>> Monsters;

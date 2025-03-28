@@ -33,7 +33,8 @@ list(TRANSFORM INCLUDE_FILES PREPEND ${INCLUDE_DIR}/)
 
 add_executable(${PROJECT_NAME}
     ${SRC_DIR}/main.cpp
-    ${SRC_DIR}/Mario.cpp
+    ${SRC_DIR}/Mario_big.cpp
+    ${SRC_DIR}/Mario_small.cpp
     ${SRC_FILES}
     ${HEADER_FILES}
         include/Monsters/Black_turtle.hpp

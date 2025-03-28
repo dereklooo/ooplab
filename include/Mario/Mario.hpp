@@ -8,6 +8,8 @@
 #include "Object/StillObject.hpp"
 class Mario : public AnimationObject{
     public:
+        Mario();
+
         void virtual SetCurrentState(int num) = 0;
 
         void virtual Hurt() = 0;
