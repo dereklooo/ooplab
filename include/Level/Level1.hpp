@@ -18,9 +18,6 @@ class Level1 : public Level{
 
             MapManerger = std::make_shared<MapManager>(m_Background->GetPosition());
             SceneManager = MapManerger->SetBlock(LuckyBlockPosition,RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock.png");
-            for (auto &object : SceneManager) {
-                std::cout<<object->GetPosition().x << " "<<object->GetPosition().y<<std::endl;
-            }
         }
         void condition() override {
             switch (Condition_num) {

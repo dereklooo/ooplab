@@ -4,9 +4,9 @@
 
 #ifndef MAPMANAGER_HPP
 #define MAPMANAGER_HPP
-#include "SceneObject.hpp"
-#include "Monster.hpp"
-#include "m_mariO.hpp"
+#include "Object/SceneObject.hpp"
+#include "Monsters/Monster.hpp"
+#include "Mario/Mario.hpp"
 #include <iostream>
 class MapManager {
     public:

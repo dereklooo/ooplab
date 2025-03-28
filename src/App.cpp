@@ -5,7 +5,7 @@
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
 #include "iostream"
-#include "StillObject.hpp"
+#include "Object/StillObject.hpp"
 
 void App::Title() {
     LOG_TRACE("Title");

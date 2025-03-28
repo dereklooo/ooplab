@@ -4,13 +4,13 @@
 
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
-#include "StillObject.hpp"
-#include "Monster.hpp"
-#include "SceneObject.hpp"
-#include "m_mariO.hpp"
+#include "Object/StillObject.hpp"
+#include "Monsters/Monster.hpp"
+#include "Object/SceneObject.hpp"
+#include "Mario/Mario.hpp"
 #include "Util/Input.hpp"
 #include "Util/Renderer.hpp"
-#include "MapManerger.hpp"
+#include "Manager/MapManerger.hpp"
 #include <iostream>
 class Level{
 public:
@@ -46,7 +46,6 @@ public:
             else {
                 m_MariO->SetPosition({m_MariO->GetPosition().x + 4,m_MariO->GetPosition().y});
             }
-            m_MariO->SetSize({1,1});
             m_MariO->SetCurrentState(Action::Run);
     }
 

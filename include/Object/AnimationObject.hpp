@@ -22,7 +22,7 @@ public:
 
     glm::vec2 GetPosition() {return m_Transform.translation;}
 
-    std::shared_ptr<Util::Animation> GenerateAnimation(const size_t size,const std::string &Path,size_t interval,size_t cooldown) {
+    static std::shared_ptr<Util::Animation> GenerateAnimation(const size_t size,const std::string &Path,size_t interval,size_t cooldown) {
         std::vector<std::string> Paths;
         for(size_t i = 1;i <= size;i++) {
             Paths.push_back(Path + std::to_string(i) + ".png");
