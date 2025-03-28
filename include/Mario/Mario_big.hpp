@@ -5,16 +5,18 @@
 #ifndef MARIO_BIG_HPP
 #define MARIO_BIG_HPP
 #include "Mario.hpp"
-enum Action{
-    Run,
-    Down,
-    Jump,
-    BigToSmall,
-    Stop,
-    Stand,
- };
+
 class Mario_big : public Mario {
     public:
+    enum Action{
+        Run=0,
+        Jump,
+        Stand,
+        Stop,
+        Down,
+        BigToSmall
+     };
+    using Action = Mario_big::Action;
         Mario_big();
 
         void SetCurrentState(int num) override;

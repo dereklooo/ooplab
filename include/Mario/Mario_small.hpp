@@ -5,21 +5,24 @@
 #ifndef MARIO_SMALL_HPP
 #define MARIO_SMALL_HPP
 #include "Mario.hpp"
-enum Action {
-    Run,
-    Jump,
-    SmalltoBig,
-    Die,
-    Stop,
-    Stand
-};
+
 class Mario_small : public Mario {
     public:
+    enum Action {
+    Run=0,
+    Jump,
+    Stand,
+    Stop,
+    SmalltoBig,
+    Die
+};
+    using Action = Mario_small::Action;
         Mario_small();
 
         void SetCurrentState(int num) override;
 
         void Hurt() override;
+        void update(std::shared_ptr<Mario> &m_MariO) override;
     private:
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
 };

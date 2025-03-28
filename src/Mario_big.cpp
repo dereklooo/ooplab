@@ -10,3 +10,4 @@ Mario_big::Mario_big() : Mario(){
     this->BigDrawable.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/character/mario/big/Down/big_down.png")); //down
     this->BigDrawable.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/character/mario/big/stop/big_stop.png")); // stop
 }
+
