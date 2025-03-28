@@ -9,7 +9,7 @@
 #include "Util/Input.hpp"
 class Mario : public AnimationObject{
     public:
-        Mario():AnimationObject(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand.png") {
+        Mario():AnimationObject(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand") {
             CurrentState=2;
         };
 

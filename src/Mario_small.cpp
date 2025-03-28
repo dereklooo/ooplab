@@ -4,12 +4,13 @@
 #include "Mario/Mario_small.hpp"
 
 Mario_small::Mario_small() : Mario(){
-    this->SmallDrawable.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/character/mario/small/stand/small_stand.png")); // stand
+    this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand",400,100)); // stand
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/run/small_run",400,100)); //run
-    this->SmallDrawable.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/character/mario/small/jump/small_jump.png")); // jump
-    this->SmallDrawable.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/character/mario/small/die/die.png")); // die
-    this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/SmalltoBig/SmalltoBig",800,200)); //smalltobig
-    this->SmallDrawable.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/character/mario/small/stop/small_stop.png"));
+    this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/jump/small_jump",400,100)); // jump
+    this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/die/small_die",400,100)); // die
+    this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/SmalltoBig/SmalltoBig",800,200)); //smalltobig
+    this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stop/small_stop",400,100)); //stop
+
 }
 void Mario_small::Hurt() {
 
@@ -26,8 +27,8 @@ void Mario_small::SetCurrentState(int num) {
         break;
         case 2:
             CurrentState=2;
-        this->SetDrawable(this->SmallDrawable[0]);
-        break;
+            this->SetDrawable(this->SmallDrawable[0]);
+            break;
         case 3:
             CurrentState=3;
         this->SetDrawable(this->SmallDrawable[5]);
