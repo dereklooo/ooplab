@@ -18,10 +18,12 @@ void Mario_small::SetCurrentState(int num) {
     switch(num) {
         case 0:
             CurrentState=0;
+            this->SetDrawable(this->SmallDrawable[0]);
             break;
         case 1:
             CurrentState=1;
-        break;
+            this->SetDrawable(this->SmallDrawable[1]);
+            break;
         case 2:
             CurrentState=3;
         break;

@@ -7,9 +7,12 @@
 #include "Object/AnimationObject.hpp"
 #include "Object/StillObject.hpp"
 #include "Util/Input.hpp"
+
 class Mario : public AnimationObject{
     public:
-        Mario();
+        Mario() : AnimationObject(1,RESOURCE_DIR"/image/character/mario/big/stand/stand.png") {
+
+        }
 
         void virtual SetCurrentState(int num) = 0;
 
@@ -27,7 +30,7 @@ class Mario : public AnimationObject{
             }
             return false;
         }
-        void virtual update(std::shared_ptr<Mario> &m_MariO)=0;
+        void virtual update(std::shared_ptr<Mario> &m_MariO) = 0;
     protected:
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         int CurrentState;

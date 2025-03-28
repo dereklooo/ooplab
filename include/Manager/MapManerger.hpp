@@ -27,7 +27,7 @@ class MapManager {
         MapManager(glm::vec2 MapPosition) {
             this->MapPosition = MapPosition;
         };
-        std::vector<std::shared_ptr<SceneObject>> SetBlock(std::vector<glm::vec2> Position,std::string Path,BlockType type) {
+        std::vector<std::shared_ptr<SceneObject>> SetBlock(std::vector<glm::vec2> &Position,BlockType type) {
             std::vector<std::shared_ptr<SceneObject>> ScenceManager;
             for (const auto position : Position) {
                 auto temp = std::shared_ptr<SceneObject>();

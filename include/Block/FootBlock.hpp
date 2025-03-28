@@ -6,8 +6,9 @@
 #define FOOTBLOCK_HPP
 #include "Object/SceneObject.hpp"
 class FootBlock : public SceneObject {
-    FootBlock(glm::vec2 Position):SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/FootBlock.png",Position) {
+    public:
+        FootBlock(glm::vec2 Position):SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/FootBlock.png",Position) {
 
-    }
+        }
 };
 #endif //FOOTBLOCK_HPP

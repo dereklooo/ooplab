@@ -6,6 +6,7 @@
 #define PIPE_64_96_HPP
 #include "Object/SceneObject.hpp"
 class Pipe64_96 : public SceneObject {
+public:
     Pipe64_96(glm::vec2 position) :  SceneObject("/image/Background/Level1/Block/Pipe_64_96.png" , position) {
 
     }
