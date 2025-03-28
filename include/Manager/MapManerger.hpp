@@ -11,7 +11,9 @@
 #include "Block/Pipe_64_96.hpp"
 #include "Block/Pipe_64_64.hpp"
 
-#include "Monsters/Monster.hpp"
+#include "Monsters/Mushroom.hpp"
+#include "Monsters/Turtle.hpp"
+
 #include "Mario/Mario.hpp"
 #include <iostream>
 enum BlockType {
@@ -78,10 +80,29 @@ class MapManager {
                 SceneManager.push_back(temp);
             }
         }
-        void MonsterCollision(std::vector<std::shared_ptr<Monster>>) {
-
+        void AddMonster(const std::shared_ptr<Monster> &monster,const std::shared_ptr<Util::Renderer> &renderer,std::vector<std::shared_ptr<Monster>> &Monsters) {
+            Monsters.push_back(monster);
+            for (auto &monster : Monsters) {
+                renderer->AddChild(monster);
+            }
         }
-        void SceneObjectCollision(std::vector<std::shared_ptr<SceneObject>>) {
+        static void MonsterCollision(const std::vector<std::shared_ptr<Monster>> &Monsters,const std::vector<std::shared_ptr<SceneObject>> &SceneObjects) {
+            for(const auto &Monster : Monsters) {
+                for(const auto& SceneObject : SceneObjects) {
+                    if(Monster->Collision(SceneObject)) {
+                        if(Monster->GetWay() == Way::Left) {
+                            Monster->SetWay(Way::Right);
+                            Monster->SetSize({1,1});
+                        }
+                        else {
+                            Monster->SetWay(Way::Left);
+                            Monster->SetSize({-1,1});
+                        }
+                    }
+                }
+            }
+        }
+        void SceneObjectCollision(const std::vector<std::shared_ptr<Monster>> &Monsters) {
 
         }
         static void Update(const std::shared_ptr<Mario>& Mario,
@@ -110,10 +131,6 @@ class MapManager {
                     glm::vec2 Mario_right_down = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
                     glm::vec2 Mario_left_up = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + Mario->GetScaledSize().y / 2};
                     glm::vec2 Mario_left_down = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
-
-                    if(Mario_right_up.x >= SceneObject_left_up.x && Mario_right_up.x <= SceneObject_right_up.x) {
-
-                    }
                 }
             }
         }

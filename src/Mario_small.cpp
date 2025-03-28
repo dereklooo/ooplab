@@ -6,15 +6,15 @@
 #include <shobjidl.h>
 
 #include "Util/Renderer.hpp"
-
+#include <iostream>
 Mario_small::Mario_small() : Mario(){
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand",400,100)); // stand
-    this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/run/small_run",400,100)); //run
+    this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/run/small_run",90,60)); //run
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/jump/small_jump",400,100)); // jump
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/die/die",400,100)); // die
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/SmalltoBig/SmalltoBig",800,200)); //smalltobig
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stop/small_stop",400,100)); //stop
-    this->SetSize({1.5,1.5});
+    this->SetSize({2,2});
 }
 void Mario_small::Hurt() {
     this->SetCurrentState(Action::Die);
@@ -80,7 +80,9 @@ void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
         m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 4});
     }
 
-
+    if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
+        std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y<<std::endl;
+    }
     if(!Util::Input::IsKeyPressed(Util::Keycode::S) &&
         !Util::Input::IsKeyPressed(Util::Keycode::W) &&
         !Util::Input::IsKeyPressed(Util::Keycode::A) &&

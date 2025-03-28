@@ -7,8 +7,8 @@
 #include "Monster.hpp"
 class Mushroom : public Monster{
     public:
-        Mushroom(size_t size,std::string Path,glm::vec2 position) : Monster(size,Path) {
-            this->SetWay(Way::left);
+        Mushroom(glm::vec2 position,Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/mushroom/mushroom_walk") {
+            this->SetWay(way);
             this->SetZIndex(100);
             this->SetPosition(position);
         };

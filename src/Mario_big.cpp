@@ -4,7 +4,7 @@
 #include "Mario/Mario_big.hpp"
 Mario_big::Mario_big() : Mario(){
     this->BigDrawable.push_back(this->GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/stand/stand",100,100)); // stand
-    this->BigDrawable.push_back(this->GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/run/big_run",400,100)); //run
+    this->BigDrawable.push_back(this->GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/run/big_run",200,100)); //run
     this->BigDrawable.push_back(this->GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/jump/small_jump",100,100)); //jump
     this->BigDrawable.push_back(this->GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/BigToSmall/big_to_small",800,200)); // BigtoSmall
     this->BigDrawable.push_back(this->GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/Down/big_down",800,200)); //down
@@ -54,11 +54,6 @@ void Mario_big::update(std::shared_ptr<Mario> &m_MariO) {
 
     if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
         m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y - 4});
-    }
-
-    if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
-        m_MariO->SetCurrentState(Action::Jump);
-        m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 4});
     }
 
 

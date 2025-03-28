@@ -25,16 +25,18 @@ class Level1 : public Level{
             switch (Condition_num) {
                 case 1:
                     if (m_Background->GetPosition().x <= 4700) {
-                        Monsters.push_back(std::make_shared<Mushroom>(2,
-                        RESOURCE_DIR "/image/character/monster/mushroom/mushroom_walk",
-                        glm::vec2{600,-247}));
+                        MapManerger->AddMonster(std::make_shared<Mushroom>(glm::vec2(600,-247),Left),m_renderer,Monsters);
+                        Condition_num += 1;
+                    }
+                    break;
+                case 2:
+                    if (m_Background->GetPosition().x <= -1050) {
+                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-247),Left));
                         for (auto &monster : Monsters) {
                             m_renderer->AddChild(monster);
                         }
                         Condition_num += 1;
                     }
-                        break;
-                case 2:
                     break;
 
             }

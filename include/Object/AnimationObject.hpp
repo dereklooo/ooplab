@@ -8,7 +8,6 @@
 #include <string>
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
-enum Way {left,right};
 class AnimationObject : public Util::GameObject{
 public:
     AnimationObject(const size_t size,const std::string &Path){
@@ -18,7 +17,6 @@ public:
         m_Drawable = std::make_shared<Util::Animation>(AnimationPaths,true,100,true,20);
     }
 
-    Way GetWay(){return way;}
 
     glm::vec2 GetPosition() {return m_Transform.translation;}
 
@@ -29,7 +27,6 @@ public:
         }
         return  std::make_shared<Util::Animation>(Paths,true,interval,true,cooldown);
     }
-    void SetWay(Way way){this->way = way;}
 
     void SetPosition(const glm::vec2 &position) {m_Transform.translation = position;}
 
@@ -44,6 +41,5 @@ public:
 protected:
     std::shared_ptr<Util::Animation> Animations;
     std::vector<std::string> AnimationPaths;
-    Way way = left;
 };
 #endif //ANIMATIONOBJECT_HPP

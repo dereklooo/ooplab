@@ -48,7 +48,9 @@ public:
             }
         }
         m_MariO->update(m_MariO );
-
+        if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
+            std::cout<<m_Background->GetPosition().x<<std::endl;
+        }
 
 
         for (auto& monster : Monsters) {
