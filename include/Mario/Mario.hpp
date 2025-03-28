@@ -7,17 +7,15 @@
 #include "Object/AnimationObject.hpp"
 #include "Object/StillObject.hpp"
 #include "Util/Input.hpp"
-
 class Mario : public AnimationObject{
     public:
-        Mario() : AnimationObject(1,RESOURCE_DIR"/image/character/mario/big/stand/stand.png") {
-
-        }
+        Mario():AnimationObject(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand.png") {
+            CurrentState=2;
+        };
 
         void virtual SetCurrentState(int num) = 0;
 
         void virtual Hurt() = 0;
-
 
         bool Collision(const std::shared_ptr<GameObject> &other) {
             if (
@@ -30,7 +28,7 @@ class Mario : public AnimationObject{
             }
             return false;
         }
-        void virtual update(std::shared_ptr<Mario> &m_MariO) = 0;
+        void virtual update(std::shared_ptr<Mario> &m_MariO)=0;
     protected:
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         int CurrentState;

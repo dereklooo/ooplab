@@ -18,30 +18,34 @@ void Mario_small::SetCurrentState(int num) {
     switch(num) {
         case 0:
             CurrentState=0;
-            this->SetDrawable(this->SmallDrawable[0]);
+            this->SetDrawable(this->SmallDrawable[1]);
             break;
         case 1:
             CurrentState=1;
-            this->SetDrawable(this->SmallDrawable[1]);
-            break;
+            this->SetDrawable(this->SmallDrawable[2]);
+        break;
         case 2:
-            CurrentState=3;
+            CurrentState=2;
+        this->SetDrawable(this->SmallDrawable[0]);
         break;
         case 3:
             CurrentState=3;
+        this->SetDrawable(this->SmallDrawable[5]);
         break;
         case 4:
             CurrentState=4;
+        this->SetDrawable(this->SmallDrawable[4]);
         break;
         case 5:
             CurrentState=5;
+        this->SetDrawable(this->SmallDrawable[3]);
         break;
     }
 
 }
 void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
     if (Util::Input::IsKeyPressed(Util::Keycode::D)){
-        m_MariO->SetPosition({m_MariO->GetPosition().x + 4,m_MariO->GetPosition().y});
+        m_MariO->SetPosition({m_MariO->GetPosition().x + 1,m_MariO->GetPosition().y});
         m_MariO->SetCurrentState(Action::Run);
     }
 
@@ -49,7 +53,10 @@ void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
         if(m_MariO->GetPosition().x - 1 <= -620) {
             m_MariO->SetPosition({-620,m_MariO->GetPosition().y});
         }
-        m_MariO->SetPosition({m_MariO->GetPosition().x - 4,m_MariO->GetPosition().y});
+        else {
+            m_MariO->SetPosition({m_MariO->GetPosition().x - 4,m_MariO->GetPosition().y});
+        }
+
         m_MariO->SetSize({-1,1});
         m_MariO->SetCurrentState(Action::Run);
     }
