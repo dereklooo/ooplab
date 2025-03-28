@@ -20,15 +20,18 @@ enum BlockType {
     footBlock,
     pipe_64_64,
     pipe_64_96,
-    pipe_64_128
+    pipe_64_128,
+    airBlock,
 };
 class MapManager {
     public:
         MapManager(glm::vec2 MapPosition) {
             this->MapPosition = MapPosition;
-        };
-        std::vector<std::shared_ptr<SceneObject>> SetBlock(std::vector<glm::vec2> &Position,BlockType type) {
-            std::vector<std::shared_ptr<SceneObject>> ScenceManager;
+        }
+        void SetFloor(std::vector<glm::vec2> &Position,size_t Floor_y) {
+
+        }
+        void SetBlock(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<glm::vec2> &Position,BlockType type) {
             for (const auto position : Position) {
                 auto temp = std::shared_ptr<SceneObject>();
                 switch(type) {
@@ -58,9 +61,8 @@ class MapManager {
                 }
                 temp->SetZIndex(50);
                 temp->SetSize({1.5,1.5});
-                ScenceManager.push_back(temp);
+                SceneManager.push_back(temp);
             }
-            return ScenceManager;
         }
         void MonsterCollision(std::vector<std::shared_ptr<Monster>>) {
 
