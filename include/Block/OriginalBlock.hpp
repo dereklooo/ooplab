@@ -4,13 +4,13 @@
 
 #ifndef ORIGINALBLOCK_HPP
 #define ORIGINALBLOCK_HPP
-#include "SceneObject.hpp"
+#include "Object/SceneObject.hpp"
 class OriginalBlock : public SceneObject {
     public:
-    OriginalBlock(glm::vec2 Position) : SceneObject("/image/Background/Level1/Block/OriginalBlock.png",Position) {
+    OriginalBlock(glm::vec2 Position) : SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/OriginalBlock.png",Position) {
 
     }
-    void hit() override{
+    void hit() {
         this->SetPosition(this->GetPosition());
     }
 };

@@ -20,6 +20,8 @@ class Mario_big : public Mario {
         void SetCurrentState(int num) override;
 
         void Hurt() override;
+
+        void update();
     private:
 };
 #endif //MARIO_BIG_HPP

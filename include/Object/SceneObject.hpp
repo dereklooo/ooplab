@@ -10,7 +10,6 @@ class SceneObject : public StillObject{
         SceneObject(std::string path,glm::vec2 position) : StillObject(path) {
             this->SetPosition(position);
         }
-        virtual void hit() {};
     private:
 
 };

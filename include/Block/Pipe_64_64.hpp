@@ -4,5 +4,10 @@
 
 #ifndef PIPE_64_64_HPP
 #define PIPE_64_64_HPP
+#include "Object/SceneObject.hpp"
+class Pipe64_64 : public SceneObject {
+    Pipe64_64(glm::vec2 position) : SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/Pipe_64_64.png",position) {
 
+    }
+};
 #endif //PIPE_64_64_HPP

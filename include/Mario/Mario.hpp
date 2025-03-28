@@ -14,6 +14,7 @@ class Mario : public AnimationObject{
 
         void virtual Hurt() = 0;
 
+
         bool Collision(const std::shared_ptr<GameObject> &other) {
             if (
                 other->GetTransform().translation.x + (other->GetScaledSize().x / 2) >= this->GetTransform().translation.x - (this->GetScaledSize().x / 2) &&

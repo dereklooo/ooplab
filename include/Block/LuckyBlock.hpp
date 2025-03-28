@@ -4,7 +4,7 @@
 
 #ifndef LUCKYBLOCK_HPP
 #define LUCKYBLOCK_HPP
-#include "SceneObject.hpp"
+#include "Object//SceneObject.hpp"
 class LuckyBlock : public SceneObject{
     public:
         LuckyBlock(glm::vec2 Position) : SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock.png",Position) {
@@ -13,7 +13,7 @@ class LuckyBlock : public SceneObject{
         void ChangeState() {
             this->SetImagePath(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock_.png");
         }
-        void hit() override {
+        void hit(){
             this->ChangeState();
         }
 };
