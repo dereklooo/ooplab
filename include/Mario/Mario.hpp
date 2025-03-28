@@ -9,7 +9,9 @@
 #include "Util/Input.hpp"
 class Mario : public AnimationObject{
     public:
-        Mario();
+        Mario():AnimationObject(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand.png") {
+            CurrentState=2;
+        };
 
         void virtual SetCurrentState(int num) = 0;
 

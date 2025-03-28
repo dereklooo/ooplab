@@ -22,6 +22,8 @@ class Mario_big : public Mario {
         void SetCurrentState(int num) override;
 
         void Hurt() override;
+
+        void update(std::shared_ptr<Mario> &m_MariO) override;
     private:
 };
 #endif //MARIO_BIG_HPP
