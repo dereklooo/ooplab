@@ -13,7 +13,7 @@
 
 #include "Monsters/Mushroom.hpp"
 #include "Monsters/Turtle.hpp"
-
+#include <iostream>
 #include "Mario/Mario.hpp"
 #include <iostream>
 enum BlockType {
@@ -31,7 +31,7 @@ class MapManager {
             this->MapPosition = MapPosition;
             this->MapSize = MapSize;
         }
-        void SetFloor(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<float> &Position,float Floor_y) {
+        void SetFloor(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<float> &Position,float Floor_y) const {
             for(float i = 0.5f ; i <= MapSize.x / 32 ; i++) {
                 bool Build = true;
                 for(float position : Position) {
@@ -47,7 +47,7 @@ class MapManager {
                 }
             }
         }
-        void SetBlock(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<glm::vec2> &Position,BlockType type) {
+        void SetBlock(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<glm::vec2> &Position,BlockType type) const {
             for (const auto position : Position) {
                 auto temp = std::shared_ptr<SceneObject>();
                 switch(type) {
@@ -80,7 +80,7 @@ class MapManager {
                 SceneManager.push_back(temp);
             }
         }
-        void AddMonster(const std::shared_ptr<Monster> &monster,const std::shared_ptr<Util::Renderer> &renderer,std::vector<std::shared_ptr<Monster>> &Monsters) {
+        static void AddMonster(const std::shared_ptr<Monster> &monster,const std::shared_ptr<Util::Renderer> &renderer,std::vector<std::shared_ptr<Monster>> &Monsters) {
             Monsters.push_back(monster);
             for (auto &monster : Monsters) {
                 renderer->AddChild(monster);
@@ -100,15 +100,25 @@ class MapManager {
                         }
                     }
                 }
+                for(const auto &_Monster : Monsters) {
+                    if (_Monster != Monster && _Monster->Collision(Monster)) {
+                        if(Monster->GetWay() == Way::Left) {
+                            Monster->SetWay(Way::Right);
+                            _Monster->SetWay(Way::Left);
+                            _Monster->SetSize({1,1});
+                            Monster->SetSize({1,1});
+                        }
+                        else {
+                            Monster->SetWay(Way::Left);
+                            _Monster->SetWay(Way::Right);
+                            Monster->SetSize({-1,1});
+                            _Monster->SetSize({-1,1});
+                        }
+                    }
+                }
             }
         }
-        void SceneObjectCollision(const std::vector<std::shared_ptr<Monster>> &Monsters) {
-
-        }
-        static void Update(const std::shared_ptr<Mario>& Mario,
-            const std::vector<std::shared_ptr<Monster>>& Monsters,
-            const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
-
+        static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(auto &monster : Monsters) {
                 if(Mario->Collision(monster)) {
                     if(Mario->GetPosition().y - Mario->GetScaledSize().y / 2 >= monster->GetPosition().y + monster->GetScaledSize().y / 2) {
@@ -122,17 +132,23 @@ class MapManager {
 
             for(auto &SceneObject : SceneObjects) {
                 if(Mario->Collision(SceneObject)) {
-                    glm::vec2 SceneObject_right_up = {SceneObject->GetPosition().x + SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y + SceneObject->GetScaledSize().y / 2};
-                    glm::vec2 SceneObject_right_down = {SceneObject->GetPosition().x + SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y - SceneObject->GetScaledSize().y / 2};
-                    glm::vec2 SceneObject_left_up = {SceneObject->GetPosition().x - SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y + SceneObject->GetScaledSize().y / 2};
-                    glm::vec2 SceneObject_left_down = {SceneObject->GetPosition().x - SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y - SceneObject->GetScaledSize().y / 2};
-
-                    glm::vec2 Mario_right_up = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + abs(Mario->GetScaledSize().y / 2)};
-                    glm::vec2 Mario_right_down = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
-                    glm::vec2 Mario_left_up = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + Mario->GetScaledSize().y / 2};
-                    glm::vec2 Mario_left_down = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
+                    // glm::vec2 SceneObject_right_up = {SceneObject->GetPosition().x + SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y + SceneObject->GetScaledSize().y / 2};
+                    // glm::vec2 SceneObject_right_down = {SceneObject->GetPosition().x + SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y - SceneObject->GetScaledSize().y / 2};
+                    // glm::vec2 SceneObject_left_up = {SceneObject->GetPosition().x - SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y + SceneObject->GetScaledSize().y / 2};
+                    // glm::vec2 SceneObject_left_down = {SceneObject->GetPosition().x - SceneObject->GetScaledSize().x / 2,SceneObject->GetPosition().y - SceneObject->GetScaledSize().y / 2};
+                    //
+                    // glm::vec2 Mario_right_up = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + abs(Mario->GetScaledSize().y / 2)};
+                    // glm::vec2 Mario_right_down = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
+                    // glm::vec2 Mario_left_up = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + Mario->GetScaledSize().y / 2};
+                    // glm::vec2 Mario_left_down = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
                 }
             }
+        }
+        static void Update(const std::shared_ptr<Mario>& Mario,
+            const std::vector<std::shared_ptr<Monster>>& Monsters,
+            const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
+            MonsterCollision(Monsters,SceneObjects);
+            MarioCollision(Mario,Monsters,SceneObjects);
         }
     private:
         glm::vec2 MapPosition;

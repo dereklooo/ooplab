@@ -40,10 +40,10 @@ public:
             if (m_MariO->GetPosition().x >= 0) {
                 m_Background->SetPosition({m_Background->GetPosition().x - 4,m_Background->GetPosition().y});
                 m_MariO->SetPosition({m_MariO->GetPosition().x - 4,m_MariO->GetPosition().y});
-                for(auto monster : Monsters) {
+                for(const auto& monster : Monsters) {
                     monster->SetPosition({monster->GetPosition().x - 4,monster->GetPosition().y});
                 }
-                for (auto Object : SceneManager) {
+                for (const auto& Object : SceneManager) {
                     Object->SetPosition({Object->GetPosition().x - 4 , Object->GetPosition().y});
                 }
             }
@@ -54,11 +54,11 @@ public:
         }
 
 
-        for (auto& monster : Monsters) {
+        for (const auto& monster : Monsters) {
             monster->Action();
         }
         this->condition();
-        Map_Manager->Update(m_MariO,Monsters,SceneManager);
+        MapManager::Update(m_MariO,Monsters,SceneManager);
         m_renderer->Update();
     }
 
