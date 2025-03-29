@@ -1,5 +1,5 @@
 //
-// Created by Benson on 2025/3/24.
+// Created by Benson on 2025/3/29.
 //
 
 #ifndef MAPMANAGER_HPP
@@ -138,4 +138,4 @@ class MapManager {
         glm::vec2 MapPosition;
         glm::vec2 MapSize;
 };
-#endif //MAPMANERGER_HPP
+#endif //MAPMANAGER_HPP
