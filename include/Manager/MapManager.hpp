@@ -13,7 +13,6 @@
 
 #include "Monsters/Mushroom.hpp"
 #include "Monsters/Turtle.hpp"
-#include <iostream>
 #include "Mario/Mario.hpp"
 #include <iostream>
 enum BlockType {
@@ -80,10 +79,10 @@ class MapManager {
                 SceneManager.push_back(temp);
             }
         }
-        static void AddMonster(const std::shared_ptr<Monster> &monster,const std::shared_ptr<Util::Renderer> &renderer,std::vector<std::shared_ptr<Monster>> &Monsters) {
-            Monsters.push_back(monster);
-            for (auto &monster : Monsters) {
+        static void AddMonster(const std::vector<std::shared_ptr<Monster>> &monsters,const std::shared_ptr<Util::Renderer> &renderer,std::vector<std::shared_ptr<Monster>> &Monsters) {
+            for (auto &monster : monsters) {
                 renderer->AddChild(monster);
+                Monsters.push_back(monster);
             }
         }
         static void MonsterCollision(const std::vector<std::shared_ptr<Monster>> &Monsters,const std::vector<std::shared_ptr<SceneObject>> &SceneObjects) {
@@ -92,11 +91,11 @@ class MapManager {
                     if(Monster->Collision(SceneObject)) {
                         if(Monster->GetWay() == Way::Left) {
                             Monster->SetWay(Way::Right);
-                            Monster->SetSize({1,1});
+                            Monster->SetSize({-1.2,1.2});
                         }
                         else {
                             Monster->SetWay(Way::Left);
-                            Monster->SetSize({-1,1});
+                            Monster->SetSize({1.2,1.2});
                         }
                     }
                 }
@@ -105,14 +104,14 @@ class MapManager {
                         if(Monster->GetWay() == Way::Left) {
                             Monster->SetWay(Way::Right);
                             _Monster->SetWay(Way::Left);
-                            _Monster->SetSize({1,1});
-                            Monster->SetSize({1,1});
+                            _Monster->SetSize({1.2,1.2});
+                            Monster->SetSize({-1.2,1.2});
                         }
                         else {
                             Monster->SetWay(Way::Left);
                             _Monster->SetWay(Way::Right);
-                            Monster->SetSize({-1,1});
-                            _Monster->SetSize({-1,1});
+                            Monster->SetSize({1.2,1.2});
+                            _Monster->SetSize({-1.2,1.2});
                         }
                     }
                 }
@@ -121,7 +120,7 @@ class MapManager {
         static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(auto &monster : Monsters) {
                 if(Mario->Collision(monster)) {
-                    if(Mario->GetPosition().y - abs(Mario->GetScaledSize().y / 2) >= monster->GetPosition().y + abs(monster->GetScaledSize().y / 2) - 5) {
+                    if(Mario->GetPosition().y - abs(Mario->GetScaledSize().y / 2) - 2<= monster->GetPosition().y + abs(monster->GetScaledSize().y / 2)) {
                         monster->Hurt();
                     }
                     else {

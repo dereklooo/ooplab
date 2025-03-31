@@ -11,6 +11,7 @@ class Mushroom : public Monster{
             this->SetWay(way);
             this->SetZIndex(100);
             this->SetPosition(position);
+            this->SetSize({1.2,1.2});
         };
         void Hurt() override;
         void Action() override;

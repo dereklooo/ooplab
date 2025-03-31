@@ -26,49 +26,48 @@ class Level1 : public Level{
             Map_Manager->SetBlock(SceneManager,Pipe_64_128,BlockType::pipe_64_128);
         }
         void condition() override {
+            std::vector<std::shared_ptr<Monster>> _temp;
             switch (Condition_num) {
                 case 1:
-                    if (m_Background->GetPosition().x <= 4700) {
-                        MapManager::AddMonster(std::make_shared<Mushroom>(glm::vec2(600,-247),Left),m_renderer,Monsters);
+                    if (m_Background->GetPosition().x <= -600) {
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-245),Left));
+                        MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
                     break;
                 case 2:
                     if (m_Background->GetPosition().x <= -1050) {
-                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-247),Left));
-                        for (auto &monster : Monsters) {
-                            m_renderer->AddChild(monster);
-                        }
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-247),Left));
+                        MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
                     break;
                 case 3:
                     if (m_Background->GetPosition().x <= -1630) {
-                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(900,-247),Left));
-                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(960,-247),Left));
-                        for (auto &monster : Monsters) {
-                            m_renderer->AddChild(monster);
-                        }
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(900,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(960,-247),Left));
+                        MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
                     break;
                 case 4:
                     if (m_Background->GetPosition().x <= -3000) {
-                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(1000,136.5),Left));
-                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(1050,136.5),Left));
-                        for (auto &monster : Monsters) {
-                            m_renderer->AddChild(monster);
-                        }
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,140),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1050,140),Left));
+                        MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
                         break;
                 case 5:
                     if (m_Background->GetPosition().x <= -3600) {
-                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-247),Left));
-                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(1050,-247),Left));
-                        for (auto &monster : Monsters) {
-                            m_renderer->AddChild(monster);
-                        }
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1050,-247),Left));
+                        MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
                     break;
