@@ -121,7 +121,7 @@ class MapManager {
         static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(auto &monster : Monsters) {
                 if(Mario->Collision(monster)) {
-                    if(Mario->GetPosition().y - Mario->GetScaledSize().y / 2 >= monster->GetPosition().y + monster->GetScaledSize().y / 2) {
+                    if(Mario->GetPosition().y - abs(Mario->GetScaledSize().y / 2) >= monster->GetPosition().y + abs(monster->GetScaledSize().y / 2) - 5) {
                         monster->Hurt();
                     }
                     else {

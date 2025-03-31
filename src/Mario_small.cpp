@@ -18,10 +18,6 @@ Mario_small::Mario_small() : Mario(){
 }
 void Mario_small::Hurt() {
     this->SetCurrentState(Action::Die);
-    for(float i = this->GetPosition().y ;i >= -40 ;i -= 4) {
-        this->SetPosition({this->GetPosition().x,i});
-    }
-
 }
 void Mario_small::SetCurrentState(int num) {
     switch(num) {

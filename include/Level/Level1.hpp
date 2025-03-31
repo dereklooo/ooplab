@@ -45,7 +45,7 @@ class Level1 : public Level{
                 case 3:
                     if (m_Background->GetPosition().x <= -1630) {
                         Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(900,-247),Left));
-                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(960,-247),Right));
+                        Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(960,-247),Left));
                         for (auto &monster : Monsters) {
                             m_renderer->AddChild(monster);
                         }
@@ -61,6 +61,7 @@ class Level1 : public Level{
                         }
                         Condition_num += 1;
                     }
+                        break;
                 case 5:
                     if (m_Background->GetPosition().x <= -3600) {
                         Monsters.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-247),Left));
@@ -70,6 +71,7 @@ class Level1 : public Level{
                         }
                         Condition_num += 1;
                     }
+                    break;
                 default:
                     break;;
             }
