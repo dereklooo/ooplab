@@ -120,7 +120,7 @@ class MapManager {
         static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(auto &monster : Monsters) {
                 if(Mario->Collision(monster)) {
-                    if(Mario->GetPosition().y - abs(Mario->GetScaledSize().y / 2) - 2<= monster->GetPosition().y + abs(monster->GetScaledSize().y / 2)) {
+                    if(Mario->GetPosition().y - abs(Mario->GetScaledSize().y / 2) - 2 <= monster->GetPosition().y + abs(monster->GetScaledSize().y / 2) && Mario->GetPosition().y + abs(Mario->GetScaledSize().y / 2) >= monster->GetPosition().y) {
                         monster->Hurt();
                     }
                     else {
@@ -140,6 +140,9 @@ class MapManager {
                     // glm::vec2 Mario_right_down = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
                     // glm::vec2 Mario_left_up = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + Mario->GetScaledSize().y / 2};
                     // glm::vec2 Mario_left_down = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
+                }
+                else {
+                    Mario->
                 }
             }
         }

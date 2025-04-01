@@ -6,6 +6,7 @@
 #define ANIMATIONOBJECT_HPP
 
 #include <string>
+#include "Manager/TimeManager.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
 class AnimationObject : public Util::GameObject{
@@ -37,7 +38,7 @@ public:
     }
 
     std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
-
+    void gravity
 protected:
     std::shared_ptr<Util::Animation> Animations;
     std::vector<std::string> AnimationPaths;

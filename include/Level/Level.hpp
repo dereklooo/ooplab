@@ -11,8 +11,8 @@
 #include "Util/Input.hpp"
 #include "Util/Renderer.hpp"
 #include "Manager/MapManager.hpp"
-#include <iostream>
 #include "Manager/TimeManager.hpp"
+#include <iostream>
 #include "Mario/Mario_big.hpp"
 #include "Mario/Mario_small.hpp"
 #include "Mario/Mario_fire.hpp"
@@ -59,6 +59,7 @@ public:
         }
         this->condition();
         MapManager::Update(m_MariO,Monsters,SceneManager);
+        Time_Manager->updata(m_MariO,Monsters,SceneManager);
         m_renderer->Update();
     }
 
@@ -70,6 +71,7 @@ protected:
     std::vector<std::shared_ptr<SceneObject>> SceneManager;
     std::vector<std::shared_ptr<Monster>> Monsters;
     std::shared_ptr<MapManager> Map_Manager;
+    std::shared_ptr<TimeManager> Time_Manager;
     size_t Condition_num = 1;
     int moveDistange = 0;
 };
