@@ -17,6 +17,7 @@ class Level1 : public Level{
             m_Background->SetPosition({-640,360});
 
             Map_Manager = std::make_shared<MapManager>(m_Background->GetPosition(),m_Background->GetScaledSize());
+
             Map_Manager->SetFloor(SceneManager,FloorBlock,-13.5);
             Map_Manager->SetBlock(SceneManager,LuckyBlockPosition,BlockType::luckyBlock);
             Map_Manager->SetBlock(SceneManager,OriginBlock,BlockType::originalBlock);
@@ -24,6 +25,8 @@ class Level1 : public Level{
             Map_Manager->SetBlock(SceneManager,Pipe_64_64,BlockType::pipe_64_64);
             Map_Manager->SetBlock(SceneManager,Pipe_64_96,BlockType::pipe_64_96);
             Map_Manager->SetBlock(SceneManager,Pipe_64_128,BlockType::pipe_64_128);
+
+            Gravity_Manager = std::make_shared<GravityManager>(m_MariO,Monsters,SceneManager);
         }
         void condition() override {
             std::vector<std::shared_ptr<Monster>> _temp;

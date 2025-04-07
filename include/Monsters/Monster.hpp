@@ -9,26 +9,20 @@
 enum Way {Right ,Left};
 class Monster : public AnimationObject {
     public:
-      Monster(const size_t size,std::string Path) : AnimationObject(size,Path) {};
+      Monster(const size_t size,const std::string &Path) : AnimationObject(size,Path) {};
       void SetWay(Way way) {
           this->way = way;
+          if(way == Right) {
+              this->SetSize({1.2,1.2});
+          }
+          else if(way == Left) {
+              this->SetSize({-1.2,1.2});
+          }
       }
 
       Way GetWay() {
           return this->way;
       }
-
-       bool Collision(const std::shared_ptr<GameObject> &other) {
-             if (
-                 other->GetTransform().translation.x + (other->GetScaledSize().x / 2) >= this->GetTransform().translation.x - abs(this->GetScaledSize().x / 2) &&
-                 other->GetTransform().translation.x - (other->GetScaledSize().x / 2) <= this->GetTransform().translation.x + abs(this->GetScaledSize().x / 2) &&
-                 other->GetTransform().translation.y + (other->GetScaledSize().y / 2) >= this->GetTransform().translation.y - abs(this->GetScaledSize().y / 2) &&
-                 other->GetTransform().translation.y - (other->GetScaledSize().y / 2) <= this->GetTransform().translation.y + abs(this->GetScaledSize().y / 2)
-             ) {
-                 return true;
-             }
-          return false;
-       }
 
       virtual void Action() = 0;
       virtual void Hurt() = 0;

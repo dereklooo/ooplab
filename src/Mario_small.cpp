@@ -52,7 +52,7 @@ void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
     if (Util::Input::IsKeyPressed(Util::Keycode::D)){
         m_MariO->SetPosition({m_MariO->GetPosition().x + 4,m_MariO->GetPosition().y});
         m_MariO->SetCurrentState(Action::Run);
-        m_MariO->SetSize({1.5,1.5});
+        m_MariO->SetSize({1.35,1.2});
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
@@ -64,7 +64,7 @@ void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
         }
 
         m_MariO->SetCurrentState(Action::Run);
-        m_MariO->SetSize({-1.5,1.5});
+        m_MariO->SetSize({-1.35,1.2});
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::S)) {

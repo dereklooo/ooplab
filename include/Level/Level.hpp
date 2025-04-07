@@ -26,14 +26,14 @@ public:
         m_MariO->SetPosition({-620,-235.5});
         m_MariO->SetCurrentState(2);
         m_MariO->SetZIndex(50);
-        m_MariO->SetSize({1.4,1.4});
+        m_MariO->SetSize({1.35,1.2});
         m_renderer->AddChild(m_Background);
         m_renderer->AddChild(m_MariO);
         for (auto &object : SceneManager) {
             m_renderer->AddChild(object);
         }
     }
-    void GameObect_Move() {
+    void GameObject_Move() {
         if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
             if (m_MariO->GetPosition().x >= 0) {
                 m_Background->SetPosition({m_Background->GetPosition().x - 4,m_Background->GetPosition().y});
@@ -48,7 +48,7 @@ public:
         }
     }
     void update() {
-        this->GameObect_Move();
+        this->GameObject_Move();
         m_MariO->update(m_MariO );
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
             std::cout<<m_Background->GetPosition().x<<std::endl;
@@ -61,7 +61,6 @@ public:
 
 
         this->condition();
-        Gravity_Manager->Update();
         MapManager::Update(m_MariO,Monsters,SceneManager);
         m_renderer->Update();
     }

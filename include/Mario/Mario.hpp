@@ -19,20 +19,10 @@ class Mario : public AnimationObject{
 
         void virtual Hurt() = 0;
 
-        bool Collision(const std::shared_ptr<GameObject> &other) {
-            if (
-                other->GetTransform().translation.x + (other->GetScaledSize().x / 2) >= this->GetTransform().translation.x - abs(this->GetScaledSize().x / 2) &&
-                other->GetTransform().translation.x - (other->GetScaledSize().x / 2) <= this->GetTransform().translation.x + abs(this->GetScaledSize().x / 2) &&
-                other->GetTransform().translation.y + (other->GetScaledSize().y / 2) >= this->GetTransform().translation.y - abs(this->GetScaledSize().y / 2) &&
-                other->GetTransform().translation.y - (other->GetScaledSize().y / 2) <= this->GetTransform().translation.y + abs(this->GetScaledSize().y / 2)
-            ) {
-                return true;
-            }
-            return false;
-        }
         void virtual update(std::shared_ptr<Mario> &m_MariO)=0;
     protected:
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         int CurrentState;
+        glm::vec2 speed = {0,0};
 };
 #endif //m_MARIO_HPP
