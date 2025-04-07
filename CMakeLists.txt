@@ -57,7 +57,8 @@ add_executable(${PROJECT_NAME}
         src/Mario_small.cpp
         src/Mario_big.cpp
         include/Manager/MapManager.hpp
-        include/Manager/TimeManager.hpp
+        include/Manager/GravityManager.hpp
+        include/Object/Object.hpp
 )
 
 if(MSVC)

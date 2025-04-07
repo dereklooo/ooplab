@@ -14,7 +14,7 @@ Mario_small::Mario_small() : Mario(){
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/die/die",400,100)); // die
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/SmalltoBig/SmalltoBig",800,200)); //smalltobig
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stop/small_stop",400,100)); //stop
-    this->SetSize({2,2});
+    this->SetSize({1.4,1.4});
 }
 void Mario_small::Hurt() {
     this->SetCurrentState(Action::Die);
@@ -52,7 +52,7 @@ void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
     if (Util::Input::IsKeyPressed(Util::Keycode::D)){
         m_MariO->SetPosition({m_MariO->GetPosition().x + 4,m_MariO->GetPosition().y});
         m_MariO->SetCurrentState(Action::Run);
-        m_MariO->SetSize({1,1});
+        m_MariO->SetSize({1.5,1.5});
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
@@ -64,7 +64,7 @@ void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
         }
 
         m_MariO->SetCurrentState(Action::Run);
-        m_MariO->SetSize({-1,1});
+        m_MariO->SetSize({-1.5,1.5});
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::S)) {

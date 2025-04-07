@@ -6,10 +6,11 @@
 #define ANIMATIONOBJECT_HPP
 
 #include <string>
-#include "Manager/TimeManager.hpp"
+
+#include "Object.hpp"
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
-class AnimationObject : public Util::GameObject{
+class AnimationObject : public Object{
 public:
     AnimationObject(const size_t size,const std::string &Path){
         for(size_t i = 1;i <= size;i++) {
@@ -17,9 +18,6 @@ public:
         }
         m_Drawable = std::make_shared<Util::Animation>(AnimationPaths,true,100,true,20);
     }
-
-
-    glm::vec2 GetPosition() {return m_Transform.translation;}
 
     static std::shared_ptr<Util::Animation> GenerateAnimation(const size_t size,const std::string &Path,size_t interval,size_t cooldown) {
         std::vector<std::string> Paths;
@@ -29,16 +27,9 @@ public:
         return  std::make_shared<Util::Animation>(Paths,true,interval,true,cooldown);
     }
 
-    void SetPosition(const glm::vec2 &position) {m_Transform.translation = position;}
-
-    void SetSize(glm::vec2 size) {m_Transform.scale = size;}
-
     void AddImagePath(const std::string &ImagePath) {
         AnimationPaths.push_back(ImagePath);
     }
-
-    std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
-    void gravity
 protected:
     std::shared_ptr<Util::Animation> Animations;
     std::vector<std::string> AnimationPaths;

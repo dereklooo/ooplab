@@ -11,7 +11,6 @@
 #include "Util/Input.hpp"
 #include "Util/Renderer.hpp"
 #include "Manager/MapManager.hpp"
-#include "Manager/TimeManager.hpp"
 #include <iostream>
 #include "Mario/Mario_big.hpp"
 #include "Mario/Mario_small.hpp"
@@ -27,15 +26,14 @@ public:
         m_MariO->SetPosition({-620,-235.5});
         m_MariO->SetCurrentState(2);
         m_MariO->SetZIndex(50);
-        m_MariO->SetSize({1,1});
+        m_MariO->SetSize({1.4,1.4});
         m_renderer->AddChild(m_Background);
         m_renderer->AddChild(m_MariO);
         for (auto &object : SceneManager) {
             m_renderer->AddChild(object);
         }
     }
-    void update() {
-
+    void GameObect_Move() {
         if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
             if (m_MariO->GetPosition().x >= 0) {
                 m_Background->SetPosition({m_Background->GetPosition().x - 4,m_Background->GetPosition().y});
@@ -48,6 +46,9 @@ public:
                 }
             }
         }
+    }
+    void update() {
+        this->GameObect_Move();
         m_MariO->update(m_MariO );
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
             std::cout<<m_Background->GetPosition().x<<std::endl;
@@ -57,9 +58,11 @@ public:
         for (const auto& monster : Monsters) {
             monster->Action();
         }
+
+
         this->condition();
+        Gravity_Manager->Update();
         MapManager::Update(m_MariO,Monsters,SceneManager);
-        Time_Manager->updata(m_MariO,Monsters,SceneManager);
         m_renderer->Update();
     }
 
@@ -71,7 +74,7 @@ protected:
     std::vector<std::shared_ptr<SceneObject>> SceneManager;
     std::vector<std::shared_ptr<Monster>> Monsters;
     std::shared_ptr<MapManager> Map_Manager;
-    std::shared_ptr<TimeManager> Time_Manager;
+    std::shared_ptr<GravityManager> Gravity_Manager;
     size_t Condition_num = 1;
     int moveDistange = 0;
 };

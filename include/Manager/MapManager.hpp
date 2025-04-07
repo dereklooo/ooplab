@@ -14,6 +14,8 @@
 #include "Monsters/Mushroom.hpp"
 #include "Monsters/Turtle.hpp"
 #include "Mario/Mario.hpp"
+
+#include "GravityManager.hpp"
 #include <iostream>
 enum BlockType {
     luckyBlock,
@@ -140,9 +142,6 @@ class MapManager {
                     // glm::vec2 Mario_right_down = {Mario->GetPosition().x + abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
                     // glm::vec2 Mario_left_up = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y + Mario->GetScaledSize().y / 2};
                     // glm::vec2 Mario_left_down = {Mario->GetPosition().x - abs(Mario->GetScaledSize().x / 2),Mario->GetPosition().y - Mario->GetScaledSize().y / 2};
-                }
-                else {
-                    Mario->
                 }
             }
         }
