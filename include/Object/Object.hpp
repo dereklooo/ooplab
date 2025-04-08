@@ -14,16 +14,16 @@ class Object : public Util::GameObject{
         std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
 
 
-        void SetGravity(float num) {
+        void SetGravity(const float num) {
             this->GravityNum = num;
         }
-        float GetGravity() {
+        float GetGravity() const {
             return GravityNum;
         }
-        bool GetFalling() {
+        bool GetFalling() const {
             return Falling;
         }
-        void SetFalling(bool f) {
+        void SetFalling(const bool f) {
             this->Falling = f;
         }
 
