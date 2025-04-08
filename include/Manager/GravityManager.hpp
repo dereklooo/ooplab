@@ -9,36 +9,33 @@
 #include "Monsters/Monster.hpp"
 class GravityManager {
     public:
-        GravityManager(const std::shared_ptr<Mario> &mario,
-            std::vector<std::shared_ptr<Monster>> &monsters,
-            const std::vector<std::shared_ptr<SceneObject>>& Scenes) {
-            this->Mario = mario;
-            this->Monsters = monsters;
+        explicit GravityManager(const std::vector<std::shared_ptr<SceneObject>>& Scenes) {
             this->Scenes = Scenes;
-        }
-        void Update(){
-            Util::Time::Update();
-            for(auto &object : Monsters) {
-                if(IsFalling(object)) {
-                    object->SetGravity(object->GetGravity() + gravity * Util::Time::GetDeltaTimeMs() / 1000);
-                    object->SetFalling(true);
-                }
-                else {
-                    object->SetGravity(0.0f);
-                    object->SetFalling(false);
-                }
-                object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
-            }
-            if(IsFalling(Mario)) {
-                Mario->SetGravity(Mario->GetGravity() + gravity * Util::Time::GetDeltaTimeMs() / 1000);
-                Mario->SetFalling(true);
-            }
-            else {
-                Mario->SetGravity(0.0f);
-                Mario->SetFalling(false);
-            }
-            Mario->SetPosition({Mario->GetPosition().x,Mario->GetPosition().y - Mario->GetGravity()});
         };
+        void Update(const std::shared_ptr<Mario> &mario,
+            const std::vector<std::shared_ptr<Monster>> &monsters){
+                Util::Time::Update();
+                this->Combination(mario,monsters);
+                for(auto &object : GravityObject) {
+                    if(IsFalling(object)) {
+                        object->SetGravity(object->GetGravity() + gravity * Util::Time::GetDeltaTimeMs() / 1000); //1 -> 0.004s = 4ms    ,  9.8 M/ms
+                        object->SetFalling(true);
+                    }
+                    else {
+                        object->SetGravity(0.0f);
+                        object->SetFalling(false);
+                    }
+                    object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
+                }
+            };
+    void Combination(const std::shared_ptr<Mario> &mario,
+        const std::vector<std::shared_ptr<Monster>> &monsters) {
+            GravityObject.clear();
+            GravityObject.push_back(mario);
+            for(auto &Monster : monsters) {
+                GravityObject.push_back(Monster);
+            }
+        }
         bool IsFalling(const std::shared_ptr<Object> &Object) {
             for(auto &Scene : Scenes) {
                 if(Object->DownCollision(Scene)) {
@@ -50,9 +47,7 @@ class GravityManager {
     private:
         const float gravity = 9.8f;
         std::shared_ptr<Util::Time> Time = std::make_shared<Util::Time>();
-        std::vector<std::shared_ptr<Monster>> Monsters;
         std::vector<std::shared_ptr<SceneObject>> Scenes;
-        std::shared_ptr<Mario> Mario;
         std::vector<std::shared_ptr<Object>> GravityObject;
 };
 #endif

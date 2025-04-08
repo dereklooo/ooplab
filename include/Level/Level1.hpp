@@ -27,7 +27,7 @@ class Level1 : public Level{
             Map_Manager->SetBlock(SceneManager,Pipe_64_96,BlockType::pipe_64_96);
             Map_Manager->SetBlock(SceneManager,Pipe_64_128,BlockType::pipe_64_128);
 
-            Gravity_Manager = std::make_shared<GravityManager>(m_MariO,Monsters,SceneManager);
+            Gravity_Manager = std::make_shared<GravityManager>(SceneManager);
         }
         void condition() override {
             std::vector<std::shared_ptr<Monster>> _temp;
@@ -35,7 +35,7 @@ class Level1 : public Level{
                 case 1:
                     if (m_Background->GetPosition().x <= -600) {
                         _temp.clear();
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-245),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-220),Left));
                         MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
@@ -43,7 +43,7 @@ class Level1 : public Level{
                 case 2:
                     if (m_Background->GetPosition().x <= -1050) {
                         _temp.clear();
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-220),Left));
                         MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
@@ -51,8 +51,8 @@ class Level1 : public Level{
                 case 3:
                     if (m_Background->GetPosition().x <= -1630) {
                         _temp.clear();
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(900,-247),Left));
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(960,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(900,-220),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(960,-220),Left));
                         MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }

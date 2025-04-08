@@ -2,9 +2,6 @@
 // Created by Benson on 2025/3/28.
 //
 #include "Mario/Mario_small.hpp"
-
-#include <shobjidl.h>
-
 #include "Util/Renderer.hpp"
 #include <iostream>
 Mario_small::Mario_small() : Mario(){

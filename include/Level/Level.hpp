@@ -63,7 +63,7 @@ public:
         this->condition();
         MapManager::Update(m_MariO,Monsters,SceneManager);
         m_renderer->Update();
-        Gravity_Manager->Update();
+        Gravity_Manager->Update(m_MariO,Monsters);
     }
 
 
