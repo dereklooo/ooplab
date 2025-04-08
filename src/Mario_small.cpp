@@ -73,7 +73,10 @@ void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
 
     if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
         m_MariO->SetCurrentState(Action::Jump);
-        m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 4});
+        if(!m_MariO->GetFalling()) {
+            m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 4});
+            m_MariO->SetGravity(-7.5);
+        }
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {

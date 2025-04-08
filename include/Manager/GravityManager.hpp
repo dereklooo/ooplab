@@ -22,23 +22,28 @@ class GravityManager {
         }
         void Update(){
             Util::Time::Update();
-            if(time <= 0) {
-                time -= Util::Time::GetDeltaTimeMs();
-               // Object->SetPosition({Object->GetPosition().x,Object->GetPosition().y -gravity});
-                time = 1000.0f;
+            for(auto &object : GravityObject) {
+                if(IsFalling(object)) {
+                    object->SetGravity(object->GetGravity() + gravity * Util::Time::GetDeltaTimeMs() / 1000);
+                    object->SetFalling(true);
+                }
+                else {
+                    object->SetGravity(0.0f);
+                    object->SetFalling(false);
+                }
+                object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
             }
         };
-        bool Isfalling() {
-            for(auto object : GravityObject) {
-              //  if(object->)
+        bool IsFalling(const std::shared_ptr<Object> &Object) {
+            for(auto &Scene : Scenes) {
+                if(Object->DownCollision(Scene)) {
+                    return false;
+                }
             }
-        }
-        void SetGravity(float Number) {
-            time = Number;
+            return true;
         }
     private:
         const float gravity = 9.8f;
-        float time = 1000.0f;
         std::shared_ptr<Util::Time> Time = std::make_shared<Util::Time>();
         std::vector<std::shared_ptr<Object>> GravityObject;
         std::vector<std::shared_ptr<SceneObject>> Scenes;

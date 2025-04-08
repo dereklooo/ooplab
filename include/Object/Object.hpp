@@ -14,6 +14,19 @@ class Object : public Util::GameObject{
         std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
 
 
+        void SetGravity(float num) {
+            this->GravityNum = num;
+        }
+        float GetGravity() {
+            return GravityNum;
+        }
+        bool GetFalling() {
+            return Falling;
+        }
+        void SetFalling(bool f) {
+            this->Falling = f;
+        }
+
 
         bool Collision(const glm::vec2 &other) const {
                 if (
@@ -27,32 +40,35 @@ class Object : public Util::GameObject{
                 return false;
             }
         bool DownCollision(const std::shared_ptr<Object> &other) const {
-            glm::vec2 TempPos = {this->GetPosition().x, this->GetPosition().y - abs(this->GetScaledSize().y / 2) - 12};
-            if(other->Collision(TempPos)) {
+            glm::vec2 TempPos = {this->GetPosition().x, this->GetPosition().y - abs(this->GetScaledSize().y / 2) - 2};
+            if(other->Collision(TempPos)){
                 return true;
             }
             return false;
         }
         bool LeftCollision(const std::shared_ptr<Object> &other) const{
-            glm::vec2 TempPos = {this->GetPosition().x - abs(this->GetScaledSize().x / 2) - 12, this->GetPosition().y};
+            glm::vec2 TempPos = {this->GetPosition().x - abs(this->GetScaledSize().x / 2) - 4, this->GetPosition().y};
             if(other->Collision(TempPos)) {
                 return true;
             }
             return false;
         }
         bool RightCollision(const std::shared_ptr<Object> &other) const{
-            glm::vec2 TempPos = {this->GetPosition().x + abs(this->GetScaledSize().x / 2) + 12, this->GetPosition().y};
+            glm::vec2 TempPos = {this->GetPosition().x + abs(this->GetScaledSize().x / 2) + 4, this->GetPosition().y};
             if(other->Collision(TempPos)) {
                 return true;
             }
             return false;
         }
         bool UpCollision(const std::shared_ptr<Object> &other) const{
-            glm::vec2 TempPos = {this->GetPosition().x, this->GetPosition().y + abs(this->GetScaledSize().y / 2) + 12};
+            glm::vec2 TempPos = {this->GetPosition().x, this->GetPosition().y + abs(this->GetScaledSize().y / 2) + 2};
             if(other->Collision(TempPos)) {
                 return true;
             }
             return false;
         }
+    private:
+        float GravityNum = 0.0f;
+        bool Falling = false;
 };
 #endif //OBJECT_HPP

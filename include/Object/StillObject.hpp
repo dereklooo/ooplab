@@ -6,7 +6,9 @@
 #define STILLOBJECT_HPP
 
 #include <string>
-#include "Object/Object.hpp"
+
+#include "Object.hpp"
+
 #include "Util/Image.hpp"
 
 class StillObject : public Object {

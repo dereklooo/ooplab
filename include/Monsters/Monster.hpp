@@ -10,7 +10,7 @@ enum Way {Right ,Left};
 class Monster : public AnimationObject {
     public:
       Monster(const size_t size,const std::string &Path) : AnimationObject(size,Path) {};
-      void SetWay(Way way) {
+      void SetWay(const Way way) {
           this->way = way;
           if(way == Right) {
               this->SetSize({1.2,1.2});
