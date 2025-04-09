@@ -101,7 +101,7 @@ class MapManager {
                         Monster->SetWay(Way::Left);
                     }
                     if(Monster->DownCollision(SceneObject)) {
-                        Monster->SetPosition({Monster->GetPosition().x,SceneObject->GetPosition().y + (SceneObject->GetScaledSize().y / 2) + (Monster->GetPosition().y / 2) + 1});
+                        Monster->SetPosition({Monster->GetPosition().x,SceneObject->GetPosition().y + abs(SceneObject->GetScaledSize().y / 2) + abs(Monster->GetScaledSize().y / 2) + 1});
                     }
                 }
                 for(const auto &_Monster : Monsters) {
