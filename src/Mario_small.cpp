@@ -12,6 +12,7 @@ Mario_small::Mario_small() : Mario(){
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/SmalltoBig/SmalltoBig",800,200)); //smalltobig
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stop/small_stop",400,100)); //stop
     this->SetSize({1.4,1.4});
+    this->Type = Small;
 }
 void Mario_small::Hurt() {
     this->SetCurrentState(Action::Die);
@@ -41,6 +42,8 @@ void Mario_small::SetCurrentState(int num) {
         case 5:
             CurrentState=5;
             this->SetDrawable(this->SmallDrawable[3]);
+        break;
+        default:
         break;
     }
 

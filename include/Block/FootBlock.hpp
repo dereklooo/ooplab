@@ -4,10 +4,13 @@
 
 #ifndef FOOTBLOCK_HPP
 #define FOOTBLOCK_HPP
-#include "Object/SceneObject.hpp"
-class FootBlock : public SceneObject {
+#include "Block/Block.hpp"
+class FootBlock : public  Block{
     public:
-        FootBlock(glm::vec2 Position):SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/FootBlock.png",Position) {
+        FootBlock(const glm::vec2 &Position) : Block(RESOURCE_DIR"/image/Background/Level1/Block/FootBlock.png",Position) {
+
+        }
+        void hit() override {
 
         }
 };

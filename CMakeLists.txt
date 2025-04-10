@@ -59,6 +59,7 @@ add_executable(${PROJECT_NAME}
         include/Manager/MapManager.hpp
         include/Manager/GravityManager.hpp
         include/Object/Object.hpp
+        include/Block/Block.hpp
 )
 
 if(MSVC)

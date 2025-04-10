@@ -118,7 +118,7 @@ class MapManager {
                 }
             }
         }
-        static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
+        static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(auto &monster : Monsters) {
                 if(Mario->RightCollision(monster) || Mario->LeftCollision(monster)) {
                     Mario->Hurt();
@@ -137,6 +137,13 @@ class MapManager {
                 }
                 if(Mario->UpCollision(SceneObject)) {
                     Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y - abs(SceneObject->GetScaledSize().y / 2) - abs(Mario->GetScaledSize().y / 2) - 1});
+                    if(Mario->GetType() == Small) {
+
+                    }
+                    else {
+
+                        SceneObjects.erase()
+                    }
                 }
                 else if(Mario->DownCollision(SceneObject)) {
                     Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y + abs(SceneObject->GetScaledSize().y / 2) + abs(Mario->GetScaledSize().y / 2) + 1});

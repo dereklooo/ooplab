@@ -4,14 +4,15 @@
 
 #ifndef ORIGINALBLOCK_HPP
 #define ORIGINALBLOCK_HPP
-#include "Object/SceneObject.hpp"
-class OriginalBlock : public SceneObject {
+#include "Block/Block.hpp"
+class OriginalBlock : public Block {
     public:
-    OriginalBlock(glm::vec2 Position) : SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/OriginalBlock.png",Position) {
+    OriginalBlock(glm::vec2 Position) : Block(RESOURCE_DIR"/image/Background/Level1/Block/OriginalBlock.png",Position) {
 
     }
-    void hit() {
-        this->SetPosition(this->GetPosition());
+    void hit() override {
+        this->SetSize({0,0});
+        this->SetVisible(false);
     }
 };
 #endif //ORIGINALBLOCK_HPP
