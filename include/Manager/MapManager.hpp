@@ -10,7 +10,7 @@
 #include "Block/Pipe_64_128.hpp"
 #include "Block/Pipe_64_96.hpp"
 #include "Block/Pipe_64_64.hpp"
-
+#include "Block/AirBlock.hpp"
 #include "Monsters/Mushroom.hpp"
 #include "Monsters/Turtle.hpp"
 #include "Mario/Mario.hpp"
@@ -41,11 +41,11 @@ class MapManager {
                     }
                 }
                 if(Build) {
-                    auto temp = std::make_shared<SceneObject>(RESOURCE_DIR"/image/Background/Level1/Block/AirBlock.png",glm::vec2(MapPosition.x + i * 48 , MapPosition.y + Floor_y * 48));
+                    auto temp = std::make_shared<AirBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + Floor_y * 48));
                     temp->SetSize({1.5,1.5});
                     temp->SetZIndex(100);
                     SceneManager.push_back(temp);
-                    temp = std::make_shared<SceneObject>(RESOURCE_DIR"/image/Background/Level1/Block/AirBlock.png",glm::vec2(MapPosition.x + i * 48 , MapPosition.y + (Floor_y - 1) * 48));
+                    temp = std::make_shared<AirBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + (Floor_y - 1) * 48));
                     temp->SetSize({1.5,1.5});
                     temp->SetZIndex(100);
                     SceneManager.push_back(temp);
@@ -118,7 +118,7 @@ class MapManager {
                 }
             }
         }
-        static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
+        static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(auto &monster : Monsters) {
                 if(Mario->RightCollision(monster) || Mario->LeftCollision(monster)) {
                     Mario->Hurt();
@@ -136,14 +136,9 @@ class MapManager {
                     Mario->SetPosition({SceneObject->GetPosition().x - abs(SceneObject->GetScaledSize().x / 2) - abs(Mario->GetScaledSize().x / 2) - 5,Mario->GetPosition().y});
                 }
                 if(Mario->UpCollision(SceneObject)) {
-                    Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y - abs(SceneObject->GetScaledSize().y / 2) - abs(Mario->GetScaledSize().y / 2) - 1});
-                    if(Mario->GetType() == Small) {
-
-                    }
-                    else {
-
-                        SceneObjects.erase()
-                    }
+                    Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y - abs(SceneObject->GetScaledSize().y / 2) - abs(Mario->GetScaledSize().y / 2) - 5});
+                    Mario->SetGravity(2);
+                    SceneObject->hit(Mario);
                 }
                 else if(Mario->DownCollision(SceneObject)) {
                     Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y + abs(SceneObject->GetScaledSize().y / 2) + abs(Mario->GetScaledSize().y / 2) + 1});

@@ -10,5 +10,8 @@ public:
     Pipe64_128(glm::vec2 position) :  SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/Pipe_64_128.png" , position) {
 
     }
+    void hit(const std::shared_ptr<Mario> &Mario) override {
+        return;
+    };
 };
 #endif //PIPE_64_128_HPP

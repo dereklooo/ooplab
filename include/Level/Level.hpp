@@ -21,7 +21,7 @@ class Level{
 public:
     void SetBackGround(std::shared_ptr<StillObject> Background);
     void SetSceneObject(std::shared_ptr<SceneObject> SceneObject);
-    virtual void condition() = 0;
+    virtual void Update() = 0;
     void Start() {
         m_MariO->SetPosition({-620,-235.5});
         m_MariO->SetCurrentState(2);
@@ -60,7 +60,7 @@ public:
         }
 
 
-        this->condition();
+        this->Update();
         MapManager::Update(m_MariO,Monsters,SceneManager);
         m_renderer->Update();
         Gravity_Manager->Update(m_MariO,Monsters);

@@ -29,7 +29,7 @@ class Level1 : public Level{
 
             Gravity_Manager = std::make_shared<GravityManager>(SceneManager);
         }
-        void condition() override {
+        void Update() override {
             std::vector<std::shared_ptr<Monster>> _temp;
             switch (Condition_num) {
                 case 1:

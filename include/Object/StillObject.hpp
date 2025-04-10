@@ -18,7 +18,6 @@ public:
     void SetImagePath(std::string){this->ImagePath = ImagePath;}
 
 
-
 protected:
     std::string ImagePath;
 };

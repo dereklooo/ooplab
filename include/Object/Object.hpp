@@ -10,7 +10,7 @@ class Object : public Util::GameObject{
         Object() = default;
         glm::vec2 GetPosition() const {return m_Transform.translation;}
         void SetPosition(const glm::vec2 &position) {m_Transform.translation = position;}
-        void SetSize(glm::vec2 size) {m_Transform.scale = size;}
+        void SetSize(const glm::vec2 size) {m_Transform.scale = size;}
         std::shared_ptr<Core::Drawable> GetDrawable() {return m_Drawable;}
 
 

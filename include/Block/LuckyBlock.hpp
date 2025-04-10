@@ -4,19 +4,19 @@
 
 #ifndef LUCKYBLOCK_HPP
 #define LUCKYBLOCK_HPP
-#include "Block/Block.hpp"
+#include "Object/SceneObject.hpp"
 enum State {
 
 };
-class LuckyBlock : public Block{
+class LuckyBlock : public SceneObject{
     public:
-        LuckyBlock(const glm::vec2 &Position) : Block(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock.png",Position) {
+        LuckyBlock(const glm::vec2 &Position) : SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock.png",Position) {
 
         }
         void ChangeState() {
-            this->SetImagePath(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock_.png");
+            this->SetDrawable(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock_.png"));
         }
-        void hit(std::shared_ptr<Mario> Mario) override{
+        void hit(const std::shared_ptr<Mario> &Mario) override{
             this->ChangeState();
         }
 };
