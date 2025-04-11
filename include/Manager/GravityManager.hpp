@@ -45,7 +45,7 @@ class GravityManager {
             return true;
         }
     private:
-        const float gravity = 9.8f;
+        const float gravity = 50.0f;
         std::shared_ptr<Util::Time> Time = std::make_shared<Util::Time>();
         std::vector<std::shared_ptr<SceneObject>> Scenes;
         std::vector<std::shared_ptr<Object>> GravityObject;
