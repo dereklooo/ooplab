@@ -23,7 +23,7 @@ class Mario_big : public Mario {
 
         void Hurt() override;
 
-        void update(std::shared_ptr<Mario> &m_MariO) override;
+        void update() override;
     private:
 };
 #endif //MARIO_BIG_HPP

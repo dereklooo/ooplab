@@ -37,23 +37,20 @@ void Mario_big::SetCurrentState(int num) {
     }
 
 }
-void Mario_big::update(std::shared_ptr<Mario> &m_MariO) {
+
+void Mario_big::update() {
     if (Util::Input::IsKeyPressed(Util::Keycode::D)){
-        m_MariO->SetPosition({m_MariO->GetPosition().x + 4,m_MariO->GetPosition().y});
-        m_MariO->SetCurrentState(Action::Run);
+        rightMove();
+        this->SetCurrentState(Action::Run);
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
-        if(m_MariO->GetPosition().x - 1 <= -620) {
-            m_MariO->SetPosition({-620,m_MariO->GetPosition().y});
-        }
-        m_MariO->SetPosition({m_MariO->GetPosition().x - 4,m_MariO->GetPosition().y});
-        m_MariO->SetSize({-1,1});
-        m_MariO->SetCurrentState(Action::Run);
+        leftMove();
+        this->SetCurrentState(Action::Run);
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
-        m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y - 4});
+
     }
 
 
@@ -61,6 +58,6 @@ void Mario_big::update(std::shared_ptr<Mario> &m_MariO) {
         !Util::Input::IsKeyPressed(Util::Keycode::W) &&
         !Util::Input::IsKeyPressed(Util::Keycode::A) &&
         !Util::Input::IsKeyPressed(Util::Keycode::D)) {
-        m_MariO->SetCurrentState(Action::Stand);
+        this->SetCurrentState(Action::Stand);
         }
 }

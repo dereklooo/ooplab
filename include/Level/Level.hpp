@@ -49,7 +49,7 @@ public:
     }
     void update() {
         this->GameObject_Move();
-        m_MariO->update(m_MariO );
+        m_MariO->update();
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
             std::cout<<m_Background->GetPosition().x<<std::endl;
         }

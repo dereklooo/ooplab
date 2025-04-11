@@ -125,6 +125,7 @@ class MapManager {
                 }
                 else if(Mario->DownCollision(monster)) {
                     monster->Hurt();
+                    Mario->SetGravity(-4.0f);
                 }
             }
 

@@ -23,7 +23,7 @@ class Mario_small : public Mario {
 
         void Hurt() override;
 
-        void update(std::shared_ptr<Mario> &m_MariO) override;
+        void update() override;
     private:
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
 };

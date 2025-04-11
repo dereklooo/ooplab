@@ -4,6 +4,7 @@
 #include "Mario/Mario_small.hpp"
 #include "Util/Renderer.hpp"
 #include <iostream>
+#include "Util/Time.hpp"
 Mario_small::Mario_small() : Mario(){
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand",400,100)); // stand
     this->SmallDrawable.push_back(Mario_small::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/run/small_run",90,60)); //run
@@ -48,44 +49,35 @@ void Mario_small::SetCurrentState(int num) {
     }
 
 }
-void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
+void Mario_small::update() {
     if (Util::Input::IsKeyPressed(Util::Keycode::D)){
-        m_MariO->SetPosition({m_MariO->GetPosition().x + 4,m_MariO->GetPosition().y});
-        m_MariO->SetCurrentState(Action::Run);
-        m_MariO->SetSize({1.35,1.2});
+        rightMove();
+        this->SetCurrentState(Action::Run);
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
-        if(m_MariO->GetPosition().x - 1 <= -620) {
-            m_MariO->SetPosition({-620,m_MariO->GetPosition().y});
-        }
-        else {
-            m_MariO->SetPosition({m_MariO->GetPosition().x - 4,m_MariO->GetPosition().y});
-        }
+        leftMove();
 
-        m_MariO->SetCurrentState(Action::Run);
-        m_MariO->SetSize({-1.35,1.2});
+        this->SetCurrentState(Action::Run);
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
-        m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y - 4});
+
+
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
-        m_MariO->SetCurrentState(Action::Jump);
-        if(!m_MariO->GetFalling()) {
-            m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 4});
-            m_MariO->SetGravity(-15);
-        }
+        jump();
+        this->SetCurrentState(Action::Jump);
+
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-        std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y<<std::endl;
+        std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y << " "<< Util::Time::GetDeltaTime()<<std::endl;
     }
-    if(!Util::Input::IsKeyPressed(Util::Keycode::S) &&
-        !Util::Input::IsKeyPressed(Util::Keycode::W) &&
-        !Util::Input::IsKeyPressed(Util::Keycode::A) &&
-        !Util::Input::IsKeyPressed(Util::Keycode::D)) {
-        m_MariO->SetCurrentState(Action::Stand);
-        }
+
+    Mario::brakes();
+    if (GetAcceleration()==0) {
+        this->SetCurrentState(Action::Stand);
+    }
 }
