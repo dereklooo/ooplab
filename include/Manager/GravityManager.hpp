@@ -18,12 +18,13 @@ class GravityManager {
                 this->Combination(mario,monsters);
                 for(auto &object : GravityObject) {
                     if(IsFalling(object)) {
-                        object->SetGravity(object->GetGravity() + gravity * Util::Time::GetDeltaTimeMs() * 0.001); //1 -> 0.004s = 4ms    ,  9.8 M/ms
+                        object->SetGravity(object->GetGravity() +  gravity * (Util::Time::GetElapsedTimeMs() - object->GetFallingTime())); //1 -> 0.004s = 4ms    ,  9.8 M/ms
                         object->SetFalling(true);
                     }
                     else {
                         object->SetGravity(0.0f);
                         object->SetFalling(false);
+                        object->SetFallingTime(Util::Time::GetElapsedTimeMs());
                     }
                     object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
                 }
@@ -45,7 +46,7 @@ class GravityManager {
             return true;
         }
     private:
-        const float gravity = 50.0f;
+        const float gravity = 9.8f;
         std::shared_ptr<Util::Time> Time = std::make_shared<Util::Time>();
         std::vector<std::shared_ptr<SceneObject>> Scenes;
         std::vector<std::shared_ptr<Object>> GravityObject;
