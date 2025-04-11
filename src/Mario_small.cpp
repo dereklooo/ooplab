@@ -18,7 +18,7 @@ Mario_small::Mario_small() : Mario(){
 void Mario_small::Hurt() {
     this->SetCurrentState(Action::Die);
 }
-void Mario_small::SetCurrentState(int num) {
+void Mario_small::SetCurrentState(const int num) {
     switch(num) {
         case 0:
             CurrentState = 0;

@@ -6,6 +6,7 @@
 #define MONSTER_HPP
 #include "Object/AnimationObject.hpp"
 #include "Object/StillObject.hpp"
+#include "Util/Time.hpp"
 enum Way {Right ,Left};
 class Monster : public AnimationObject {
     public:
@@ -23,10 +24,15 @@ class Monster : public AnimationObject {
       Way GetWay() {
           return this->way;
       }
-
+      bool GetDie() const {
+          return Die;
+      }
       virtual void Action() = 0;
       virtual void Hurt() = 0;
     protected:
         Way way;
+        bool Die = false;
+        float DieTimer = 0.0f;
+
 };
 #endif //MONSTER_HPP

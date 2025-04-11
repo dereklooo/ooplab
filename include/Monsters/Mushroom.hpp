@@ -17,6 +17,6 @@ class Mushroom : public Monster{
 
     private:
         std::shared_ptr<AnimationObject> walk = std::make_shared<AnimationObject>(2,RESOURCE_DIR "/image/character/monster/mushroom/mushroom_walk");
-        std::shared_ptr<StillObject> die = std::make_shared<StillObject>(RESOURCE_DIR "/image/character/monster/mushroom/mushroom_die.png");
+        std::shared_ptr<AnimationObject> die = std::make_shared<AnimationObject>(1,RESOURCE_DIR "/image/character/monster/mushroom/mushroom_die");
 };
 #endif //MUSHROOM_HPP

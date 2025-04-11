@@ -106,11 +106,11 @@ class MapManager {
                 }
                 for(const auto &_Monster : Monsters) {
                     if (_Monster != Monster) {
-                        if(_Monster->LeftCollision(Monster)) {
+                        if(_Monster->LeftCollision(Monster) && !Monster->GetDie() && !_Monster->GetDie()) {
                             _Monster->SetWay(Way::Right);
                             Monster->SetWay(Way::Left);
                         }
-                        else if(_Monster->RightCollision(Monster)) {
+                        else if(_Monster->RightCollision(Monster) && !Monster->GetDie() && !_Monster->GetDie()) {
                             _Monster->SetWay(Way::Left);
                             Monster->SetWay(Way::Right);
                         }
@@ -120,15 +120,16 @@ class MapManager {
         }
         static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(auto &monster : Monsters) {
-                if(Mario->RightCollision(monster) || Mario->LeftCollision(monster)) {
+                if((Mario->RightCollision(monster) || Mario->LeftCollision(monster)) && !monster->GetDie()) {
                     Mario->Hurt();
                 }
                 else if(Mario->DownCollision(monster)) {
+
                     monster->Hurt();
                     Mario->SetGravity(-4.0f);
+
                 }
             }
-
             for(auto &SceneObject : SceneObjects) {
                 if(Mario->LeftCollision(SceneObject)) {
                     Mario->SetPosition({SceneObject->GetPosition().x + abs(SceneObject->GetScaledSize().x / 2) + abs(Mario->GetScaledSize().x / 2) + 5,Mario->GetPosition().y});
@@ -149,6 +150,10 @@ class MapManager {
         static void Update(const std::shared_ptr<Mario>& Mario,
             const std::vector<std::shared_ptr<Monster>>& Monsters,
             const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
+
+            for (const auto& monster : Monsters) {
+                monster->Action();
+            }
             MonsterCollision(Monsters,SceneObjects);
             MarioCollision(Mario,Monsters,SceneObjects);
         }

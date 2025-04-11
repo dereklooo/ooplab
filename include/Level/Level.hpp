@@ -48,17 +48,12 @@ public:
         }
     }
     void update() {
+
         this->GameObject_Move();
         m_MariO->update();
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
             std::cout<<m_Background->GetPosition().x<<std::endl;
         }
-
-
-        for (const auto& monster : Monsters) {
-            monster->Action();
-        }
-
 
         this->Update();
         MapManager::Update(m_MariO,Monsters,SceneManager);
