@@ -25,10 +25,12 @@ class Mario : public AnimationObject{
 
         void virtual update(std::shared_ptr<Mario> &m_MariO)=0;
 
+
         Type GetType() const {
             return Type;
         }
     protected:
+        void jump ();
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         int CurrentState;
         glm::vec2 speed = {0,0};

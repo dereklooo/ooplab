@@ -14,11 +14,11 @@ class GravityManager {
         };
         void Update(const std::shared_ptr<Mario> &mario,
             const std::vector<std::shared_ptr<Monster>> &monsters){
-                Util::Time::Update();
+
                 this->Combination(mario,monsters);
                 for(auto &object : GravityObject) {
                     if(IsFalling(object)) {
-                        object->SetGravity(object->GetGravity() + gravity * Util::Time::GetDeltaTimeMs() / 1000); //1 -> 0.004s = 4ms    ,  9.8 M/ms
+                        object->SetGravity(object->GetGravity() + gravity * 0.01); //1 -> 0.004s = 4ms    ,  9.8 M/ms
                         object->SetFalling(true);
                     }
                     else {

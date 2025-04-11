@@ -60,6 +60,7 @@ add_executable(${PROJECT_NAME}
         include/Manager/GravityManager.hpp
         include/Object/Object.hpp
         include/Block/AirBlock.hpp
+        src/Mario.cpp
 )
 
 if(MSVC)
