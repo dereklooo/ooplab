@@ -7,12 +7,12 @@
 #include "Object/AnimationObject.hpp"
 #include "Object/StillObject.hpp"
 #include "Util/Time.hpp"
+#include "Util/Input.hpp"
 enum Type {
     Small,
     Big,
     Fire
 };
-#include "Util/Input.hpp"
 class Mario : public AnimationObject{
     public:
         Mario():AnimationObject(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand") {

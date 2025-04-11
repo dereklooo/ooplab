@@ -31,7 +31,7 @@ public:
         AnimationPaths.push_back(ImagePath);
     }
 protected:
-    std::shared_ptr<Util::Animation> Animations;
     std::vector<std::string> AnimationPaths;
+
 };
 #endif //ANIMATIONOBJECT_HPP
