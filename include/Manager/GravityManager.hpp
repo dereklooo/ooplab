@@ -18,14 +18,14 @@ class GravityManager {
                 this->Combination(mario,monsters);
                 for(auto &object : GravityObject) {
                     if(IsFalling(object)) {
-                        object->SetGravity(object->GetGravity() +  gravity * (Util::Time::GetElapsedTimeMs() - object->GetFallingTime())); //1 -> 0.004s = 4ms    ,  9.8 M/ms
+                        object->SetGravity(object->GetGravity() +  (gravity * (Util::Time::GetElapsedTimeMs() - object->GetFallingTime()) / 2) / 1000000); //1 -> 0.004s = 4ms    ,  9.8 M/ms
                         object->SetFalling(true);
                     }
                     else {
                         object->SetGravity(0.0f);
                         object->SetFalling(false);
-                        object->SetFallingTime(Util::Time::GetElapsedTimeMs());
                     }
+                    object->SetFallingTime(Util::Time::GetElapsedTimeMs());
                     object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
                 }
             };
