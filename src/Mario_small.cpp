@@ -75,7 +75,7 @@ void Mario_small::update(std::shared_ptr<Mario> &m_MariO) {
         m_MariO->SetCurrentState(Action::Jump);
         if(!m_MariO->GetFalling()) {
             m_MariO->SetPosition({m_MariO->GetPosition().x,m_MariO->GetPosition().y + 10});
-            m_MariO->SetGravity(-5.0f);
+            m_MariO->SetGravity(-7.5f);
         }
     }
 

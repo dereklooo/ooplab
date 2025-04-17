@@ -123,9 +123,9 @@ class MapManager {
                 if((Mario->RightCollision(monster) || Mario->LeftCollision(monster)) && !monster->GetDie()) {
                     Mario->Hurt();
                 }
-                else if(Mario->DownCollision(monster)) {
+                else if(Mario->DownCollision(monster) && !monster->GetDie()) {
                         monster->Hurt();
-                        Mario->SetGravity(-4.0f);
+                        Mario->SetGravity(-2.0f);
                 }
             }
             for(auto &SceneObject : SceneObjects) {

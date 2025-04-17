@@ -4,6 +4,9 @@
 
 #ifndef GRAVITYMANAGER_HPP
 #define GRAVITYMANAGER_HPP
+#include <iostream>
+#include <ostream>
+
 #include "Util/Time.hpp"
 #include "Mario/Mario.hpp"
 #include "Monsters/Monster.hpp"
@@ -18,7 +21,10 @@ class GravityManager {
                 this->Combination(mario,monsters);
                 for(auto &object : GravityObject) {
                     if(IsFalling(object)) {
-                        object->SetGravity(object->GetGravity() +  (gravity * (Util::Time::GetElapsedTimeMs() - object->GetFallingTime()) / 2) / 1000000); //1 -> 0.004s = 4ms    ,  9.8 M/ms
+                        float deltaTime = (Util::Time::GetElapsedTimeMs() - object->GetFallingTime()) / 1000.0f;
+                        float gravityNow = object->GetGravity();
+                        float gravityNext = gravityNow + gravity * deltaTime;
+                        object->SetGravity(gravityNext);
                         object->SetFalling(true);
                     }
                     else {
@@ -46,7 +52,7 @@ class GravityManager {
             return true;
         }
     private:
-        const float gravity = 9.8f;
+        const float gravity = 9.5f;
         std::shared_ptr<Util::Time> Time = std::make_shared<Util::Time>();
         std::vector<std::shared_ptr<SceneObject>> Scenes;
         std::vector<std::shared_ptr<Object>> GravityObject;

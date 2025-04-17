@@ -67,10 +67,10 @@ class Level1 : public Level{
                     }
                         break;
                 case 5:
-                    if (m_Background->GetPosition().x <= -3600) {
+                    if (m_Background->GetPosition().x <= -3900) {
                         _temp.clear();
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-247),Left));
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1050,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(775,-247),Left));
                         MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
