@@ -28,7 +28,6 @@ void Mario_small::UpDateCurrentState(const int num) {
 
             this->SetDrawable(this->SmallDrawable[2]);
         break;
-
         case 2:
 
             this->SetDrawable(this->SmallDrawable[0]);
@@ -68,6 +67,7 @@ void Mario_small::update() {
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+
         jump();
         CurrentState=1;
         this->UpDateCurrentState(CurrentState);
@@ -82,5 +82,6 @@ void Mario_small::update() {
     if (GetAcceleration()==0) {
         CurrentState=2;
         this->UpDateCurrentState(CurrentState);
+
     }
 }

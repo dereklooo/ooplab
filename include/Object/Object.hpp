@@ -23,6 +23,12 @@ class Object : public Util::GameObject{
         bool GetFalling() const {
             return Falling;
         }
+        float GetFallingTime() const {
+            return FallingTime;
+        }
+        void SetFallingTime(const float &FallingTime) {
+            this->FallingTime = FallingTime;
+        }
         void SetFalling(const bool f) {
             this->Falling = f;
         }
@@ -68,7 +74,9 @@ class Object : public Util::GameObject{
             return false;
         }
     private:
-        float GravityNum = 0.0f;
+        float GravityNum = 9.8f;
+        float FallingTime = 0.0f;
         bool Falling = false;
+
 };
 #endif //OBJECT_HPP

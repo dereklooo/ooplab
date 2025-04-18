@@ -23,8 +23,10 @@ public:
     void SetSceneObject(std::shared_ptr<SceneObject> SceneObject);
     virtual void Update() = 0;
     void Start() {
-        m_MariO->SetPosition({-620,-235.5});
+
+        m_MariO->SetPosition({-620,-150});
         m_MariO->UpDateCurrentState(2);
+
         m_MariO->SetZIndex(50);
         m_MariO->SetSize({1.35,1.2});
         m_renderer->AddChild(m_Background);

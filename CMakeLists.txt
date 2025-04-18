@@ -61,8 +61,6 @@ add_executable(${PROJECT_NAME}
         include/Object/Object.hpp
         include/Block/AirBlock.hpp
         src/Mario.cpp
-        "include/Item/Item_Mushroom .hpp"
-        include/Item/Item.hpp
 )
 
 if(MSVC)

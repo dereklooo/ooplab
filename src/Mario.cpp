@@ -53,7 +53,7 @@ void Mario::leftMove() {
 void Mario::jump() {
     if(!this->GetFalling()) {
         this->SetPosition({this->GetPosition().x,this->GetPosition().y + 4});
-        this->SetGravity(-15);
+        this->SetGravity(-7.5);
     }
 }
 
