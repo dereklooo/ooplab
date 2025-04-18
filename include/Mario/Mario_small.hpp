@@ -19,7 +19,7 @@ class Mario_small : public Mario {
     using Action = Mario_small::Action;
         Mario_small();
 
-        void SetCurrentState(int num) override;
+        void UpDateCurrentState(int num) override;
 
         void Hurt() override;
 

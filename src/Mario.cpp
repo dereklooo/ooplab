@@ -19,9 +19,9 @@ void Mario::rightMove() {
         this->SetSize({1.35,1.2});
         CurrentState = 0;
     }else if (GetAcceleration()<0) {
-        SetAcceleration(GetAcceleration()+0.5f);
+        SetAcceleration(GetAcceleration()+0.2f);
         CurrentState=3;
-        this->SetSize({-1.35,1.2});
+        this->SetSize({1.35,1.2});
     }
     this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
 
@@ -40,9 +40,9 @@ void Mario::leftMove() {
             this->SetSize({-1.35,1.2});
             CurrentState = 0;
         }else {
-            SetAcceleration(GetAcceleration()-0.5f);
+            SetAcceleration(GetAcceleration()-0.2f);
             CurrentState=3;
-            this->SetSize({1.35,1.2});
+            this->SetSize({-1.35,1.2});
         }
 
     }
@@ -63,8 +63,11 @@ void Mario::brakes() {
     !Util::Input::IsKeyPressed(Util::Keycode::W) &&
     !Util::Input::IsKeyPressed(Util::Keycode::A) &&
     !Util::Input::IsKeyPressed(Util::Keycode::D)) {
-        if (GetAcceleration()>=0.02f || GetAcceleration()<=-0.02f) {
-            SetAcceleration(GetAcceleration()/1.05);
+        if (GetAcceleration()>=0.07f ) {
+            SetAcceleration(GetAcceleration()-0.07);
+            this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
+        }else if (GetAcceleration()<=-0.02f) {
+            SetAcceleration(GetAcceleration()+0.07);
             this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
         }
         else{SetAcceleration(0);}

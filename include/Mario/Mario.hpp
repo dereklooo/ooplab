@@ -20,7 +20,7 @@ class Mario : public AnimationObject{
             CurrentState=2;
         };
 
-        void virtual SetCurrentState(int num) = 0;
+        void virtual UpDateCurrentState(int num) = 0;
 
         void virtual Hurt() = 0;
 

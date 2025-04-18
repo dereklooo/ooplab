@@ -24,7 +24,7 @@ public:
     virtual void Update() = 0;
     void Start() {
         m_MariO->SetPosition({-620,-235.5});
-        m_MariO->SetCurrentState(2);
+        m_MariO->UpDateCurrentState(2);
         m_MariO->SetZIndex(50);
         m_MariO->SetSize({1.35,1.2});
         m_renderer->AddChild(m_Background);

@@ -19,7 +19,7 @@ class Mario_big : public Mario {
     using Action = Mario_big::Action;
         Mario_big();
 
-        void SetCurrentState(int num) override;
+        void UpDateCurrentState(int num) override;
 
         void Hurt() override;
 

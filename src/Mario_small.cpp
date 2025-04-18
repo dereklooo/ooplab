@@ -16,32 +16,32 @@ Mario_small::Mario_small() : Mario(){
     this->Type = Small;
 }
 void Mario_small::Hurt() {
-    this->SetCurrentState(Action::Die);
+    this->UpDateCurrentState(Action::Die);
 }
-void Mario_small::SetCurrentState(const int num) {
+void Mario_small::UpDateCurrentState(const int num) {
     switch(num) {
         case 0:
-            CurrentState = 0;
+
             this->SetDrawable(this->SmallDrawable[1]);
             break;
         case 1:
-            CurrentState=1;
+
             this->SetDrawable(this->SmallDrawable[2]);
         break;
         case 2:
-            CurrentState=2;
+
             this->SetDrawable(this->SmallDrawable[0]);
             break;
         case 3:
-            CurrentState=3;
+
             this->SetDrawable(this->SmallDrawable[5]);
         break;
         case 4:
-            CurrentState=4;
+
             this->SetDrawable(this->SmallDrawable[4]);
         break;
         case 5:
-            CurrentState=5;
+
             this->SetDrawable(this->SmallDrawable[3]);
         break;
         default:
@@ -52,13 +52,13 @@ void Mario_small::SetCurrentState(const int num) {
 void Mario_small::update() {
     if (Util::Input::IsKeyPressed(Util::Keycode::D)){
         rightMove();
-        this->SetCurrentState(Action::Run);
+        this->UpDateCurrentState(CurrentState);
     }
 
-    if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
+    else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
         leftMove();
 
-        this->SetCurrentState(Action::Run);
+        this->UpDateCurrentState(CurrentState);
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
@@ -68,7 +68,8 @@ void Mario_small::update() {
 
     if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
         jump();
-        this->SetCurrentState(Action::Jump);
+        CurrentState=1;
+        this->UpDateCurrentState(CurrentState);
 
     }
 
@@ -78,6 +79,7 @@ void Mario_small::update() {
 
     Mario::brakes();
     if (GetAcceleration()==0) {
-        this->SetCurrentState(Action::Stand);
+        CurrentState=2;
+        this->UpDateCurrentState(CurrentState);
     }
 }

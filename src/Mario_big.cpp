@@ -14,7 +14,7 @@ Mario_big::Mario_big() : Mario(){
 void Mario_big::Hurt() {
 
 }
-void Mario_big::SetCurrentState(int num) {
+void Mario_big::UpDateCurrentState(int num) {
     switch(num) {
         case 0:
             CurrentState=0;
@@ -41,12 +41,12 @@ void Mario_big::SetCurrentState(int num) {
 void Mario_big::update() {
     if (Util::Input::IsKeyPressed(Util::Keycode::D)){
         rightMove();
-        this->SetCurrentState(Action::Run);
+        this->UpDateCurrentState(Action::Run);
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
         leftMove();
-        this->SetCurrentState(Action::Run);
+        this->UpDateCurrentState(Action::Run);
     }
 
     if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
@@ -58,6 +58,6 @@ void Mario_big::update() {
         !Util::Input::IsKeyPressed(Util::Keycode::W) &&
         !Util::Input::IsKeyPressed(Util::Keycode::A) &&
         !Util::Input::IsKeyPressed(Util::Keycode::D)) {
-        this->SetCurrentState(Action::Stand);
+        this->UpDateCurrentState(Action::Stand);
         }
 }
