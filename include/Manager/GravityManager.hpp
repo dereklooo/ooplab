@@ -50,7 +50,7 @@ class GravityManager {
                 }
             }
             return true;
-        }
+        } // aa
     private:
         const float gravity = 9.5f;
         std::shared_ptr<Util::Time> Time = std::make_shared<Util::Time>();

@@ -27,6 +27,7 @@ void Mario_small::SetCurrentState(const int num) {
             CurrentState=1;
             this->SetDrawable(this->SmallDrawable[2]);
         break;
+
         case 2:
             CurrentState=2;
             this->SetDrawable(this->SmallDrawable[0]);
