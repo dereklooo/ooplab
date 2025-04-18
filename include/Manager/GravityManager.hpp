@@ -25,7 +25,7 @@ class GravityManager {
                         float gravityNow = object->GetGravity();
                         float gravityNext = gravityNow + gravity * deltaTime;
                         object->SetGravity(gravityNext);
-                        object->SetFalling(true);
+                        object->SetFalling(true); //a a
                     }
                     else {
                         object->SetGravity(0.0f);

@@ -7,7 +7,7 @@
 #include "Item.hpp"
 class Item_Mushroom : public Item{
     public:
-        Item_Mushroom(glm::vec2 position) : Item(,position){};
+        explicit Item_Mushroom(const glm::vec2 position) : Item(,position){};
         void Action() override {
 
         };
