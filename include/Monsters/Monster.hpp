@@ -7,7 +7,6 @@
 #include "Object/AnimationObject.hpp"
 #include "Object/StillObject.hpp"
 #include "Util/Time.hpp"
-enum Way {Right ,Left};
 class Monster : public AnimationObject {
     public:
       Monster(const size_t size,const std::string &Path) : AnimationObject(size,Path) {};

@@ -36,16 +36,14 @@ public:
         }
     }
     void GameObject_Move() {
-        if(Util::Input::IsKeyPressed(Util::Keycode::D)) {
-            if (m_MariO->GetPosition().x >= 0) {
-                m_Background->SetPosition({m_Background->GetPosition().x - 4,m_Background->GetPosition().y});
-                m_MariO->SetPosition({m_MariO->GetPosition().x - 4,m_MariO->GetPosition().y});
-                for(const auto& monster : Monsters) {
-                    monster->SetPosition({monster->GetPosition().x - 4,monster->GetPosition().y});
-                }
-                for (const auto& Object : SceneManager) {
-                    Object->SetPosition({Object->GetPosition().x - 4 , Object->GetPosition().y});
-                }
+        if (m_MariO->GetPosition().x >= 0) {
+            m_Background->SetPosition({m_Background->GetPosition().x - 4,m_Background->GetPosition().y});
+            m_MariO->SetPosition({m_MariO->GetPosition().x - 4,m_MariO->GetPosition().y});
+            for(const auto& monster : Monsters) {
+                monster->SetPosition({monster->GetPosition().x - 4,monster->GetPosition().y});
+            }
+            for (const auto& Object : SceneManager) {
+                Object->SetPosition({Object->GetPosition().x - 4 , Object->GetPosition().y});
             }
         }
     }

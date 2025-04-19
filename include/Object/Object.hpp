@@ -5,6 +5,7 @@
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 #include "Util/GameObject.hpp"
+enum Way {Right ,Left};
 class Object : public Util::GameObject{
     public:
         Object() = default;
