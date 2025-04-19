@@ -7,6 +7,7 @@
 #include "Object/StillObject.hpp"
 #include "Monsters/Monster.hpp"
 #include "Object/SceneObject.hpp"
+#include "Object/ItemObject.hpp"
 #include "Mario/Mario.hpp"
 #include "Util/Input.hpp"
 #include "Util/Renderer.hpp"
@@ -34,6 +35,9 @@ public:
         for (auto &object : SceneManager) {
             m_renderer->AddChild(object);
         }
+        for (const auto& Object : ItemManager) {
+            m_renderer->AddChild(Object);
+        }
     }
     void GameObject_Move() {
         if (m_MariO->GetPosition().x >= 0) {
@@ -45,20 +49,25 @@ public:
             for (const auto& Object : SceneManager) {
                 Object->SetPosition({Object->GetPosition().x - 4 , Object->GetPosition().y});
             }
+            for (const auto& Object : ItemManager) {
+                Object->SetPosition({Object->GetPosition().x - 4 , Object->GetPosition().y});
+            }
+        }
+        if(m_Background->GetPosition().x <= 500 && m_MariO->GetPosition().y <= -350) {
+            m_MariO->SetPosition({m_MariO->GetPosition().x,0});
         }
     }
     void update() {
-
         this->GameObject_Move();
         m_MariO->update();
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-            std::cout<<m_Background->GetPosition().x<<std::endl;
+            std::cout<<m_Background->GetPosition().x << std::endl;
         }
 
         this->Update();
-        MapManager::Update(m_MariO,Monsters,SceneManager);
+        MapManager::Update(m_MariO,Monsters,SceneManager,ItemManager);
         m_renderer->Update();
-        Gravity_Manager->Update(m_MariO,Monsters);
+        Gravity_Manager->Update(m_MariO,Monsters,ItemManager);
     }
 
 
@@ -68,6 +77,7 @@ protected:
     std::shared_ptr<StillObject> m_Background;
     std::vector<std::shared_ptr<SceneObject>> SceneManager;
     std::vector<std::shared_ptr<Monster>> Monsters;
+    std::vector<std::shared_ptr<ItemObject>> ItemManager;
     std::shared_ptr<MapManager> Map_Manager;
     std::shared_ptr<GravityManager> Gravity_Manager;
     size_t Condition_num = 1;

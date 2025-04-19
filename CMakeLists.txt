@@ -63,6 +63,7 @@ add_executable(${PROJECT_NAME}
         src/Mario.cpp
         include/Object/ItemObject.hpp
         "include/Item/Mushroom_Item .hpp"
+        include/Item/Coin_Item.hpp
 )
 
 if(MSVC)

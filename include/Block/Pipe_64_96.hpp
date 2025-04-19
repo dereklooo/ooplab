@@ -11,7 +11,7 @@ public:
 
     }
     void hit(const std::shared_ptr<Mario> &Mario) override {
-        return;
+        (void)Mario;
     };
 };
 #endif //PIPE_64_96_HPP

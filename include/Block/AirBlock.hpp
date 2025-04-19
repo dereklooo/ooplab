@@ -10,8 +10,8 @@ class AirBlock final : public SceneObject {
 public:
     AirBlock(const glm::vec2& Position): SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/AirBlock.png", Position) {}
 
-    void hit(const std::shared_ptr<Mario>&) override {
-
+    void hit(const std::shared_ptr<Mario> &_) override {
+        (void)_;
     }
 };
 

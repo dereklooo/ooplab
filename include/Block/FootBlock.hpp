@@ -11,7 +11,7 @@ class FootBlock : public SceneObject{
 
         }
         void hit(const std::shared_ptr<Mario> &Mario) override {
-            return;
+            (void)Mario;
         }
 };
 #endif //FOOTBLOCK_HPP

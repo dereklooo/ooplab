@@ -7,15 +7,27 @@
 #include "Object/ItemObject.hpp"
 class Mushroom_Item final : public ItemObject {
 public:
-    Mushroom_Item(const glm::vec2 &position,const std::string &ImagePath) : ItemObject(position,ImagePath) {
+    explicit Mushroom_Item(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/character/Item/Mushroom.png") {
 
     };
     void Action() override {
-        if(this->way == Right) {
-            this->SetPosition({this->GetPosition().x + 4,this->GetPosition().y});
+        if(Spawning) {
+            this->SetVisible(true);
+            if(Util::Time::GetElapsedTimeMs() - this->StartSpawningTime <= 2000) {
+                this->SetGravity(-0.5);
+            }
+            else if(Util::Time::GetElapsedTimeMs() - this->StartSpawningTime > 2000) {
+                this->SetGravity(0.0f);
+                this->Spawning = false;
+            }
         }
-        else if(this->way == Left){
-            this->SetPosition({this->GetPosition().x - 4,this->GetPosition().y});
+        if(!this->IsInside() && !Spawning) {
+            if(this->way == Right) {
+                this->SetPosition({this->GetPosition().x + 4,this->GetPosition().y});
+            }
+            else if(this->way == Left){
+                this->SetPosition({this->GetPosition().x - 4,this->GetPosition().y});
+            }
         }
     }
 

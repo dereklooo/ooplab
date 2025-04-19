@@ -27,6 +27,9 @@ class Level1 : public Level{
             Map_Manager->SetBlock(SceneManager,Pipe_64_96,BlockType::pipe_64_96);
             Map_Manager->SetBlock(SceneManager,Pipe_64_128,BlockType::pipe_64_128);
 
+            Map_Manager->SetItem(SceneManager,ItemManager,Item_Mushroom,RewardType::Item_Mushroom);
+            Map_Manager->SetItem(SceneManager,ItemManager,Item_Coin,RewardType::Item_Coin);
+
             Gravity_Manager = std::make_shared<GravityManager>(SceneManager);
         }
         void Update() override {
@@ -90,5 +93,9 @@ class Level1 : public Level{
        std::vector<glm::vec2> Pipe_64_64 = {{29,-12},{164,-12},{180,-12}};
        std::vector<glm::vec2> Pipe_64_96 = {{39,-11.5}};
        std::vector<glm::vec2> Pipe_64_128 = {{47,-11},{58,-11}};
+
+        std::vector<glm::vec2> Item_Mushroom = {{21.5f,-9.5f},{78.5f,-9.5f},{109.5f,-5.5f}};
+        std::vector<glm::vec2> Item_Coin = {{16.5f,-9.5},{22.5,-5.5f},{23.5f,-9.5f},{94.5f,-5.5f},{94.5f,-9.5f},{106.5f,-9.5f},{109.5f,-9.5f},{112.5f,-9.5f},{129.5f,-5.5f},{130.5f,-5.5f},{170.5f,-9.5f}};
+        std::vector<glm::vec2> Item_Star = {{101.5,-9.5}};
 };
 #endif //LEVEL1_HPP

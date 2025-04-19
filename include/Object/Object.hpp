@@ -74,10 +74,16 @@ class Object : public Util::GameObject{
             }
             return false;
         }
+        bool WCollision() const {
+            return WantCollision;
+        }
+        void SetWCollion(bool W) {
+            this->WantCollision = W;
+        }
     private:
         float GravityNum = 9.8f;
         float FallingTime = 0.0f;
         bool Falling = false;
-
+        bool WantCollision = true;
 };
 #endif //OBJECT_HPP

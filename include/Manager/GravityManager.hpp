@@ -10,15 +10,17 @@
 #include "Util/Time.hpp"
 #include "Mario/Mario.hpp"
 #include "Monsters/Monster.hpp"
+#include "Object/ItemObject.hpp"
 class GravityManager {
     public:
         explicit GravityManager(const std::vector<std::shared_ptr<SceneObject>>& Scenes) {
             this->Scenes = Scenes;
         };
         void Update(const std::shared_ptr<Mario> &mario,
-            const std::vector<std::shared_ptr<Monster>> &monsters){
+            const std::vector<std::shared_ptr<Monster>> &monsters,
+            const std::vector<std::shared_ptr<ItemObject>> &items){
 
-                this->Combination(mario,monsters);
+                this->Combination(mario,monsters,items);
                 for(auto &object : GravityObject) {
                     if(IsFalling(object)) {
 
@@ -37,14 +39,20 @@ class GravityManager {
                     object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
                 }
             };
-    void Combination(const std::shared_ptr<Mario> &mario,
-        const std::vector<std::shared_ptr<Monster>> &monsters) {
-            GravityObject.clear();
-            GravityObject.push_back(mario);
-            for(auto &Monster : monsters) {
-                GravityObject.push_back(Monster);
+        void Combination(const std::shared_ptr<Mario> &mario,
+            const std::vector<std::shared_ptr<Monster>> &monsters,
+            const std::vector<std::shared_ptr<ItemObject>> &items) {
+                GravityObject.clear();
+                GravityObject.push_back(mario);
+                for(auto &Monster : monsters) {
+                    GravityObject.push_back(Monster);
+                }
+                for(auto &item : items) {
+                    if(!item->IsInside()) {
+                        GravityObject.push_back(item);
+                    }
+                }
             }
-        }
         bool IsFalling(const std::shared_ptr<Object> &Object) {
             for(auto &Scene : Scenes) {
                 if(Object->DownCollision(Scene)) {

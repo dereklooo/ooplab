@@ -20,7 +20,7 @@ class Monster : public AnimationObject {
           }
       }
 
-      Way GetWay() {
+      Way GetWay() const {
           return this->way;
       }
       bool GetDie() const {
