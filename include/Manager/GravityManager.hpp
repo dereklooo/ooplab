@@ -23,10 +23,9 @@ class GravityManager {
                 this->Combination(mario,monsters,items);
                 for(auto &object : GravityObject) {
                     if(IsFalling(object)) {
-
-                        float deltaTime = (Util::Time::GetElapsedTimeMs() - object->GetFallingTime()) / 1000.0f;
-                        float gravityNow = object->GetGravity();
-                        float gravityNext = gravityNow + gravity * deltaTime;
+                        const float deltaTime = (Util::Time::GetElapsedTimeMs() - object->GetFallingTime()) / 1000.0f;
+                        const float gravityNow = object->GetGravity();
+                        const float gravityNext = gravityNow + gravity * deltaTime;
                         object->SetGravity(gravityNext);
 
                         object->SetFalling(true);
@@ -48,7 +47,7 @@ class GravityManager {
                     GravityObject.push_back(Monster);
                 }
                 for(auto &item : items) {
-                    if(!item->IsInside()) {
+                    if(item->GetState() != ItemState::Hidden) {
                         GravityObject.push_back(item);
                     }
                 }

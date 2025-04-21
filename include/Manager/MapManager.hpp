@@ -118,7 +118,7 @@ class MapManager {
                         }
                         temp->SetZIndex(100);
                         temp->SetSize({1.5,1.5});
-                        temp->SetVisible(true);
+                        temp->SetVisible(false);
                         ItemManager.push_back(temp);
                         Scene->SetItem(temp);
                     }
@@ -213,7 +213,7 @@ class MapManager {
             MarioCollision(Mario,Monsters,SceneObjects);
         }
     private:
-        glm::vec2 MapPosition;
-        glm::vec2 MapSize;
+        glm::vec2 MapPosition{};
+        glm::vec2 MapSize{};
 };
 #endif //MAPMANAGER_HPP

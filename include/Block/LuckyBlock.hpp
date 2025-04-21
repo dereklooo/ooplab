@@ -17,9 +17,10 @@ class LuckyBlock : public SceneObject{
         void hit(const std::shared_ptr<Mario> &Mario) override{
             if(this->GotHit == false) {
                 this->ChangeState();
-                this->Item->SetSpawn(true);
-                this->Item->SetInside(false);
-                this->Item->SetStartSpawningTime(Util::Time::GetElapsedTimeMs());
+                this->Item->SetVisible(true);
+                this->Item->SetState(ItemState::PoppingUp);
+                this->Item->SetGravity(-2.5f);
+                this->Item->SetStartPopTime(Util::Time::GetElapsedTimeMs());
                 this->GotHit = true;
             }
         }

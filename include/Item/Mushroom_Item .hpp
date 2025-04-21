@@ -11,25 +11,21 @@ public:
 
     };
     void Action() override {
-        if(Spawning) {
-            this->SetVisible(true);
-            if(Util::Time::GetElapsedTimeMs() - this->StartSpawningTime <= 2000) {
-                this->SetGravity(-0.5);
-            }
-            else if(Util::Time::GetElapsedTimeMs() - this->StartSpawningTime > 2000) {
-                this->SetGravity(0.0f);
-                this->Spawning = false;
-            }
-        }
-        if(!this->IsInside() && !Spawning) {
-            if(this->way == Right) {
-                this->SetPosition({this->GetPosition().x + 4,this->GetPosition().y});
-            }
-            else if(this->way == Left){
-                this->SetPosition({this->GetPosition().x - 4,this->GetPosition().y});
-            }
+        switch(ItemState State) {
+            case ItemState::Hidden:
+
+                break;
+            case ItemState::Collected:
+
+                break;
+            case ItemState::Walking:
+
+                break;
+            case ItemState::PoppingUp:
+
+                break;
+
         }
     }
-
 };
 #endif //MUSHROOM_ITEM_HPP

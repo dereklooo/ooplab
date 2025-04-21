@@ -5,6 +5,12 @@
 #ifndef ITEMOBJECT_HPP
 #define ITEMOBJECT_HPP
 #include "Object/StillObject.hpp"
+enum ItemState {
+    Hidden,
+    PoppingUp,
+    Walking,
+    Collected
+};
 class ItemObject : public StillObject {
 public:
     ItemObject(const glm::vec2 &position,const std::string &ImagePath) : StillObject(ImagePath) {
@@ -12,27 +18,24 @@ public:
     };
     virtual void Action() = 0;
 
-    bool IsInside() const {
-        return Inside;
-    }
-    void SetInside(const bool inside) {
-        Inside = inside;
+    ItemState GetState() const {
+        return state;
     }
 
-    void SetSpawn(const bool spawn) {
-        this->Spawning = spawn;
+    void SetState(ItemState state) {
+        this->state = state;
     }
-    bool IsSpawning() const {
-        return Spawning;
+    void SetStartPopTime(const float t) {
+        StartPopTime = t;
     }
-
-    void SetStartSpawningTime(const float Start) {
-        this->StartSpawningTime = Start;
+    float GetStartPopTime() const {
+        return StartPopTime;
     }
 protected:
-    bool Spawning = false;
-    bool Inside = true;
-    float StartSpawningTime = 0;
+    ItemState state = Hidden;
+    float StartPopTime = 0.0f;
+    float LastTime = 0;
+
     Way way = Right;
 };
 #endif //ITEMOBJECT_HPP
