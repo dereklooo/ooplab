@@ -11,7 +11,7 @@ public:
 
     };
     void Action() override {
-        switch(ItemState State) {
+        switch(state) {
             case ItemState::Hidden:
 
                 break;

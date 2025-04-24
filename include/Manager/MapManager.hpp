@@ -189,7 +189,7 @@ class MapManager {
         static void ItemCollision(const std::vector<std::shared_ptr<ItemObject>> &Items,const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(const auto& Item : Items) {
                 for(const auto& SceneObject : SceneObjects) {
-                    if(Item->DownCollision(SceneObject)) {
+                    if(Item->DownCollision(SceneObject) && Item->GetWCollision()) {
                         Item->SetPosition({Item->GetPosition().x,Item->GetPosition().y + abs(SceneObject->GetScaledSize().y / 2) + abs(Item->GetScaledSize().y / 2)});
                     }
                 }
@@ -209,6 +209,7 @@ class MapManager {
             for(const auto& item : Items) {
                 item->Action();
             }
+
             MonsterCollision(Monsters,SceneObjects);
             MarioCollision(Mario,Monsters,SceneObjects);
         }

@@ -68,6 +68,7 @@ public:
         MapManager::Update(m_MariO,Monsters,SceneManager,ItemManager);
         m_renderer->Update();
         Gravity_Manager->Update(m_MariO,Monsters,ItemManager);
+        std::cout<<ItemManager[0]->GetGravity()<<std::endl;
     }
 
 

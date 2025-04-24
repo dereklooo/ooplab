@@ -4,6 +4,9 @@
 
 #ifndef COIN_ITEM_HPP
 #define COIN_ITEM_HPP
+#include <iostream>
+#include <ostream>
+
 #include "Object/ItemObject.hpp"
 class Coin_Item : public ItemObject {
     public:
@@ -11,26 +14,30 @@ class Coin_Item : public ItemObject {
 
         };
         void Action() override {
+            this->SetGravity(0.0f);
             float DeltaTime = (Util::Time::GetElapsedTimeMs() - LastTime) / 1000.0f;
-            switch(ItemState State) {
+            switch(state) {
                 case ItemState::Hidden:
                     break;
                 case ItemState::Collected:
-                    this->SetPosition({this->GetPosition().x,this->GetPosition().y - DeltaTime * 5.0f});
-                    if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 4000) {
+                    this->SetPosition({this->GetPosition().x,this->GetPosition().y - DeltaTime * 250.0f});
+                    if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 2000) {
+                        this->SetVisible(false);
                         this->state = Walking;
                     }
                     break;
                 case ItemState::Walking:
-                    this->SetGravity(0.0f);
+                    SetWCollion(true);
                     break;
                 case ItemState::PoppingUp:
-                    this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 5.0f});
-                    if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 2000) {
+                    this->SetWCollion(false);
+                    this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 250.0f});
+                    if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 1000) {
                         this->state = Collected;
                     }
                     break;
             }
+            LastTime = Util::Time::GetElapsedTimeMs();
         }
 };
 #endif //COIN_ITEM_HPP

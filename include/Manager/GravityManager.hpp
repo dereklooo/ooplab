@@ -31,7 +31,9 @@ class GravityManager {
                         object->SetFalling(true);
                     }
                     else {
-                        object->SetGravity(0.0f);
+                        if(object->GetWCollision()) {
+                            object->SetGravity(0.0f);
+                        }
                         object->SetFalling(false);
                     }
                     object->SetFallingTime(Util::Time::GetElapsedTimeMs());

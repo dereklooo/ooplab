@@ -19,7 +19,8 @@ class LuckyBlock : public SceneObject{
                 this->ChangeState();
                 this->Item->SetVisible(true);
                 this->Item->SetState(ItemState::PoppingUp);
-                this->Item->SetGravity(-2.5f);
+                this->Item->SetGravity(-10.0f);
+                this->Item->SetFallingTime(Util::Time::GetElapsedTimeMs());
                 this->Item->SetStartPopTime(Util::Time::GetElapsedTimeMs());
                 this->GotHit = true;
             }
