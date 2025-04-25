@@ -28,10 +28,11 @@ public:
                 break;
             case ItemState::PoppingUp:
                 this->SetWCollion(false);
-                this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 250.0f});
-                if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 100) {
+                this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 0.1f});
+                if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 90) {
                     this->state = Walking;
                     this->SetGravity(0.0f);
+                    this->SetWay(Right);
                 }
                 break;
         }
