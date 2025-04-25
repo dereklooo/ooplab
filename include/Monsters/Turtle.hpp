@@ -9,9 +9,11 @@ class Turtle : public Monster{
     public:
         Turtle(const glm::vec2 position, const Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/turtle/walk") {
             this->SetWay(way);
+            this->SetSize({3,2.5});
             this->SetZIndex(100);
             this->SetPosition(position);
         };
+        MonsterType GetType() override{return type;};
         void Action() override;
         void Hurt() override;
     private:

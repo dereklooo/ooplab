@@ -11,6 +11,12 @@ enum ItemState {
     Walking,
     Collected
 };
+enum ItemType {
+    Item_Mushroom,
+    Item_FireFlower,
+    Item_Star,
+    Item_Coin
+};
 class ItemObject : public StillObject {
 public:
     ItemObject(const glm::vec2 &position,const std::string &ImagePath) : StillObject(ImagePath) {
@@ -43,6 +49,7 @@ protected:
     float StartPopTime = 0.0f;
     float LastTime = 0;
 
+    Type type;
     Way way = Right;
 };
 #endif //ITEMOBJECT_HPP

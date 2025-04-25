@@ -7,6 +7,16 @@
 #include "StillObject.hpp"
 #include "Mario/Mario.hpp"
 #include "Object/ItemObject.hpp"
+enum class BlockType {
+    Lucky,
+    Original,
+    Foot,
+    Pipe_64_64,
+    Pipe_64_96,
+    Pipe_64_128,
+    Air
+};
+
 class SceneObject : public StillObject{
     public:
         SceneObject(const std::string &path, const glm::vec2 &position) : StillObject(path) {
@@ -19,6 +29,7 @@ class SceneObject : public StillObject{
         std::shared_ptr<ItemObject> GetItem() {
             return this->Item;
         };
+        BlockType virtual GetType() = 0;
     protected:
         bool GotHit = false;
         std::shared_ptr<ItemObject> Item = nullptr;

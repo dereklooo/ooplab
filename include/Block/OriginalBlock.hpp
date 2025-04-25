@@ -17,6 +17,7 @@ class OriginalBlock : public SceneObject {
             this->SetVisible(false);
         }
     }
+    BlockType GetType() override {return BlockType::Original;};
     private:
         float BouncingTimer = 0;
         bool Bouncing = false;

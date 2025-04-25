@@ -13,5 +13,6 @@ public:
     void hit(const std::shared_ptr<Mario> &Mario) override {
         (void)Mario;
     };
+    BlockType GetType() override{return BlockType::Pipe_64_96;};
 };
 #endif //PIPE_64_96_HPP

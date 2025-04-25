@@ -13,6 +13,7 @@ public:
     void hit(const std::shared_ptr<Mario> &_) override {
         (void)_;
     }
+    BlockType GetType() override{return BlockType::Air;}
 };
 
 #endif //AIRBLOCK_HPP

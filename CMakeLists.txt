@@ -32,17 +32,21 @@ list(TRANSFORM INCLUDE_FILES PREPEND ${INCLUDE_DIR}/)
 # file(GLOB_RECURSE HEADER_FILES include/*)
 
 add_executable(${PROJECT_NAME}
-    ${SRC_DIR}/main.cpp
-    ${SRC_DIR}/Mario.cpp
-    ${SRC_FILES}
-    ${HEADER_FILES}
+        src/App/App.cpp
+        src/App/main.cpp
+        src/Mario/Mario.cpp
+        src/Monster/Mushroom.cpp
+        src/Monster/Turtle.cpp
+
+        include/Object/SceneObject.hpp
+        include/Object/Object.hpp
+        include/Object/ItemObject.hpp
+
         include/Monsters/Black_turtle.hpp
         include/Monsters/Fly_turtle.hpp
         include/Monsters/Eat_flower.hpp
         include/Monsters/Kooper.hpp
-        src/Mushroom.cpp
-        src/Turtle.cpp
-        include/Object/SceneObject.hpp
+
         include/Block/Pipe_64_128.hpp
         include/Block/LuckyBlock.hpp
         include/Block/LuckyBlock.hpp
@@ -50,14 +54,24 @@ add_executable(${PROJECT_NAME}
         include/Block/Pipe_64_96.hpp
         include/Block/Pipe_64_64.hpp
         include/Block/OriginalBlock.hpp
+        include/Block/AirBlock.hpp
+
         include/Manager/MapManager.hpp
         include/Manager/GravityManager.hpp
-        include/Object/Object.hpp
-        include/Block/AirBlock.hpp
-        include/Mario/Mario.hpp
-        include/Object/ItemObject.hpp
-        "include/Item/Mushroom_Item .hpp"
+        include/Manager/MarioManager.hpp
+        include/Manager/MonsterManager.hpp
+        include/Manager/BlockManager.hpp
+        include/Manager/ManagerManager.hpp
+        include/Manager/ItemManager.hpp
+
+        include/Item/Mushroom_Item.hpp
         include/Item/Coin_Item.hpp
+
+        include/Mario/Mario.hpp
+        src/Manager/BlockManager.cpp
+        src/Manager/MonsterManager.cpp
+        src/Manager/ItemManager.cpp
+
 )
 
 if(MSVC)

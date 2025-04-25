@@ -25,5 +25,6 @@ class LuckyBlock : public SceneObject{
                 this->GotHit = true;
             }
         }
+        BlockType GetType() override{return BlockType::Lucky;}
 };
 #endif //LUCKYBLOCK_HPP

@@ -7,6 +7,17 @@
 #include "Object/AnimationObject.hpp"
 #include "Object/StillObject.hpp"
 #include "Util/Time.hpp"
+
+enum MonsterType {
+    Black_turtle,
+    Eat_flower,
+    Fly_turtle,
+    Kooper,
+    Jump_turtle,
+    Mushroom_Type,
+    Turtle_Type
+};
+
 class Monster : public AnimationObject {
     public:
       Monster(const size_t size,const std::string &Path) : AnimationObject(size,Path) {};
@@ -26,12 +37,14 @@ class Monster : public AnimationObject {
       bool GetDie() const {
           return Die;
       }
+      virtual MonsterType GetType() = 0;
       virtual void Action() = 0;
       virtual void Hurt() = 0;
     protected:
         Way way;
         bool Die = false;
         float DieTimer = 0.0f;
+        MonsterType type;
 
 };
 #endif //MONSTER_HPP
