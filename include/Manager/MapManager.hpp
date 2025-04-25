@@ -189,8 +189,16 @@ class MapManager {
         static void ItemCollision(const std::vector<std::shared_ptr<ItemObject>> &Items,const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(const auto& Item : Items) {
                 for(const auto& SceneObject : SceneObjects) {
-                    if(Item->DownCollision(SceneObject) && Item->GetWCollision()) {
-                        Item->SetPosition({Item->GetPosition().x,Item->GetPosition().y + abs(SceneObject->GetScaledSize().y / 2) + abs(Item->GetScaledSize().y / 2)});
+                    if(Item->GetWCollision()) {
+                        if(Item->DownCollision(SceneObject)) {
+                            Item->SetPosition({Item->GetPosition().x,SceneObject->GetPosition().y + abs(SceneObject->GetScaledSize().y / 2) + abs(Item->GetScaledSize().y / 2) + 2});
+                        }
+                        if(Item->LeftCollision(SceneObject)) {
+                            Item->SetWay(Right);
+                        }
+                        if(Item->RightCollision(SceneObject)) {
+                            Item->SetWay(Left);
+                        }
                     }
                 }
                 if(Item->LeftCollision(Mario) || Item->RightCollision(Mario) || Item->UpCollision(Mario) || Item->DownCollision(Mario)) {
@@ -212,6 +220,7 @@ class MapManager {
 
             MonsterCollision(Monsters,SceneObjects);
             MarioCollision(Mario,Monsters,SceneObjects);
+            ItemCollision(Items,Mario,SceneObjects);
         }
     private:
         glm::vec2 MapPosition{};

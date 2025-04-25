@@ -31,6 +31,12 @@ public:
     float GetStartPopTime() const {
         return StartPopTime;
     }
+    Way GetWay() const {
+        return way;
+    }
+    void SetWay(const Way way){
+        this->way = way;
+    }
 protected:
     ItemState state = Hidden;
     float StartPopTime = 0.0f;
