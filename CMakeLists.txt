@@ -33,8 +33,7 @@ list(TRANSFORM INCLUDE_FILES PREPEND ${INCLUDE_DIR}/)
 
 add_executable(${PROJECT_NAME}
     ${SRC_DIR}/main.cpp
-    ${SRC_DIR}/Mario_big.cpp
-    ${SRC_DIR}/Mario_small.cpp
+    ${SRC_DIR}/Mario.cpp
     ${SRC_FILES}
     ${HEADER_FILES}
         include/Monsters/Black_turtle.hpp
@@ -51,16 +50,11 @@ add_executable(${PROJECT_NAME}
         include/Block/Pipe_64_96.hpp
         include/Block/Pipe_64_64.hpp
         include/Block/OriginalBlock.hpp
-        include/Mario/Mario_fire.hpp
-        include/Mario/Mario_big.hpp
-        include/Mario/Mario_small.hpp
-        src/Mario_small.cpp
-        src/Mario_big.cpp
         include/Manager/MapManager.hpp
         include/Manager/GravityManager.hpp
         include/Object/Object.hpp
         include/Block/AirBlock.hpp
-        src/Mario.cpp
+        include/Mario/Mario.hpp
         include/Object/ItemObject.hpp
         "include/Item/Mushroom_Item .hpp"
         include/Item/Coin_Item.hpp

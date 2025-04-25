@@ -7,7 +7,11 @@
 #include "Monster.hpp"
 class Turtle : public Monster{
     public:
-        Turtle(const size_t size,std::string Path) : Monster(size,Path){};
+        Turtle(const glm::vec2 position, const Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/turtle/walk") {
+            this->SetWay(way);
+            this->SetZIndex(100);
+            this->SetPosition(position);
+        };
         void Action() override;
         void Hurt() override;
     private:

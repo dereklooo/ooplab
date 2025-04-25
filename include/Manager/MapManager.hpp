@@ -176,7 +176,7 @@ class MapManager {
                 else if(Mario->RightCollision(SceneObject)) {
                     Mario->SetPosition({SceneObject->GetPosition().x - abs(SceneObject->GetScaledSize().x / 2) - abs(Mario->GetScaledSize().x / 2) - 5,Mario->GetPosition().y});
                 }
-                if(Mario->UpCollision(SceneObject)) {
+                else if(Mario->UpCollision(SceneObject)) {
                     Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y - abs(SceneObject->GetScaledSize().y / 2) - abs(Mario->GetScaledSize().y / 2) - 5});
                     Mario->SetGravity(2);
                     SceneObject->hit(Mario);

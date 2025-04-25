@@ -77,6 +77,15 @@ class Level1 : public Level{
                         MapManager::AddMonster(_temp,m_renderer,Monsters);
                         Condition_num += 1;
                     }
+                case 6:
+                    if(m_Background->GetPosition().x <= -4600) {
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<Turtle>(glm::vec2(625,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(775,-247),Left));
+                        MapManager::AddMonster(_temp,m_renderer,Monsters);
+                        Condition_num += 1;
+                    }
                     break;
                 default:
                     break;;

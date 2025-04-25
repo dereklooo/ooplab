@@ -13,9 +13,6 @@
 #include "Util/Renderer.hpp"
 #include "Manager/MapManager.hpp"
 #include <iostream>
-#include "Mario/Mario_big.hpp"
-#include "Mario/Mario_small.hpp"
-#include "Mario/Mario_fire.hpp"
 
 
 class Level{
@@ -24,9 +21,10 @@ public:
     void SetSceneObject(std::shared_ptr<SceneObject> SceneObject);
     virtual void Update() = 0;
     void Start() {
-
+        m_MariO = std::make_shared<Mario>();
+        m_MariO->SetGravity(-2.0f);
         m_MariO->SetPosition({-620,-150});
-        m_MariO->UpDateCurrentState(2);
+        m_MariO->UpDateCurrentState(Stand);
 
         m_MariO->SetZIndex(50);
         m_MariO->SetSize({1.35,1.2});
@@ -73,7 +71,7 @@ public:
 
 protected:
     std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
-    std::shared_ptr<Mario> m_MariO = std::make_shared<Mario_small>();
+    std::shared_ptr<Mario> m_MariO;
     std::shared_ptr<StillObject> m_Background;
     std::vector<std::shared_ptr<SceneObject>> SceneManager;
     std::vector<std::shared_ptr<Monster>> Monsters;

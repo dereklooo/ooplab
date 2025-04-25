@@ -8,40 +8,60 @@
 #include "Object/StillObject.hpp"
 #include "Util/Time.hpp"
 #include "Util/Input.hpp"
+
+enum Action {
+    Stand,
+    Run,
+    Jump,
+    Die,
+    SmallTOBig,
+    BigToFire,
+    BigToSmall,
+    Stop,
+    Down
+};
 enum Type {
     Small,
     Big,
-    Fire
+    Fire,
 };
 
 class Mario : public AnimationObject{
     public:
-        Mario():AnimationObject(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand") {
-            CurrentState=2;
-        };
+        Mario();
 
-        void virtual UpDateCurrentState(int num) = 0;
+        void UpDateCurrentState(Action act);
 
-        void virtual Hurt() = 0;
+        void Hurt() ;
 
-        void virtual update()=0;
-    void SetAcceleration(const float num) {
-        this->horizontalAcceleration = num;
-    }
-    float GetAcceleration() const {
-        return horizontalAcceleration;
-    }
+        void update();
+
+        void SetAcceleration(const float num) {
+            this->horizontalAcceleration = num;
+        }
+
+        float GetAcceleration() const {
+            return horizontalAcceleration;
+        }
 
         Type GetType() const {
             return Type;
         }
+        void SetType(const Type type) {
+            this->Type = type;
+        }
+        void Jump ();
+
+        void LeftMove ();
+
+        void RightMove ();
+
+        void Brakes();
     protected:
-        void jump ();
-        void leftMove ();
-        void rightMove ();
-        void brakes();
+
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
-        int CurrentState;
+        std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
+        Action CurrentState;
         glm::vec2 speed = {0,0};
         Type Type;
         float horizontalAcceleration = 0.0f;

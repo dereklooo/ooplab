@@ -4,7 +4,6 @@
 
 #ifndef MUSHROOM_ITEM_HPP
 #define MUSHROOM_ITEM_HPP
-#include "Mario/Mario_big.hpp"
 #include "Object/ItemObject.hpp"
 class Mushroom_Item final : public ItemObject {
 public:
@@ -41,7 +40,8 @@ public:
     }
     void ChangeMarioState(std::shared_ptr<Mario>& mario) override {
         if(mario->GetType() == Small) {
-            mario = std::make_shared<Mario_big>();
+            mario->SetType(Big);
+            mario->UpDateCurrentState(Stand);
         }
     }
 };

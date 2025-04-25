@@ -7,67 +7,209 @@
 #include <ostream>
 #include <unistd.h>
 #include <iostream>
-#include "Mario/Mario_small.hpp"
 
-void Mario::rightMove() {
+    Mario::Mario() : AnimationObject(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand") {
+        this->SmallDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stand/small_stand",400,100)); // stand
+        this->SmallDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/run/small_run",80,60)); //run
+        this->SmallDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/jump/small_jump",400,100)); // jump
+        this->SmallDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/die/die",400,100)); // die
+        this->SmallDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/SmalltoBig/SmalltoBig",800,200)); //SmallToBig
+        this->SmallDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stop/small_stop",400,100)); //stop
+
+        this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/stand/stand",100,100)); // stand
+        this->BigDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/run/big_run",80,60)); //run
+        this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/jump/big_jump",100,100)); //jump
+        this->BigDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/BigToSmall/big_to_small",800,200)); // BigToSmall
+        this->BigDrawable.push_back(Mario::GenerateAnimation(2,RESOURCE_DIR"/image/character/mario/big/BigToFire/big_to_fire",800,200)); //BigToFire
+        this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/Down/big_down",800,200)); //down
+        this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/stop/big_stop",800,200)); // stop
+
+        this->SetSize({1.4,1.4});
+        this->Type = Small;
+    };
+void Mario::UpDateCurrentState(const Action act) {
+    if(Type == Small) {
+        switch(act) {
+            case Action::Stand:
+                this->SetDrawable(this->SmallDrawable[0]);
+            break;
+            case Action::Run:
+                this->SetDrawable(this->SmallDrawable[1]);
+            break;
+            case Action::Jump:
+                this->SetDrawable(this->SmallDrawable[2]);
+            break;
+            case Action::Die:
+                this->SetDrawable(this->SmallDrawable[3]);
+            break;
+            case Action::SmallTOBig:
+                this->SetDrawable(this->SmallDrawable[4]);
+            break;
+            case Action::Stop:
+                this->SetDrawable(this->SmallDrawable[5]);
+            break;
+            default:
+                break;
+        }
+    }
+    else if(Type == Big) {
+        switch(act) {
+            case Action::Stand:
+                this->SetDrawable(this->BigDrawable[0]);
+            break;
+            case Action::Run:
+                this->SetDrawable(this->BigDrawable[1]);
+            break;
+            case Action::Jump:
+                this->SetDrawable(this->BigDrawable[2]);
+            break;
+            case Action::BigToSmall:
+                this->SetDrawable(this->BigDrawable[3]);
+                break;
+            case Action::BigToFire:
+                this->SetDrawable(this->BigDrawable[4]);
+            break;
+            case Action::Down:
+                this->SetDrawable(this->BigDrawable[5]);
+            break;
+            case Action::Stop:
+                this->SetDrawable(this->BigDrawable[6]);
+            break;
+            default:
+                break;
+        }
+    }
+}
+
+void Mario::Hurt() {
+    if(this->Type == Small) {
+        this->UpDateCurrentState(Die);
+    }
+    else if(this->Type == Big) {
+        this->SetType(Small);
+    }
+    else if(this->Type == Fire) {
+        this->SetType(Big);
+    }
+}
+
+void Mario::update() {
+    if(this->GetPosition().x - 1 <= -620) {
+        this->SetPosition({-620,this->GetPosition().y});
+    }
+
+    if(Type == Small) {
+        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
+            CurrentState = Run;
+            this->RightMove();
+        }
+
+        else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
+            CurrentState = Run;
+            LeftMove();
+        }
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+
+        }
+        if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+            Jump();
+            CurrentState = Action::Jump;
+        }
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
+            std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y << " "<< Util::Time::GetDeltaTime()<<std::endl;
+        }
+        Mario::Brakes();
+        if (GetAcceleration()==0) {
+            CurrentState = Stand;
+        }
+    }
+    else if(Type == Big) {
+        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
+            CurrentState = Run;
+            this->RightMove();
+        }
+
+        else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
+            CurrentState = Run;
+            this->LeftMove();
+        }
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+            CurrentState = Down;
+        }
+        if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+            this->Jump();
+            CurrentState = Action::Jump;
+        }
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
+            std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y << " "<< Util::Time::GetDeltaTime()<<std::endl;
+        }
+        Mario::Brakes();
+        if (GetAcceleration()==0) {
+            CurrentState = Stand;
+        }
+    }
+    this->UpDateCurrentState(CurrentState);
+}
+
+void Mario::RightMove() {
     if (GetAcceleration()<=4.0f && GetAcceleration()>=0.0f) {
         SetAcceleration(GetAcceleration()+0.1f);
         if (GetAcceleration()>4.0) {
             SetAcceleration(4.0);
         }
-
         this->SetSize({1.35,1.2});
-        CurrentState = 0;
+        this->UpDateCurrentState(Run);
+        CurrentState = Run;
     }else if (GetAcceleration()<0) {
         SetAcceleration(GetAcceleration()+0.2f);
-        CurrentState=3;
+        this->UpDateCurrentState(Stop);
+        CurrentState = Stop;
         this->SetSize({1.35,1.2});
     }
     this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
 
 }
-void Mario::leftMove() {
-    if(this->GetPosition().x - 1 <= -620) {
-        this->SetPosition({-620,this->GetPosition().y});
-    }
-    else {
+void Mario::LeftMove() {
         if (GetAcceleration()>=-4.0f && GetAcceleration()<=0.0f) {
             SetAcceleration(GetAcceleration()-0.1f);
             if (GetAcceleration()<-4.0) {
                 SetAcceleration(-4.0);
             }
-
             this->SetSize({-1.35,1.2});
-            CurrentState = 0;
-        }else {
+            this->UpDateCurrentState(Run);
+            CurrentState = Run;
+        }
+        else {
             SetAcceleration(GetAcceleration()-0.2f);
-            CurrentState=3;
+            this->UpDateCurrentState(Stop);
+            CurrentState = Stop;
             this->SetSize({-1.35,1.2});
         }
-
-    }
-
     this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
 
 }
-void Mario::jump() {
+void Mario::Jump() {
     if(!this->GetFalling()) {
         this->SetPosition({this->GetPosition().x,this->GetPosition().y + 4});
-        this->SetGravity(-7.5);
+        this->SetGravity(-8.0f);
     }
 }
 
-void Mario::brakes() {
+void Mario::Brakes() {
 
     if(!Util::Input::IsKeyPressed(Util::Keycode::S) &&
     !Util::Input::IsKeyPressed(Util::Keycode::W) &&
     !Util::Input::IsKeyPressed(Util::Keycode::A) &&
     !Util::Input::IsKeyPressed(Util::Keycode::D)) {
         if (GetAcceleration()>=0.07f ) {
-            SetAcceleration(GetAcceleration()-0.07);
+            SetAcceleration(GetAcceleration()-0.07f);
             this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
         }else if (GetAcceleration()<=-0.02f) {
-            SetAcceleration(GetAcceleration()+0.07);
+            SetAcceleration(GetAcceleration()+0.07f);
             this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
         }
         else{SetAcceleration(0);}
