@@ -37,6 +37,7 @@ public:
     void SetWay(const Way way){
         this->way = way;
     }
+    virtual void ChangeMarioState(std::shared_ptr<Mario> &mario) = 0;
 protected:
     ItemState state = Hidden;
     float StartPopTime = 0.0f;

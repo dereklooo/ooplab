@@ -186,7 +186,7 @@ class MapManager {
                 }
             }
         }
-        static void ItemCollision(const std::vector<std::shared_ptr<ItemObject>> &Items,const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
+        static void ItemCollision(const std::vector<std::shared_ptr<ItemObject>> &Items, std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
             for(const auto& Item : Items) {
                 for(const auto& SceneObject : SceneObjects) {
                     if(Item->GetWCollision()) {
@@ -202,11 +202,13 @@ class MapManager {
                     }
                 }
                 if(Item->LeftCollision(Mario) || Item->RightCollision(Mario) || Item->UpCollision(Mario) || Item->DownCollision(Mario)) {
+                    Item->ChangeMarioState(Mario);
+                    Item->SetPosition({0,-1000});
                     continue; // 改馬力歐的狀態
                 }
             }
         }
-        static void Update(const std::shared_ptr<Mario>& Mario,
+        static void Update( std::shared_ptr<Mario>& Mario,
             const std::vector<std::shared_ptr<Monster>>& Monsters,
             const std::vector<std::shared_ptr<SceneObject>>& SceneObjects,
             const std::vector<std::shared_ptr<ItemObject>>& Items) {

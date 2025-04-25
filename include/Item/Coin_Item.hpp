@@ -39,5 +39,8 @@ class Coin_Item : public ItemObject {
             }
             LastTime = Util::Time::GetElapsedTimeMs();
         }
+        void ChangeMarioState(std::shared_ptr<Mario> &mario) override{
+            (void)mario;
+        }
 };
 #endif //COIN_ITEM_HPP

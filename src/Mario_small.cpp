@@ -27,7 +27,7 @@ void Mario_small::UpDateCurrentState(const int num) {
         case 1:
 
             this->SetDrawable(this->SmallDrawable[2]);
-        break;
+            break;
         case 2:
 
             this->SetDrawable(this->SmallDrawable[0]);
@@ -35,17 +35,17 @@ void Mario_small::UpDateCurrentState(const int num) {
         case 3:
 
             this->SetDrawable(this->SmallDrawable[5]);
-        break;
+            break;
         case 4:
 
             this->SetDrawable(this->SmallDrawable[4]);
-        break;
+            break;
         case 5:
 
             this->SetDrawable(this->SmallDrawable[3]);
-        break;
+            break;
         default:
-        break;
+            break;
     }
 
 }
