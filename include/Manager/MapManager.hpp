@@ -4,124 +4,28 @@
 
 #ifndef MAPMANAGER_HPP
 #define MAPMANAGER_HPP
-#include "Block/OriginalBlock.hpp"
-#include "Block/LuckyBlock.hpp"
-#include "Block/FootBlock.hpp"
-#include "Block/Pipe_64_128.hpp"
-#include "Block/Pipe_64_96.hpp"
-#include "Block/Pipe_64_64.hpp"
-#include "Block/AirBlock.hpp"
-
-#include "Monsters/Mushroom.hpp"
-#include "Monsters/Turtle.hpp"
-
+#include "Monsters/Monster.hpp"
 #include "Mario/Mario.hpp"
+#include "Object/ItemObject.hpp"
+#include "Object/SceneObject.hpp"
 
-#include "Item/Mushroom_Item.hpp"
-#include "Item/Coin_Item.hpp"
-#include "GravityManager.hpp"
-#include <iostream>
 class MapManager {
     public:
-        MapManager(const glm::vec2 MapPosition, const glm::vec2 MapSize) {
-            this->MapPosition = MapPosition;
-            this->MapSize = MapSize;
-        }
-        void SetItem(const std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<std::shared_ptr<ItemObject>> &ItemManager,std::vector<glm::vec2>& Position, const RewardType type) const {
-            for(const auto &pos : Position) {
-                for(const auto &Scene : SceneManager) {
-                    if(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48) == Scene->GetPosition() ) {
-                        std::shared_ptr<ItemObject> temp = nullptr;
-                        switch(type) {
-                            case(Item_Mushroom):
-                                temp = std::make_shared<Mushroom_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
-                                break;
-                            case(Item_FireFlower):
+    MapManager(std::shared_ptr<Mario>& Mario,
+        std::shared_ptr<SceneObject>& Background,
+        std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
+        std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters,
+        std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items);
 
-                                break;
-                            case(Item_Star):
+        void GameObject_Move();
+        void Update() {
 
-                                break;
-                            case(Item_Coin):
-                                temp = std::make_shared<Coin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
-                                break;
-                        }
-                        temp->SetZIndex(100);
-                        temp->SetSize({1.5,1.5});
-                        temp->SetVisible(false);
-                        ItemManager.push_back(temp);
-                        Scene->SetItem(temp);
-                    }
-                }
-            }
-        }
-        static void MarioCollision(const std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<Monster>>& Monsters,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
-            for(auto &monster : Monsters) {
-                if((Mario->RightCollision(monster) || Mario->LeftCollision(monster)) && !monster->GetDie()) {
-                    Mario->Hurt();
-                }
-                else if(Mario->DownCollision(monster) && !monster->GetDie()) {
-                        monster->Hurt();
-                        Mario->SetGravity(-2.0f);
-                }
-            }
-            for(auto &SceneObject : SceneObjects) {
-                if(Mario->LeftCollision(SceneObject)) {
-                    Mario->SetPosition({SceneObject->GetPosition().x + abs(SceneObject->GetScaledSize().x / 2) + abs(Mario->GetScaledSize().x / 2) + 5,Mario->GetPosition().y});
-                }
-                else if(Mario->RightCollision(SceneObject)) {
-                    Mario->SetPosition({SceneObject->GetPosition().x - abs(SceneObject->GetScaledSize().x / 2) - abs(Mario->GetScaledSize().x / 2) - 5,Mario->GetPosition().y});
-                }
-                else if(Mario->UpCollision(SceneObject)) {
-                    Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y - abs(SceneObject->GetScaledSize().y / 2) - abs(Mario->GetScaledSize().y / 2) - 5});
-                    Mario->SetGravity(2);
-                    SceneObject->hit(Mario);
-                }
-                else if(Mario->DownCollision(SceneObject)) {
-                    Mario->SetPosition({Mario->GetPosition().x,SceneObject->GetPosition().y + abs(SceneObject->GetScaledSize().y / 2) + abs(Mario->GetScaledSize().y / 2) + 1});
-                }
-            }
-        }
-        static void ItemCollision(const std::vector<std::shared_ptr<ItemObject>> &Items, std::shared_ptr<Mario>& Mario,const std::vector<std::shared_ptr<SceneObject>>& SceneObjects) {
-            for(const auto& Item : Items) {
-                for(const auto& SceneObject : SceneObjects) {
-                    if(Item->GetWCollision()) {
-                        if(Item->DownCollision(SceneObject)) {
-                            Item->SetPosition({Item->GetPosition().x,SceneObject->GetPosition().y + abs(SceneObject->GetScaledSize().y / 2) + abs(Item->GetScaledSize().y / 2) + 2});
-                        }
-                        if(Item->LeftCollision(SceneObject)) {
-                            Item->SetWay(Right);
-                        }
-                        if(Item->RightCollision(SceneObject)) {
-                            Item->SetWay(Left);
-                        }
-                    }
-                }
-                if(Item->LeftCollision(Mario) || Item->RightCollision(Mario) || Item->UpCollision(Mario) || Item->DownCollision(Mario)) {
-                    Item->ChangeMarioState(Mario);
-                    Item->SetPosition({0,-1000});
-                    continue; // 改馬力歐的狀態
-                }
-            }
-        }
-        static void Update( std::shared_ptr<Mario>& Mario,
-            const std::vector<std::shared_ptr<Monster>>& Monsters,
-            const std::vector<std::shared_ptr<SceneObject>>& SceneObjects,
-            const std::vector<std::shared_ptr<ItemObject>>& Items) {
-
-            for (const auto& monster : Monsters) {
-                monster->Action();
-            }
-            for(const auto& item : Items) {
-                item->Action();
-            }
-
-            MonsterCollision(Monsters,SceneObjects);
-            MarioCollision(Mario,Monsters,SceneObjects);
-            ItemCollision(Items,Mario,SceneObjects);
         }
     private:
-        glm::vec2 MapPosition{};
-        glm::vec2 MapSize{};
+        std::shared_ptr<Mario>& Mario_,
+        std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
+        std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters;
+        std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items;
+        std::shared_ptr<StillObject>& Background;
 };
 #endif //MAPMANAGER_HPP

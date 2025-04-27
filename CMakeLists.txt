@@ -71,6 +71,10 @@ add_executable(${PROJECT_NAME}
         src/Manager/BlockManager.cpp
         src/Manager/MonsterManager.cpp
         src/Manager/ItemManager.cpp
+        src/Manager/MarioManager.cpp
+        include/Object/GravityObject.hpp
+        src/Manager/GravityManager.cpp
+        src/Manager/MapManager.cpp
 
 )
 

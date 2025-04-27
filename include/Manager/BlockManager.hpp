@@ -15,18 +15,18 @@
 
 class BlockManager {
 public:
-    BlockManager(glm::vec2 mapPos, glm::vec2 mapSize, std::vector<std::shared_ptr<SceneObject>> &sceneObjects);
+    BlockManager(
+        glm::vec2 mapPos,
+        glm::vec2 mapSize,
+        std::shared_ptr<std::unordered_map<BlockType,std::vector<std::shared_ptr<SceneObject>>>>& Blocks);
 
-    void AddBlock(const std::shared_ptr<SceneObject>& block);
-    void SetFloor(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<float> &Position, const float Floor_y);
-    void SetBlock(std::vector<glm::vec2> &positions, BlockType type);
-
-    std::vector<std::shared_ptr<SceneObject>> GetByType(BlockType type);
+    void AddBlock(const std::shared_ptr<SceneObject>& block) const;
+    void SetFloor(std::vector<float> &Position,float Floor_y) const;
+    void SetBlock(std::vector<glm::vec2> &positions, BlockType type) const;
 
 private:
-    std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>> BlockMap;
+    std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
 
     glm::vec2 MapSize;
     glm::vec2 MapPosition;
-    std::vector<std::shared_ptr<SceneObject>> &SceneObjects;
 };

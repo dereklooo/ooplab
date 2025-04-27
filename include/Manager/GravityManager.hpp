@@ -11,16 +11,17 @@
 #include "Mario/Mario.hpp"
 #include "Monsters/Monster.hpp"
 #include "Object/ItemObject.hpp"
+#include "Object/SceneObject.hpp"
+
 class GravityManager {
     public:
-        explicit GravityManager(const std::vector<std::shared_ptr<SceneObject>>& Scenes) {
-            this->Scenes = Scenes;
-        };
-        void Update(const std::shared_ptr<Mario> &mario,
-            const std::vector<std::shared_ptr<Monster>> &monsters,
-            const std::vector<std::shared_ptr<ItemObject>> &items){
+        explicit GravityManager(
+            std::shared_ptr<std::unordered_map<BlockType,std::vector<std::shared_ptr<SceneObject>>>>& Blocks) : Blocks(Blocks) {};
+        void Update(const std::shared_ptr<Mario> &Mario,
+            const std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>> &Monsters,
+            const std::shared_ptr<std::unordered_map<ItemType,std::vector<std::shared_ptr<ItemObject>>>> &Items){
 
-                this->Combination(mario,monsters,items);
+                this->Combination(Mario,Monsters,Items);
                 for(auto &object : GravityObject) {
                     if(IsFalling(object)) {
                         const float deltaTime = (Util::Time::GetElapsedTimeMs() - object->GetFallingTime()) / 1000.0f;
@@ -41,22 +42,22 @@ class GravityManager {
                 }
             };
         void Combination(const std::shared_ptr<Mario> &mario,
-            const std::vector<std::shared_ptr<Monster>> &monsters,
-            const std::vector<std::shared_ptr<ItemObject>> &items) {
+            const std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>> &Monsters,
+            const std::shared_ptr<std::unordered_map<ItemType,std::vector<std::shared_ptr<ItemObject>>>> &Items) {
                 GravityObject.clear();
                 GravityObject.push_back(mario);
-                for(auto &Monster : monsters) {
+                for(auto &[type,Monster] : Monsters) {
                     GravityObject.push_back(Monster);
                 }
-                for(auto &item : items) {
+                for(auto &item : Items) {
                     if(item->GetState() != ItemState::Hidden) {
                         GravityObject.push_back(item);
                     }
                 }
             }
-        bool IsFalling(const std::shared_ptr<Object> &Object) {
-            for(auto &Scene : Scenes) {
-                if(Object->DownCollision(Scene)) {
+        bool IsFalling(const std::shared_ptr<Object> &Object) const {
+            for(auto &[type,Block] : Blocks) {
+                if(Object->DownCollision(Block)) {
                     return false;
                 }
             }
@@ -65,7 +66,7 @@ class GravityManager {
     private:
         const float gravity = 9.5f;
         std::shared_ptr<Util::Time> Time = std::make_shared<Util::Time>();
-        std::vector<std::shared_ptr<SceneObject>> Scenes;
+        std::shared_ptr<std::unordered_map<BlockType,std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
         std::vector<std::shared_ptr<Object>> GravityObject;
 };
 #endif

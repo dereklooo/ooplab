@@ -24,6 +24,7 @@ enum Type {
     Small,
     Big,
     Fire,
+    Star,
 };
 
 class Mario : public AnimationObject{

@@ -1,14 +1,17 @@
 #include "Manager/BlockManager.hpp"
 
-BlockManager::BlockManager(const glm::vec2 mapPos, const glm::vec2 mapSize, std::vector<std::shared_ptr<SceneObject>> &sceneObjects)
-    : MapSize(mapSize), MapPosition(mapPos), SceneObjects(sceneObjects) {}
+BlockManager::BlockManager(
+    const glm::vec2 mapPos,
+    const glm::vec2 mapSize,
+    std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks)
+    :Blocks(Blocks), MapSize(mapSize), MapPosition(mapPos){}
 
-void BlockManager::AddBlock(const std::shared_ptr<SceneObject>& block) {
-    BlockMap[block->GetType()].push_back(block);
-    SceneObjects.push_back(block); // 加進碰撞處理場景中
+
+void BlockManager::AddBlock(const std::shared_ptr<SceneObject>& block) const {
+    (*Blocks)[block->GetType()].push_back(block);
 }
 
-void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType type) {
+void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const {
     for (const auto &pos : positions) {
         std::shared_ptr<SceneObject> block;
 
@@ -26,7 +29,7 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
         if (block) AddBlock(block);
     }
 }
-void BlockManager::SetFloor(std::vector<std::shared_ptr<SceneObject>>& SceneManager,std::vector<float> &Position, const float Floor_y){
+void BlockManager::SetFloor(std::vector<float> &Position, const float Floor_y) const{
     for(float i = 0.5f ; i <= MapSize.x / 32 ; i++) {
         bool Build = true;
         for(const float position : Position) {
@@ -47,8 +50,4 @@ void BlockManager::SetFloor(std::vector<std::shared_ptr<SceneObject>>& SceneMana
 
         }
     }
-}
-
-std::vector<std::shared_ptr<SceneObject>> BlockManager::GetByType(const BlockType type) {
-    return BlockMap[type];
 }

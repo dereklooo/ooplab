@@ -45,11 +45,12 @@ public:
     }
     virtual void ChangeMarioState(std::shared_ptr<Mario> &mario) = 0;
 protected:
-    ItemState state = Hidden;
     float StartPopTime = 0.0f;
     float LastTime = 0;
 
-    Type type;
+    ItemState state = Hidden;
+    ItemType type;
     Way way = Right;
+
 };
 #endif //ITEMOBJECT_HPP
