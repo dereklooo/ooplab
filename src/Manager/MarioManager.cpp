@@ -33,7 +33,17 @@ void MarioManager::HandleBlock() const {
         }
     }
 }
-
+void MarioManager::HandleItem() const {
+    for (const auto& [type, items] : *Items) {
+        for (const auto& item : items) {
+            if(Mario_->LeftCollision(item)|| Mario_->RightCollision(item) || Mario_->DownCollision(item)) {
+                item->SetVisible(false);
+                item->SetWCollision(false);
+                item->ChangeMarioState(Mario_);
+            }
+        }
+    }
+}
 void MarioManager::HandleMonster() const {
     for(auto &[type,monsters] : *Monsters) {
         for(auto &monster : monsters) {
@@ -99,19 +109,15 @@ void MarioManager::MarioInputCtl() const {
 void MarioManager::MarioInitialize() const {
     Mario_ = std::make_shared<Mario>();
     Mario_->SetGravity(-2.0f);
+    Mario_->SetFallingTime(Util::Time::GetElapsedTimeMs());
     Mario_->SetPosition({-620,-150});
     Mario_->UpDateCurrentState(Stand);
 
     Mario_->SetZIndex(50);
     Mario_->SetSize({1.35,1.2});
 }
-
-void MarioManager::Update() {
-    MarioCollision();
-    MarioInputCtl();
-}
-
-void MarioManager::MarioCollision() {
+void MarioManager::MarioCollision() const {
+    HandleItem();
     HandleBlock();
     HandleMonster();
 }

@@ -29,7 +29,7 @@ public:
         return state;
     }
 
-    void SetState(ItemState state) {
+    void SetState(const ItemState state) {
         this->state = state;
     }
     void SetStartPopTime(const float t) {
@@ -43,6 +43,9 @@ public:
     }
     void SetWay(const Way way){
         this->way = way;
+    }
+    ItemType GetType() const {
+        return type;
     }
     virtual void ChangeMarioState(std::shared_ptr<Mario> &mario) = 0;
 protected:

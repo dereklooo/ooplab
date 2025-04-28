@@ -13,8 +13,8 @@ MonsterManager::MonsterManager(
 
 void MonsterManager::AddMonster(const std::vector<std::shared_ptr<Monster>>& monsters, const std::shared_ptr<Util::Renderer> &renderer) const {
     for(auto &monster : monsters) {
+        monster->SetFallingTime(Util::Time::GetElapsedTimeMs());
         (*Monsters)[monster->GetType()].push_back(monster);
-        std::cout<<monster->GetType()<<"\n";
         renderer->AddChild(monster);
     }
 }

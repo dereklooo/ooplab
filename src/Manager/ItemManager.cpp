@@ -100,7 +100,6 @@ void ItemManager::ItemCollision() const {
     for (const auto& [type, items] : (*Items)) {
         for (const auto& item : items) {
             HandleBlockCollision(type, item);
-            HandleMonsterCollision(item);
         }
     }
 }
