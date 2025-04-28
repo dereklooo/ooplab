@@ -14,7 +14,7 @@
 
 #include "Util/Renderer.hpp"
 #include "Object/SceneObject.hpp"
-
+#include <iostream>
 class MonsterManager {
 public:
     explicit MonsterManager(
@@ -25,8 +25,8 @@ public:
     void MonsterCollision() const;
     void Update() const{
         MonsterCollision();
-        for(auto &[type,monsters] : Monsters) {
-            for(auto &monster : monsters) {
+        for(auto &[type,monsters] : *Monsters) {
+            for(const auto &monster : monsters) {
                 monster->Action();
             }
         }

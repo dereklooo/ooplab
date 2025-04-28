@@ -8,6 +8,7 @@
 class Turtle : public Monster{
     public:
         Turtle(const glm::vec2 position, const Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/turtle/walk") {
+            this->type = MonsterType::Turtle_Type;
             this->SetWay(way);
             this->SetSize({3,2.5});
             this->SetZIndex(100);

@@ -8,6 +8,7 @@
 class Mushroom : public Monster{
     public:
         Mushroom(glm::vec2 position,Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/mushroom/mushroom_walk") {
+            this->type = Mushroom_Type;
             this->SetWay(way);
             this->SetZIndex(100);
             this->SetPosition(position);

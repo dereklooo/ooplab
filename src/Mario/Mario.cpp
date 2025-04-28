@@ -92,69 +92,6 @@ void Mario::Hurt() {
         this->SetType(Big);
     }
 }
-
-void Mario::update() {
-    if(this->GetPosition().x - 1 <= -620) {
-        this->SetPosition({-620,this->GetPosition().y});
-    }
-
-    if(Type == Small) {
-        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
-            CurrentState = Run;
-            this->RightMove();
-        }
-
-        else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
-            CurrentState = Run;
-            LeftMove();
-        }
-
-        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
-
-        }
-        if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
-            Jump();
-            CurrentState = Action::Jump;
-        }
-
-        if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-            std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y << " "<< Util::Time::GetDeltaTime()<<std::endl;
-        }
-        Mario::Brakes();
-        if (GetAcceleration()==0) {
-            CurrentState = Stand;
-        }
-    }
-    else if(Type == Big) {
-        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
-            CurrentState = Run;
-            this->RightMove();
-        }
-
-        else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
-            CurrentState = Run;
-            this->LeftMove();
-        }
-
-        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
-            CurrentState = Down;
-        }
-        if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
-            this->Jump();
-            CurrentState = Action::Jump;
-        }
-
-        if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-            std::cout<<this->GetPosition().x<<" "<<this->GetPosition().y << " "<< Util::Time::GetDeltaTime()<<std::endl;
-        }
-        Mario::Brakes();
-        if (GetAcceleration()==0) {
-            CurrentState = Stand;
-        }
-    }
-    this->UpDateCurrentState(CurrentState);
-}
-
 void Mario::RightMove() {
     if (GetAcceleration()<=4.0f && GetAcceleration()>=0.0f) {
         SetAcceleration(GetAcceleration()+0.1f);

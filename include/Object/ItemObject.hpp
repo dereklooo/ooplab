@@ -5,6 +5,7 @@
 #ifndef ITEMOBJECT_HPP
 #define ITEMOBJECT_HPP
 #include "Object/StillObject.hpp"
+#include "Mario/Mario.hpp"
 enum ItemState {
     Hidden,
     PoppingUp,

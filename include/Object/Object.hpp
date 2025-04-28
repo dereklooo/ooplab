@@ -79,7 +79,7 @@ class Object : public Util::GameObject{
         bool GetWCollision() const {
             return WantCollision;
         }
-        void SetWCollion(bool W) {
+        void SetWCollision(bool W) {
             this->WantCollision = W;
         }
     private:

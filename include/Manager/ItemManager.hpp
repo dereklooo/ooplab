@@ -22,14 +22,16 @@ class ItemManager {
             std::shared_ptr<std::unordered_map<ItemType,std::vector<std::shared_ptr<ItemObject>>>> &Items,
             std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>> &Monsters);
 
-        void SetItem(std::vector<glm::vec2>& Position, ItemType type);
+        void SetItem(std::vector<glm::vec2>& Position, ItemType type) const;
 
         void ItemCollision() const;
 
         void Update() const {
             ItemCollision();
-            for(auto &[type,item] : Items) {
-                item->Action();
+            for(auto &[type,items] : *Items) {
+                for(const auto &item : items) {
+                    item->Action();
+                }
             }
         }
     private:

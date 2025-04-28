@@ -15,7 +15,7 @@ class Coin_Item : public ItemObject {
         };
         void Action() override {
             this->SetGravity(0.0f);
-            float DeltaTime = (Util::Time::GetElapsedTimeMs() - LastTime) / 1000.0f;
+            const float DeltaTime = (Util::Time::GetElapsedTimeMs() - LastTime) / 1000.0f;
             switch(state) {
                 case ItemState::Hidden:
                     break;
@@ -27,10 +27,10 @@ class Coin_Item : public ItemObject {
                     }
                     break;
                 case ItemState::Walking:
-                    SetWCollion(true);
+                    SetWCollision(true);
                     break;
                 case ItemState::PoppingUp:
-                    this->SetWCollion(false);
+                    this->SetWCollision(false);
                     this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 250.0f});
                     if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 1000) {
                         this->state = Collected;

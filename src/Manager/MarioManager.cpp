@@ -13,34 +13,102 @@ MarioManager::MarioManager(
             Items(Items) {
 
             }
-void MarioManager::HandleBlock() {
-    for(const auto& [type,Block] : Blocks) {
-        if(Mario_->LeftCollision(Block)) {
-            Mario_->SetPosition({Block->GetPosition().x + abs(Block->GetScaledSize().x / 2) + abs(Mario_->GetScaledSize().x / 2) + 5,Mario_->GetPosition().y});
-        }
-        else if(Mario_->RightCollision(Block)) {
-            Mario_->SetPosition({Block->GetPosition().x - abs(Block->GetScaledSize().x / 2) - abs(Mario_->GetScaledSize().x / 2) - 5,Mario_->GetPosition().y});
-        }
-        else if(Mario_->UpCollision(Block)) {
-            Mario_->SetPosition({Mario_->GetPosition().x,Block->GetPosition().y - abs(Block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
-            Mario_->SetGravity(2);
-            Block->hit(Mario_);
-        }
-        else if(Mario_->DownCollision(Block)) {
-            Mario_->SetPosition({Mario_->GetPosition().x,Block->GetPosition().y + abs(Block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
+void MarioManager::HandleBlock() const {
+    for (const auto& [type, blocks] : *Blocks) {   // 注意這裡，blocks 是 vector
+        for (const auto& block : blocks) {          // 再一個 for loop
+            if(Mario_->LeftCollision(block)) {
+                Mario_->SetPosition({block->GetPosition().x + abs(block->GetScaledSize().x / 2) + abs(Mario_->GetScaledSize().x / 2) + 5, Mario_->GetPosition().y});
+            }
+            else if(Mario_->RightCollision(block)) {
+                Mario_->SetPosition({block->GetPosition().x - abs(block->GetScaledSize().x / 2) - abs(Mario_->GetScaledSize().x / 2) - 5, Mario_->GetPosition().y});
+            }
+            else if(Mario_->UpCollision(block)) {
+                Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
+                Mario_->SetGravity(2);
+                block->hit(Mario_);
+            }
+            else if(Mario_->DownCollision(block)) {
+                Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
+            }
         }
     }
 }
-void MarioManager::HandleMonster() {
-    for(auto &monster : Monsters) {
-        if((Mario_->RightCollision(monster) || Mario_->LeftCollision(monster)) && !monster->GetDie()) {
-            Mario_->Hurt();
-        }
-        else if(Mario_->DownCollision(monster) && !monster->GetDie()) {
-            monster->Hurt();
-            Mario_->SetGravity(-2.0f);
+
+void MarioManager::HandleMonster() const {
+    for(auto &[type,monsters] : *Monsters) {
+        for(auto &monster : monsters) {
+            if((Mario_->RightCollision(monster) || Mario_->LeftCollision(monster)) && !monster->GetDie()) {
+                Mario_->Hurt();
+            }
+            else if(Mario_->DownCollision(monster) && !monster->GetDie()) {
+                monster->Hurt();
+                Mario_->SetGravity(-2.0f);
+            }
         }
     }
+}
+void MarioManager::MarioInputCtl() const {
+    if(Mario_->GetType() == Small) {
+        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
+            Mario_->SetCurrentState(Run);
+            Mario_->RightMove();
+        }
+
+        else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
+            Mario_->SetCurrentState(Run);
+            Mario_->LeftMove();
+        }
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+
+        }
+        if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
+            Mario_->SetCurrentState(Stand);
+        }
+        if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+            Mario_->Jump();
+            Mario_->SetCurrentState(Action::Jump);
+        }
+        Mario_->Brakes();
+    }
+    else if(Mario_->GetType() == Big) {
+        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
+            Mario_->SetCurrentState(Run);
+            Mario_->RightMove();
+        }
+
+        else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
+            Mario_->SetCurrentState(Run);
+            Mario_->LeftMove();
+        }
+
+        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+            Mario_->SetCurrentState(Down);
+        }
+        if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
+            Mario_->SetCurrentState(Stand);
+        }
+        if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+            Mario_->Jump();
+            Mario_->SetCurrentState(Action::Jump);
+        }
+        Mario_->Brakes();
+    }
+    Mario_->UpDateCurrentState(Mario_->GetCurrentState());
+}
+void MarioManager::MarioInitialize() const {
+    Mario_ = std::make_shared<Mario>();
+    Mario_->SetGravity(-2.0f);
+    Mario_->SetPosition({-620,-150});
+    Mario_->UpDateCurrentState(Stand);
+
+    Mario_->SetZIndex(50);
+    Mario_->SetSize({1.35,1.2});
+}
+
+void MarioManager::Update() {
+    MarioCollision();
+    MarioInputCtl();
 }
 
 void MarioManager::MarioCollision() {

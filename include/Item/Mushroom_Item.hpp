@@ -11,7 +11,7 @@ public:
 
     };
     void Action() override {
-        float DeltaTime = (Util::Time::GetElapsedTimeMs() - LastTime) / 1000.0f;
+        const float DeltaTime = (Util::Time::GetElapsedTimeMs() - LastTime) / 1000.0f;
         switch(state) {
             case ItemState::Hidden:
                 break;
@@ -24,10 +24,10 @@ public:
                 else if(this->way == Right) {
                     this->SetPosition({this->GetPosition().x + 1.5,this->GetPosition().y});
                 }
-                SetWCollion(true);
+                SetWCollision(true);
                 break;
             case ItemState::PoppingUp:
-                this->SetWCollion(false);
+                this->SetWCollision(false);
                 this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 0.1f});
                 if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 90) {
                     this->state = Walking;

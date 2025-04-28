@@ -4,62 +4,58 @@
 
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
-#include "Object/StillObject.hpp"
-#include "Monsters/Monster.hpp"
-#include "Object/SceneObject.hpp"
-#include "Object/ItemObject.hpp"
-#include "Mario/Mario.hpp"
-#include "Util/Input.hpp"
-#include "Util/Renderer.hpp"
+#include "Manager/BlockManager.hpp"
+#include "Manager/GravityManager.hpp"
+#include "Manager/ItemManager.hpp"
+#include "Manager/ManagerManager.hpp"
 #include "Manager/MapManager.hpp"
-#include <iostream>
+#include "Manager/MarioManager.hpp"
+#include "Manager/MonsterManager.hpp"
+#include "Util/Renderer.hpp"
 
 
 class Level{
 public:
+
+    Level()= default;
+
     void SetBackGround(std::shared_ptr<StillObject> Background);
     void SetSceneObject(std::shared_ptr<SceneObject> SceneObject);
     virtual void Update() = 0;
-    void Start() {
-        m_MariO = std::make_shared<Mario>();
-        m_MariO->SetGravity(-2.0f);
-        m_MariO->SetPosition({-620,-150});
-        m_MariO->UpDateCurrentState(Stand);
-
-        m_MariO->SetZIndex(50);
-        m_MariO->SetSize({1.35,1.2});
+    void Start() const {
+        m_ManagerManager->MarioInitialize();
         m_renderer->AddChild(m_Background);
-        m_renderer->AddChild(m_MariO);
-        for (auto &object : SceneManager) {
-            m_renderer->AddChild(object);
+        m_renderer->AddChild(m_Mario);
+        for (auto &[type,blocks] : *Blocks) {
+            for (auto &block : blocks) {
+                m_renderer->AddChild(block);
+            }
         }
-        for (const auto& Object : ItemManager) {
-            m_renderer->AddChild(Object);
+        for (const auto& [type,items] : *Items) {
+            for(const auto &item : items) {
+                m_renderer->AddChild(item);
+            }
         }
     }
     void update() {
-        m_MariO->update();
-        if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-            std::cout<<m_Background->GetPosition().x << std::endl;
-        }
-
         this->Update();
-        MapManager::Update(m_MariO,Monsters,SceneManager,ItemManager);
+        m_ManagerManager->Update();
         m_renderer->Update();
-        Gravity_Manager->Update(m_MariO,Monsters,ItemManager);
     }
 
 
 protected:
+
     std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
-    std::shared_ptr<Mario> m_MariO;
+    std::shared_ptr<Mario> m_Mario = std::make_shared<Mario>();
     std::shared_ptr<StillObject> m_Background;
 
-    std::vector<std::shared_ptr<SceneObject>> SceneManager;
-    std::vector<std::shared_ptr<Monster>> Monsters;
-    std::vector<std::shared_ptr<ItemObject>> ItemManager;
-    std::shared_ptr<MapManager> Map_Manager;
-    std::shared_ptr<GravityManager> Gravity_Manager;
+    std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>> Items = std::make_shared<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>();
+    std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>> Blocks = std::make_shared<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>();
+    std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>> Monsters = std::make_shared<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>();
+
+
+    std::shared_ptr<ManagerManager> m_ManagerManager;
     size_t Condition_num = 1;
 };
 #endif //LEVEL_HPP

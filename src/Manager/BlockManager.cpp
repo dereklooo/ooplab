@@ -1,5 +1,5 @@
 #include "Manager/BlockManager.hpp"
-
+#include <iostream>
 BlockManager::BlockManager(
     const glm::vec2 mapPos,
     const glm::vec2 mapSize,
@@ -14,7 +14,7 @@ void BlockManager::AddBlock(const std::shared_ptr<SceneObject>& block) const {
 void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const {
     for (const auto &pos : positions) {
         std::shared_ptr<SceneObject> block;
-
+        std::cout<<MapPosition.x<<MapPosition.y<<std::endl;
         switch (type) {
             case BlockType::Lucky: block = std::make_shared<LuckyBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Original: block = std::make_shared<OriginalBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;

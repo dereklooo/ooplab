@@ -46,19 +46,25 @@ class GravityManager {
             const std::shared_ptr<std::unordered_map<ItemType,std::vector<std::shared_ptr<ItemObject>>>> &Items) {
                 GravityObject.clear();
                 GravityObject.push_back(mario);
-                for(auto &[type,Monster] : Monsters) {
-                    GravityObject.push_back(Monster);
+                for(auto &[type,monsters] : (*Monsters)) {
+                    for(auto &monster : monsters) {
+                        GravityObject.push_back(monster);
+                    }
                 }
-                for(auto &item : Items) {
-                    if(item->GetState() != ItemState::Hidden) {
-                        GravityObject.push_back(item);
+                for(auto &[type,items] : (*Items)) {
+                    for(auto &item : items) {
+                        if(item->GetState() != ItemState::Hidden) {
+                            GravityObject.push_back(item);
+                        }
                     }
                 }
             }
         bool IsFalling(const std::shared_ptr<Object> &Object) const {
-            for(auto &[type,Block] : Blocks) {
-                if(Object->DownCollision(Block)) {
-                    return false;
+            for(auto &[type,blocks] : (*Blocks)) {
+                for(auto &block : blocks) {
+                    if(Object->DownCollision(block)) {
+                        return false;
+                    }
                 }
             }
             return true;

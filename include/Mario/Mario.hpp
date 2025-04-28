@@ -27,15 +27,11 @@ enum Type {
     Star,
 };
 
-class Mario : public AnimationObject{
+class Mario final : public AnimationObject{
     public:
         Mario();
 
         void UpDateCurrentState(Action act);
-
-        void Hurt() ;
-
-        void update();
 
         void SetAcceleration(const float num) {
             this->horizontalAcceleration = num;
@@ -51,6 +47,16 @@ class Mario : public AnimationObject{
         void SetType(const Type type) {
             this->Type = type;
         }
+
+        Action GetCurrentState() const {
+            return CurrentState;
+        }
+
+        void SetCurrentState(Action action) {
+            this->CurrentState = action;
+        }
+        void Hurt() ;
+
         void Jump ();
 
         void LeftMove ();

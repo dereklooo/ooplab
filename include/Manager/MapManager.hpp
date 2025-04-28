@@ -12,17 +12,17 @@
 class MapManager {
     public:
     MapManager(std::shared_ptr<Mario>& Mario,
-        std::shared_ptr<SceneObject>& Background,
+        std::shared_ptr<StillObject>& Background,
         std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
         std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters,
         std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items);
 
-        void GameObject_Move();
-        void Update() {
-
+        void GameObject_Move() const;
+        void Update() const {
+            GameObject_Move();
         }
     private:
-        std::shared_ptr<Mario>& Mario_,
+        std::shared_ptr<Mario>& Mario_;
         std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
         std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters;
         std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items;

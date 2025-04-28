@@ -10,28 +10,28 @@
 
 class Level1 : public Level{
       public:
-        Level1() {
+        Level1() : Level() {
             m_Background = std::make_shared<StillObject>(RESOURCE_DIR "/image/Background/Level1/level_1.png");
             m_Background->SetSize({1.5,1.5});
             m_Background->SetPivot({-3584,240});
             m_Background->SetPosition({-640,360});
             m_Background->SetZIndex(1);
 
-            Map_Manager = std::make_shared<MapManager>(m_Background->GetPosition(),m_Background->GetScaledSize());
+            m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,m_Mario,m_Background);
 
-            Map_Manager->SetFloor(SceneManager,FloorBlock,-13.5);
-            Map_Manager->SetBlock(SceneManager,LuckyBlockPosition,BlockType::luckyBlock);
-            Map_Manager->SetBlock(SceneManager,OriginBlock,BlockType::originalBlock);
-            Map_Manager->SetBlock(SceneManager,FootBlock,BlockType::footBlock);
-            Map_Manager->SetBlock(SceneManager,Pipe_64_64,BlockType::pipe_64_64);
-            Map_Manager->SetBlock(SceneManager,Pipe_64_96,BlockType::pipe_64_96);
-            Map_Manager->SetBlock(SceneManager,Pipe_64_128,BlockType::pipe_64_128);
+            std::cout<<m_Background->GetPosition().x<<" "<<m_Background->GetPosition().y<<std::endl;
+            m_ManagerManager->SetFloor(FloorBlock, -13.5);
+            m_ManagerManager->SetBlock(LuckyBlockPosition, BlockType::Lucky);
+            m_ManagerManager->SetBlock(OriginBlock, BlockType::Original);
+            m_ManagerManager->SetBlock(FootBlock, BlockType::Foot);
+            m_ManagerManager->SetBlock(Pipe_64_64, BlockType::Pipe_64_64);
+            m_ManagerManager->SetBlock(Pipe_64_96, BlockType::Pipe_64_96);
+            m_ManagerManager->SetBlock(Pipe_64_128, BlockType::Pipe_64_128);
 
-            Map_Manager->SetItem(SceneManager,ItemManager,Item_Mushroom,RewardType::Item_Mushroom);
-            Map_Manager->SetItem(SceneManager,ItemManager,Item_Coin,RewardType::Item_Coin);
-
-            Gravity_Manager = std::make_shared<GravityManager>(SceneManager);
+            m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
+            m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
         }
+
         void Update() override {
             std::vector<std::shared_ptr<Monster>> _temp;
             switch (Condition_num) {
@@ -39,7 +39,7 @@ class Level1 : public Level{
                     if (m_Background->GetPosition().x <= -600) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-220),Left));
-                        MapManager::AddMonster(_temp,m_renderer,Monsters);
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
                     break;
@@ -47,7 +47,7 @@ class Level1 : public Level{
                     if (m_Background->GetPosition().x <= -1050) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-220),Left));
-                        MapManager::AddMonster(_temp,m_renderer,Monsters);
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
                     break;
@@ -56,7 +56,7 @@ class Level1 : public Level{
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(900,-220),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(960,-220),Left));
-                        MapManager::AddMonster(_temp,m_renderer,Monsters);
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
                     break;
@@ -65,7 +65,7 @@ class Level1 : public Level{
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,140),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1050,140),Left));
-                        MapManager::AddMonster(_temp,m_renderer,Monsters);
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
                         break;
@@ -74,7 +74,7 @@ class Level1 : public Level{
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(775,-247),Left));
-                        MapManager::AddMonster(_temp,m_renderer,Monsters);
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
                 case 6:
@@ -83,7 +83,7 @@ class Level1 : public Level{
                         _temp.push_back(std::make_shared<Turtle>(glm::vec2(625,-247),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(775,-247),Left));
-                        MapManager::AddMonster(_temp,m_renderer,Monsters);
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
                     break;
