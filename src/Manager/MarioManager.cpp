@@ -117,7 +117,9 @@ void MarioManager::MarioInitialize() const {
     Mario_->SetSize({1.35,1.2});
 }
 void MarioManager::MarioCollision() const {
-    HandleItem();
-    HandleBlock();
-    HandleMonster();
+    if(Mario_->GetWCollision()) {
+        HandleItem();
+        HandleBlock();
+        HandleMonster();
+    }
 }
