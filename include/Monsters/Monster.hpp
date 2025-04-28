@@ -37,13 +37,15 @@ class Monster : public AnimationObject {
       bool GetDie() const {
           return Die;
       }
-      virtual MonsterType GetType() = 0;
+      MonsterType GetType() const {
+          return type;
+      };
       virtual void Action() = 0;
       virtual void Hurt() = 0;
     protected:
         Way way;
         bool Die = false;
-        float DieTimer = 0.0f;
+        float StartHurtTimer = 0.0f;
         MonsterType type;
 
 };

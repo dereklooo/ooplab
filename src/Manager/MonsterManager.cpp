@@ -52,7 +52,8 @@ void MonsterManager::HandleBlockCollision(
             case MonsterType::Turtle_Type:
                 if (monster->LeftCollision(block)) {
                     monster->SetWay(Way::Right);
-                } else if (monster->RightCollision(block)) {
+                }
+                else if (monster->RightCollision(block)) {
                     monster->SetWay(Way::Left);
                 }
                 break;
@@ -71,14 +72,27 @@ void MonsterManager::HandleMonsterCollision(const std::shared_ptr<Monster>& mons
                 if (_monster->LeftCollision(monster)) {
                     _monster->SetWay(Way::Right);
                     monster->SetWay(Way::Left);
-                } else if (_monster->RightCollision(monster)) {
+                }
+                else if (_monster->RightCollision(monster)) {
                     _monster->SetWay(Way::Left);
                     monster->SetWay(Way::Right);
                 }
                 break;
             case MonsterType::Turtle_Type:
                 if(monster->GetDie()) {
-                    
+                    if(_monster->LeftCollision(monster) || _monster->RightCollision(monster)) {
+                        _monster->Hurt();
+                    }
+                }
+                else{
+                    if(_monster->LeftCollision(monster)) {
+                        _monster->SetWay(Way::Right);
+                        monster->SetWay(Way::Left);
+                    }
+                    else if (_monster->RightCollision(monster)) {
+                        _monster->SetWay(Way::Left);
+                        monster->SetWay(Way::Right);
+                    }
                 }
             default:
                 break;

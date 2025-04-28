@@ -3,7 +3,7 @@
 //
 #include "Monsters/Turtle.hpp"
 void Turtle::Action() {
-    if(!Die) {
+    if(Turtle_type == OutSize) {
         if(this->way == Way::Left) {
             this->SetPosition({this->GetPosition().x - 1.5,this->GetPosition().y});
             this->SetSize({-3,2.5});
@@ -13,11 +13,27 @@ void Turtle::Action() {
             this->SetSize({3,2.5});
         }
     }
-    else if(Util::Time::GetElapsedTimeMs() - this->DieTimer >= 1000.0f) {
-        this->SetPosition({this->GetPosition().x,this->GetPosition().y-500});
+    else if(Turtle_type == Inside) {
+
     }
+    else if(Turtle_type == Rolling) {
+        if(this->way == Way::Left) {
+            this->SetPosition({this->GetPosition().x - 5,this->GetPosition().y});
+            this->SetSize({-3,2.5});
+        }
+        else if(this->way == Way::Right) {
+            this->SetPosition({this->GetPosition().x + 5,this->GetPosition().y});
+            this->SetSize({3,2.5});
+        }
+    }
+
 }
 void Turtle::Hurt() {
-    this->SetDrawable(this->die->GetDrawable());
-    this->Die = true;
+    if(!Die) {
+        this->Die = true;
+        this->SetDrawable(this->die->GetDrawable());
+    }
+    else {
+
+    }
 }

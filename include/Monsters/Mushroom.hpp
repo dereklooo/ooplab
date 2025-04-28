@@ -13,7 +13,6 @@ class Mushroom : public Monster{
             this->SetZIndex(100);
             this->SetPosition(position);
         };
-        MonsterType GetType() override {return  type;}
         void Hurt() override;
         void Action() override;
 
