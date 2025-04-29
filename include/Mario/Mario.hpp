@@ -18,7 +18,8 @@ enum Action {
     BigToFire,
     BigToSmall,
     Stop,
-    Down
+    Down,
+    CantMove
 };
 enum Type {
     Small,

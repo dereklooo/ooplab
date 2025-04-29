@@ -80,6 +80,14 @@ add_executable(${PROJECT_NAME}
         src/Item/Coin_Item.cpp
         src/Item/Star_Item.cpp
         include/Monsters/Turtle.hpp
+        include/Block/Pipe.hpp
+        src/Block/AirBlock.cpp
+        src/Block/FootBlock.cpp
+        src/Block/LuckyBlock.cpp
+        src/Block/OriginalBlock.cpp
+        src/Block/Pipe64_96.cpp
+        src/Block/Pipe64_64.cpp
+        src/Block/Pipe64_128.cpp
 
 )
 

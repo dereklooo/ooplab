@@ -36,8 +36,4 @@ void MapManager::GameObject_Move() const {
             }
         }
     }
-
-    if(Background->GetPosition().x <= 500 && Mario_->GetPosition().y <= -350) {
-        Mario_->SetPosition({Mario_->GetPosition().x,0});
-    }
 }

@@ -4,15 +4,11 @@
 
 #ifndef PIPE_64_96_HPP
 #define PIPE_64_96_HPP
-#include "Object/SceneObject.hpp"
-class Pipe64_96 : public SceneObject {
+#include "Block/Pipe.hpp"
+class Pipe64_96 final : public Pipe {
 public:
-    Pipe64_96(glm::vec2 position) :  SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/Pipe_64_96.png" , position) {
-
-    }
-    void hit(const std::shared_ptr<Mario> &Mario) override {
-        (void)Mario;
-    };
+    explicit Pipe64_96(glm::vec2 position);
+    void hit(const std::shared_ptr<Mario> &Mario) override;
     BlockType GetType() override{return BlockType::Pipe_64_96;};
 };
 #endif //PIPE_64_96_HPP

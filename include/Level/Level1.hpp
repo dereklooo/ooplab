@@ -79,6 +79,7 @@ class Level1 : public Level{
                         m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
+                    break;
                 case 6:
                     if(m_Background->GetPosition().x <= -4600) {
                         _temp.clear();

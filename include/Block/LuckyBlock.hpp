@@ -7,23 +7,9 @@
 #include "Object/SceneObject.hpp"
 class LuckyBlock : public SceneObject{
     public:
-        LuckyBlock(const glm::vec2 &Position) : SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock.png",Position) {
-
-        }
-        void ChangeState() {
-            this->SetDrawable(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock_.png"));
-        }
-        void hit(const std::shared_ptr<Mario> &Mario) override{
-            if(this->GotHit == false) {
-                this->ChangeState();
-                this->Item->SetVisible(true);
-                this->Item->SetState(ItemState::PoppingUp);
-                this->Item->SetGravity(-10.0f);
-                this->Item->SetFallingTime(Util::Time::GetElapsedTimeMs());
-                this->Item->SetStartPopTime(Util::Time::GetElapsedTimeMs());
-                this->GotHit = true;
-            }
-        }
+        explicit LuckyBlock(const glm::vec2 &Position);
+        void ChangeState();
+        void hit(const std::shared_ptr<Mario> &Mario) override;
         BlockType GetType() override{return BlockType::Lucky;}
 };
 #endif //LUCKYBLOCK_HPP

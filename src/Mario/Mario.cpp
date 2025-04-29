@@ -83,7 +83,10 @@ void Mario::UpDateCurrentState(const Action act) {
 
 void Mario::Hurt() {
     if(this->Type == Small) {
+        this->SetWCollision(false);
         this->UpDateCurrentState(Die);
+        this->SetCurrentState(CantMove);
+        this->SetGravity(-2.0f);
     }
     else if(this->Type == Big) {
         this->SetType(Small);

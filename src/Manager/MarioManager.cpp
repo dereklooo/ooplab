@@ -32,6 +32,14 @@ void MarioManager::HandleBlock() const {
             }
             else if(Mario_->DownCollision(block)) {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
+                if(block->GetType() == BlockType::Pipe_64_96 || block->GetType() == BlockType::Pipe_64_128 || block->GetType() == BlockType::Pipe_64_64) {
+                    auto temp = std::dynamic_pointer_cast<Pipe>(block);
+                    if(temp->GetHasAnotherMap()) {
+                        Mario_->SetPosition({block->GetPosition().x,block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize() .y / 2)});
+                        Mario_->SetWCollision(false);
+                        Mario_->SetCurrentState(Action::CantMove);
+                    }
+                }
             }
         }
     }
@@ -104,6 +112,9 @@ void MarioManager::HandleMonster() const {
     }
 }
 void MarioManager::MarioInputCtl() const {
+    if(Mario_->GetCurrentState() == CantMove) {
+        return;
+    }
     if(Mario_->GetType() == Small) {
         if (Util::Input::IsKeyPressed(Util::Keycode::D)){
             Mario_->SetCurrentState(Run);
