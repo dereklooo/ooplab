@@ -55,6 +55,17 @@ class Mario final : public AnimationObject{
         void SetCurrentState(Action action) {
             this->CurrentState = action;
         }
+        bool GetStaring() const {
+            return Staring;
+        }
+        void SetStaring(const bool B_, const float StartShining) {
+            this->Staring = B_;
+            this->StartShiningTime = StartShining;
+
+        }
+        float GetStartShiningTime() const{
+            return StartShiningTime;
+        }
         void Hurt() ;
 
         void Jump ();
@@ -65,7 +76,8 @@ class Mario final : public AnimationObject{
 
         void Brakes();
     protected:
-
+        bool Staring = false;
+        float StartShiningTime = 0.0f;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
         Action CurrentState;

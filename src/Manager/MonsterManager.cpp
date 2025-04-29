@@ -97,7 +97,11 @@ void MonsterManager::HandleMonsterCollision(const std::shared_ptr<Monster>& mons
                 }
                 else if(temp->GetTurtleTye() == Rolling) {
                     if (_monster->LeftCollision(monster) || _monster->RightCollision(monster) || _monster->DownCollision(monster) || _monster->UpCollision(monster)) {
-                        _monster->Hurt();
+                        _monster->SetDie(true);
+                        _monster->SetKnockAway(true);
+                        _monster->SetWCollision(false);
+                        _monster->SetSize({_monster->GetSize().x, _monster->GetSize().y * -1});
+                        _monster->SetGravity(-2.0f);
                     }
                 }
                 break;

@@ -12,7 +12,6 @@ class LuckyBlock : public SceneObject{
         }
         void ChangeState() {
             this->SetDrawable(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock_.png"));
-            this->GotHit = true;
         }
         void hit(const std::shared_ptr<Mario> &Mario) override{
             if(this->GotHit == false) {

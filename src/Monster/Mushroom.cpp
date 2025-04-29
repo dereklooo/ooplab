@@ -13,8 +13,14 @@ void Mushroom::Action() {
 			this->SetPosition({this->GetPosition().x + 1.5,this->GetPosition().y});
 		}
 	}
-	else if(Util::Time::GetElapsedTimeMs() - this->StartHurtTimer >= 1000.0f) {
+	else {
+		if(this->GetKnockAway()) {
+			return;
+		}
+		else if(Util::Time::GetElapsedTimeMs() - this->StartHurtTimer >= 1000.0f) {
 			this->SetPosition({this->GetPosition().x,this->GetPosition().y-500});
+		}
+
 	}
 }
 void Mushroom::Hurt() {

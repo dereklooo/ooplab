@@ -15,12 +15,18 @@ void Star_Item::Action() {
             break;
         case ItemState::Walking:
             if(this->way == Left) {
-                this->SetPosition({this->GetPosition().x - 4.5,this->GetPosition().y});
-                this->SetGravity(-3.0f);
+                this->SetPosition({this->GetPosition().x - 3,this->GetPosition().y});
+                if(!this->GetFalling()) {
+                    this->SetPosition({this->GetPosition().x,this->GetPosition().y + 3.5f});
+                    this->SetGravity(-6.0f);
+                }
             }
             else if(this->way == Right) {
-                this->SetPosition({this->GetPosition().x + 4.5,this->GetPosition().y});
-                this->SetGravity(-3.0f);
+                this->SetPosition({this->GetPosition().x + 3,this->GetPosition().y});
+                if(!this->GetFalling()) {
+                    this->SetPosition({this->GetPosition().x,this->GetPosition().y + 3.5f});
+                    this->SetGravity(-6.0f);
+                }
             }
             SetWCollision(true);
         break;
@@ -37,6 +43,6 @@ void Star_Item::Action() {
     LastTime = Util::Time::GetElapsedTimeMs();
 }
 void Star_Item::ChangeMarioState(std::shared_ptr<Mario> &mario) {
-    mario->SetType(Star);
+    mario->SetStaring(true,Util::Time::GetElapsedTimeMs());
     mario->UpDateCurrentState(Stand);
 }

@@ -38,7 +38,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
                     temp->SetZIndex(100);
                     temp->SetSize({1.5,1.5});
                     temp->SetVisible(false);
-
+                    temp->SetWCollision(false);
                     (*Items)[type].push_back(temp);
                     block->SetItem(temp);
                 }

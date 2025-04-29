@@ -76,6 +76,9 @@ class Object : public Util::GameObject{
             }
             return false;
         }
+        glm::vec2  GetSize() const {
+            return m_Transform.scale;
+        }
         bool GetWCollision() const {
             return WantCollision;
         }

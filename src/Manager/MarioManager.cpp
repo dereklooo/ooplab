@@ -39,7 +39,7 @@ void MarioManager::HandleBlock() const {
 void MarioManager::HandleItem() const {
     for (const auto& [type, items] : *Items) {
         for (const auto& item : items) {
-            if(Mario_->LeftCollision(item)|| Mario_->RightCollision(item) || Mario_->DownCollision(item)) {
+            if((Mario_->LeftCollision(item)|| Mario_->RightCollision(item) || Mario_->DownCollision(item) || Mario_->UpCollision(item)) && item->GetWCollision()) {
                 item->SetVisible(false);
                 item->SetWCollision(false);
                 item->ChangeMarioState(Mario_);
@@ -50,8 +50,17 @@ void MarioManager::HandleItem() const {
 void MarioManager::HandleMonster() const {
     for(auto &[type,monsters] : *Monsters) {
         for(auto &monster : monsters) {
-            if(Mario_->GetType() == Star) {
-                monster->Hurt();
+            if(Mario_->GetStaring()) {
+                if((Mario_->RightCollision(monster) || Mario_->LeftCollision(monster) || Mario_->DownCollision(monster) || Mario_->UpCollision(monster)) && !monster->GetDie()) {
+                        monster->SetDie(true);
+                        monster->SetKnockAway(true);
+                        monster->SetWCollision(false);
+                        monster->SetSize({monster->GetSize().x, monster->GetSize().y * -1});
+                        monster->SetGravity(-2.0f);
+                }
+                if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() >= 10000) {
+                    Mario_->SetStaring(false,0.0f);
+                }
             }
             else {
                 if((Mario_->RightCollision(monster) || Mario_->LeftCollision(monster))) {
