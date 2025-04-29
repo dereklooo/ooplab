@@ -1,5 +1,6 @@
 #include "Manager/BlockManager.hpp"
 #include <iostream>
+
 BlockManager::BlockManager(
     const glm::vec2 mapPos,
     const glm::vec2 mapSize,
@@ -22,6 +23,7 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::Pipe_64_64: block = std::make_shared<Pipe64_64>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Pipe_64_96: block = std::make_shared<Pipe64_96>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Pipe_64_128: block = std::make_shared<Pipe64_128>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
+            case BlockType::Floor: block = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Air: block = std::make_shared<AirBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
         }
         block->SetZIndex(100);
@@ -38,12 +40,12 @@ void BlockManager::SetFloor(std::vector<float> &Position, const float Floor_y) c
             }
         }
         if(Build) {
-            auto temp = std::make_shared<AirBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + Floor_y * 48));
+            auto temp = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + Floor_y * 48));
             temp->SetSize({1.5,1.5});
             temp->SetZIndex(100);
             AddBlock(temp);
 
-            temp = std::make_shared<AirBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + (Floor_y - 1) * 48));
+            temp = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + (Floor_y - 1) * 48));
             temp->SetSize({1.5,1.5});
             temp->SetZIndex(100);
             AddBlock(temp);

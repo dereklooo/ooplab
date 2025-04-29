@@ -12,6 +12,7 @@
 #include "Block/Pipe_64_96.hpp"
 #include "Block/Pipe_64_128.hpp"
 #include "Block/AirBlock.hpp"
+#include "Block/FloorBlock.hpp"
 
 class BlockManager {
 public:

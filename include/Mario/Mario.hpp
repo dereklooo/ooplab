@@ -18,8 +18,7 @@ enum Action {
     BigToFire,
     BigToSmall,
     Stop,
-    Down,
-    CantMove
+    Down
 };
 enum Type {
     Small,
@@ -67,6 +66,12 @@ class Mario final : public AnimationObject{
         float GetStartShiningTime() const{
             return StartShiningTime;
         }
+        void SetCanMove(const bool B) {
+            this->CanMove = B;
+        }
+        bool GetCanMove() const {
+            return CanMove;
+        }
         void Hurt() ;
 
         void Jump ();
@@ -77,6 +82,7 @@ class Mario final : public AnimationObject{
 
         void Brakes();
     protected:
+        bool CanMove = true;
         bool Staring = false;
         float StartShiningTime = 0.0f;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;

@@ -88,6 +88,8 @@ add_executable(${PROJECT_NAME}
         src/Block/Pipe64_96.cpp
         src/Block/Pipe64_64.cpp
         src/Block/Pipe64_128.cpp
+        include/Block/FloorBlock.hpp
+        src/Block/FloorBlock.cpp
 
 )
 

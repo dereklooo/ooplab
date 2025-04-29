@@ -3,8 +3,8 @@
 //
 #include "Manager/MarioManager.hpp"
 
+#include <iostream>
 #include <Monsters/Turtle.hpp>
-
 MarioManager::MarioManager(
             std::shared_ptr<Mario> &Mario,
             std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
@@ -18,7 +18,10 @@ MarioManager::MarioManager(
             }
 void MarioManager::HandleBlock() const {
     for (const auto& [type, blocks] : *Blocks) {   // 注意這裡，blocks 是 vector
-        for (const auto& block : blocks) {          // 再一個 for loop
+        for (const auto& block : blocks) {
+            if(Mario_->GetWCollision() == false) {
+                return;
+            }
             if(Mario_->LeftCollision(block)) {
                 Mario_->SetPosition({block->GetPosition().x + abs(block->GetScaledSize().x / 2) + abs(Mario_->GetScaledSize().x / 2) + 5, Mario_->GetPosition().y});
             }
@@ -34,10 +37,13 @@ void MarioManager::HandleBlock() const {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
                 if(block->GetType() == BlockType::Pipe_64_96 || block->GetType() == BlockType::Pipe_64_128 || block->GetType() == BlockType::Pipe_64_64) {
                     auto temp = std::dynamic_pointer_cast<Pipe>(block);
-                    if(temp->GetHasAnotherMap()) {
+                    if(temp->GetHasAnotherMap() && Mario_->GetCurrentState() == Down) {
                         Mario_->SetPosition({block->GetPosition().x,block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize() .y / 2)});
                         Mario_->SetWCollision(false);
-                        Mario_->SetCurrentState(Action::CantMove);
+                        Mario_->UpDateCurrentState(Stand);
+                        Mario_->SetCanMove(false);
+                        Mario_->SetGravity(-1.0f);
+                        Mario_->SetZIndex(1);
                     }
                 }
             }
@@ -112,7 +118,7 @@ void MarioManager::HandleMonster() const {
     }
 }
 void MarioManager::MarioInputCtl() const {
-    if(Mario_->GetCurrentState() == CantMove) {
+    if(Mario_->GetCanMove() == false) {
         return;
     }
     if(Mario_->GetType() == Small) {
@@ -124,10 +130,6 @@ void MarioManager::MarioInputCtl() const {
         else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
             Mario_->SetCurrentState(Run);
             Mario_->LeftMove();
-        }
-
-        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
-
         }
         if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
             Mario_->SetCurrentState(Stand);
@@ -148,10 +150,6 @@ void MarioManager::MarioInputCtl() const {
             Mario_->SetCurrentState(Run);
             Mario_->LeftMove();
         }
-
-        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
-            Mario_->SetCurrentState(Down);
-        }
         if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
             Mario_->SetCurrentState(Stand);
         }
@@ -160,6 +158,10 @@ void MarioManager::MarioInputCtl() const {
             Mario_->SetCurrentState(Action::Jump);
         }
         Mario_->Brakes();
+    }
+
+    if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+        Mario_->SetCurrentState(Down);
     }
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());
 }

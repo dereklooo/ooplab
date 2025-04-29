@@ -16,7 +16,7 @@ class Turtle final : public Monster{
             this->type = MonsterType::Turtle_Type;
             this->Turtle_type = TurtleType::OutSide;
             this->SetWay(way);
-            this->SetSize({3,2.5});
+            this->SetSize({1.5,1.5});
             this->SetZIndex(100);
             this->SetPosition(position);
         };
@@ -29,6 +29,7 @@ class Turtle final : public Monster{
         TurtleType Turtle_type;
 
         std::shared_ptr<Util::Animation> WalkDrawable = Turtle::GenerateAnimation(2,RESOURCE_DIR "/image/character/monster/turtle/walk",200,100);
-        std::shared_ptr<Util::Image> DieDrawable= std::make_shared<Util::Image>(RESOURCE_DIR "/image/character/monster/turtle/die1.png");
+        std::shared_ptr<Util::Image> DieDrawable1= std::make_shared<Util::Image>(RESOURCE_DIR "/image/character/monster/turtle/die1.png");
+        std::shared_ptr<Util::Image> DieDrawable2= std::make_shared<Util::Image>(RESOURCE_DIR "/image/character/monster/turtle/die2.png");
 };
 #endif //TURTLE_HPP

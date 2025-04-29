@@ -7,28 +7,31 @@ void Turtle::Action() {
         if(Turtle_type == OutSide) {
             if(this->way == Way::Left) {
                 this->SetPosition({this->GetPosition().x - 1.5,this->GetPosition().y});
-                this->SetSize({-3,2.5});
+                this->SetSize({-1.5,1.5});
             }
             else if(this->way == Way::Right) {
                 this->SetPosition({this->GetPosition().x + 1.5,this->GetPosition().y});
-                this->SetSize({3,2.5});
+                this->SetSize({1.5,1.5});
             }
         }
         else if(Turtle_type == Inside) {
+            if(Util::Time::GetElapsedTimeMs() - StartHurtTimer >= 5000 && Util::Time::GetElapsedTimeMs() - StartHurtTimer < 10000) {
+                this->SetDrawable(DieDrawable2);
+            }
             if(Util::Time::GetElapsedTimeMs() - StartHurtTimer >= 10000) {
                 this->SetDrawable(WalkDrawable);
                 this->Turtle_type = OutSide;
             }
-            this->SetSize({3,2.5});
+            this->SetSize({1.5,1.5});
         }
         else if(Turtle_type == Rolling) {
             if(this->way == Way::Left) {
                 this->SetPosition({this->GetPosition().x - 5,this->GetPosition().y});
-                this->SetSize({-3,2.5});
+                this->SetSize({-1.5,1.5});
             }
             else if(this->way == Way::Right) {
                 this->SetPosition({this->GetPosition().x + 5,this->GetPosition().y});
-                this->SetSize({3,2.5});
+                this->SetSize({1.5,1.5});
             }
         }
     }
@@ -38,7 +41,7 @@ void Turtle::Action() {
 }
 void Turtle::Hurt() {
     if(Turtle_type == OutSide) {
-        this->SetDrawable(this->DieDrawable);
+        this->SetDrawable(this->DieDrawable1);
         this->StartHurtTimer = Util::Time::GetElapsedTimeMs();
         this->Turtle_type = Inside;
     }

@@ -47,7 +47,7 @@ void Mario::UpDateCurrentState(const Action act) {
             break;
             case Action::Stop:
                 this->SetDrawable(this->SmallDrawable[5]);
-            break;
+                break;
             default:
                 break;
         }
@@ -85,8 +85,8 @@ void Mario::Hurt() {
     if(this->Type == Small) {
         this->SetWCollision(false);
         this->UpDateCurrentState(Die);
-        this->SetCurrentState(CantMove);
         this->SetGravity(-2.0f);
+        this->SetCanMove(false);
     }
     else if(this->Type == Big) {
         this->SetType(Small);
