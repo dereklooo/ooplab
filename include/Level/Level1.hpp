@@ -30,6 +30,7 @@ class Level1 : public Level{
 
             m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
             m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
+            m_ManagerManager->SetItem(Item_Star,ItemType::Item_Star);
         }
 
         void Update() override {
@@ -39,6 +40,7 @@ class Level1 : public Level{
                     if (m_Background->GetPosition().x <= -600) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-220),Left));
+                        _temp.push_back(std::make_shared<Turtle>(glm::vec2(600,-220),Left)); // 測試用之後記得刪掉
                         m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }

@@ -2,6 +2,9 @@
 // Created by Benson on 2025/4/26.
 //
 #include "Manager/MarioManager.hpp"
+
+#include <Monsters/Turtle.hpp>
+
 MarioManager::MarioManager(
             std::shared_ptr<Mario> &Mario,
             std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
@@ -47,12 +50,46 @@ void MarioManager::HandleItem() const {
 void MarioManager::HandleMonster() const {
     for(auto &[type,monsters] : *Monsters) {
         for(auto &monster : monsters) {
-            if((Mario_->RightCollision(monster) || Mario_->LeftCollision(monster)) && !monster->GetDie()) {
-                Mario_->Hurt();
-            }
-            else if(Mario_->DownCollision(monster) && !monster->GetDie()) {
+            if(Mario_->GetType() == Star) {
                 monster->Hurt();
-                Mario_->SetGravity(-2.0f);
+            }
+            else {
+                if((Mario_->RightCollision(monster) || Mario_->LeftCollision(monster))) {
+                    switch(type) {
+                        case Mushroom_Type: {
+                            if(!monster->GetDie()) {
+                                Mario_->Hurt();
+                            }
+                            break;
+                        }
+                        case Turtle_Type: {
+                            const auto temp = std::dynamic_pointer_cast<Turtle>(monster);
+                            if(temp->GetTurtleTye() == Inside) {
+                                if(Mario_->RightCollision(monster)) {
+                                    monster->SetWay(Right);
+                                }
+                                else if(Mario_->LeftCollision(monster)) {
+                                    monster->SetWay(Left);
+                                }
+                                monster->Hurt();
+                            }
+                            else if(temp->GetTurtleTye() == OutSide){
+                                Mario_->Hurt();
+                            }
+                            else if(temp->GetTurtleTye() == Rolling) {
+                                Mario_->Hurt();
+                            }
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
+                    }
+                }
+                else if(Mario_->DownCollision(monster) && !monster->GetDie()) {
+                    monster->Hurt();
+                    Mario_->SetGravity(-2.0f);
+                }
             }
         }
     }

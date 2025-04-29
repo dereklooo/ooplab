@@ -29,7 +29,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
 
                             break;
                         case(Item_Star):
-
+                            temp = std::make_shared<Star_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
                             break;
                         case(Item_Coin):
                             temp = std::make_shared<Coin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));

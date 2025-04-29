@@ -8,8 +8,8 @@
 #include <Monsters/Monster.hpp>
 
 #include "Item/Coin_Item.hpp"
-
 #include "Item/Mushroom_Item.hpp"
+#include "Item/Star_Item.hpp"
 #include "Object/SceneObject.hpp"
 
 #include "Monsters/Monster.hpp"

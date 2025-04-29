@@ -6,7 +6,7 @@
 #define TURTLE_HPP
 #include "Monster.hpp"
 enum TurtleType {
-    OutSize,
+    OutSide,
     Inside,
     Rolling,
 };
@@ -14,7 +14,7 @@ class Turtle final : public Monster{
     public:
         Turtle(const glm::vec2 position, const Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/turtle/walk") {
             this->type = MonsterType::Turtle_Type;
-            this->Turtle_type = TurtleType::OutSize;
+            this->Turtle_type = TurtleType::OutSide;
             this->SetWay(way);
             this->SetSize({3,2.5});
             this->SetZIndex(100);
@@ -22,10 +22,13 @@ class Turtle final : public Monster{
         };
         void Action() override;
         void Hurt() override;
+        TurtleType GetTurtleTye() const {
+            return Turtle_type;
+        }
     private:
         TurtleType Turtle_type;
 
-        std::shared_ptr<AnimationObject> walk = std::make_shared<AnimationObject>(2,RESOURCE_DIR "/image/character/monster/turtle/walk");
-        std::shared_ptr<StillObject> die = std::make_shared<StillObject>(RESOURCE_DIR "/image/character/monster/turtle/die1.png");
+        std::shared_ptr<Util::Animation> WalkDrawable = Turtle::GenerateAnimation(2,RESOURCE_DIR "/image/character/monster/turtle/walk",200,100);
+        std::shared_ptr<Util::Image> DieDrawable= std::make_shared<Util::Image>(RESOURCE_DIR "/image/character/monster/turtle/die1.png");
 };
 #endif //TURTLE_HPP

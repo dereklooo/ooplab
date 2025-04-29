@@ -75,6 +75,10 @@ add_executable(${PROJECT_NAME}
         include/Object/GravityObject.hpp
         src/Manager/GravityManager.cpp
         src/Manager/MapManager.cpp
+        include/Item/Star_Item.hpp
+        src/Item/Mushroom_Item.cpp
+        src/Item/Coin_Item.cpp
+        src/Item/Star_Item.cpp
 
 )
 
