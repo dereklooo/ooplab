@@ -5,7 +5,7 @@
 Mushroom_Item::Mushroom_Item(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/character/Item/Mushroom.png") {
 
 };
-void Mushroom_Item::Action() override{
+void Mushroom_Item::Action(){
     const float DeltaTime = (Util::Time::GetElapsedTimeMs() - LastTime) / 1000.0f;
     switch(state) {
         case ItemState::Hidden:
@@ -33,7 +33,7 @@ void Mushroom_Item::Action() override{
     }
     LastTime = Util::Time::GetElapsedTimeMs();
 }
-void Mushroom_Item::ChangeMarioState(std::shared_ptr<Mario>& mario) override {
+void Mushroom_Item::ChangeMarioState(std::shared_ptr<Mario>& mario) {
     if(mario->GetType() == Small) {
         mario->SetType(Big);
         mario->UpDateCurrentState(Stand);

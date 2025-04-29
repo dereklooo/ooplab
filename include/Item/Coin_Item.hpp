@@ -8,7 +8,7 @@
 #include <ostream>
 
 #include "Object/ItemObject.hpp"
-class Coin_Item : public ItemObject {
+class Coin_Item final : public ItemObject {
     public:
         explicit Coin_Item(const glm::vec2 &position);
         void Action() override;
