@@ -42,7 +42,9 @@ public:
         m_ManagerManager->Update();
         m_renderer->Update();
     }
-
+    void GameOver() {
+        return;  //實作GameOver
+    }
 
 protected:
 
