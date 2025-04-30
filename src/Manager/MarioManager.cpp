@@ -98,6 +98,7 @@ void MarioManager::HandleMonster() const {
                     }
                     if(Mario_->DownCollision(monster) && !monster->GetDie()) {
                         monster->Hurt();
+                        Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
                         Mario_->SetGravity(-2.0f);
                     }
                 }
@@ -143,6 +144,7 @@ void MarioManager::HandleMonster() const {
                 }
                 else if(Mario_->DownCollision(monster) && !monster->GetDie()) {
                     monster->Hurt();
+                    Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
                     Mario_->SetGravity(-2.0f);
                 }
             }
