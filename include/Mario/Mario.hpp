@@ -52,19 +52,19 @@ class Mario final : public AnimationObject{
             return CurrentState;
         }
 
-        void SetCurrentState(Action action) {
+        void SetCurrentState(const Action action) {
             this->CurrentState = action;
         }
         bool GetStaring() const {
-            return Staring;
+            return star.Staring;
         }
         void SetStaring(const bool B_, const float StartShining) {
-            this->Staring = B_;
-            this->StartShiningTime = StartShining;
+            this->star.Staring = B_;
+            this->star.StartShiningTime = StartShining;
 
         }
         float GetStartShiningTime() const{
-            return StartShiningTime;
+            return star.StartShiningTime;
         }
         void SetCanMove(const bool B) {
             this->CanMove = B;
@@ -72,6 +72,17 @@ class Mario final : public AnimationObject{
         bool GetCanMove() const {
             return CanMove;
         }
+        void SetHurting(const bool B, const float StartTime) {
+            hurt.Hurting = B;
+            hurt.StartHurtingTIme = StartTime;
+        }
+        bool GetHurting() const {
+            return hurt.Hurting;
+        }
+        float GetHurtingTime() const {
+            return hurt.StartHurtingTIme;
+        }
+
         void Hurt() ;
 
         void Jump ();
@@ -82,9 +93,11 @@ class Mario final : public AnimationObject{
 
         void Brakes();
     protected:
+        struct Star_ {bool Staring = false;float StartShiningTime = 0.0f;};
+        struct Hurt_ {bool Hurting = false;float StartHurtingTIme = 0.0f;};
+        Star_ star;
+        Hurt_ hurt;
         bool CanMove = true;
-        bool Staring = false;
-        float StartShiningTime = 0.0f;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
         Action CurrentState;

@@ -41,13 +41,13 @@ void BlockManager::SetFloor(std::vector<float> &Position, const float Floor_y) c
         }
         if(Build) {
             auto temp = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + Floor_y * 48));
-            temp->SetSize({1.5,1.5});
-            temp->SetZIndex(100);
+            temp->SetSize({1.65,1.5});
+            temp->SetZIndex(1);
             AddBlock(temp);
 
             temp = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + (Floor_y - 1) * 48));
-            temp->SetSize({1.5,1.5});
-            temp->SetZIndex(100);
+            temp->SetSize({1.65,1.5});
+            temp->SetZIndex(1);
             AddBlock(temp);
 
         }

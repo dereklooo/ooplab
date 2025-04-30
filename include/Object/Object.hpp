@@ -33,7 +33,9 @@ class Object : public Util::GameObject{
         void SetFalling(const bool f) {
             this->Falling = f;
         }
-
+        bool GetVisible() {
+            return m_Visible;
+        }
 
         bool Collision(const glm::vec2 &other) const {
                 if (

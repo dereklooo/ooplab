@@ -19,7 +19,7 @@
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/stand/stand",100,100)); // stand
         this->BigDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/run/big_run",80,60)); //run
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/jump/big_jump",100,100)); //jump
-        this->BigDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/BigToSmall/big_to_small",800,200)); // BigToSmall
+        this->BigDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/BigToSmall/big_to_small",200,50)); // BigToSmall
         this->BigDrawable.push_back(Mario::GenerateAnimation(2,RESOURCE_DIR"/image/character/mario/big/BigToFire/big_to_fire",800,200)); //BigToFire
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/Down/big_down",800,200)); //down
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/stop/big_stop",800,200)); // stop
@@ -83,13 +83,16 @@ void Mario::UpDateCurrentState(const Action act) {
 
 void Mario::Hurt() {
     if(this->Type == Small) {
+        this->SetZIndex(2);
         this->SetWCollision(false);
         this->UpDateCurrentState(Die);
         this->SetGravity(-2.0f);
         this->SetCanMove(false);
     }
     else if(this->Type == Big) {
-        this->SetType(Small);
+        this->UpDateCurrentState(BigToSmall);
+        this->SetHurting(true,Util::Time::GetElapsedTimeMs());
+        this->CanMove = false;
     }
     else if(this->Type == Fire) {
         this->SetType(Big);

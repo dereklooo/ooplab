@@ -72,8 +72,38 @@ void MarioManager::HandleMonster() const {
                         monster->SetSize({monster->GetSize().x, monster->GetSize().y * -1});
                         monster->SetGravity(-2.0f);
                 }
-                if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() >= 10000) {
+                if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() <10000) {
+                    if ((static_cast<int>(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime()) / 200) % 2 == 0) {
+                        Mario_->SetVisible(false);
+                    } else {
+                        Mario_->SetVisible(true);
+                    }
+                }
+                else if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() >= 10000) {
                     Mario_->SetStaring(false,0.0f);
+                }
+            }
+            else if (Mario_->GetHurting()) {
+                float elapsed = Util::Time::GetElapsedTimeMs() - Mario_->GetHurtingTime();
+                if (elapsed < 1500.0f) {
+                    Mario_->SetGravity(0.0f);
+                }
+                else if (elapsed < 6500.0f) {
+                    Mario_->SetType(Small);
+                    Mario_->SetCanMove(true);
+                    if ((static_cast<int>(elapsed) / 200) % 2 == 0 && Mario_->GetVisible()) {
+                        Mario_->SetVisible(false);
+                    } else {
+                        Mario_->SetVisible(true);
+                    }
+                    if(Mario_->DownCollision(monster) && !monster->GetDie()) {
+                        monster->Hurt();
+                        Mario_->SetGravity(-2.0f);
+                    }
+                }
+                else {
+                    Mario_->SetVisible(true);
+                    Mario_->SetHurting(false, 0.0f);
                 }
             }
             else {
@@ -90,9 +120,11 @@ void MarioManager::HandleMonster() const {
                             if(temp->GetTurtleTye() == Inside) {
                                 if(Mario_->RightCollision(monster)) {
                                     monster->SetWay(Right);
+                                    monster->SetPosition({monster->GetPosition().x + 20,monster->GetPosition().y});
                                 }
                                 else if(Mario_->LeftCollision(monster)) {
                                     monster->SetWay(Left);
+                                    monster->SetPosition({monster->GetPosition().x - 20,monster->GetPosition().y});
                                 }
                                 monster->Hurt();
                             }
@@ -138,7 +170,6 @@ void MarioManager::MarioInputCtl() const {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
         }
-        Mario_->Brakes();
     }
     else if(Mario_->GetType() == Big) {
         if (Util::Input::IsKeyPressed(Util::Keycode::D)){
@@ -157,12 +188,12 @@ void MarioManager::MarioInputCtl() const {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
         }
-        Mario_->Brakes();
     }
 
-    if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+    if(Util::Input::IsKeyPressed(Util::Keycode::S) && !Mario_->GetFalling() && Mario_->GetAcceleration() == 0) {
         Mario_->SetCurrentState(Down);
     }
+    Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());
 }
 void MarioManager::MarioInitialize() const {
