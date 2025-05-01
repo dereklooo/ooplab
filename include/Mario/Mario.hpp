@@ -82,7 +82,12 @@ class Mario final : public AnimationObject{
         float GetHurtingTime() const {
             return hurt.StartHurtingTIme;
         }
-
+        void AddScore(const int adder) {
+            Score += adder;
+        }
+        int GetScore() const{
+            return Score;
+        }
         void Hurt() ;
 
         void Jump ();
@@ -98,6 +103,7 @@ class Mario final : public AnimationObject{
         Star_ star;
         Hurt_ hurt;
         bool CanMove = true;
+        int Score = 0;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
         Action CurrentState;

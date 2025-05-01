@@ -93,6 +93,9 @@ add_executable(${PROJECT_NAME}
         include/TimeScore/Timer.hpp
         include/TimeScore/Score.hpp
         include/Manager/TImeScoreManager.hpp
+        src/Manager/TimeScoreManager.cpp
+        src/TimeScore/Timer.cpp
+        src/TimeScore/Score.cpp
 
 )
 
