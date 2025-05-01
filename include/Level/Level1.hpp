@@ -35,8 +35,8 @@ class Level1 : public Level{
 
         void Update() override {
             std::vector<std::shared_ptr<Monster>> _temp;
-            if(m_Mario->GetCurrentState() == Die && m_Mario->GetPosition().y <= -5000) {
-                this->GameOver();
+            if(m_Mario->GetPosition().y <= -2000) {
+                this->GameOver = true;
                 return;
             }
             switch (Condition_num) {

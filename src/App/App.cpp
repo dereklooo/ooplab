@@ -39,7 +39,7 @@ void App::TitleUpgrade() {
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
         m_CurrentState = State::END;
-        }
+    }
 }
 
 void App::Start() {
@@ -47,7 +47,6 @@ void App::Start() {
     switch(level) {
         case 1:
             m_level = std::make_shared<Level1>();
-
             break;
         case 2:
             m_level = std::make_shared<Level2>();
@@ -67,11 +66,14 @@ void App::Update() {
      * closing the window.
      */
     m_level->update();
+    if(m_level->GetGameOverState() == true) {
+        m_CurrentState = State::END;
+    }
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
         m_CurrentState = State::END;
-        }
+    }
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)
