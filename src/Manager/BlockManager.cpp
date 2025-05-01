@@ -27,7 +27,7 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::Air: block = std::make_shared<AirBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
         }
         block->SetZIndex(100);
-        block->SetSize({1.5,1.5});
+        block->SetSize({1.65,1.5});
         if (block) AddBlock(block);
     }
 }

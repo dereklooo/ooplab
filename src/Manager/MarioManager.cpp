@@ -153,6 +153,9 @@ void MarioManager::HandleMonster() const {
 }
 void MarioManager::MarioInputCtl() const {
     if(Mario_->GetCanMove() == false) {
+        if(Util::Input::IsKeyDown(Util::Keycode::SPACE)) {
+            std::cout<<Mario_->GetPosition().x<<" "<<Mario_->GetPosition().y<<std::endl;
+        }
         return;
     }
     if(Mario_->GetType() == Small) {

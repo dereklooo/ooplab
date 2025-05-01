@@ -3,7 +3,7 @@
 #include "Core/Context.hpp"
 
 int main(int, char**) {
-    auto context = Core::Context::GetInstance();
+    const auto context = Core::Context::GetInstance();
     App app;
 
     while (!context->GetExit()) {

@@ -42,11 +42,12 @@ public:
         m_ManagerManager->Update();
         m_renderer->Update();
     }
-    void GameOver() {
-        return;  //實作GameOver
+    bool GetGameOverState() const {
+        return GameOver;
     }
-
 protected:
+    bool GameOver = false;
+
 
     std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
     std::shared_ptr<Mario> m_Mario = std::make_shared<Mario>();
