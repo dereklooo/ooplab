@@ -144,10 +144,9 @@ void Mario::Jump() {
 
 void Mario::Brakes() {
 
-    if(!Util::Input::IsKeyPressed(Util::Keycode::S) &&
-    !Util::Input::IsKeyPressed(Util::Keycode::W) &&
-    !Util::Input::IsKeyPressed(Util::Keycode::A) &&
-    !Util::Input::IsKeyPressed(Util::Keycode::D)) {
+    if(
+    (!Util::Input::IsKeyPressed(Util::Keycode::W) && !Util::Input::IsKeyPressed(Util::Keycode::A) && !Util::Input::IsKeyPressed(Util::Keycode::D)) || ((Util::Input::IsKeyPressed(Util::Keycode::A) ||
+    Util::Input::IsKeyPressed(Util::Keycode::D)) && (Util::Input::IsKeyPressed(Util::Keycode::S)) && this->GetType() == Big))  {
         if (GetAcceleration()>=0.07f ) {
             SetAcceleration(GetAcceleration()-0.07f);
             this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});

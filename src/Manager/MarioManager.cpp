@@ -174,7 +174,10 @@ void MarioManager::MarioInputCtl() const {
         }
     }
     else if(Mario_->GetType() == Big) {
-        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
+        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+            Mario_->SetCurrentState(Down);
+        }
+        else if (Util::Input::IsKeyPressed(Util::Keycode::D)){
             Mario_->SetCurrentState(Run);
             Mario_->RightMove();
         }
@@ -183,18 +186,17 @@ void MarioManager::MarioInputCtl() const {
             Mario_->SetCurrentState(Run);
             Mario_->LeftMove();
         }
-        if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
+        else if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
             Mario_->SetCurrentState(Stand);
         }
         if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
         }
+
     }
 
-    if(Util::Input::IsKeyPressed(Util::Keycode::S) && !Mario_->GetFalling() && Mario_->GetAcceleration() == 0) {
-        Mario_->SetCurrentState(Down);
-    }
+
     Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());
 }
