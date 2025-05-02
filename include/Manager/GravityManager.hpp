@@ -70,7 +70,7 @@ class GravityManager {
             return true;
         }
     private:
-        const float gravity = 15.0f;
+        const float gravity = 18.0f;
         std::shared_ptr<Util::Time> Time = std::make_shared<Util::Time>();
         std::shared_ptr<std::unordered_map<BlockType,std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
         std::vector<std::shared_ptr<Object>> GravityObject;

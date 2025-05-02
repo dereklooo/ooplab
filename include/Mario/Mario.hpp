@@ -17,6 +17,7 @@ enum Action {
     SmallToBig,
     BigToFire,
     BigToSmall,
+    Shoot,
     Stop,
     Down
 };
@@ -97,6 +98,8 @@ class Mario final : public AnimationObject{
         void RightMove ();
 
         void Brakes();
+
+        void Shoot();
     protected:
         struct Star_ {bool Staring = false;float StartShiningTime = 0.0f;};
         struct Hurt_ {bool Hurting = false;float StartHurtingTIme = 0.0f;};
