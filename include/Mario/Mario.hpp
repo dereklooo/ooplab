@@ -106,6 +106,7 @@ class Mario final : public AnimationObject{
         int Score = 0;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
+        std::vector<std::shared_ptr<Core::Drawable>> FireDrawable;
         Action CurrentState;
         glm::vec2 speed = {0,0};
         Type Type;

@@ -24,6 +24,12 @@
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/Down/big_down",800,200)); //down
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/stop/big_stop",800,200)); // stop
 
+        this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/stand/stand",400,100)); // stand
+        this->FireDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/fire/run/run",80,60)); //run
+        this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/jump/jump",400,100)); // jump
+        this->FireDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/BigToSmall/big_to_small",800,200)); //FireToSmall
+        this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stop/small_stop",400,100)); //stop;
+
         this->SetSize({1.4,1.4});
         this->Type = Small;
     };

@@ -91,11 +91,9 @@ void MarioManager::HandleMonster() const {
                 else if (elapsed < 6500.0f) {
                     Mario_->SetType(Small);
                     Mario_->SetCanMove(true);
-                    if ((static_cast<int>(elapsed) / 200) % 2 == 0 && Mario_->GetVisible()==true) {
-
+                    if ((static_cast<int>(elapsed) / 200) % 2 == 0 && Mario_->GetVisible()) {
                         Mario_->SetVisible(false);
                     } else {
-
                         Mario_->SetVisible(true);
                     }
                     if(Mario_->DownCollision(monster) && !monster->GetDie()) {
@@ -105,7 +103,6 @@ void MarioManager::HandleMonster() const {
                     }
                 }
                 else {
-
                     Mario_->SetVisible(true);
                     Mario_->SetHurting(false, 0.0f);
                 }

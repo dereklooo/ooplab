@@ -96,6 +96,8 @@ add_executable(${PROJECT_NAME}
         src/Manager/TimeScoreManager.cpp
         src/TimeScore/Timer.cpp
         src/TimeScore/Score.cpp
+        include/Mario/FireBall.hpp
+        include/Mario/FireBall.hpp
 
 )
 
