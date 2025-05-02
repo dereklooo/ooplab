@@ -71,8 +71,8 @@ class Object : public Util::GameObject{
             return false;
         }
         bool UpCollision(const std::shared_ptr<Object> &other) const{
-            const glm::vec2 TempPos1 = {this->GetPosition().x + 2, this->GetPosition().y + abs(this->GetScaledSize().y / 2) + 2};
-            const glm::vec2 TempPos2 = {this->GetPosition().x - 2, this->GetPosition().y + abs(this->GetScaledSize().y / 2) + 2};
+            const glm::vec2 TempPos1 = {this->GetPosition().x + 10, this->GetPosition().y + abs(this->GetScaledSize().y / 2) + 2};
+            const glm::vec2 TempPos2 = {this->GetPosition().x - 10, this->GetPosition().y + abs(this->GetScaledSize().y / 2) + 2};
             if(other->Collision(TempPos1) || other->Collision(TempPos2)) {
                 return true;
             }

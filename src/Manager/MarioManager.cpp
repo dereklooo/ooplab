@@ -93,9 +93,7 @@ void MarioManager::HandleMonster() const {
                     Mario_->SetCanMove(true);
                     if ((static_cast<int>(elapsed) / 200) % 2 == 0 && Mario_->GetVisible()) {
                         Mario_->SetVisible(false);
-                        std::cout<<"aa"<<std::endl;
                     } else {
-                        std::cout<<"bb"<<std::endl;
                         Mario_->SetVisible(true);
                     }
                     if(Mario_->DownCollision(monster) && !monster->GetDie()) {
