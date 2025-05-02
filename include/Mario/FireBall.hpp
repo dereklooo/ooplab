@@ -5,12 +5,22 @@
 #ifndef FIREBALL_HPP
 #define FIREBALL_HPP
 #include "Object/AnimationObject.hpp"
+#include "Util/Time.hpp"
+enum FireBallState {Exploding,Rolling};
 class FireBall final: public AnimationObject {
     public:
-        FireBall();
+        explicit FireBall(glm::vec2 position);
+
         void Rolling();
-        void Exploding();
+
+        void Explode();
+
+        void SetState(FireBallState state);
+
+        FireBallState GetState() const;
+
     private:
+        FireBallState state = FireBallState::Rolling;
 
 };
 #endif //FIREBALL_HPP

@@ -166,11 +166,11 @@ void Mario::LeftMove() {
 void Mario::Jump() {
     if(!this->GetFalling()) {
         this->SetPosition({this->GetPosition().x,this->GetPosition().y + 4});
-        this->SetGravity(-12.0f);
+        this->SetGravity(-11.0f);
     }
 }
 void Mario::Shoot() {
-    
+    this->Shooting = true;
 }
 
 void Mario::Brakes() {

@@ -101,6 +101,8 @@ add_executable(${PROJECT_NAME}
         src/Mario/FireBall.cpp
         include/Item/FireFlower_Item.hpp
         src/Item/FireFlower_Item.cpp
+        include/Manager/FireBallManager.hpp
+        src/Manager/FireBallManager.cpp
 
 )
 
