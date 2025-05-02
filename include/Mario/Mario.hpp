@@ -14,7 +14,7 @@ enum Action {
     Run,
     Jump,
     Die,
-    SmallTOBig,
+    SmallToBig,
     BigToFire,
     BigToSmall,
     Stop,
