@@ -138,7 +138,7 @@ void Mario::LeftMove() {
 void Mario::Jump() {
     if(!this->GetFalling()) {
         this->SetPosition({this->GetPosition().x,this->GetPosition().y + 4});
-        this->SetGravity(-8.0f);
+        this->SetGravity(-10.0f);
     }
 }
 
@@ -147,11 +147,11 @@ void Mario::Brakes() {
     if(
     (!Util::Input::IsKeyPressed(Util::Keycode::A) && !Util::Input::IsKeyPressed(Util::Keycode::D)) || ((Util::Input::IsKeyPressed(Util::Keycode::A) ||
     Util::Input::IsKeyPressed(Util::Keycode::D)) && (Util::Input::IsKeyPressed(Util::Keycode::S)) && this->GetType() == Big)  )  {
-        if (GetAcceleration()>=0.07f ) {
-            SetAcceleration(GetAcceleration()-0.07f);
+        if (GetAcceleration()>=0.1f ) {
+            SetAcceleration(GetAcceleration()-0.13f);
             this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
-        }else if (GetAcceleration()<=-0.02f) {
-            SetAcceleration(GetAcceleration()+0.07f);
+        }else if (GetAcceleration()<=-0.1f) {
+            SetAcceleration(GetAcceleration()+0.13f);
             this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
         }
         else{SetAcceleration(0);}
