@@ -4,7 +4,7 @@
 #include "Item/FireFlower_Item.hpp"
 
 
-FireFlower::FireFlower(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"Resources/image/character/Item/Fire.png"){
+FireFlower::FireFlower(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/character/Item/Fire.png"){
 
 }
 void FireFlower::Action() {
@@ -16,10 +16,10 @@ void FireFlower::Action() {
             break;
         case ItemState::Walking:
             return;
-        break;
+            break;
         case ItemState::PoppingUp:
             this->SetWCollision(false);
-        this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 0.1f});
+            this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 0.1f});
         if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 90) {
             this->SetWCollision(true);
             this->state = Walking;

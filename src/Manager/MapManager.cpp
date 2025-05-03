@@ -5,10 +5,12 @@
 MapManager::MapManager(
     std::shared_ptr<Mario> &Mario,
     std::shared_ptr<StillObject> &Background,
+    std::vector<std::shared_ptr<FireBall>> &FireBalls,
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
     std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters,
     std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items) :
     Mario_(Mario),
+    FireBalls(FireBalls),
     Blocks(Blocks),
     Monsters(Monsters),
     Items(Items),
@@ -34,6 +36,9 @@ void MapManager::GameObject_Move() const {
             for(const auto &item : items) {
                 item->SetPosition({item->GetPosition().x - 4 , item->GetPosition().y});
             }
+        }
+        for(const auto &fireball : FireBalls) {
+            fireball->SetPosition({fireball->GetPosition().x - 4 , fireball->GetPosition().y});
         }
     }
 }

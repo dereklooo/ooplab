@@ -159,6 +159,10 @@ void MarioManager::MarioInputCtl() const {
         return;
     }
     if(Mario_->GetType() == Small) {
+        if(Util::Input::IsKeyDown(Util::Keycode::Z)) {  // test
+            Mario_->SetType(Fire);
+        }
+
         if (Util::Input::IsKeyPressed(Util::Keycode::D)){
             Mario_->SetCurrentState(Run);
             Mario_->RightMove();
@@ -196,11 +200,31 @@ void MarioManager::MarioInputCtl() const {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
         }
-        else if(Util::Input::IsKeyDown(Util::Keycode::J)) {
+    }
+    else if(Mario_->GetType() == Fire) {
+        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+            Mario_->SetCurrentState(Down);
+        }
+        else if (Util::Input::IsKeyPressed(Util::Keycode::D)){
+            Mario_->SetCurrentState(Run);
+            Mario_->RightMove();
+        }
+
+        else if(Util::Input::IsKeyPressed(Util::Keycode::A)) {
+            Mario_->SetCurrentState(Run);
+            Mario_->LeftMove();
+        }
+        else if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
+            Mario_->SetCurrentState(Stand);
+        }
+        if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+            Mario_->Jump();
+            Mario_->SetCurrentState(Action::Jump);
+        }
+        if(Util::Input::IsKeyPressed(Util::Keycode::J)) {
             Mario_->Shoot();
         }
     }
-
 
     Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());

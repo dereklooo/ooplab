@@ -9,9 +9,10 @@
 //
 #include "Object/ItemObject.hpp"
 class FireFlower final : public ItemObject {
-    explicit FireFlower(const glm::vec2 &position);
-    void Action() override;
-    void ChangeMarioState(std::shared_ptr<Mario>& mario) override;
+    public:
+        explicit FireFlower(const glm::vec2 &position);
+        void Action() override;
+        void ChangeMarioState(std::shared_ptr<Mario>& mario) override;
 };
 
 #endif //FIREFLOWER_ITEM_HPP

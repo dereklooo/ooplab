@@ -3,6 +3,9 @@
 //
 
 #include "Manager/ItemManager.hpp"
+
+#include "Item/FireFlower_Item.hpp"
+
 ItemManager::ItemManager(const glm::vec2 MapPosition,
                          const glm::vec2 MapSize,
                          std::shared_ptr<std::unordered_map<BlockType,std::vector<std::shared_ptr<SceneObject>>>> &Blocks,
@@ -26,7 +29,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
                             temp = std::make_shared<Mushroom_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
                             break;
                         case(Item_FireFlower):
-
+                            temp = std::make_shared<FireFlower>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
                             break;
                         case(Item_Star):
                             temp = std::make_shared<Star_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));

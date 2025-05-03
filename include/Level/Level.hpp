@@ -57,6 +57,7 @@ protected:
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>> Blocks = std::make_shared<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>();
     std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>> Monsters = std::make_shared<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>();
 
+    std::vector<std::shared_ptr<FireBall>> FireBalls = std::vector<std::shared_ptr<FireBall>>();
 
     std::shared_ptr<ManagerManager> m_ManagerManager;
     size_t Condition_num = 1;

@@ -17,7 +17,7 @@ class Level1 : public Level{
             m_Background->SetPosition({-640,360});
             m_Background->SetZIndex(1);
 
-            m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,m_Mario,m_Background);
+            m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
 
             std::cout<<m_Background->GetPosition().x<<" "<<m_Background->GetPosition().y<<std::endl;
             m_ManagerManager->SetFloor(FloorBlock, -13.5);
@@ -29,6 +29,7 @@ class Level1 : public Level{
             m_ManagerManager->SetBlock(Pipe_64_128, BlockType::Pipe_64_128);
 
             m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
+            m_ManagerManager->SetItem(Item_FireFlower, ItemType::Item_FireFlower);
             m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
             m_ManagerManager->SetItem(Item_Star,ItemType::Item_Star);
         }
@@ -110,8 +111,10 @@ class Level1 : public Level{
        std::vector<glm::vec2> Pipe_64_96 = {{39,-11.5}};
        std::vector<glm::vec2> Pipe_64_128 = {{47,-11},{58,-11}};
 
-        std::vector<glm::vec2> Item_Mushroom = {{21.5f,-9.5f},{78.5f,-9.5f},{109.5f,-5.5f}};
+        std::vector<glm::vec2> Item_Mushroom = {{21.5f,-9.5f},{78.5f,-9.5f}};
+        std::vector<glm::vec2> Item_FireFlower = {{109.5f,-5.5f}};
         std::vector<glm::vec2> Item_Coin = {{16.5f,-9.5},{22.5,-5.5f},{23.5f,-9.5f},{94.5f,-5.5f},{94.5f,-9.5f},{106.5f,-9.5f},{109.5f,-9.5f},{112.5f,-9.5f},{129.5f,-5.5f},{130.5f,-5.5f},{170.5f,-9.5f}};
         std::vector<glm::vec2> Item_Star = {{101.5,-9.5}};
+
 };
 #endif //LEVEL1_HPP
