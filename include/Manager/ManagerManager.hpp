@@ -51,6 +51,9 @@ class ManagerManager {
     void MarioInitialize() const {
         MarioManager_->MarioInitialize();
     }
+    void FireballsInitialize() const {
+        FireBallManager_->FireballsInitialize();
+    }
     void Update() const{
         ItemManager_->Update();
         MonsterManager_->Update();

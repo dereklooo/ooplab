@@ -17,7 +17,8 @@ class FireBallManager {
             std::vector<std::shared_ptr<FireBall>>& Fireballs,
             std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
             std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters);
-            void Update();
+            void Update() const;
+            void FireballsInitialize() const;
     private:
         void HandleMonsterCollision(const std::shared_ptr<FireBall> &FireBall) const;
         void HandleBlocksCollision(const std::shared_ptr<FireBall> &FireBall) const;

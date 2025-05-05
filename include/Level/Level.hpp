@@ -24,6 +24,7 @@ public:
     virtual void Update() = 0;
     void Start() const {
         m_ManagerManager->MarioInitialize();
+        m_ManagerManager->FireballsInitialize();
         m_renderer->AddChild(m_Background);
         m_renderer->AddChild(m_Mario);
         for (auto &[type,blocks] : *Blocks) {

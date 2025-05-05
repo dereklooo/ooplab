@@ -15,23 +15,20 @@ FireBall::FireBall(const glm::vec2 position) : AnimationObject(4,RESOURCE_DIR"/i
     this->SetZIndex(20);
     this->SetVisible(true);
     this->SetFallingTime(Util::Time::GetElapsedTimeMs());
+    this->SetGravity(0);
 }
 
 void FireBall::Rolling() {
     if(this->way == Right) {
-        this->SetPosition({this->GetPosition().x + 4,this->GetPosition().y,});
+        this->SetPosition({this->GetPosition().x + 5,this->GetPosition().y,});
     }
     else {
-        this->SetPosition({this->GetPosition().x - 4,this->GetPosition().y,});
+        this->SetPosition({this->GetPosition().x - 5,this->GetPosition().y,});
     }
 
-    if(!this->GetFalling()) {
-        this->SetPosition({this->GetPosition().x,this->GetPosition().y + 10});
-        this->SetGravity(-4.0f);
-    }
 }
 void FireBall::Explode(const float Time) {
-    const auto temp = FireBall::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/fire/fireball/explode",200,100);
+    const auto temp = explode;
     this->StartExplodeTime = Time;
     this->SetDrawable(temp);
     this->SetState(FireBallState::End);

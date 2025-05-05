@@ -25,6 +25,8 @@ class FireBall final: public AnimationObject {
 
         float GetStartExplodeTime() const;
     private:
+        std::shared_ptr<Util::Animation> rolling = AnimationObject::GenerateAnimation(4,RESOURCE_DIR"/image/character/mario/fire/fireball/Rollingfireball",100,20);
+        std::shared_ptr<Util::Animation> explode = AnimationObject::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/fire/fireball/explode",200,100);
         FireBallState state = FireBallState::Roll;
         Way way = Way::Right;
         size_t number;

@@ -22,8 +22,13 @@ FireBallManager::FireBallManager(
 void FireBallManager::HandleBlocksCollision(const std::shared_ptr<FireBall> &FireBall) const {
     for(const auto &[BlockType,blocks] : *Blocks) {
         for(const auto &block : blocks) {
-            if(FireBall->LeftCollision(block) || FireBall->RightCollision(block) || FireBall->UpCollision(block)) {
+            if(FireBall->DownCollision(block)) {
+                FireBall->SetPosition({FireBall->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(FireBall->GetScaledSize().y / 2) + 10});
+                FireBall->SetGravity(-4.0f);
+            }
+            if(FireBall->LeftCollision(block) || FireBall->RightCollision(block)) {
                 FireBall->SetState(Explode);
+                return;
             }
         }
     }
@@ -43,46 +48,58 @@ void FireBallManager::HandleMonsterCollision(const std::shared_ptr<FireBall> &Fi
         }
     }
 }
+void FireBallManager::FireballsInitialize() const {
+    for(int i = 0; i < 3 ;i++) {
+        auto temp = std::make_shared<FireBall>(Mario_->GetPosition());
+        temp->SetSize({0,0});
+        temp->SetWCollision(false);
+        this->FireBalls.push_back(temp);
+        this->renderer->AddChild(temp);
+    }
+}
 
-void FireBallManager::Update() {
+void FireBallManager::Update() const {
     if(Mario_->GetShooting()) {
-        const auto temp = std::make_shared<FireBall>(Mario_->GetPosition());
-        if(Mario_->GetSize().x < 0) {
-            temp->SetWay(Left);
+        for(const auto& Fireball : FireBalls){
+            if(Fireball->GetSize().x == 0) {
+                std::cout<<"Fireballs "<<std::endl;
+                Fireball->SetPosition(Mario_->GetPosition());
+                Fireball->SetSize({1.5,1.5});
+                Fireball->SetFallingTime(Util::Time::GetElapsedTimeMs());
+                Fireball->SetGravity(0);
+                Fireball->SetVisible(true);
+                Fireball->SetWCollision(true);
+                Fireball->SetState(Roll);
+                if(Mario_->GetSize().x < 0) {
+                    Fireball->SetWay(Left);
+                }
+                else {
+                    Fireball->SetWay(Right);
+                }
+                break;
+            }
         }
-        else {
-            temp->SetWay(Right);
-        }
-        temp->SetSize({1.5,1.5});
-        temp->SetVisible(true);
-        FireBalls.push_back(temp);
-        renderer->AddChild(temp);
         Mario_->SetShooting(false);
     }
-    for (size_t i = 0; i < FireBalls.size(); ) {
-        auto& fireball = FireBalls[i];
-        if(fireball->GetState() == Roll) {
+    for (auto& fireball : FireBalls) {
+        if(fireball->GetSize().x == 0) {
+            continue;
+        }
+        if (fireball->GetState() == Roll) {
+            fireball->Rolling();
             HandleBlocksCollision(fireball);
             HandleMonsterCollision(fireball);
         }
-
-        if (fireball->GetState() == Roll) {
-            fireball->Rolling();
-            ++i;
-        }
         else if (fireball->GetState() == Explode) {
             fireball->Explode(Util::Time::GetElapsedTimeMs());
-            ++i;
         }
         else if (fireball->GetState() == End) {
             if(Util::Time::GetElapsedTimeMs() - fireball->GetStartExplodeTime() >= 700) {
-                std::cout << "AAA"<< std::endl;
                 fireball->SetSize({0,0});
                 fireball->SetVisible(false);
-                FireBalls.erase(std::remove(FireBalls.begin(),FireBalls.end(),fireball),FireBalls.end());
-                renderer->RemoveChild(fireball);
+                fireball->SetDrawable(AnimationObject::GenerateAnimation(4,RESOURCE_DIR"/image/character/mario/fire/fireball/Rollingfireball",100,20));
+                fireball->SetWCollision(true);
             }
-            return;
         }
     }
 }
