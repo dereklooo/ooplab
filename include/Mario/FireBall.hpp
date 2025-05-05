@@ -13,7 +13,7 @@ class FireBall final: public AnimationObject {
 
         void Rolling();
 
-        void Explode();
+        void Explode(float Time);
 
         void SetState(FireBallState state);
 
@@ -23,10 +23,11 @@ class FireBall final: public AnimationObject {
 
         FireBallState GetState() const;
 
+        float GetStartExplodeTime() const;
     private:
         FireBallState state = FireBallState::Roll;
         Way way = Way::Right;
         size_t number;
-
+        float StartExplodeTime;
 };
 #endif //FIREBALL_HPP

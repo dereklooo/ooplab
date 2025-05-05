@@ -26,12 +26,13 @@ void FireBall::Rolling() {
     }
 
     if(!this->GetFalling()) {
-        this->SetPosition({this->GetPosition().x,this->GetPosition().y + 5});
+        this->SetPosition({this->GetPosition().x,this->GetPosition().y + 10});
         this->SetGravity(-4.0f);
     }
 }
-void FireBall::Explode() {
+void FireBall::Explode(const float Time) {
     const auto temp = FireBall::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/fire/fireball/explode",200,100);
+    this->StartExplodeTime = Time;
     this->SetDrawable(temp);
     this->SetState(FireBallState::End);
 }
@@ -47,4 +48,7 @@ Way FireBall::GetWay() const {
 }
 FireBallState FireBall::GetState() const {
     return this->state;
+}
+float FireBall::GetStartExplodeTime() const {
+    return StartExplodeTime;
 }

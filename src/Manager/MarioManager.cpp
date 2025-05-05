@@ -221,7 +221,7 @@ void MarioManager::MarioInputCtl() const {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
         }
-        if(Util::Input::IsKeyPressed(Util::Keycode::J)) {
+        if(Util::Input::IsKeyDown(Util::Keycode::J)) {
             Mario_->Shoot();
         }
     }

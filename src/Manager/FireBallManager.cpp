@@ -57,24 +57,32 @@ void FireBallManager::Update() {
         temp->SetVisible(true);
         FireBalls.push_back(temp);
         renderer->AddChild(temp);
+        Mario_->SetShooting(false);
     }
-    Mario_->SetShooting(false);
     for (size_t i = 0; i < FireBalls.size(); ) {
         auto& fireball = FireBalls[i];
-
-        HandleBlocksCollision(fireball);
-        HandleMonsterCollision(fireball);
+        if(fireball->GetState() == Roll) {
+            HandleBlocksCollision(fireball);
+            HandleMonsterCollision(fireball);
+        }
 
         if (fireball->GetState() == Roll) {
             fireball->Rolling();
             ++i;
         }
         else if (fireball->GetState() == Explode) {
-            fireball->Explode();
+            fireball->Explode(Util::Time::GetElapsedTimeMs());
             ++i;
         }
         else if (fireball->GetState() == End) {
-            return; //從這邊改
+            if(Util::Time::GetElapsedTimeMs() - fireball->GetStartExplodeTime() >= 700) {
+                std::cout << "AAA"<< std::endl;
+                fireball->SetSize({0,0});
+                fireball->SetVisible(false);
+                FireBalls.erase(std::remove(FireBalls.begin(),FireBalls.end(),fireball),FireBalls.end());
+                renderer->RemoveChild(fireball);
+            }
+            return;
         }
     }
 }
