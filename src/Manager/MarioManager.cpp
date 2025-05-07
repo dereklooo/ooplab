@@ -28,12 +28,12 @@ void MarioManager::HandleBlock() const {
             else if(Mario_->RightCollision(block)) {
                 Mario_->SetPosition({block->GetPosition().x - abs(block->GetScaledSize().x / 2) - abs(Mario_->GetScaledSize().x / 2) - 5, Mario_->GetPosition().y});
             }
-            else if(Mario_->UpCollision(block)) {
+            else if(Mario_->UpCollision(block) && Mario_->GetGravity() < 0) {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
                 Mario_->SetGravity(2);
                 block->hit(Mario_);
             }
-            else if(Mario_->DownCollision(block)) {
+            else if(Mario_->DownCollision(block) && Mario_->GetGravity() > 0) {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
                 if(block->GetType() == BlockType::Pipe_64_96 || block->GetType() == BlockType::Pipe_64_128 || block->GetType() == BlockType::Pipe_64_64) {
                     auto temp = std::dynamic_pointer_cast<Pipe>(block);

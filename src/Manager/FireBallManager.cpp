@@ -22,13 +22,13 @@ FireBallManager::FireBallManager(
 void FireBallManager::HandleBlocksCollision(const std::shared_ptr<FireBall> &FireBall) const {
     for(const auto &[BlockType,blocks] : *Blocks) {
         for(const auto &block : blocks) {
-            if(FireBall->DownCollision(block)) {
+            if(FireBall->LeftCollision(block) || FireBall->RightCollision(block)) {
+                FireBall->Explode(Util::Time::GetElapsedTimeMs());
+                return;
+            }
+            else if(FireBall->DownCollision(block)) {
                 FireBall->SetPosition({FireBall->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(FireBall->GetScaledSize().y / 2) + 10});
                 FireBall->SetGravity(-4.0f);
-            }
-            if(FireBall->LeftCollision(block) || FireBall->RightCollision(block)) {
-                FireBall->SetState(Explode);
-                return;
             }
         }
     }
