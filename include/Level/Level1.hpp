@@ -30,12 +30,15 @@ class Level1 : public Level{
             m_ManagerManager->SetBlock(BlueFloorBlock,BlockType::Blue_Floor);
             m_ManagerManager->SetBlock(BlueOriginalBlock, BlockType::Blue_Original);
             //m_ManagerManager->SetBlock(AirBlock, BlockType::Air);
+            m_ManagerManager->SetBlock(HorizontalPipe_64_64,BlockType::HorizontalPipe_64_64);
             m_ManagerManager->SetBlock(LongPipe,BlockType::LongPipe);
 
             m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
             m_ManagerManager->SetItem(Item_FireFlower, ItemType::Item_FireFlower);
             m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
             m_ManagerManager->SetItem(Item_Star,ItemType::Item_Star);
+            m_ManagerManager->SetItem(Item_OutSideCoin, ItemType::Item_OutSideCoin);
+
         }
 
         void Update() override {
@@ -119,6 +122,8 @@ class Level1 : public Level{
         std::vector<glm::vec2> Pipe_64_64 = {{29,-12},{164,-12},{180,-12}};
         std::vector<glm::vec2> Pipe_64_96 = {{39,-11.5}};
         std::vector<glm::vec2> Pipe_64_128 = {{47,-11},{58,-11}};
+        std::vector<glm::vec2> HorizontalPipe_64_64 = {{69,-28}};
+
         std::vector<glm::vec2> BlueOriginalBlock = {
             {55.5, -17.5}, {55.5, -18.5}, {55.5, -19.5}, {55.5, -20.5}, {55.5, -21.5}, {55.5, -22.5},
             {55.5, -23.5}, {55.5, -24.5}, {55.5, -25.5}, {55.5, -26.5}, {55.5, -27.5},{55.5,-28.5},
@@ -140,6 +145,15 @@ class Level1 : public Level{
         std::vector<glm::vec2> Item_FireFlower = {{109.5f,-5.5f}};
         std::vector<glm::vec2> Item_Coin = {{16.5f,-9.5},{22.5,-5.5f},{23.5f,-9.5f},{94.5f,-5.5f},{94.5f,-9.5f},{106.5f,-9.5f},{109.5f,-9.5f},{112.5f,-9.5f},{129.5f,-5.5f},{130.5f,-5.5f},{170.5f,-9.5f}};
         std::vector<glm::vec2> Item_Star = {{101.5,-9.5}};
+        std::vector<glm::vec2> Item_OutSideCoin = {
+        {59.5, -20.5}, {60.5, -20.5}, {61.5, -20.5}, {62.5, -20.5}, {63.5, -20.5}, {64.5, -20.5}, {65.5, -20.5},
+        {59.5, -21.5}, {60.5, -21.5}, {61.5, -21.5}, {62.5, -21.5}, {63.5, -21.5}, {64.5, -21.5}, {65.5, -21.5},
+        {59.5, -22.5}, {60.5, -22.5}, {61.5, -22.5}, {62.5, -22.5}, {63.5, -22.5}, {64.5, -22.5}, {65.5, -22.5},
+        {59.5, -23.5}, {60.5, -23.5}, {61.5, -23.5}, {62.5, -23.5}, {63.5, -23.5}, {64.5, -23.5}, {65.5, -23.5},
+        {59.5, -24.5}, {60.5, -24.5}, {61.5, -24.5}, {62.5, -24.5}, {63.5, -24.5}, {64.5, -24.5}, {65.5, -24.5},
+        {59.5, -25.5}, {60.5, -25.5}, {61.5, -25.5}, {62.5, -25.5}, {63.5, -25.5}, {64.5, -25.5}, {65.5, -25.5}};
 
+
+        std::vector<glm::vec2> AnotherMapPos = {};
 };
 #endif //LEVEL1_HPP

@@ -111,6 +111,10 @@ add_executable(${PROJECT_NAME}
         src/Block/BlueOriginalBlock.cpp
         include/Block/LongPipe.hpp
         src/Block/LongPipe.cpp
+        include/Item/OutSideCoin_Item.hpp
+        src/Item/OutSideCoin_Item.cpp
+        include/Block/HorizontalPipe_64_64.hpp
+        src/Block/HorizontalPipe_64_64.cpp
 
 )
 

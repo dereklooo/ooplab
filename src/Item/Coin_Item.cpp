@@ -32,5 +32,6 @@ void Coin_Item::Action() {
     LastTime = Util::Time::GetElapsedTimeMs();
 }
 void Coin_Item::ChangeMarioState(std::shared_ptr<Mario> &mario) {
-        (void)mario;
+        mario->AddCoin(1);
+        mario->AddScore(200);
 }

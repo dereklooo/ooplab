@@ -73,7 +73,7 @@ void MarioManager::HandleMonster() const {
                         monster->SetSize({monster->GetSize().x, monster->GetSize().y * -1});
                         monster->SetGravity(-2.0f);
                 }
-                if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() <10000) {
+                if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() < 10000) {
                     if ((static_cast<int>(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime()) / 200) % 2 == 0) {
                         Mario_->SetVisible(false);
                     } else {

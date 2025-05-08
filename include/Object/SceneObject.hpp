@@ -15,6 +15,7 @@ enum class BlockType {
     Pipe_64_96,
     Pipe_64_128,
     LongPipe,
+    HorizontalPipe_64_64,
     Floor,
     Blue_Floor,
     Blue_Foot,

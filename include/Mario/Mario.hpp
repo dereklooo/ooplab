@@ -89,6 +89,12 @@ class Mario final : public AnimationObject{
         int GetScore() const{
             return Score;
         }
+        void AddCoin(const int adder) {
+            Coin += adder;
+        }
+        int GetCoin() const{
+            return Coin;
+        }
         bool GetShooting() const {
             return Shooting;
         }
@@ -121,6 +127,7 @@ class Mario final : public AnimationObject{
         bool Shooting = false;
         bool Animating = false;
         int Score = 0;
+        int Coin = 0;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> FireDrawable;

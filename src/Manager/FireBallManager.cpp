@@ -22,13 +22,8 @@ FireBallManager::FireBallManager(
 void FireBallManager::HandleBlocksCollision(const std::shared_ptr<FireBall> &FireBall) const {
     for(const auto &[BlockType,blocks] : *Blocks) {
         for(const auto &block : blocks) {
-            if(FireBall->LeftCollision(block) || FireBall->RightCollision(block)) {
+            if(FireBall->LeftCollision(block) || FireBall->RightCollision(block) || FireBall->UpCollision(block) || FireBall->DownCollision(block)) {
                 FireBall->Explode(Util::Time::GetElapsedTimeMs());
-                return;
-            }
-            else if(FireBall->DownCollision(block)) {
-                FireBall->SetPosition({FireBall->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(FireBall->GetScaledSize().y / 2) + 10});
-                FireBall->SetGravity(-4.0f);
             }
         }
     }
@@ -90,10 +85,10 @@ void FireBallManager::Update() const {
             HandleBlocksCollision(fireball);
             HandleMonsterCollision(fireball);
         }
-        else if (fireball->GetState() == Explode) {
+        if (fireball->GetState() == Explode) {
             fireball->Explode(Util::Time::GetElapsedTimeMs());
         }
-        else if (fireball->GetState() == End) {
+        if (fireball->GetState() == End) {
             if(Util::Time::GetElapsedTimeMs() - fireball->GetStartExplodeTime() >= 700) {
                 fireball->SetSize({0,0});
                 fireball->SetVisible(false);

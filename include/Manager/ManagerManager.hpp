@@ -54,6 +54,9 @@ class ManagerManager {
     void FireballsInitialize() const {
         FireBallManager_->FireballsInitialize();
     }
+    void SetAnotherMap(const std::vector<glm::vec2> &positions) const {
+        BlockManager_->SetAnotherMap(positions);
+    }
     void Update() const{
         ItemManager_->Update();
         MonsterManager_->Update();

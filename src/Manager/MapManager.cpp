@@ -50,12 +50,18 @@ void MapManager::GameObject_Move() const {
             }
         }
         Monsters->clear();
-        for(auto &[Type,blocks] : *Blocks) {
-            for(const auto& block : blocks) {
-                block->SetPosition({block->GetPosition().x, block->GetPosition().y + 816});
+        for(auto &[Type,items] : *Items) {
+            for(const auto &item : items) {
+                item->SetPosition({item->GetPosition().x - Mario_->GetPosition().x, item->GetPosition().y + 816});
             }
         }
-        Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 250});
+        for(auto &[Type,blocks] : *Blocks) {
+            for(const auto& block : blocks) {
+                block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y + 816});
+            }
+        }
+        Mario_->SetAcceleration(0.0f);
+        Mario_->SetPosition({-75,400});
         Mario_->SetWCollision(true);
         Mario_->SetCanMove(true);
         Mario_->UpDateCurrentState(Stand);
