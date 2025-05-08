@@ -95,6 +95,12 @@ class Mario final : public AnimationObject{
         void SetShooting(const bool Shooting){
             this->Shooting = Shooting;
         }
+        void SetAnimation(bool B) {
+            this->Animating = B;
+        }
+        bool GetAnimating() const {
+            return Animating;
+        }
         void Hurt() ;
 
         void Jump ();
@@ -113,6 +119,7 @@ class Mario final : public AnimationObject{
         Hurt_ hurt;
         bool CanMove = true;
         bool Shooting = false;
+        bool Animating = false;
         int Score = 0;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;

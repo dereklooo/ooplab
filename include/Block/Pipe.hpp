@@ -14,6 +14,6 @@ class Pipe : public SceneObject {
             return HasAnotherMap;
         }
     private:
-        bool HasAnotherMap = false;
+        bool HasAnotherMap = true;
 };
 #endif //PIPE_HPP

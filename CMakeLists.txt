@@ -103,6 +103,14 @@ add_executable(${PROJECT_NAME}
         src/Item/FireFlower_Item.cpp
         include/Manager/FireBallManager.hpp
         src/Manager/FireBallManager.cpp
+        include/Block/BlueFloorBlock.hpp
+        src/Block/BlueFloorBlock.cpp
+        include/Block/BlueFootBlock.hpp
+        src/Block/BlueFootBlock.cpp
+        include/Block/BlueOriginalBlock.hpp
+        src/Block/BlueOriginalBlock.cpp
+        include/Block/LongPipe.hpp
+        src/Block/LongPipe.cpp
 
 )
 

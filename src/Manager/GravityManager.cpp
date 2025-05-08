@@ -58,7 +58,7 @@ void GravityManager::Combination() {
 bool GravityManager::IsFalling(const std::shared_ptr<Object> &Object) const{
         for(auto &[type,blocks] : (*Blocks)) {
             for(auto &block : blocks) {
-                if(Object->DownCollision(block)) {
+                if(Object->DownCollision(block) && Object->GetGravity() >= 0) {
                     Object->SetFalling(false);
                     return false;
                 }

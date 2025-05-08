@@ -13,7 +13,10 @@
 #include "Block/Pipe_64_128.hpp"
 #include "Block/AirBlock.hpp"
 #include "Block/FloorBlock.hpp"
-
+#include "Block/BlueFloorBlock.hpp"
+#include "Block/BlueFootBlock.hpp"
+#include "Block/BlueOriginalBlock.hpp"
+#include "Block/LongPipe.hpp"
 class BlockManager {
 public:
     BlockManager(

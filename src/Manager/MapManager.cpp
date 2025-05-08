@@ -41,4 +41,23 @@ void MapManager::GameObject_Move() const {
             fireball->SetPosition({fireball->GetPosition().x - 4 , fireball->GetPosition().y});
         }
     }
+    if(Mario_->GetPosition().y <= -250 && Mario_->GetAnimating() == true) {
+
+        Background->SetPosition({Background->GetPosition().x - Mario_->GetPosition().x,Background->GetPosition().y + 816});
+        for(auto &[Type,monsters] : *Monsters) {
+            for(const auto& monster : monsters) {
+                monster->SetVisible(false);
+            }
+        }
+        Monsters->clear();
+        for(auto &[Type,blocks] : *Blocks) {
+            for(const auto& block : blocks) {
+                block->SetPosition({block->GetPosition().x, block->GetPosition().y + 816});
+            }
+        }
+        Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 250});
+        Mario_->SetWCollision(true);
+        Mario_->SetCanMove(true);
+        Mario_->UpDateCurrentState(Stand);
+    }
 }

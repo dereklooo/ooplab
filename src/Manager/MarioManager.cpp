@@ -28,12 +28,12 @@ void MarioManager::HandleBlock() const {
             else if(Mario_->RightCollision(block)) {
                 Mario_->SetPosition({block->GetPosition().x - abs(block->GetScaledSize().x / 2) - abs(Mario_->GetScaledSize().x / 2) - 5, Mario_->GetPosition().y});
             }
-            else if(Mario_->UpCollision(block) && Mario_->GetGravity() < 0) {
+            else if(Mario_->UpCollision(block) && Mario_->GetGravity() <= 0) {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
                 Mario_->SetGravity(2);
                 block->hit(Mario_);
             }
-            else if(Mario_->DownCollision(block) && Mario_->GetGravity() > 0) {
+            else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0) {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
                 if(block->GetType() == BlockType::Pipe_64_96 || block->GetType() == BlockType::Pipe_64_128 || block->GetType() == BlockType::Pipe_64_64) {
                     auto temp = std::dynamic_pointer_cast<Pipe>(block);
@@ -42,8 +42,9 @@ void MarioManager::HandleBlock() const {
                         Mario_->SetWCollision(false);
                         Mario_->UpDateCurrentState(Stand);
                         Mario_->SetCanMove(false);
-                        Mario_->SetGravity(-1.0f);
-                        Mario_->SetZIndex(1);
+                        Mario_->SetAnimation(true);
+                        Mario_->SetGravity(0.65f);
+                        Mario_->SetZIndex(1.5);
                     }
                 }
             }
@@ -181,10 +182,7 @@ void MarioManager::MarioInputCtl() const {
         }
     }
     else if(Mario_->GetType() == Big) {
-        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
-            Mario_->SetCurrentState(Down);
-        }
-        else if (Util::Input::IsKeyPressed(Util::Keycode::D)){
+        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
             Mario_->SetCurrentState(Run);
             Mario_->RightMove();
         }
@@ -202,10 +200,7 @@ void MarioManager::MarioInputCtl() const {
         }
     }
     else if(Mario_->GetType() == Fire) {
-        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
-            Mario_->SetCurrentState(Down);
-        }
-        else if (Util::Input::IsKeyPressed(Util::Keycode::D)){
+        if (Util::Input::IsKeyPressed(Util::Keycode::D)){
             Mario_->SetCurrentState(Run);
             Mario_->RightMove();
         }
@@ -225,7 +220,9 @@ void MarioManager::MarioInputCtl() const {
             Mario_->Shoot();
         }
     }
-
+    if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+        Mario_->SetCurrentState(Down);
+    }
     Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());
 }
