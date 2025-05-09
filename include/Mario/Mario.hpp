@@ -119,6 +119,12 @@ class Mario final : public AnimationObject{
         bool GetInPipe() const {
             return InPipe;
         }
+        void SetNextPosition(glm::vec2 Next) {
+            this->NextPos = Next;
+        }
+        glm::vec2 GetNextPosition() const {
+            return NextPos;
+        }
         void Hurt() ;
 
         void Jump ();
@@ -141,6 +147,7 @@ class Mario final : public AnimationObject{
         bool InPipe = false;
         int Score = 0;
         int Coin = 0;
+        glm::vec2 NextPos;
         Way AnimationWay;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
