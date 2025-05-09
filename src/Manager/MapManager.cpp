@@ -100,7 +100,7 @@ void MapManager::GameObject_Move() const {
                 }
             }
             Background->SetPosition({Background->GetPosition().x - Mario_->GetNextPosition().x,Background->GetPosition().y});
-            Mario_->SetPosition({-96,0});
+            Mario_->SetPosition({-120,-120});
             Mario_->SetWCollision(true);
             Mario_->SetCanMove(true);
             Mario_->UpDateCurrentState(Stand);

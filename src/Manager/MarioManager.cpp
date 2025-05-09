@@ -218,6 +218,9 @@ void MarioManager::MarioInputCtl() const {
         }
         return;
     }
+    if(Util::Input::IsKeyDown(Util::Keycode::SPACE)) {
+        std::cout<<Mario_->GetPosition().x<<" "<<Mario_->GetPosition().y<<std::endl;
+    }
     if(Mario_->GetType() == Small) {
         if(Util::Input::IsKeyDown(Util::Keycode::Z)) {  // test
             Mario_->SetType(Fire);
