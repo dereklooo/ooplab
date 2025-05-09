@@ -43,9 +43,13 @@ void MapManager::GameObject_Move() const {
     }
 
     if(Mario_->GetPosition().y <= -250 && Mario_->GetAnimating() == true) {
+        if(Mario_->GetNextPosition() == glm::vec2(0,0)) {
+            Background->SetPosition({Background->GetPosition().x - Mario_->GetPosition().x,Background->GetPosition().y + 816});
+        }
+        else{
+            Background->SetPosition({Background->GetPosition().x - Mario_->GetPosition().x,Background->GetPosition().y - 816});
+        }
 
-        Background->SetPosition({Background->GetPosition().x - Mario_->GetPosition().x,Background->GetPosition().y + 816});
-        Background->SetFloor(Background->GetFloor() - 1);
 
         for(auto &[Type,monsters] : *Monsters) {
             for(const auto& monster : monsters) {
@@ -55,19 +59,54 @@ void MapManager::GameObject_Move() const {
         Monsters->clear();
         for(auto &[Type,items] : *Items) {
             for(const auto &item : items) {
-                item->SetPosition({item->GetPosition().x - Mario_->GetPosition().x, item->GetPosition().y + 816});
+                if(Mario_->GetNextPosition() == glm::vec2(0,0)){
+                    item->SetPosition({item->GetPosition().x - Mario_->GetPosition().x, item->GetPosition().y + 816});
+                }
+                else {
+                    item->SetPosition({item->GetPosition().x - Mario_->GetPosition().x, item->GetPosition().y - 816});
+                }
             }
         }
         for(auto &[Type,blocks] : *Blocks) {
             for(const auto& block : blocks) {
-                block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y + 816});
+                if(Mario_->GetNextPosition() == glm::vec2(0,0)){
+                    block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y + 816});
+                }
+                else {
+                    block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y - 816});
+                }
             }
         }
-        Mario_->SetAcceleration(0.0f);
-        Mario_->SetPosition({-75,400});
-        Mario_->SetWCollision(true);
-        Mario_->SetCanMove(true);
-        Mario_->UpDateCurrentState(Stand);
-        Mario_->SetAnimation(false);
+        if(Mario_->GetNextPosition() == glm::vec2(0,0)) {
+            Mario_->SetAcceleration(0.0f);
+            Mario_->SetPosition({-75,400});
+            Mario_->SetGravity(0);
+            Mario_->SetWCollision(true);
+            Mario_->SetFallingTime(Util::Time::GetElapsedTimeMs());
+            Mario_->SetCanMove(true);
+            Mario_->UpDateCurrentState(Stand);
+            Mario_->SetAnimation(false);
+            Background->SetFloor(Background->GetFloor() - 1);
+        }
+        else {
+            Mario_->SetAcceleration(0.0f);
+            for(auto& [Type,items] : *Items) {
+                for(const auto &item : items) {
+                    item->SetPosition({item->GetPosition().x - Mario_->GetNextPosition().x,item->GetPosition().y});
+                }
+            }
+            for(auto & [Type,blocks] : *Blocks) {
+                for(const auto &block : blocks) {
+                    block->SetPosition({block->GetPosition().x - Mario_->GetNextPosition().x,block->GetPosition().y});
+                }
+            }
+            Background->SetPosition({Background->GetPosition().x - Mario_->GetNextPosition().x,Background->GetPosition().y});
+            Mario_->SetPosition({-120,-120});
+            Mario_->SetWCollision(true);
+            Mario_->SetCanMove(true);
+            Mario_->UpDateCurrentState(Stand);
+            Mario_->SetAnimation(false);
+            Background->SetFloor(Background->GetFloor() + 1);
+        }
     }
 }

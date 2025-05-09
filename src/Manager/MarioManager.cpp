@@ -33,17 +33,24 @@ void MarioManager::HandleBlock() const {
                     else {
                         Mario_->LeftMove();
                     }
+                    if(block->GetType() == BlockType::Blue_Original) {
+                        Mario_->SetWCollision(false);
+                        Mario_->SetAnimation(true);
+                        Mario_->SetGravity(2);
+                    }
                 }
                 else {
                     Mario_->SetPosition({block->GetPosition().x + abs(block->GetScaledSize().x / 2) + abs(Mario_->GetScaledSize().x / 2) + 5, Mario_->GetPosition().y});
                     if(block->GetType() == BlockType::HorizontalPipe_64_64) {
                         auto temp = std::dynamic_pointer_cast<Pipe>(block);
                             if(temp->GetHasAnotherMap()){
-                            Mario_->SetAnimation(true);
-                            Mario_->SetAnimationWay(Right);
-                            Mario_->SetCurrentState(Stand);
-                            Mario_->SetCanMove(false);
-                            Mario_->SetAcceleration(0.5);
+                                Mario_->SetPosition({Mario_->GetPosition().x - 5,block->GetPosition().y});
+                                Mario_->SetAnimation(true);
+                                Mario_->SetAnimationWay(Left);
+                                Mario_->SetCurrentState(Stand);
+                                Mario_->SetCanMove(false);
+                                Mario_->SetAcceleration(0.5);
+                                Mario_->SetNextPosition(temp->GetNextPosition());
                         }
                     }
                 }
@@ -57,14 +64,16 @@ void MarioManager::HandleBlock() const {
                     else {
                         Mario_->LeftMove();
                     }
-                    if(block->GetType() != BlockType::HorizontalPipe_64_64) {
+                    if(block->GetType() == BlockType::Blue_Original) {
                         Mario_->SetWCollision(false);
+                        Mario_->SetAnimation(true);
+                        Mario_->SetGravity(2);
                     }
                 }
                 else {
                     Mario_->SetPosition({block->GetPosition().x - abs(block->GetScaledSize().x / 2) - abs(Mario_->GetScaledSize().x / 2) - 5, Mario_->GetPosition().y});
                     if(block->GetType() == BlockType::HorizontalPipe_64_64) {
-                        auto temp = std::dynamic_pointer_cast<Pipe>(block);
+                        auto temp = std::dynamic_pointer_cast<HorizontalPipe_64_64>(block);
                         if(temp->GetHasAnotherMap()) {
                             Mario_->SetPosition({Mario_->GetPosition().x + 5,block->GetPosition().y});
                             Mario_->SetAnimation(true);
@@ -72,6 +81,7 @@ void MarioManager::HandleBlock() const {
                             Mario_->SetCurrentState(Stand);
                             Mario_->SetCanMove(false);
                             Mario_->SetAcceleration(0.5);
+                            Mario_->SetNextPosition(temp->GetNextPosition());
                         }
                     }
                 }
@@ -207,6 +217,9 @@ void MarioManager::MarioInputCtl() const {
             std::cout<<Mario_->GetPosition().x<<" "<<Mario_->GetPosition().y<<std::endl;
         }
         return;
+    }
+    if(Util::Input::IsKeyDown(Util::Keycode::SPACE)) {
+        std::cout<<Mario_->GetPosition().x<<" "<<Mario_->GetPosition().y<<std::endl;
     }
     if(Mario_->GetType() == Small) {
         if(Util::Input::IsKeyDown(Util::Keycode::Z)) {  // test

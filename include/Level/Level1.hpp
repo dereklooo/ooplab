@@ -15,7 +15,6 @@ class Level1 : public Level{
 
             m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
 
-            std::cout<<m_Background->GetPosition().x<<" "<<m_Background->GetPosition().y<<std::endl;
             m_ManagerManager->SetFloor(FloorBlock, -13.5);
             m_ManagerManager->SetBlock(LuckyBlockPosition, BlockType::Lucky);
             m_ManagerManager->SetBlock(OriginBlock, BlockType::Original);
@@ -35,7 +34,7 @@ class Level1 : public Level{
             m_ManagerManager->SetItem(Item_Star,ItemType::Item_Star);
             m_ManagerManager->SetItem(Item_OutSideCoin, ItemType::Item_OutSideCoin);
 
-            m_ManagerManager->SetAnotherMap(AnotherMapPos);
+            m_ManagerManager->SetAnotherMap(AnotherMapPos,NextPipePos);
 
         }
 
@@ -162,5 +161,7 @@ class Level1 : public Level{
 
 
         std::vector<glm::vec2> AnotherMapPos = {{58,-11},{69,-28}};
+
+        std::vector<glm::vec2> NextPipePos = {{0,0},{180,-12}};
 };
 #endif //LEVEL1_HPP

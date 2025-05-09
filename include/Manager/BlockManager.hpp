@@ -28,7 +28,7 @@ public:
     void AddBlock(const std::shared_ptr<SceneObject>& block) const;
     void SetFloor(std::vector<float> &Position,float Floor_y) const;
     void SetBlock(std::vector<glm::vec2> &positions, BlockType type) const;
-    void SetAnotherMap(const std::vector<glm::vec2> &positions) const;
+    void SetAnotherMap(const std::vector<glm::vec2> &positions,const std::vector<glm::vec2> &positions_) const;
 private:
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
 
