@@ -98,6 +98,10 @@ add_executable(${PROJECT_NAME}
         src/TimeScore/Score.cpp
         include/Mario/FireBall.hpp
         include/Mario/FireBall.hpp
+        src/Block/flag.cpp
+        include/Block/flag.hpp
+        include/Manager/flagManager.hpp
+        src/Manager/flagManager.cpp
 
 )
 

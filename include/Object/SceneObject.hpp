@@ -15,7 +15,8 @@ enum class BlockType {
     Pipe_64_96,
     Pipe_64_128,
     Floor,
-    Air
+    Air,
+    flag
 };
 
 class SceneObject : public StillObject{
