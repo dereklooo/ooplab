@@ -101,11 +101,17 @@ class Mario final : public AnimationObject{
         void SetShooting(const bool Shooting){
             this->Shooting = Shooting;
         }
-        void SetAnimation(bool B) {
+        void SetAnimation(const bool B) {
             this->Animating = B;
         }
         bool GetAnimating() const {
             return Animating;
+        }
+        void SetAnimationWay(const Way way) {
+            this->AnimationWay = way;
+        }
+        Way GetAnimationWay() const {
+            return AnimationWay;
         }
         void Hurt() ;
 
@@ -128,11 +134,11 @@ class Mario final : public AnimationObject{
         bool Animating = false;
         int Score = 0;
         int Coin = 0;
+        Way AnimationWay;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> FireDrawable;
         Action CurrentState;
-        glm::vec2 speed = {0,0};
         Type Type;
         float horizontalAcceleration = 0.0f;
 };

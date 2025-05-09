@@ -5,6 +5,9 @@
 
 #include <iostream>
 #include <Monsters/Turtle.hpp>
+
+#include "Block/HorizontalPipe_64_64.hpp"
+
 MarioManager::MarioManager(
             std::shared_ptr<Mario> &Mario,
             std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
@@ -27,6 +30,9 @@ void MarioManager::HandleBlock() const {
             }
             else if(Mario_->RightCollision(block)) {
                 Mario_->SetPosition({block->GetPosition().x - abs(block->GetScaledSize().x / 2) - abs(Mario_->GetScaledSize().x / 2) - 5, Mario_->GetPosition().y});
+                if(block->GetType() == BlockType::HorizontalPipe_64_64) {
+
+                }
             }
             else if(Mario_->UpCollision(block) && Mario_->GetGravity() <= 0) {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});

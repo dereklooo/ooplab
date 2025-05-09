@@ -13,9 +13,9 @@ void BlockManager::AddBlock(const std::shared_ptr<SceneObject>& block) const {
 }
 void BlockManager::SetAnotherMap(const std::vector<glm::vec2> &positions) const{
     for(auto &pos : positions) {
-        for(auto& [Type,blocks] : *(this->Blocks)) {
+        for(auto& [Type,blocks] : *(Blocks)) {
             for(const auto & block : blocks) {
-                if(block->GetPosition() == pos) {
+                if(block->GetPosition() == glm::vec2(MapPosition.x + pos.x * 48, MapPosition.y + pos.y * 48)) {
                     const auto temp = std::static_pointer_cast<Pipe>(block);
                     temp->SetHasAnotherMap(true);
                 }

@@ -9,11 +9,12 @@
 #include "Mario/Mario.hpp"
 #include "Object/ItemObject.hpp"
 #include "Object/SceneObject.hpp"
+#include "Map/Map.hpp"
 
 class MapManager {
     public:
     MapManager(std::shared_ptr<Mario>& Mario,
-        std::shared_ptr<StillObject>& Background,
+        std::shared_ptr<Map>& Background,
         std::vector<std::shared_ptr<FireBall>>& FireBalls,
         std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
         std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters,
@@ -29,6 +30,6 @@ class MapManager {
         std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
         std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters;
         std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items;
-        std::shared_ptr<StillObject>& Background;
+        std::shared_ptr<Map>& Background;
 };
 #endif //MAPMANAGER_HPP

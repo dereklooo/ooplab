@@ -9,7 +9,13 @@ class HorizontalPipe_64_64 final: public Pipe {
     public:
         explicit HorizontalPipe_64_64(glm::vec2 position,Way way);
         void hit(const std::shared_ptr<Mario> &Mario) override;
-        BlockType GetType() override{return BlockType::Pipe_64_64;};
+        BlockType GetType() override{return BlockType::HorizontalPipe_64_64;};
+        Way GetWay() const {
+            return way;
+        }
+        void SetWay(const Way way) {
+            this->way = way;
+        }
     private:
         Way way;
 };

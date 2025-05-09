@@ -115,6 +115,8 @@ add_executable(${PROJECT_NAME}
         src/Item/OutSideCoin_Item.cpp
         include/Block/HorizontalPipe_64_64.hpp
         src/Block/HorizontalPipe_64_64.cpp
+        include/Map/Map.hpp
+        src/Map/Map.cpp
 
 )
 

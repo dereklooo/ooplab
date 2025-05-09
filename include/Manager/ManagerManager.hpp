@@ -20,7 +20,7 @@ class ManagerManager {
         std::vector<std::shared_ptr<FireBall>>& FireBalls,
         std::shared_ptr<Mario> &Mario,
         std::shared_ptr<Util::Renderer>& Renderer,
-        std::shared_ptr<StillObject> &Background) :
+        std::shared_ptr<Map> &Background) :
         Items(Items),
         Blocks(Blocks),
         FireBalls(FireBalls),
@@ -72,7 +72,7 @@ class ManagerManager {
         std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
         std::vector<std::shared_ptr<FireBall>>& FireBalls;
         std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>>& Monsters;
-        std::shared_ptr<StillObject>& Background;
+        std::shared_ptr<Map>& Background;
         std::shared_ptr<Util::Renderer>& Renderder_;
         std::shared_ptr<Mario>& Mario;
 

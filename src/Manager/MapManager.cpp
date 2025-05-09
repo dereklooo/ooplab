@@ -4,7 +4,7 @@
 #include "Manager/MapManager.hpp"
 MapManager::MapManager(
     std::shared_ptr<Mario> &Mario,
-    std::shared_ptr<StillObject> &Background,
+    std::shared_ptr<Map> &Background,
     std::vector<std::shared_ptr<FireBall>> &FireBalls,
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
     std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters,

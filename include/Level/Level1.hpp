@@ -11,11 +11,7 @@
 class Level1 : public Level{
       public:
         Level1() : Level() {
-            m_Background = std::make_shared<StillObject>(RESOURCE_DIR "/image/Background/Level1/level_1.png");
-            m_Background->SetSize({1.5,1.5});
-            m_Background->SetPivot({-3584,480});
-            m_Background->SetPosition({-640,360});
-            m_Background->SetZIndex(1);
+            m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level1/level_1.png",glm::vec2(-3584,480),glm::vec2(-640,360));
 
             m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
 
@@ -38,6 +34,8 @@ class Level1 : public Level{
             m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
             m_ManagerManager->SetItem(Item_Star,ItemType::Item_Star);
             m_ManagerManager->SetItem(Item_OutSideCoin, ItemType::Item_OutSideCoin);
+
+            m_ManagerManager->SetAnotherMap(AnotherMapPos);
 
         }
 
@@ -154,6 +152,6 @@ class Level1 : public Level{
         {59.5, -25.5}, {60.5, -25.5}, {61.5, -25.5}, {62.5, -25.5}, {63.5, -25.5}, {64.5, -25.5}, {65.5, -25.5}};
 
 
-        std::vector<glm::vec2> AnotherMapPos = {};
+        std::vector<glm::vec2> AnotherMapPos = {{58,-11},{69,-28}};
 };
 #endif //LEVEL1_HPP
