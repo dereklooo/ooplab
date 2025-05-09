@@ -80,6 +80,7 @@ void MapManager::GameObject_Move() const {
         if(Mario_->GetNextPosition() == glm::vec2(0,0)) {
             Mario_->SetAcceleration(0.0f);
             Mario_->SetPosition({-75,400});
+            Mario_->SetGravity(0);
             Mario_->SetWCollision(true);
             Mario_->SetFallingTime(Util::Time::GetElapsedTimeMs());
             Mario_->SetCanMove(true);
