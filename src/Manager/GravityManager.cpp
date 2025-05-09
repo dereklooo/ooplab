@@ -23,7 +23,6 @@ void GravityManager::Update() {
                 const float gravityNow = object->GetGravity();
                 const float gravityNext = gravityNow + gravity * deltaTime;
                 object->SetGravity(gravityNext);
-
                 object->SetFalling(true);
             }
             else {

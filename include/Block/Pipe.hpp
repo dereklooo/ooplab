@@ -16,11 +16,7 @@ class Pipe : public SceneObject {
         bool GetHasAnotherMap() const {
             return HasAnotherMap;
         }
-        glm::vec2 GetNextPosition() const {
-            return next_position;
-        }
     private:
-        glm::vec2 next_position;
         bool HasAnotherMap = false;
 };
 #endif //PIPE_HPP

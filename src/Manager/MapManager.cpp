@@ -41,9 +41,12 @@ void MapManager::GameObject_Move() const {
             fireball->SetPosition({fireball->GetPosition().x - 4 , fireball->GetPosition().y});
         }
     }
+
     if(Mario_->GetPosition().y <= -250 && Mario_->GetAnimating() == true) {
 
         Background->SetPosition({Background->GetPosition().x - Mario_->GetPosition().x,Background->GetPosition().y + 816});
+        Background->SetFloor(Background->GetFloor() - 1);
+
         for(auto &[Type,monsters] : *Monsters) {
             for(const auto& monster : monsters) {
                 monster->SetVisible(false);

@@ -113,6 +113,12 @@ class Mario final : public AnimationObject{
         Way GetAnimationWay() const {
             return AnimationWay;
         }
+        void SetInPipe(const bool B) {
+            this->InPipe = B;
+        }
+        bool GetInPipe() const {
+            return InPipe;
+        }
         void Hurt() ;
 
         void Jump ();
@@ -132,6 +138,7 @@ class Mario final : public AnimationObject{
         bool CanMove = true;
         bool Shooting = false;
         bool Animating = false;
+        bool InPipe = false;
         int Score = 0;
         int Coin = 0;
         Way AnimationWay;

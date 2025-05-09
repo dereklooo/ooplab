@@ -16,7 +16,14 @@ class HorizontalPipe_64_64 final: public Pipe {
         void SetWay(const Way way) {
             this->way = way;
         }
+        void SetNextPipPosition(const glm::vec2 pos) {
+            this->next_position = pos;
+        }
+        glm::vec2 GetNextPosition() const {
+            return next_position;
+        }
     private:
         Way way;
+        glm::vec2 next_position;
 };
 #endif //HORIZONTALPIPE_64_64_HPP
