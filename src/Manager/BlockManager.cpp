@@ -11,11 +11,21 @@ BlockManager::BlockManager(
 void BlockManager::AddBlock(const std::shared_ptr<SceneObject>& block) const {
     (*Blocks)[block->GetType()].push_back(block);
 }
-
+void BlockManager::SetAnotherMap(const std::vector<glm::vec2> &positions) const{
+    for(auto &pos : positions) {
+        for(auto& [Type,blocks] : *(Blocks)) {
+            for(const auto & block : blocks) {
+                if(block->GetPosition() == glm::vec2(MapPosition.x + pos.x * 48, MapPosition.y + pos.y * 48)) {
+                    const auto temp = std::static_pointer_cast<Pipe>(block);
+                    temp->SetHasAnotherMap(true);
+                }
+            }
+        }
+    }
+}
 void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const {
     for (const auto &pos : positions) {
         std::shared_ptr<SceneObject> block;
-        std::cout<<MapPosition.x<<MapPosition.y<<std::endl;
         switch (type) {
             case BlockType::Lucky: block = std::make_shared<LuckyBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Original: block = std::make_shared<OriginalBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
@@ -23,8 +33,13 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::Pipe_64_64: block = std::make_shared<Pipe64_64>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Pipe_64_96: block = std::make_shared<Pipe64_96>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Pipe_64_128: block = std::make_shared<Pipe64_128>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
+            case BlockType::HorizontalPipe_64_64: block = std::make_shared<HorizontalPipe_64_64>(glm::vec2(MapPosition.x + pos.x * 48, MapPosition.y + pos.y * 48),Left); break;
+            case BlockType::LongPipe: block = std::make_shared<LongPipe>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::Floor: block = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Air: block = std::make_shared<AirBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
+            case BlockType::Blue_Floor: block = std::make_shared<BlueFloorBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::Blue_Foot: block = std::make_shared<BlueFootBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::Blue_Original: block = std::make_shared<BlueOriginalBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
         }
         block->SetZIndex(100);
         block->SetSize({1.65,1.5});
@@ -42,12 +57,12 @@ void BlockManager::SetFloor(std::vector<float> &Position, const float Floor_y) c
         if(Build) {
             auto temp = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + Floor_y * 48));
             temp->SetSize({1.65,1.5});
-            temp->SetZIndex(1);
+            temp->SetZIndex(2);
             AddBlock(temp);
 
             temp = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + i * 48 , MapPosition.y + (Floor_y - 1) * 48));
             temp->SetSize({1.65,1.5});
-            temp->SetZIndex(1);
+            temp->SetZIndex(2);
             AddBlock(temp);
 
         }

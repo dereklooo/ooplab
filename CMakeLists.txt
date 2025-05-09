@@ -98,11 +98,25 @@ add_executable(${PROJECT_NAME}
         src/TimeScore/Score.cpp
         include/Mario/FireBall.hpp
         include/Mario/FireBall.hpp
-        src/Block/flag.cpp
-        include/Block/flag.hpp
-        include/Manager/flagManager.hpp
-        src/Manager/flagManager.cpp
-
+        src/Mario/FireBall.cpp
+        include/Item/FireFlower_Item.hpp
+        src/Item/FireFlower_Item.cpp
+        include/Manager/FireBallManager.hpp
+        src/Manager/FireBallManager.cpp
+        include/Block/BlueFloorBlock.hpp
+        src/Block/BlueFloorBlock.cpp
+        include/Block/BlueFootBlock.hpp
+        src/Block/BlueFootBlock.cpp
+        include/Block/BlueOriginalBlock.hpp
+        src/Block/BlueOriginalBlock.cpp
+        include/Block/LongPipe.hpp
+        src/Block/LongPipe.cpp
+        include/Item/OutSideCoin_Item.hpp
+        src/Item/OutSideCoin_Item.cpp
+        include/Block/HorizontalPipe_64_64.hpp
+        src/Block/HorizontalPipe_64_64.cpp
+        include/Map/Map.hpp
+        src/Map/Map.cpp
 )
 
 if(MSVC)

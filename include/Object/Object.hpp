@@ -37,47 +37,54 @@ class Object : public Util::GameObject{
             return m_Visible;
         }
 
-        bool Collision(const glm::vec2 &other) const {
-                if (
-                    other.x <= this->GetPosition().x + abs(this->GetScaledSize().x / 2)&&
-                    other.x >= this->GetPosition().x - abs(this->GetScaledSize().x / 2)&&
-                    other.y <= this->GetPosition().y + abs(this->GetScaledSize().y / 2)&&
-                    other.y >= this->GetPosition().y - abs(this->GetScaledSize().y / 2)
-                ) {
-                    return true;
-                }
-                return false;
-            }
-        bool DownCollision(const std::shared_ptr<Object> &other) const {
-            const glm::vec2 TempPos1 = {this->GetPosition().x + 15, this->GetPosition().y - abs(this->GetScaledSize().y / 2) - 2};
-            const glm::vec2 TempPos2 = {this->GetPosition().x - 15, this->GetPosition().y - abs(this->GetScaledSize().y / 2) - 2};
-            if(other->Collision(TempPos1) || other->Collision(TempPos2)){
-                return true;
-            }
-            return false;
+    // 判斷某個點是否在當前物件的範圍內
+    bool Collision(const glm::vec2 &point) const {
+            float halfWidth  = std::abs(this->GetScaledSize().x / 2.0f);
+            float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
+            glm::vec2 pos = this->GetPosition();
+
+            return point.x >= pos.x - halfWidth && point.x <= pos.x + halfWidth &&
+                   point.y >= pos.y - halfHeight && point.y <= pos.y + halfHeight;
         }
-        bool LeftCollision(const std::shared_ptr<Object> &other) const{
-            glm::vec2 TempPos = {this->GetPosition().x - abs(this->GetScaledSize().x / 2) - 4, this->GetPosition().y};
-            if(other->Collision(TempPos)) {
-                return true;
-            }
-            return false;
+
+    // 向下碰撞
+    bool DownCollision(const std::shared_ptr<Object> &other) const {
+            float x = this->GetPosition().x;
+            float y = this->GetPosition().y - std::abs(this->GetScaledSize().y / 2.0f) - 2;
+
+            glm::vec2 p1 = {x + 15, y};
+            glm::vec2 p2 = {x - 15, y};
+
+            return other->Collision(p1) || other->Collision(p2);
         }
-        bool RightCollision(const std::shared_ptr<Object> &other) const{
-            glm::vec2 TempPos = {this->GetPosition().x + abs(this->GetScaledSize().x / 2) + 4, this->GetPosition().y};
-            if(other->Collision(TempPos)) {
-                return true;
-            }
-            return false;
+
+    // 向上碰撞
+    bool UpCollision(const std::shared_ptr<Object> &other) const {
+            float x = this->GetPosition().x;
+            float y = this->GetPosition().y + std::abs(this->GetScaledSize().y / 2.0f) + 2;
+
+            glm::vec2 p1 = {x + 10, y};
+            glm::vec2 p2 = {x - 10, y};
+
+            return other->Collision(p1) || other->Collision(p2);
         }
-        bool UpCollision(const std::shared_ptr<Object> &other) const{
-            const glm::vec2 TempPos1 = {this->GetPosition().x + 2, this->GetPosition().y + abs(this->GetScaledSize().y / 2) + 2};
-            const glm::vec2 TempPos2 = {this->GetPosition().x - 2, this->GetPosition().y + abs(this->GetScaledSize().y / 2) + 2};
-            if(other->Collision(TempPos1) || other->Collision(TempPos2)) {
-                return true;
-            }
-            return false;
+
+    // 向左碰撞
+    bool LeftCollision(const std::shared_ptr<Object> &other) const {
+            float x = this->GetPosition().x - std::abs(this->GetScaledSize().x / 2.0f) - 4;
+            float y = this->GetPosition().y;
+
+            return other->Collision({x, y});
         }
+
+    // 向右碰撞
+    bool RightCollision(const std::shared_ptr<Object> &other) const {
+            float x = this->GetPosition().x + std::abs(this->GetScaledSize().x / 2.0f) + 4;
+            float y = this->GetPosition().y;
+
+            return other->Collision({x, y});
+        }
+
         glm::vec2  GetSize() const {
             return m_Transform.scale;
         }

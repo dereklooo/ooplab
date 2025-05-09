@@ -11,13 +11,9 @@
 class Level1 : public Level{
       public:
         Level1() : Level() {
-            m_Background = std::make_shared<StillObject>(RESOURCE_DIR "/image/Background/Level1/level_1.png");
-            m_Background->SetSize({1.5,1.5});
-            m_Background->SetPivot({-3584,240});
-            m_Background->SetPosition({-640,360});
-            m_Background->SetZIndex(1);
+            m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level1/level_1.png",glm::vec2(-3584,480),glm::vec2(-640,360));
 
-            m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,m_Mario,m_Background);
+            m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
 
             std::cout<<m_Background->GetPosition().x<<" "<<m_Background->GetPosition().y<<std::endl;
             m_ManagerManager->SetFloor(FloorBlock, -13.5);
@@ -27,15 +23,25 @@ class Level1 : public Level{
             m_ManagerManager->SetBlock(Pipe_64_64, BlockType::Pipe_64_64);
             m_ManagerManager->SetBlock(Pipe_64_96, BlockType::Pipe_64_96);
             m_ManagerManager->SetBlock(Pipe_64_128, BlockType::Pipe_64_128);
+            m_ManagerManager->SetBlock(BlueFloorBlock,BlockType::Blue_Floor);
+            m_ManagerManager->SetBlock(BlueOriginalBlock, BlockType::Blue_Original);
+            //m_ManagerManager->SetBlock(AirBlock, BlockType::Air);
+            m_ManagerManager->SetBlock(HorizontalPipe_64_64,BlockType::HorizontalPipe_64_64);
+            m_ManagerManager->SetBlock(LongPipe,BlockType::LongPipe);
 
             m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
+            m_ManagerManager->SetItem(Item_FireFlower, ItemType::Item_FireFlower);
             m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
             m_ManagerManager->SetItem(Item_Star,ItemType::Item_Star);
+            m_ManagerManager->SetItem(Item_OutSideCoin, ItemType::Item_OutSideCoin);
+
+            m_ManagerManager->SetAnotherMap(AnotherMapPos);
+
         }
 
         void Update() override {
             std::vector<std::shared_ptr<Monster>> _temp;
-            if(m_Mario->GetPosition().y <= -2000) {
+            if(m_Mario->GetPosition().y <= -2000 && m_Mario->GetAnimating() == false) {
                 this->GameOver = true;
                 return;
             }
@@ -99,6 +105,10 @@ class Level1 : public Level{
             }
         }
       private:
+    std::vector<glm::vec2> AirBlock = {{70.5, -18.5}, {70.5, -19.5}, {70.5, -20.5}, {70.5, -21.5}, {70.5, -22.5},
+        {70.5, -23.5}, {70.5, -24.5}, {70.5, -25.5}, {70.5, -26.5}, {70.5, -27.5},
+        {70.5, -28.5}};
+        std::vector<glm::vec2> LongPipe = {{71,-23.5}};
        std::vector<glm::vec2> LuckyBlockPosition = {{16.5,-9.5},{22.5,-5.5},{21.5,-9.5},{23.5,-9.5},{78.5,-9.5},{94.5,-5.5},{106.5,-9.5},{109.5,-9.5},{109.5,-5.5},{112.5,-9.5},{129.5,-5.5},{130.5,-5.5},{170.5,-9.5}};
        std::vector<glm::vec2>OriginBlock = {{20.5,-9.5} , {22.5,-9.5} , {24.5,-9.5} , {77.5,-9.5} , {79.5,-9.5} , {80.5,-5.5} , {81.5,-5.5} , {82.5,-5.5} , {83.5,-5.5} , {84.5,-5.5} , {85.5,-5.5} , {86.5,-5.5} , {87.5,-5.5} , {91.5,-5.5} ,
        {92.5,-5.5} , {93.5,-5.5} , {100.5,-9.5} , {118.5,-9.5} , {121.5 , -5.5} , {122.5 , -5.5} , {123.5,-5.5},{128.5 , -5.5} ,{129.5,-9.5},{130.5,-9.5}, {131.5 , -5.5} , {168.5,-9.5},{169.5 , -9.5} , {171.5 , -9.5}   ,{101.5,-9.5}};
@@ -107,12 +117,50 @@ class Level1 : public Level{
     {181.5, -12.5}, {182.5, -12.5}, {183.5, -12.5}, {184.5, -12.5}, {185.5, -12.5}, {186.5, -12.5}, {187.5, -12.5}, {188.5, -12.5}, {189.5, -12.5}, {182.5, -11.5}, {183.5, -11.5}, {184.5, -11.5}, {185.5, -11.5}, {186.5, -11.5}, {187.5, -11.5}, {188.5, -11.5}, {189.5, -11.5}, {183.5, -10.5}, {184.5, -10.5}, {185.5, -10.5}, {186.5, -10.5}, {187.5, -10.5}, {188.5, -10.5}, {189.5, -10.5}, {184.5, -9.5}, {185.5, -9.5}, {186.5, -9.5}, {187.5, -9.5}, {188.5, -9.5}, {189.5, -9.5}, {185.5, -8.5}, {186.5, -8.5}, {187.5, -8.5}, {188.5, -8.5}, {189.5, -8.5}, {186.5, -7.5}, {187.5, -7.5}, {188.5, -7.5}, {189.5, -7.5}, {187.5, -6.5}, {188.5, -6.5}, {189.5, -6.5}, {188.5, -5.5}, {189.5, -5.5}, {189.5, -4.5}
        ,{198.5, -12.5}};
        std::vector<float> FloorBlock = {69.5f, 70.5f , 86.5f , 87.5f , 88.5f , 153.5f ,154.5f};
-       std::vector<glm::vec2> Pipe_64_64 = {{29,-12},{164,-12},{180,-12}};
-       std::vector<glm::vec2> Pipe_64_96 = {{39,-11.5}};
-       std::vector<glm::vec2> Pipe_64_128 = {{47,-11},{58,-11}};
 
-        std::vector<glm::vec2> Item_Mushroom = {{21.5f,-9.5f},{78.5f,-9.5f},{109.5f,-5.5f}};
+        std::vector<glm::vec2> Pipe_64_64 = {{29,-12},{164,-12},{180,-12}};
+        std::vector<glm::vec2> Pipe_64_96 = {{39,-11.5}};
+        std::vector<glm::vec2> Pipe_64_128 = {{47,-11},{58,-11}};
+        std::vector<glm::vec2> HorizontalPipe_64_64 = {{69,-28}};
+
+        std::vector<glm::vec2> BlueOriginalBlock = {
+            {55.5, -17.5}, {55.5, -18.5}, {55.5, -19.5}, {55.5, -20.5}, {55.5, -21.5}, {55.5, -22.5},
+            {55.5, -23.5}, {55.5, -24.5}, {55.5, -25.5}, {55.5, -26.5}, {55.5, -27.5},{55.5,-28.5},
+            {59.5, -17.5}, {60.5, -17.5}, {61.5, -17.5}, {62.5, -17.5}, {63.5, -17.5}, {64.5, -17.5},
+            {65.5, -17.5}, {59.5, -26.5}, {60.5, -26.5}, {61.5, -26.5}, {62.5, -26.5}, {63.5, -26.5}, {64.5, -26.5}, {65.5, -26.5},
+            {59.5, -27.5}, {60.5, -27.5}, {61.5, -27.5}, {62.5, -27.5}, {63.5, -27.5}, {64.5, -27.5}, {65.5, -27.5},
+            {59.5, -28.5}, {60.5, -28.5}, {61.5, -28.5}, {62.5, -28.5}, {63.5, -28.5}, {64.5, -28.5}, {65.5, -28.5},
+            {72.5, -28.5}, {72.5, -27.5}, {72.5, -26.5}, {72.5, -25.5}, {72.5, -24.5},
+            {72.5, -23.5}, {72.5, -22.5}, {72.5, -21.5}, {72.5, -20.5}, {72.5, -19.5},
+            {72.5, -18.5}, {72.5, -17.5}
+        };
+
+        std::vector<glm::vec2> BlueFloorBlock = {
+            {55.5, -30.5}, {56.5, -30.5}, {57.5, -30.5}, {58.5, -30.5}, {59.5, -30.5}, {60.5, -30.5},
+            {61.5, -30.5}, {62.5, -30.5}, {63.5, -30.5}, {64.5, -30.5}, {65.5, -30.5}, {66.5, -30.5},
+            {67.5, -30.5}, {68.5, -30.5}, {69.5, -30.5}, {70.5, -30.5}, {71.5, -30.5},{72.5,-30.5},
+            {55.5, -29.5}, {56.5, -29.5}, {57.5, -29.5}, {58.5, -29.5}, {59.5, -29.5}, {60.5, -29.5},
+            {61.5, -29.5}, {62.5, -29.5}, {63.5, -29.5}, {64.5, -29.5}, {65.5, -29.5}, {66.5, -29.5},
+            {67.5, -29.5}, {68.5, -29.5}, {69.5, -29.5}, {70.5, -29.5}, {71.5, -29.5},{72.5,-29.5},
+            {55.5, -31.5}, {56.5, -31.5}, {57.5, -31.5}, {58.5, -31.5}, {59.5, -31.5},
+           {60.5, -31.5}, {61.5, -31.5}, {62.5, -31.5}, {63.5, -31.5}, {64.5, -31.5},
+           {65.5, -31.5}, {66.5, -31.5}, {67.5, -31.5}, {68.5, -31.5}, {69.5, -31.5},
+           {70.5, -31.5}, {71.5, -31.5}, {72.5, -31.5}
+        };
+
+        std::vector<glm::vec2> Item_Mushroom = {{21.5f,-9.5f},{78.5f,-9.5f}};
+        std::vector<glm::vec2> Item_FireFlower = {{109.5f,-5.5f}};
         std::vector<glm::vec2> Item_Coin = {{16.5f,-9.5},{22.5,-5.5f},{23.5f,-9.5f},{94.5f,-5.5f},{94.5f,-9.5f},{106.5f,-9.5f},{109.5f,-9.5f},{112.5f,-9.5f},{129.5f,-5.5f},{130.5f,-5.5f},{170.5f,-9.5f}};
         std::vector<glm::vec2> Item_Star = {{101.5,-9.5}};
+        std::vector<glm::vec2> Item_OutSideCoin = {
+        {59.5, -20.5}, {60.5, -20.5}, {61.5, -20.5}, {62.5, -20.5}, {63.5, -20.5}, {64.5, -20.5}, {65.5, -20.5},
+        {59.5, -21.5}, {60.5, -21.5}, {61.5, -21.5}, {62.5, -21.5}, {63.5, -21.5}, {64.5, -21.5}, {65.5, -21.5},
+        {59.5, -22.5}, {60.5, -22.5}, {61.5, -22.5}, {62.5, -22.5}, {63.5, -22.5}, {64.5, -22.5}, {65.5, -22.5},
+        {59.5, -23.5}, {60.5, -23.5}, {61.5, -23.5}, {62.5, -23.5}, {63.5, -23.5}, {64.5, -23.5}, {65.5, -23.5},
+        {59.5, -24.5}, {60.5, -24.5}, {61.5, -24.5}, {62.5, -24.5}, {63.5, -24.5}, {64.5, -24.5}, {65.5, -24.5},
+        {59.5, -25.5}, {60.5, -25.5}, {61.5, -25.5}, {62.5, -25.5}, {63.5, -25.5}, {64.5, -25.5}, {65.5, -25.5}};
+
+
+        std::vector<glm::vec2> AnotherMapPos = {{58,-11},{69,-28}};
 };
 #endif //LEVEL1_HPP

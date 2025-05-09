@@ -10,6 +10,9 @@ class Pipe : public SceneObject {
         Pipe(const std::string& Path, const glm::vec2 position) : SceneObject(Path,position) {
 
         };
+        void SetHasAnotherMap(const bool B){
+            HasAnotherMap = B;
+        }
         bool GetHasAnotherMap() const {
             return HasAnotherMap;
         }

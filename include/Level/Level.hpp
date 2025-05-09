@@ -24,6 +24,7 @@ public:
     virtual void Update() = 0;
     void Start() const {
         m_ManagerManager->MarioInitialize();
+        m_ManagerManager->FireballsInitialize();
         m_renderer->AddChild(m_Background);
         m_renderer->AddChild(m_Mario);
         for (auto &[type,blocks] : *Blocks) {
@@ -51,12 +52,13 @@ protected:
 
     std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
     std::shared_ptr<Mario> m_Mario = std::make_shared<Mario>();
-    std::shared_ptr<StillObject> m_Background;
+    std::shared_ptr<Map> m_Background;
 
     std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>> Items = std::make_shared<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>();
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>> Blocks = std::make_shared<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>();
     std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>> Monsters = std::make_shared<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>();
 
+    std::vector<std::shared_ptr<FireBall>> FireBalls = std::vector<std::shared_ptr<FireBall>>();
 
     std::shared_ptr<ManagerManager> m_ManagerManager;
     size_t Condition_num = 1;

@@ -13,6 +13,7 @@ public:
         TitleUpdate,
         START,
         UPDATE,
+        GameOver,
         END,
     };
 
@@ -26,6 +27,8 @@ public:
 
     void Update();
 
+    void GameOver();
+
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
 private:
@@ -38,7 +41,12 @@ private:
 
     std::shared_ptr<StillObject> m_Background;
 
-    std::shared_ptr<Level> m_level;
+    std::shared_ptr<Level> m_level1;
+
+    std::shared_ptr<Level> m_level2;
+
+    std::shared_ptr<Level> m_level3;
+
 
     std::shared_ptr <Util::Renderer> m_renderer;
 

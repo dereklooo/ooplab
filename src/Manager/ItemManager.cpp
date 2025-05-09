@@ -3,6 +3,7 @@
 //
 
 #include "Manager/ItemManager.hpp"
+
 ItemManager::ItemManager(const glm::vec2 MapPosition,
                          const glm::vec2 MapSize,
                          std::shared_ptr<std::unordered_map<BlockType,std::vector<std::shared_ptr<SceneObject>>>> &Blocks,
@@ -17,6 +18,14 @@ ItemManager::ItemManager(const glm::vec2 MapPosition,
             }
 void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type) const {
     for(const auto &pos : Position) {
+        if(type == Item_OutSideCoin) {
+            const auto temp = std::make_shared<OutSideCoin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
+            temp->SetSize({1.5,1.5});
+            temp->SetVisible(true);
+            temp->SetZIndex(100);
+            (*Items)[type].push_back(temp);
+            continue;
+        }
         for(const auto &[type_B,blocks] : (*Blocks)) {
             for(auto &block : blocks) {
                 if(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48) == block->GetPosition() ) {
@@ -26,13 +35,15 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
                             temp = std::make_shared<Mushroom_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
                             break;
                         case(Item_FireFlower):
-
+                            temp = std::make_shared<FireFlower>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
                             break;
                         case(Item_Star):
                             temp = std::make_shared<Star_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
                             break;
                         case(Item_Coin):
                             temp = std::make_shared<Coin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
+                            break;
+                        default:
                             break;
                     }
                     temp->SetZIndex(100);

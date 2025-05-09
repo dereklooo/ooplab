@@ -14,9 +14,10 @@ enum Action {
     Run,
     Jump,
     Die,
-    SmallTOBig,
+    SmallToBig,
     BigToFire,
     BigToSmall,
+    Shoot,
     Stop,
     Down
 };
@@ -88,6 +89,36 @@ class Mario final : public AnimationObject{
         int GetScore() const{
             return Score;
         }
+        void AddCoin(const int adder) {
+            Coin += adder;
+        }
+        int GetCoin() const{
+            return Coin;
+        }
+        bool GetShooting() const {
+            return Shooting;
+        }
+        void SetShooting(const bool Shooting){
+            this->Shooting = Shooting;
+        }
+        void SetAnimation(const bool B) {
+            this->Animating = B;
+        }
+        bool GetAnimating() const {
+            return Animating;
+        }
+        void SetAnimationWay(const Way way) {
+            this->AnimationWay = way;
+        }
+        Way GetAnimationWay() const {
+            return AnimationWay;
+        }
+        void SetInPipe(const bool B) {
+            this->InPipe = B;
+        }
+        bool GetInPipe() const {
+            return InPipe;
+        }
         void Hurt() ;
 
         void Jump ();
@@ -97,18 +128,24 @@ class Mario final : public AnimationObject{
         void RightMove ();
 
         void Brakes();
+
+        void Shoot();
     protected:
         struct Star_ {bool Staring = false;float StartShiningTime = 0.0f;};
         struct Hurt_ {bool Hurting = false;float StartHurtingTIme = 0.0f;};
         Star_ star;
         Hurt_ hurt;
         bool CanMove = true;
+        bool Shooting = false;
+        bool Animating = false;
+        bool InPipe = false;
         int Score = 0;
+        int Coin = 0;
+        Way AnimationWay;
         std::vector<std::shared_ptr<Core::Drawable>> BigDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> SmallDrawable;
         std::vector<std::shared_ptr<Core::Drawable>> FireDrawable;
         Action CurrentState;
-        glm::vec2 speed = {0,0};
         Type Type;
         float horizontalAcceleration = 0.0f;
 };

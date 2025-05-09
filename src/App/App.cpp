@@ -46,17 +46,17 @@ void App::Start() {
     LOG_TRACE("Start");
     switch(level) {
         case 1:
-            m_level = std::make_shared<Level1>();
+            m_level1 = std::make_shared<Level1>();
             break;
         case 2:
-            m_level = std::make_shared<Level2>();
+            m_level2 = std::make_shared<Level2>();
             break;
         case 3:
-            m_level = std::make_shared<Level3>();
+            m_level3 = std::make_shared<Level3>();
             break;
             default: ;
     }
-    m_level->Start();
+    m_level1->Start();
     m_CurrentState = State::UPDATE;
 }
 
@@ -65,9 +65,29 @@ void App::Update() {
      * Do not touch the code below as they serve the purpose for
      * closing the window.
      */
-    m_level->update();
-    if(m_level->GetGameOverState() == true) {
-        m_CurrentState = State::END;
+    switch(level) {
+        case 1:
+            m_level1->update();
+            if(m_level1->GetGameOverState() == true) {
+                m_level1 = std::make_shared<Level1>();
+                m_CurrentState = State::START;
+            }
+            break;
+        case 2:
+            m_level2->update();
+            if(m_level2->GetGameOverState() == true) {
+                m_level2 = std::make_shared<Level2>();
+                m_CurrentState = State::START;
+            }
+            break;
+        case 3:
+            m_level3->update();
+            if(m_level3->GetGameOverState() == true) {
+                m_level3 = std::make_shared<Level3>();
+                m_CurrentState = State::START;
+            }
+            break;
+        default: ;
     }
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
@@ -75,7 +95,6 @@ void App::Update() {
         m_CurrentState = State::END;
     }
 }
-
 void App::End() { // NOLINT(this method will mutate members in the future)
     LOG_TRACE("End");
 }

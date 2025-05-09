@@ -4,11 +4,13 @@
 #include "Manager/MapManager.hpp"
 MapManager::MapManager(
     std::shared_ptr<Mario> &Mario,
-    std::shared_ptr<StillObject> &Background,
+    std::shared_ptr<Map> &Background,
+    std::vector<std::shared_ptr<FireBall>> &FireBalls,
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks,
     std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters,
     std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items) :
     Mario_(Mario),
+    FireBalls(FireBalls),
     Blocks(Blocks),
     Monsters(Monsters),
     Items(Items),
@@ -35,5 +37,37 @@ void MapManager::GameObject_Move() const {
                 item->SetPosition({item->GetPosition().x - 4 , item->GetPosition().y});
             }
         }
+        for(const auto &fireball : FireBalls) {
+            fireball->SetPosition({fireball->GetPosition().x - 4 , fireball->GetPosition().y});
+        }
+    }
+
+    if(Mario_->GetPosition().y <= -250 && Mario_->GetAnimating() == true) {
+
+        Background->SetPosition({Background->GetPosition().x - Mario_->GetPosition().x,Background->GetPosition().y + 816});
+        Background->SetFloor(Background->GetFloor() - 1);
+
+        for(auto &[Type,monsters] : *Monsters) {
+            for(const auto& monster : monsters) {
+                monster->SetVisible(false);
+            }
+        }
+        Monsters->clear();
+        for(auto &[Type,items] : *Items) {
+            for(const auto &item : items) {
+                item->SetPosition({item->GetPosition().x - Mario_->GetPosition().x, item->GetPosition().y + 816});
+            }
+        }
+        for(auto &[Type,blocks] : *Blocks) {
+            for(const auto& block : blocks) {
+                block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y + 816});
+            }
+        }
+        Mario_->SetAcceleration(0.0f);
+        Mario_->SetPosition({-75,400});
+        Mario_->SetWCollision(true);
+        Mario_->SetCanMove(true);
+        Mario_->UpDateCurrentState(Stand);
+        Mario_->SetAnimation(false);
     }
 }

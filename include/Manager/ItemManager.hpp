@@ -11,6 +11,8 @@
 #include "Item/Mushroom_Item.hpp"
 #include "Item/Star_Item.hpp"
 #include "Object/SceneObject.hpp"
+#include "Item/FireFlower_Item.hpp"
+#include "Item/OutSideCoin_Item.hpp"
 
 #include "Monsters/Monster.hpp"
 
