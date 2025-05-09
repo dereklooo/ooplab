@@ -68,5 +68,6 @@ void MapManager::GameObject_Move() const {
         Mario_->SetWCollision(true);
         Mario_->SetCanMove(true);
         Mario_->UpDateCurrentState(Stand);
+        Mario_->SetAnimation(false);
     }
 }
