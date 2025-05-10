@@ -21,7 +21,9 @@ enum class BlockType {
     Blue_Foot,
     Blue_Original,
     Air,
-    flag
+    flag,
+    flagball,
+    flagpole
 };
 
 class SceneObject : public StillObject{

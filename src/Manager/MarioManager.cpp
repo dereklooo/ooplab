@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <Monsters/Turtle.hpp>
-
+#include "Block/Flag.hpp"
 #include "Block/HorizontalPipe_64_64.hpp"
 
 MarioManager::MarioManager(
@@ -25,7 +25,7 @@ void MarioManager::HandleBlock() const {
             if(Mario_->GetWCollision() == false) {
                 return;
             }
-            if(Mario_->LeftCollision(block)) {
+            if(Mario_->LeftCollision(block) && block->GetType()!=BlockType::flag && block->GetType()!=BlockType::flagball && block->GetType()!=BlockType::flagpole) {
                 if(Mario_->GetAnimating()) {
                     if(Mario_->GetAnimationWay() == Right) {
                         Mario_->RightMove();
@@ -56,7 +56,7 @@ void MarioManager::HandleBlock() const {
                 }
             }
 
-            else if(Mario_->RightCollision(block)) {
+            else if(Mario_->RightCollision(block) && block->GetType()!=BlockType::flag && block->GetType()!=BlockType::flagball && block->GetType()!=BlockType::flagpole) {
                 if(Mario_->GetAnimating()) {
                     if(Mario_->GetAnimationWay() == Right) {
                         Mario_->RightMove();

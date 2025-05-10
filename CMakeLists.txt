@@ -117,6 +117,12 @@ add_executable(${PROJECT_NAME}
         src/Block/HorizontalPipe_64_64.cpp
         include/Map/Map.hpp
         src/Map/Map.cpp
+        include/Block/FlagBall.hpp
+        include/Block/flagpole.hpp
+        src/Block/FlagPole.cpp
+        src/Block/FlagBall.cpp
+        include/Block/Flag.hpp
+        src/Block/Flag.cpp
 )
 
 if(MSVC)

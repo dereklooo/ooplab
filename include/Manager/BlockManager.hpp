@@ -18,6 +18,9 @@
 #include "Block/BlueFootBlock.hpp"
 #include "Block/BlueOriginalBlock.hpp"
 #include "Block/LongPipe.hpp"
+#include "Block/Flag.hpp"
+#include "Block/FlagBall.hpp"
+#include "Block/FlagPole.hpp"
 class BlockManager {
 public:
     BlockManager(

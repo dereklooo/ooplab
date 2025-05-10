@@ -6,11 +6,11 @@
 #define FLAG_HPP
 #include "Object/SceneObject.hpp"
 #include "Util/Time.hpp"
-class flag : public SceneObject {
+class Flag : public SceneObject {
 public:
-    explicit flag(glm::vec2 Position);
-
-
+    explicit Flag(glm::vec2 Position);
+    void hit(const std::shared_ptr<Mario> &Mario) override;
+    BlockType GetType() override {return BlockType::flag;};
 
 private:
     std::shared_ptr<Util::Time> time;

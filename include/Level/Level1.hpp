@@ -34,6 +34,10 @@ class Level1 : public Level{
             m_ManagerManager->SetItem(Item_Star,ItemType::Item_Star);
             m_ManagerManager->SetItem(Item_OutSideCoin, ItemType::Item_OutSideCoin);
 
+            m_ManagerManager->SetBlock(Flag,BlockType::flag);
+            m_ManagerManager->SetBlock(FlagBall,BlockType::flagball);
+            m_ManagerManager->SetBlock(FlagPole,BlockType::flagpole);
+
             m_ManagerManager->SetAnotherMap(AnotherMapPos,NextPipePos);
 
         }
@@ -159,7 +163,9 @@ class Level1 : public Level{
         {59.5, -24.5}, {60.5, -24.5}, {61.5, -24.5}, {62.5, -24.5}, {63.5, -24.5}, {64.5, -24.5}, {65.5, -24.5},
         {59.5, -25.5}, {60.5, -25.5}, {61.5, -25.5}, {62.5, -25.5}, {63.5, -25.5}, {64.5, -25.5}, {65.5, -25.5}};
 
-
+        std::vector<glm::vec2> Flag = {{198, -2.5}};
+        std::vector<glm::vec2> FlagBall = {{198.5, -1.5}};
+        std::vector<glm::vec2> FlagPole = {{198.5, -11.5},{198.5, -10.5},{198.5, -9.5},{198.5, -8.5},{198.5, -7.5},{198.5, -6.5},{198.5, -5.5},{198.5, -4.5},{198.5, -3.5},{198.5, -2.5}};
         std::vector<glm::vec2> AnotherMapPos = {{58,-11},{69,-28}};
 
         std::vector<glm::vec2> NextPipePos = {{0,0},{180,-12}};
