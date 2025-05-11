@@ -34,7 +34,6 @@ public:
 private:
     static void HandleMonsterCollision(const std::shared_ptr<Monster>& monster,const std::shared_ptr<Monster>& _monster);
     static void HandleBlockCollision(MonsterType type,const std::shared_ptr<Monster>& monster, const std::shared_ptr<SceneObject>& block);
-
     std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters;
 
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;

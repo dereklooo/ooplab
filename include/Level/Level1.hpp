@@ -50,7 +50,7 @@ class Level1 : public Level{
             }
             switch (Condition_num) {
                 case 1:
-                    if (m_Background->GetPosition().x <= -600) {
+                    if (m_Background->GetPosition().x <= -600 && m_Background->GetPosition().x >= -650) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-220),Left));
                         _temp.push_back(std::make_shared<Turtle>(glm::vec2(600,-220),Left)); // 測試用之後記得刪掉
@@ -59,7 +59,7 @@ class Level1 : public Level{
                     }
                     break;
                 case 2:
-                    if (m_Background->GetPosition().x <= -1050) {
+                    if (m_Background->GetPosition().x <= -1050 && m_Background->GetPosition().x >= -1100) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-220),Left));
                         m_ManagerManager->AddMonster(_temp,m_renderer);
@@ -67,7 +67,7 @@ class Level1 : public Level{
                     }
                     break;
                 case 3:
-                    if (m_Background->GetPosition().x <= -1630) {
+                    if (m_Background->GetPosition().x <= -1630 && m_Background->GetPosition().x >= -1680) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(900,-220),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(960,-220),Left));
@@ -76,7 +76,7 @@ class Level1 : public Level{
                     }
                     break;
                 case 4:
-                    if (m_Background->GetPosition().x <= -3000) {
+                    if (m_Background->GetPosition().x <= -3000 && m_Background->GetPosition().x >= -3050) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,140),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1050,140),Left));
@@ -85,7 +85,7 @@ class Level1 : public Level{
                     }
                         break;
                 case 5:
-                    if (m_Background->GetPosition().x <= -3900) {
+                    if (m_Background->GetPosition().x <= -3900 && m_Background->GetPosition().x >= -3950) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(775,-247),Left));
@@ -94,7 +94,7 @@ class Level1 : public Level{
                     }
                     break;
                 case 6:
-                    if(m_Background->GetPosition().x <= -4600) {
+                    if(m_Background->GetPosition().x <= -4600 && m_Background->GetPosition().x >= -4650) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Turtle>(glm::vec2(625,-247),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));

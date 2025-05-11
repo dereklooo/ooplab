@@ -41,7 +41,8 @@ void MapManager::GameObject_Move() const {
             fireball->SetPosition({fireball->GetPosition().x - 4 , fireball->GetPosition().y});
         }
     }
-
+}
+void MapManager::CtlMarioPipeMove() const{
     if(Mario_->GetPosition().y <= -250 && Mario_->GetAnimating() == true) {
         if(Mario_->GetNextPosition() == glm::vec2(0,0)) {
             Background->SetPosition({Background->GetPosition().x - Mario_->GetPosition().x,Background->GetPosition().y + 816});
@@ -57,6 +58,7 @@ void MapManager::GameObject_Move() const {
             }
         }
         Monsters->clear();
+
         for(auto &[Type,items] : *Items) {
             for(const auto &item : items) {
                 if(Mario_->GetNextPosition() == glm::vec2(0,0)){
