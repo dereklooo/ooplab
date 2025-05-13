@@ -2,6 +2,10 @@
 // Created by Benson on 2025/4/25.
 //
 #include "Manager/MapManager.hpp"
+
+#include <iostream>
+#include <ostream>
+
 MapManager::MapManager(
     std::shared_ptr<Mario> &Mario,
     std::shared_ptr<Map> &Background,
@@ -72,9 +76,11 @@ void MapManager::CtlMarioPipeMove() const{
         for(auto &[Type,blocks] : *Blocks) {
             for(const auto& block : blocks) {
                 if(Mario_->GetNextPosition() == glm::vec2(0,0)){
+                    std::cout<<"A"<<std::endl;
                     block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y + 816});
                 }
                 else {
+                    std::cout<<"B"<<std::endl;
                     block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y - 816});
                 }
             }

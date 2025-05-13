@@ -104,6 +104,7 @@ void MarioManager::HandleBlock() const {
                         Mario_->SetAnimation(true);
                         Mario_->SetGravity(0.65f);
                         Mario_->SetZIndex(1.5);
+                        Mario_->SetNextPosition(temp->GetNextPosition());
                     }
                 }
             }
