@@ -64,7 +64,7 @@ void MarioManager::HandleBlock() const {
                     else {
                         Mario_->LeftMove();
                     }
-                    if(block->GetType() == BlockType::Blue_Original) {
+                    if(block->GetType() == BlockType::Blue_Original || block->GetType() == BlockType::Air) {
                         Mario_->SetWCollision(false);
                         Mario_->SetAnimation(true);
                         Mario_->SetGravity(2);
