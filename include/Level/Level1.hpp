@@ -43,7 +43,7 @@ class Level1 : public Level{
         }
 
         void Update() override {
-            if(m_Mario->GetPosition().y <= -2000 && m_Mario->GetAnimating() == false) {
+            if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false) {
                 this->GameOver = true;
                 return;
             }

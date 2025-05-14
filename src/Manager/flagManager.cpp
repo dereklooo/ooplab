@@ -61,7 +61,7 @@ void FlagManager::Update() {
                         if(block->GetType()==BlockType::flag){
 
 	                        glm::vec2 FlagPosition = block->GetPosition();
-	                        FlagPosition.y -= 1.0;
+	                        FlagPosition.y -= 2.0;
             				block->SetPosition(FlagPosition);
 	                        //std::cout << "bb" << std::endl;
 
@@ -77,12 +77,12 @@ void FlagManager::Update() {
     		}
      	}
         else if(MarioMoveFlag==true) {
-	        Mario_->SetPosition({Mario_->GetPosition().x, Mario_->GetPosition().y-1.0});
+	        Mario_->SetPosition({Mario_->GetPosition().x, Mario_->GetPosition().y-2.0});
         	for(const auto &[BlockType,blocks] : *Blocks) {
         		for(const auto &block : blocks) {
         			if(block->GetType()==BlockType::flag){
         				glm::vec2 FlagPosition = block->GetPosition();
-        				FlagPosition.y -= 1.0;
+        				FlagPosition.y -= 2.0;
         				block->SetPosition(FlagPosition);
         			}
         		}
