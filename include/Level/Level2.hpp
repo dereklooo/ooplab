@@ -8,10 +8,6 @@
 class Level2 final : public Level {
     public:
         Level2() : Level() {
-            if(m_Mario->GetPosition().y <= -2000 && m_Mario->GetAnimating() == false) {
-                this->GameOver = true;
-                return;
-            }
             m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level2/level_2.png",glm::vec2(-3216,720),glm::vec2(-640,360));
 
             m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
@@ -42,7 +38,12 @@ class Level2 final : public Level {
 
              m_ManagerManager->SetAnotherMap(AnotherMapPos,NextPipePos);
         }
-        void Update() override{};
+        void Update() override {
+            if(m_Mario->GetPosition().y <= -2000 && m_Mario->GetAnimating() == false) {
+                this->GameOver = true;
+                return;
+            }
+        };
     private:
 
     std::vector<float> FloorBlock = {};

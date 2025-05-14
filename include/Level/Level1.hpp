@@ -11,10 +11,6 @@
 class Level1 : public Level{
       public:
         Level1() : Level() {
-            if(m_Mario->GetPosition().y <= -2000 && m_Mario->GetAnimating() == false) {
-                this->GameOver = true;
-                return;
-            }
             m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level1/level_1.png",glm::vec2(-3584,480),glm::vec2(-640,360));
 
             m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
@@ -47,6 +43,10 @@ class Level1 : public Level{
         }
 
         void Update() override {
+            if(m_Mario->GetPosition().y <= -2000 && m_Mario->GetAnimating() == false) {
+                this->GameOver = true;
+                return;
+            }
             std::vector<std::shared_ptr<Monster>> _temp;
             switch (Condition_num) {
                 case 1:
