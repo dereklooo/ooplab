@@ -19,7 +19,8 @@ enum Action {
     BigToSmall,
     Shoot,
     Stop,
-    Down
+    Down,
+    HugFlag
 };
 enum Type {
     Small,

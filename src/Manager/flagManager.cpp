@@ -27,7 +27,7 @@ void FlagManager::HandleBlocksCollision()  {
             		std::cout << "aa" << std::endl;
                     Mario_->SetCanMove(false);
 
-                    Mario_->SetCurrentState(Stand);
+                    Mario_->SetCurrentState(HugFlag);
             		Mario_->UpDateCurrentState(Mario_->GetCurrentState());
             		Mario_->SetTouchFlagFlag(true);
             		FlagMoveFlag=true;

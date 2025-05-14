@@ -15,6 +15,7 @@
         this->SmallDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/die/die",400,100)); // die
         this->SmallDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/small/SmalltoBig/SmalltoBig",800,200)); //SmallToBig
         this->SmallDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/stop/small_stop",400,100)); //stop
+        this->SmallDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/small/Hugflag/Hug",400,100)); //hugflag
 
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/stand/stand",100,100)); // stand
         this->BigDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/run/big_run",80,60)); //run
@@ -23,12 +24,14 @@
         this->BigDrawable.push_back(Mario::GenerateAnimation(2,RESOURCE_DIR"/image/character/mario/big/BigToFire/big_to_fire",800,200)); //BigToFire
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/Down/big_down",800,200)); //down
         this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/stop/big_stop",800,200)); // stop
+        this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/big/Hugflag/Hug",400,100)); //hugflag
 
         this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/stand/stand",400,100)); // stand
         this->FireDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/fire/run/run",80,60)); //run
         this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/jump/jump",400,100)); // jump
         this->FireDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/BigToSmall/big_to_small",800,200)); //FireToSmall
         this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/stop/stop",400,100)); //stop;
+        this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/Hugflag/Hug",400,100)); //hugflag
 
         this->SetSize({1.4,1.4});
         this->Type = Small;
@@ -54,6 +57,9 @@ void Mario::UpDateCurrentState(const Action act) {
             case Action::Stop:
                 this->SetDrawable(this->SmallDrawable[5]);
                 break;
+            case Action::HugFlag:
+                this->SetDrawable(this->SmallDrawable[6]);
+            break;
             default:
                 break;
         }
@@ -81,6 +87,9 @@ void Mario::UpDateCurrentState(const Action act) {
             case Action::Stop:
                 this->SetDrawable(this->BigDrawable[6]);
             break;
+            case Action::HugFlag:
+                this->SetDrawable(this->BigDrawable[7]);
+            break;
             default:
                 break;
         }
@@ -101,6 +110,10 @@ void Mario::UpDateCurrentState(const Action act) {
                 break;
             case Action::Stop:
                 this->SetDrawable(this->FireDrawable[4]);
+                break;
+            case Action::HugFlag:
+                this->SetDrawable(this->FireDrawable[5]);
+            break;
             default:
                 break;
         }
