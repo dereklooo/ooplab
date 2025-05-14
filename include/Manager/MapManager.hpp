@@ -21,8 +21,10 @@ class MapManager {
         std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items);
 
         void GameObject_Move() const;
+        void CtlMarioPipeMove() const;
         void Update() const {
             GameObject_Move();
+            CtlMarioPipeMove();
         }
     private:
         std::shared_ptr<Mario>& Mario_;

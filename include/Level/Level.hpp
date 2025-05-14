@@ -17,6 +17,7 @@
 
 class Level{
 public:
+    virtual ~Level() = default;
 
     Level()= default;
 

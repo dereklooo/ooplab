@@ -47,16 +47,18 @@ void App::Start() {
     switch(level) {
         case 1:
             m_level1 = std::make_shared<Level1>();
+            m_level1->Start();
             break;
         case 2:
             m_level2 = std::make_shared<Level2>();
+            m_level2->Start();
             break;
         case 3:
             m_level3 = std::make_shared<Level3>();
             break;
-            default: ;
+            default:
+                break;
     }
-    m_level1->Start();
     m_CurrentState = State::UPDATE;
 }
 

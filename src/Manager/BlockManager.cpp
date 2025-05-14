@@ -19,7 +19,12 @@ void BlockManager::SetAnotherMap(const std::vector<glm::vec2> &positions,const s
                 if(block->GetPosition() == glm::vec2(MapPosition.x + pos.x * 48, MapPosition.y + pos.y * 48)) {
                     const auto temp = std::static_pointer_cast<Pipe>(block);
                     temp->SetHasAnotherMap(true);
-                    temp->SetNextPipPosition({(positions_[i].x - pos.x) * 48 , (positions_[i].y - pos.y) * 48});
+                    if(positions_[i].x == 0.0f && positions_[i].y == 0.0f) {
+                        temp->SetNextPipPosition({0.0f,0.0f});
+                    }
+                    else {
+                        temp->SetNextPipPosition({(positions_[i].x - pos.x) * 48 , (positions_[i].y - pos.y) * 48});
+                    }
                 }
             }
         }
@@ -48,9 +53,9 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
         }
         block->SetZIndex(100);
         block->SetSize({1.65,1.5});
-        if (type==BlockType::flagpole || type==BlockType::flag) {
-            block->SetSize({3.3,3.0});
-        }
+        //if (type==BlockType::flagpole || type==BlockType::flag) {
+        //    block->SetSize({3.3,3.0});
+        //}
         if (type==BlockType::flagpole) {
             block->SetZIndex(99);
         }

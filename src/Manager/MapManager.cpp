@@ -2,6 +2,10 @@
 // Created by Benson on 2025/4/25.
 //
 #include "Manager/MapManager.hpp"
+
+#include <iostream>
+#include <ostream>
+
 MapManager::MapManager(
     std::shared_ptr<Mario> &Mario,
     std::shared_ptr<Map> &Background,
@@ -41,7 +45,8 @@ void MapManager::GameObject_Move() const {
             fireball->SetPosition({fireball->GetPosition().x - 4 , fireball->GetPosition().y});
         }
     }
-
+}
+void MapManager::CtlMarioPipeMove() const{
     if(Mario_->GetPosition().y <= -250 && Mario_->GetAnimating() == true) {
         if(Mario_->GetNextPosition() == glm::vec2(0,0)) {
             Background->SetPosition({Background->GetPosition().x - Mario_->GetPosition().x,Background->GetPosition().y + 816});
@@ -57,6 +62,7 @@ void MapManager::GameObject_Move() const {
             }
         }
         Monsters->clear();
+
         for(auto &[Type,items] : *Items) {
             for(const auto &item : items) {
                 if(Mario_->GetNextPosition() == glm::vec2(0,0)){
@@ -70,9 +76,11 @@ void MapManager::GameObject_Move() const {
         for(auto &[Type,blocks] : *Blocks) {
             for(const auto& block : blocks) {
                 if(Mario_->GetNextPosition() == glm::vec2(0,0)){
+                    std::cout<<"A"<<std::endl;
                     block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y + 816});
                 }
                 else {
+                    std::cout<<"B"<<std::endl;
                     block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y - 816});
                 }
             }

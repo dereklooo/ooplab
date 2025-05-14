@@ -43,14 +43,14 @@ class Level1 : public Level{
         }
 
         void Update() override {
-            std::vector<std::shared_ptr<Monster>> _temp;
             if(m_Mario->GetPosition().y <= -2000 && m_Mario->GetAnimating() == false) {
                 this->GameOver = true;
                 return;
             }
+            std::vector<std::shared_ptr<Monster>> _temp;
             switch (Condition_num) {
                 case 1:
-                    if (m_Background->GetPosition().x <= -600) {
+                    if (m_Background->GetPosition().x <= -600 && m_Background->GetPosition().x >= -650) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-220),Left));
                         _temp.push_back(std::make_shared<Turtle>(glm::vec2(600,-220),Left)); // 測試用之後記得刪掉
@@ -59,7 +59,7 @@ class Level1 : public Level{
                     }
                     break;
                 case 2:
-                    if (m_Background->GetPosition().x <= -1050) {
+                    if (m_Background->GetPosition().x <= -1050 && m_Background->GetPosition().x >= -1100) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,-220),Left));
                         m_ManagerManager->AddMonster(_temp,m_renderer);
@@ -67,7 +67,7 @@ class Level1 : public Level{
                     }
                     break;
                 case 3:
-                    if (m_Background->GetPosition().x <= -1630) {
+                    if (m_Background->GetPosition().x <= -1630 && m_Background->GetPosition().x >= -1680) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(900,-220),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(960,-220),Left));
@@ -76,7 +76,7 @@ class Level1 : public Level{
                     }
                     break;
                 case 4:
-                    if (m_Background->GetPosition().x <= -3000) {
+                    if (m_Background->GetPosition().x <= -3000 && m_Background->GetPosition().x >= -3050) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1000,140),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(1050,140),Left));
@@ -85,7 +85,7 @@ class Level1 : public Level{
                     }
                         break;
                 case 5:
-                    if (m_Background->GetPosition().x <= -3900) {
+                    if (m_Background->GetPosition().x <= -3900 && m_Background->GetPosition().x >= -3950) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(775,-247),Left));
@@ -94,7 +94,7 @@ class Level1 : public Level{
                     }
                     break;
                 case 6:
-                    if(m_Background->GetPosition().x <= -4600) {
+                    if(m_Background->GetPosition().x <= -4600 && m_Background->GetPosition().x >= -4650) {
                         _temp.clear();
                         _temp.push_back(std::make_shared<Turtle>(glm::vec2(625,-247),Left));
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));
@@ -110,7 +110,7 @@ class Level1 : public Level{
       private:
     std::vector<glm::vec2> AirBlock = {{70.5, -18.5}, {70.5, -19.5}, {70.5, -20.5}, {70.5, -21.5}, {70.5, -22.5},
         {70.5, -23.5}, {70.5, -24.5}, {70.5, -25.5}, {70.5, -26.5}, {70.5, -27.5},
-        {70.5, -28.5}};
+        {70.5, -28.5},};
         std::vector<glm::vec2> LongPipe = {{71,-23.5}};
        std::vector<glm::vec2> LuckyBlockPosition = {{16.5,-9.5},{22.5,-5.5},{21.5,-9.5},{23.5,-9.5},{78.5,-9.5},{94.5,-5.5},{106.5,-9.5},{109.5,-9.5},{109.5,-5.5},{112.5,-9.5},{129.5,-5.5},{130.5,-5.5},{170.5,-9.5}};
        std::vector<glm::vec2>OriginBlock = {{20.5,-9.5} , {22.5,-9.5} , {24.5,-9.5} , {77.5,-9.5} , {79.5,-9.5} , {80.5,-5.5} , {81.5,-5.5} , {82.5,-5.5} , {83.5,-5.5} , {84.5,-5.5} , {85.5,-5.5} , {86.5,-5.5} , {87.5,-5.5} , {91.5,-5.5} ,
