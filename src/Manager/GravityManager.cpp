@@ -2,6 +2,9 @@
 // Created by Benson on 2025/4/27.
 //
 #include "Manager/GravityManager.hpp"
+
+#include "Block/Flag.hpp"
+
 GravityManager::GravityManager(
     std::shared_ptr<Mario>& mario,
     std::vector<std::shared_ptr<FireBall> > &FireBalls,
@@ -29,10 +32,14 @@ void GravityManager::Update() {
                 if(object->GetWCollision()) {
                     object->SetGravity(0.0f);
                     object->SetFalling(false);
+
                 }
             }
             object->SetFallingTime(Util::Time::GetElapsedTimeMs());
-            object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
+            if (Mario_->GetTouchFlagFlag()==false || Mario_->GetMarioGoDoorFlag()==true) {
+                object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
+            }
+
         }
 }
 void GravityManager::Combination() {
@@ -57,7 +64,7 @@ void GravityManager::Combination() {
 bool GravityManager::IsFalling(const std::shared_ptr<Object> &Object) const{
         for(auto &[type,blocks] : (*Blocks)) {
             for(auto &block : blocks) {
-                if(Object->DownCollision(block) && Object->GetGravity() >= 0) {
+                if(((Object->DownCollision(block) && Object->GetGravity() >= 0) || (Mario_->GetTouchFlagFlag()==true && Mario_->GetMarioGoDoorFlag()==false)) && (block->GetType()!=BlockType::flag && block->GetType()!=BlockType::flagpole)) {
                     Object->SetFalling(false);
                     return false;
                 }

@@ -51,6 +51,9 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
         if (type==BlockType::flagpole || type==BlockType::flag) {
             block->SetSize({3.3,3.0});
         }
+        if (type==BlockType::flagpole) {
+            block->SetZIndex(99);
+        }
         if (block) AddBlock(block);
     }
 }

@@ -136,6 +136,14 @@ class Mario final : public AnimationObject{
         void Brakes();
 
         void Shoot();
+
+    bool GetTouchFlagFlag(){return TouchFlagFlag;}
+    void SetTouchFlagFlag(bool flag) {TouchFlagFlag=flag;}
+    void SetMarioGoDoorFlag(bool flag) {MarioGoDoorFlag=flag;}
+    bool GetMarioGoDoorFlag() {return MarioGoDoorFlag;}
+    void SetNextLevelFlag(bool flag) {NextLevelFlag=flag;}
+    bool GetNextLevelFlag() {return NextLevelFlag;}
+
     protected:
         struct Star_ {bool Staring = false;float StartShiningTime = 0.0f;};
         struct Hurt_ {bool Hurting = false;float StartHurtingTIme = 0.0f;};
@@ -145,6 +153,9 @@ class Mario final : public AnimationObject{
         bool Shooting = false;
         bool Animating = false;
         bool InPipe = false;
+        bool TouchFlagFlag=false;
+        bool MarioGoDoorFlag=false;
+        bool NextLevelFlag=false;
         int Score = 0;
         int Coin = 0;
         glm::vec2 NextPos;

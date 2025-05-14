@@ -11,6 +11,7 @@
 #include "Manager/MapManager.hpp"
 #include "Manager/MarioManager.hpp"
 #include "Manager/MonsterManager.hpp"
+#include "Manager/FlagManager.hpp"
 #include "Util/Renderer.hpp"
 
 

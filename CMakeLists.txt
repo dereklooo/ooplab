@@ -63,6 +63,7 @@ add_executable(${PROJECT_NAME}
         include/Manager/BlockManager.hpp
         include/Manager/ManagerManager.hpp
         include/Manager/ItemManager.hpp
+        include/Manager/flagManager.hpp
 
         include/Item/Mushroom_Item.hpp
         include/Item/Coin_Item.hpp
@@ -75,6 +76,7 @@ add_executable(${PROJECT_NAME}
         include/Object/GravityObject.hpp
         src/Manager/GravityManager.cpp
         src/Manager/MapManager.cpp
+        src/Manager/flagManager.cpp
         include/Item/Star_Item.hpp
         src/Item/Mushroom_Item.cpp
         src/Item/Coin_Item.cpp

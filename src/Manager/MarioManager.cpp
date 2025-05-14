@@ -25,7 +25,7 @@ void MarioManager::HandleBlock() const {
             if(Mario_->GetWCollision() == false) {
                 return;
             }
-            if(Mario_->LeftCollision(block) && block->GetType()!=BlockType::flag && block->GetType()!=BlockType::flagball && block->GetType()!=BlockType::flagpole) {
+            if(Mario_->LeftCollision(block) &&  Mario_->GetTouchFlagFlag()==false) {
                 if(Mario_->GetAnimating()) {
                     if(Mario_->GetAnimationWay() == Right) {
                         Mario_->RightMove();
@@ -56,7 +56,7 @@ void MarioManager::HandleBlock() const {
                 }
             }
 
-            else if(Mario_->RightCollision(block) && block->GetType()!=BlockType::flag && block->GetType()!=BlockType::flagball && block->GetType()!=BlockType::flagpole) {
+            else if(Mario_->RightCollision(block) &&  Mario_->GetTouchFlagFlag()==false) {
                 if(Mario_->GetAnimating()) {
                     if(Mario_->GetAnimationWay() == Right) {
                         Mario_->RightMove();
@@ -87,12 +87,12 @@ void MarioManager::HandleBlock() const {
                 }
             }
 
-            else if(Mario_->UpCollision(block) && Mario_->GetGravity() <= 0) {
+            else if((Mario_->UpCollision(block) && Mario_->GetGravity() <= 0) && Mario_->GetTouchFlagFlag()==false) {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
                 Mario_->SetGravity(2);
                 block->hit(Mario_);
             }
-            else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0) {
+            else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0 && (Mario_->GetTouchFlagFlag()==false ) ){
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
                 if(block->GetType() == BlockType::Pipe_64_96 || block->GetType() == BlockType::Pipe_64_128 || block->GetType() == BlockType::Pipe_64_64) {
                     auto temp = std::dynamic_pointer_cast<Pipe>(block);
@@ -284,6 +284,11 @@ void MarioManager::MarioInputCtl() const {
     }
     if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
         Mario_->SetCurrentState(Down);
+    }
+
+    if (Util::Input::IsKeyDown(Util::Keycode::E)) {
+        Mario_->SetPosition({8500
+            , -180});
     }
     Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());
