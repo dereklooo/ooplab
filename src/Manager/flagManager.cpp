@@ -24,7 +24,6 @@ void FlagManager::HandleBlocksCollision()  {
                 if(block->GetType()==BlockType::flag || block->GetType()==BlockType::flagball || block->GetType()==BlockType::flagpole) {
 
             	if((Mario_->RightCollision(block) || Mario_->LeftCollision(block) ||Mario_->UpCollision(block) ||Mario_->DownCollision(block)) && Mario_->GetTouchFlagFlag()!=true) {
-            		std::cout << "aa" << std::endl;
                     Mario_->SetCanMove(false);
 
                     Mario_->SetCurrentState(HugFlag);
@@ -47,7 +46,6 @@ void FlagManager::HandleBlocksCollision()  {
 
 
 void FlagManager::Update() {
-	std::cout << Mario_->GetGravity()<< std::endl;
 	if (Mario_->GetTouchFlagFlag()==false) {
 		HandleBlocksCollision();
 	}

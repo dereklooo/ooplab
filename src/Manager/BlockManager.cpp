@@ -63,7 +63,7 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
     }
 }
 void BlockManager::SetFloor(std::vector<float> &Position, const float Floor_y) const{
-    for(float i = 0.5f ; i <= MapSize.x / 32 ; i++) {
+    for(float i = 0.5f ; i <= MapSize.x / 48 ; i++) {
         bool Build = true;
         for(const float position : Position) {
             if(position == i) {

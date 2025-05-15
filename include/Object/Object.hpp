@@ -72,17 +72,27 @@ class Object : public Util::GameObject{
     // 向左碰撞
     bool LeftCollision(const std::shared_ptr<Object> &other) const {
             float x = this->GetPosition().x - std::abs(this->GetScaledSize().x / 2.0f) - 4;
+            float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
             float y = this->GetPosition().y;
 
-            return other->Collision({x, y});
+            glm::vec2 top = {x, y + halfHeight - 10};
+            glm::vec2 mid = {x, y};
+            glm::vec2 bottom = {x, y - halfHeight + 2};
+
+            return other->Collision(top) || other->Collision(mid);
         }
 
-    // 向右碰撞
+    // 向右碰撞（上、中、下三點檢測）
     bool RightCollision(const std::shared_ptr<Object> &other) const {
             float x = this->GetPosition().x + std::abs(this->GetScaledSize().x / 2.0f) + 4;
+            float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
             float y = this->GetPosition().y;
 
-            return other->Collision({x, y});
+            glm::vec2 top = {x, y + halfHeight - 10};
+            glm::vec2 mid = {x, y};
+            glm::vec2 bottom = {x, y - halfHeight + 2};
+
+            return other->Collision(top) || other->Collision(mid);
         }
 
         glm::vec2  GetSize() const {
