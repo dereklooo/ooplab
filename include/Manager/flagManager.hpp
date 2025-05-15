@@ -11,7 +11,7 @@
 #include "Util/Renderer.hpp"
 #include "Monsters/Monster.hpp"
 #include "Map/Map.hpp"
-
+#include "Block/Flag.hpp"
 class FlagManager {
     public:
         FlagManager(

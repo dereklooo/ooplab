@@ -290,6 +290,7 @@ void MarioManager::MarioInputCtl() const {
     if (Util::Input::IsKeyDown(Util::Keycode::E)) {
         Mario_->SetPosition({8500
             , -180});
+
     }
     Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());

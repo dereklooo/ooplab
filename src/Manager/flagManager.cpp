@@ -78,14 +78,13 @@ void FlagManager::Update() {
      	}
         else if(MarioMoveFlag==true) {
 	        Mario_->SetPosition({Mario_->GetPosition().x, Mario_->GetPosition().y-2.0});
-        	for(const auto &[BlockType,blocks] : *Blocks) {
-        		for(const auto &block : blocks) {
-        			if(block->GetType()==BlockType::flag){
+        	for(const auto &block : (*Blocks)[BlockType::flag]) {
+
+
         				glm::vec2 FlagPosition = block->GetPosition();
         				FlagPosition.y -= 2.0;
         				block->SetPosition(FlagPosition);
-        			}
-        		}
+
         		if(Mario_->GetPosition().y <= -180) {
         			MarioMoveFlag = false;
         			Mario_->SetMarioGoDoorFlag(true);
@@ -99,7 +98,13 @@ void FlagManager::Update() {
         	//Mario_->SetCanMove(true);
         	Mario_->SetPosition({Mario_->GetPosition().x+3, Mario_->GetPosition().y});
         	//std::cout << Background->GetPosition().x<< std::endl;
-        	if ( Background->GetPosition().x <= -9805) {
+        	int x=0;
+        	for(const auto &block : (*Blocks)[BlockType::flagpole]) {
+				x=block->GetPosition().x;
+
+
+        	}
+        	if ( Mario_->GetPosition().x >= x+180*1.5) {
         		Mario_->SetMarioGoDoorFlag(false);
         		Mario_->SetNextLevelFlag(true);
         		Mario_->SetVisible(false);

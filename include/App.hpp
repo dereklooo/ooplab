@@ -53,5 +53,6 @@ private:
     State m_CurrentState = State::Title;
 
     size_t level = 1;
+
 };
 #endif

@@ -10,6 +10,7 @@
 #include "Object/ItemObject.hpp"
 #include "Object/SceneObject.hpp"
 #include "Map/Map.hpp"
+#include "Util/Input.hpp"
 
 class MapManager {
     public:
@@ -25,6 +26,8 @@ class MapManager {
         void Update() const {
             GameObject_Move();
             CtlMarioPipeMove();
+
+
         }
     private:
         std::shared_ptr<Mario>& Mario_;

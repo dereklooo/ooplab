@@ -74,6 +74,12 @@ void App::Update() {
                 m_level1 = std::make_shared<Level1>();
                 m_CurrentState = State::START;
             }
+             if (m_level1->GetNextLevelFlag()==true) {
+
+                 level++;
+                 m_renderer=std::make_shared<Util::Renderer>();
+                 m_CurrentState = State::START;
+             }
             break;
         case 2:
             m_level2->update();
@@ -81,11 +87,21 @@ void App::Update() {
                 m_level2 = std::make_shared<Level2>();
                 m_CurrentState = State::START;
             }
+            if (m_level2->GetNextLevelFlag()==true) {
+
+                level++;
+                m_CurrentState = State::START;
+            }
             break;
         case 3:
             m_level3->update();
             if(m_level3->GetGameOverState() == true) {
                 m_level3 = std::make_shared<Level3>();
+                m_CurrentState = State::START;
+            }
+            if (m_level3->GetNextLevelFlag()==true) {
+
+                level++;
                 m_CurrentState = State::START;
             }
             break;

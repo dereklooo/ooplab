@@ -20,7 +20,8 @@ public:
     virtual ~Level() = default;
 
     Level()= default;
-
+    bool GetNextLevelFlag (){return NextLevelFlag;}
+    void SetNextLevelFlag(bool flag){NextLevelFlag = flag;}
     void SetBackGround(std::shared_ptr<StillObject> Background);
     void SetSceneObject(std::shared_ptr<SceneObject> SceneObject);
     virtual void Update() = 0;
@@ -44,13 +45,14 @@ public:
         this->Update();
         m_ManagerManager->Update();
         m_renderer->Update();
+        SetNextLevelFlag(m_Mario->GetNextLevelFlag());
     }
     bool GetGameOverState() const {
         return GameOver;
     }
 protected:
     bool GameOver = false;
-
+    bool NextLevelFlag = false;
 
     std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
     std::shared_ptr<Mario> m_Mario = std::make_shared<Mario>();
