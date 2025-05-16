@@ -243,6 +243,9 @@ void MarioManager::MarioInputCtl() const {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
         }
+        if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
+            Mario_->SetCurrentState(Down);
+        }
     }
     else if(Mario_->GetType() == Big) {
         if (Util::Input::IsKeyPressed(Util::Keycode::D)){
