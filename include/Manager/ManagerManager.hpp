@@ -42,8 +42,8 @@ class ManagerManager {
     void SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const{
         BlockManager_->SetBlock(positions, type);
     }
-    void SetFloor(std::vector<float> &Position, const float Floor_y) const {
-        BlockManager_->SetFloor(Position,Floor_y);
+    void SetFloor(const std::vector<glm::vec2>& Position,const std::vector<glm::vec2>& Size) const {
+        BlockManager_->SetFloor(Position,Size);
     }
     void SetItem(std::vector<glm::vec2>& Position, const ItemType type) const{
         ItemManager_->SetItem(Position, type);

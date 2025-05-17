@@ -10,7 +10,7 @@
 #include "Block/Pipe_64_64.hpp"
 #include "Block/Pipe_64_96.hpp"
 #include "Block/Pipe_64_128.hpp"
-
+#include <iostream>
 class MarioManager {
     public:
         MarioManager(

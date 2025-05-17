@@ -25,6 +25,7 @@ void GravityManager::Update() {
                 const float deltaTime = (Util::Time::GetElapsedTimeMs() - object->GetFallingTime()) / 1000.0f;
                 const float gravityNow = object->GetGravity();
                 const float gravityNext = gravityNow + gravity * deltaTime;
+
                 object->SetGravity(gravityNext);
                 object->SetFalling(true);
             }
@@ -32,7 +33,6 @@ void GravityManager::Update() {
                 if(object->GetWCollision()) {
                     object->SetGravity(0.0f);
                     object->SetFalling(false);
-
                 }
             }
             object->SetFallingTime(Util::Time::GetElapsedTimeMs());

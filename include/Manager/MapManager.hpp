@@ -26,8 +26,6 @@ class MapManager {
         void Update() const {
             GameObject_Move();
             CtlMarioPipeMove();
-
-
         }
     private:
         std::shared_ptr<Mario>& Mario_;

@@ -21,6 +21,7 @@ enum class BlockType {
     Blue_Foot,
     Blue_Original,
     Air,
+    Elevator,
     flag,
     flagball,
     flagpole
