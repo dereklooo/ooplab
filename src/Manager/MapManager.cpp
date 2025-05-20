@@ -6,6 +6,8 @@
 #include <iostream>
 #include <ostream>
 
+#include "Block/Elevator.hpp"
+
 MapManager::MapManager(
     std::shared_ptr<Mario> &Mario,
     std::shared_ptr<Map> &Background,
@@ -79,6 +81,10 @@ void MapManager::CtlMarioPipeMove() const{
                     block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y + 816});
                 }
                 else {
+                    if(block->GetType() == BlockType::Elevator_Down || block->GetType() == BlockType::Elevator_Up) {
+                        const auto temp = std::dynamic_pointer_cast<Elevator>(block);
+                        temp->SetMove(false);
+                    }
                     block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y - 816});
                 }
             }

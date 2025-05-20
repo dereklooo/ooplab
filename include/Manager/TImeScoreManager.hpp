@@ -5,17 +5,23 @@
 #ifndef TIMESCOREMANAGER_HPP
 #define TIMESCOREMANAGER_HPP
 #include "Mario/Mario.hpp"
-#include "TimeScore/Score.hpp"
-#include "TimeScore/Timer.hpp"
+#include "Util/Renderer.hpp"
+#include "TImeAndScore/Score.hpp"
+#include "TImeAndScore/Timer.hpp"
+
 class TimeScoreManager {
     public:
-        explicit TimeScoreManager(std::shared_ptr<Mario> &Mario,std::shared_ptr<Score> &Score,std::shared_ptr<Timer> &Timer);
+        explicit TimeScoreManager(const std::shared_ptr<Mario> &Mario,float GameStartTime);
         void update() const;
         float GetTimer() const;
         int GetScore() const;
+        void TimeScoreManagerInitialize(const std::shared_ptr<Util::Renderer> &renderer);
     private:
-        std::shared_ptr<Mario>& Mario_;
-        std::shared_ptr<Score> Score_;
-        std::shared_ptr<Timer> Timer_;
+        float GameStartTime;
+        int Score_;
+        std::shared_ptr<Mario> Mario_;
+        std::vector<std::shared_ptr<Score>> Scores;
+        std::vector<std::shared_ptr<Timer>> Timers;
+
 };
 #endif //TIMESCOREMANAGER_HPP

@@ -92,8 +92,6 @@ add_executable(${PROJECT_NAME}
         src/Block/Pipe64_128.cpp
         include/Block/FloorBlock.hpp
         src/Block/FloorBlock.cpp
-        include/TimeScore/Timer.hpp
-        include/TimeScore/Score.hpp
         include/Manager/TImeScoreManager.hpp
         src/Manager/TimeScoreManager.cpp
         src/TimeScore/Timer.cpp
@@ -129,6 +127,8 @@ add_executable(${PROJECT_NAME}
         src/Block/Elevator.cpp
         include/Manager/ElevatorManager.hpp
         src/Manager/ElevatorManager.cpp
+        include/TImeAndScore/Timer.hpp
+        include/TImeAndScore/Score.hpp
 )
 
 if(MSVC)

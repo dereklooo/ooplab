@@ -28,6 +28,7 @@ public:
     void Start() const {
         m_ManagerManager->MarioInitialize();
         m_ManagerManager->FireballsInitialize();
+        m_ManagerManager->TimeScoreManagerInitialize(m_renderer);
         m_renderer->AddChild(m_Background);
         m_renderer->AddChild(m_Mario);
         for (auto &[type,blocks] : *Blocks) {

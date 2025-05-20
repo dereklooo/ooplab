@@ -10,7 +10,7 @@ void Elevator::hit(const std::shared_ptr<Mario> &Mario) {
 }
 
 void Elevator::Move() {
-    if(this->GetPosition().x <= 1000) {
+    if(this->GetPosition().x <= 1000 && this->GetPosition().x >= 950) {
         this->Moving = true;
     }
     if(this->Moving == true) {

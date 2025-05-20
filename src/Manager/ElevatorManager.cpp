@@ -8,16 +8,16 @@ ElevatorManager::ElevatorManager(std::shared_ptr<std::unordered_map<BlockType,st
 void ElevatorManager::Update() const {
     for (const auto& elevator : (*Blocks)[BlockType::Elevator_Down]) {
         const auto temp = std::dynamic_pointer_cast<Elevator>(elevator);
-        temp->Move();
         if(Mario_->DownCollision(temp)) {
-            Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y - 1.5});
+            Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y - 3});
         }
+        temp->Move();
     }
     for (const auto& elevator : (*Blocks)[BlockType::Elevator_Up]) {
         const auto temp = std::dynamic_pointer_cast<Elevator>(elevator);
         temp->Move();
         if(Mario_->DownCollision(temp)) {
-            Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 1.5});
+            Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 3});
         }
     }
 

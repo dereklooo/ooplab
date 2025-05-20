@@ -14,7 +14,7 @@
 
 class StillObject : public Object {
 public:
-    StillObject(std::string ImagePath) : ImagePath(ImagePath) {m_Drawable = std::make_shared<Util::Image>(ImagePath);};
+    explicit StillObject(const std::string& ImagePath) : ImagePath(ImagePath) {m_Drawable = std::make_shared<Util::Image>(ImagePath);};
 
     void SetImagePath(std::string){this->ImagePath = ImagePath;}
 

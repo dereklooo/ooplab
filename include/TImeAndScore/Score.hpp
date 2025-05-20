@@ -1,15 +1,16 @@
 //
-// Created by benson on 2025/5/1.
+// Created by benson on 2025/5/20.
 //
 
 #ifndef SCORE_HPP
 #define SCORE_HPP
-class Score {
+#include <Object/StillObject.hpp>
+class Score final : public StillObject{
     public:
         Score();
         void SetScore(int score);
         int GetScore() const;
     private:
-        int GameScore = 0;
+        int score;
 };
 #endif //SCORE_HPP
