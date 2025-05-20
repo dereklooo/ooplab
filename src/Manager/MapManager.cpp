@@ -76,11 +76,9 @@ void MapManager::CtlMarioPipeMove() const{
         for(auto &[Type,blocks] : *Blocks) {
             for(const auto& block : blocks) {
                 if(Mario_->GetNextPosition() == glm::vec2(0,0)){
-                    std::cout<<"A"<<std::endl;
                     block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y + 816});
                 }
                 else {
-                    std::cout<<"B"<<std::endl;
                     block->SetPosition({block->GetPosition().x - Mario_->GetPosition().x, block->GetPosition().y - 816});
                 }
             }

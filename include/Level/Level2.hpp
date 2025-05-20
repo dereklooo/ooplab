@@ -24,7 +24,8 @@ public:
         m_ManagerManager->SetBlock(BlueOriginalBlock, BlockType::Blue_Original);
         m_ManagerManager->SetBlock(BlueFootBLock, BlockType::Blue_Foot);
         m_ManagerManager->SetBlock(AirBlock, BlockType::Air);
-        m_ManagerManager->SetBlock(Elevator,BlockType::Elevator);
+        m_ManagerManager->SetBlock(Elevator_Down,BlockType::Elevator_Down);
+        m_ManagerManager->SetBlock(Elevator_Up,BlockType::Elevator_Up);
         m_ManagerManager->SetBlock(HorizontalPipe_64_64,BlockType::HorizontalPipe_64_64);
         m_ManagerManager->SetBlock(LongPipe,BlockType::LongPipe);
 
@@ -77,9 +78,12 @@ private:
     std::vector<glm::vec2> AirBlock={
     {15.5,-2.5}, {15.5,-3.5}, {15.5,-4.5}, {15.5,-5.5}, {15.5,-6.5}, {15.5,-7.5}, {15.5,-8.5}, {15.5,-9.5}, {15.5,-10.5}, {15.5,-11.5}, {15.5,-12.5}, {15.5,-13.5}, {15.5,-14.5}
 };
-    std::vector<glm::vec2> Elevator = {
-        {152,-27} , {152,-23}
+    std::vector<glm::vec2> Elevator_Down = {
+        {152,-29} , {152,-21}
 };
+    std::vector<glm::vec2> Elevator_Up = {
+        {166,-29} , {166,-21}
+    };
     std::vector<glm::vec2> HorizontalPipe_64_64 = {
     {12.0,-12.0},{126,-45}
 };

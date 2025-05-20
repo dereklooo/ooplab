@@ -4,6 +4,7 @@
 
 #ifndef MANAGERMANAGER_HPP
 #define MANAGERMANAGER_HPP
+#include "Manager/ElevatorManager.hpp"
 #include "Manager/MapManager.hpp"
 #include "Manager/ItemManager.hpp"
 #include "Manager/GravityManager.hpp"
@@ -38,6 +39,7 @@ class ManagerManager {
             MapManager_ = std::make_shared<MapManager>(Mario,Background,FireBalls,Blocks,Monsters,Items);
             FireBallManager_ = std::make_shared<FireBallManager>(Mario,Renderer,FireBalls,Blocks,Monsters);
             FlagManager_=std::make_shared<FlagManager>(Mario,Renderer,Blocks,Background);
+            ElevatorManager_ = std::make_shared<ElevatorManager>(Blocks,Mario);
     };
     void SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const{
         BlockManager_->SetBlock(positions, type);
@@ -61,7 +63,6 @@ class ManagerManager {
         BlockManager_->SetAnotherMap(positions,positions_);
     }
     void Update() const{
-
         FlagManager_->Update();
         ItemManager_->Update();
         MonsterManager_->Update();
@@ -69,6 +70,7 @@ class ManagerManager {
         MapManager_->Update();
         MarioManager_->Update();
         FireBallManager_->Update();
+        ElevatorManager_->Update();
     }
 
 
@@ -88,6 +90,7 @@ class ManagerManager {
         std::shared_ptr<MonsterManager> MonsterManager_;
         std::shared_ptr<ItemManager> ItemManager_;
         std::shared_ptr<FireBallManager> FireBallManager_;
+        std::shared_ptr<ElevatorManager> ElevatorManager_;
 
 };
 #endif //MANAGERMANAGER_HPP

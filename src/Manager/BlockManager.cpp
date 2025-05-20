@@ -44,7 +44,8 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::LongPipe: block = std::make_shared<LongPipe>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::Floor: block = std::make_shared<FloorBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Air: block = std::make_shared<AirBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
-            case BlockType::Elevator: block = std::make_shared<Elevator>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
+            case BlockType::Elevator_Up: block = std::make_shared<Elevator>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48),Right); break;
+            case BlockType::Elevator_Down: block = std::make_shared<Elevator>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48),Left); break;
             case BlockType::Blue_Floor: block = std::make_shared<BlueFloorBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::Blue_Foot: block = std::make_shared<BlueFootBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::Blue_Original: block = std::make_shared<BlueOriginalBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
@@ -53,7 +54,12 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::flagpole: block = std::make_shared<FlagPole>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
         }
         block->SetZIndex(100);
-        block->SetSize({1.65,1.5});
+        if(type == BlockType::Blue_Floor || type == BlockType::Pipe_64_64 || type == BlockType::Pipe_64_96 || type == BlockType::Pipe_64_128 || type == BlockType::LongPipe || type == BlockType::HorizontalPipe_64_64) {
+            block->SetSize({1.65,1.5});
+        }
+        else {
+            block->SetSize({1.5,1.5});
+        }
         //if (type==BlockType::flagpole || type==BlockType::flag) {
         //    block->SetSize({3.3,3.0});
         //}

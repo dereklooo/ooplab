@@ -127,6 +127,8 @@ add_executable(${PROJECT_NAME}
         src/Block/Flag.cpp
         include/Block/Elevator.hpp
         src/Block/Elevator.cpp
+        include/Manager/ElevatorManager.hpp
+        src/Manager/ElevatorManager.cpp
 )
 
 if(MSVC)
