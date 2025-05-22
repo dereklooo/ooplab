@@ -12,5 +12,6 @@ class Score final : public StillObject{
         int GetScore() const;
     private:
         int score;
+        std::vector<std::shared_ptr<Util::Image>> images;
 };
 #endif //SCORE_HPP

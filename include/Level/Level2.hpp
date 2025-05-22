@@ -46,6 +46,7 @@ public:
             this->GameOver = true;
             return;
         }
+
     };
 private:
 
@@ -109,7 +110,7 @@ private:
     {12.0,-12.0}, {114.0,-28.5},{126,-45},{177,-26}
 };
     std::vector<glm::vec2> LongPipe = {
-        {128,-40.5},{179,-21.5}
+        {128,-40.5},{179,-23.5}
     };
     std::vector<glm::vec2> NextPipePos = {
         {0,0},{0,0},{126.0,-29},{161.0,-12.5}

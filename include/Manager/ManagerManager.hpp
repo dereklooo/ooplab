@@ -76,6 +76,7 @@ class ManagerManager {
         MarioManager_->Update();
         FireBallManager_->Update();
         ElevatorManager_->Update();
+        TimeScoreManager_->Update();
     }
 
 

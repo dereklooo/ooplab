@@ -129,6 +129,7 @@ add_executable(${PROJECT_NAME}
         src/Manager/ElevatorManager.cpp
         include/TImeAndScore/Timer.hpp
         include/TImeAndScore/Score.hpp
+        src/Monster/EatFlower.cpp
 )
 
 if(MSVC)

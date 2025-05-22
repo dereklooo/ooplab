@@ -12,7 +12,7 @@
 class TimeScoreManager {
     public:
         explicit TimeScoreManager(const std::shared_ptr<Mario> &Mario,float GameStartTime);
-        void update() const;
+        void Update() const;
         float GetTimer() const;
         int GetScore() const;
         void TimeScoreManagerInitialize(const std::shared_ptr<Util::Renderer> &renderer);

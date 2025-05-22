@@ -9,6 +9,7 @@ void LuckyBlock::ChangeState() {
         this->SetDrawable(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock_.png"));
 }
 void LuckyBlock::hit(const std::shared_ptr<Mario> &Mario) {
+        Mario->AddScore(200);
         if(this->GotHit == false) {
                 this->ChangeState();
                 this->Item->SetVisible(true);

@@ -8,5 +8,5 @@ FlagPole::FlagPole(glm::vec2 Position) : SceneObject(RESOURCE_DIR"/image/Backgro
 }
 
 void FlagPole::hit(const std::shared_ptr<Mario> &Mario) {
-
+    (void) Mario;
 }

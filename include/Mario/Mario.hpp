@@ -85,10 +85,10 @@ class Mario final : public AnimationObject{
             return hurt.StartHurtingTIme;
         }
         void AddScore(const int adder) {
-            Score += adder;
+            this->Score += adder;
         }
         int GetScore() const{
-            return Score;
+            return this->Score;
         }
         void AddCoin(const int adder) {
             Coin += adder;

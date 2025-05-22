@@ -91,6 +91,7 @@ void MarioManager::HandleBlock() const {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
                 Mario_->SetGravity(2);
                 block->hit(Mario_);
+                std::cout<<Mario_->GetScore()<<std::endl;
             }
             else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0 && (Mario_->GetTouchFlagFlag()==false ) ){
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
@@ -118,6 +119,8 @@ void MarioManager::HandleItem() const {
                 item->SetVisible(false);
                 item->SetWCollision(false);
                 item->ChangeMarioState(Mario_);
+                item->SetPosition({item->GetPosition().x,item->GetPosition().y - 40000});
+                Mario_->AddScore(300);
             }
         }
     }
@@ -132,6 +135,7 @@ void MarioManager::HandleMonster() const {
                         monster->SetWCollision(false);
                         monster->SetSize({monster->GetSize().x, monster->GetSize().y * -1});
                         monster->SetGravity(-2.0f);
+                        Mario_->AddScore(200);
                 }
                 if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() < 10000) {
                     if ((static_cast<int>(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime()) / 200) % 2 == 0) {
@@ -205,6 +209,7 @@ void MarioManager::HandleMonster() const {
                 }
                 else if(Mario_->DownCollision(monster) && !monster->GetDie()) {
                     monster->Hurt();
+                    Mario_->AddScore(200);
                     Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
                     Mario_->SetGravity(-2.0f);
                 }

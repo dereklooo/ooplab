@@ -33,5 +33,4 @@ void Coin_Item::Action() {
 }
 void Coin_Item::ChangeMarioState(std::shared_ptr<Mario> &mario) {
         mario->AddCoin(1);
-        mario->AddScore(200);
 }

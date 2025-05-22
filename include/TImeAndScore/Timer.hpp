@@ -9,9 +9,10 @@
 class Timer final : public StillObject {
     public:
         explicit Timer();
-        int GetTime();
-        void SetTime(float Time);
+        int GetTime() const;
+        void SetTime(int Time);
     private:
         int time;
+        std::vector<std::shared_ptr<Util::Image>> images;
 };
 #endif //TIMER_HPP
