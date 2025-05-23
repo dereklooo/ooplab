@@ -13,7 +13,7 @@ class EatFlower final : public Monster {
             side = s;
         }
         Side GetSide() const {
-                return side;
+            return side;
         }
         void Hurt() override;
         void Action() override;

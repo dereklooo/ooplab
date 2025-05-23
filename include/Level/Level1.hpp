@@ -49,6 +49,9 @@ class Level1 : public Level{
                 this->GameOver = true;
                 return;
             }
+            if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
+                std::cout<<m_Background->GetPosition().x<<std::endl;
+            }
             std::vector<std::shared_ptr<Monster>> _temp;
             switch (Condition_num) {
                 case 1:
@@ -105,6 +108,26 @@ class Level1 : public Level{
                         Condition_num += 1;
                     }
                     break;
+                case 7:
+                    if(m_Background->GetPosition().x <= -5300 && m_Background->GetPosition().x >= -5350) {
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(750,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(900,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(950,-247),Left));
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
+                        Condition_num += 1;
+                    }
+                    break;
+                case 8:
+                    if(m_Background->GetPosition().x <= -7400 && m_Background->GetPosition().x >= -7450) {
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(650,-247),Left));
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
+                        Condition_num += 1;
+                    }
+                break;
                 default:
                     break;;
             }

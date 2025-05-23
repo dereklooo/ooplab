@@ -14,6 +14,7 @@ Mario_(Mario){
         auto temp2 = std::make_shared<Timer>();
         temp2->SetPosition({-75 + 30 * i,340});
         temp2->SetSize({1.5,2});
+        temp2->SetZIndex(100);
         Timers.push_back(temp2);
     }
 }
