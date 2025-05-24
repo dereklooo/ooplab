@@ -46,6 +46,37 @@ public:
             this->GameOver = true;
             return;
         }
+        if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
+            std::cout<<m_Background->GetPosition().x<<std::endl;
+        }
+        std::vector<std::shared_ptr<Monster>> _temp;
+        switch (Condition_num) {
+            case 1:
+                if (m_Background->GetPosition().x <= -700 && m_Background->GetPosition().x >= -750 && !m_Mario->GetAnimating()) {
+                    _temp.clear();
+                    _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(490,-240),Left));
+                    _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(540,-240),Left));
+                    m_ManagerManager->AddMonster(_temp,m_renderer);
+                    Condition_num += 1;
+                }
+            case 2:
+                if (m_Background->GetPosition().x <= -1000 && m_Background->GetPosition().x >= -1050) {
+                    _temp.clear();
+                    _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(850,-240),Left));
+                    m_ManagerManager->AddMonster(_temp,m_renderer);
+                    Condition_num += 1;
+                }
+            case 3:
+                if(m_Background->GetPosition().x <= -1900 && m_Background->GetPosition().x >= -1950) {
+                    _temp.clear();
+                    _temp.push_back(std::make_shared<BlueTurtle>(glm::vec2(700,-240),Left));
+                    _temp.push_back(std::make_shared<BlueTurtle>(glm::vec2(760,-240),Left));
+                    m_ManagerManager->AddMonster(_temp,m_renderer);
+                    Condition_num += 1;
+                }
+            default:
+                break;
+        }
 
     };
 private:

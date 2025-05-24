@@ -18,6 +18,11 @@ enum MonsterType {
     Turtle_Type
 };
 
+enum TurtleType {
+    OutSide,
+    Inside,
+    Rolling,
+};
 class Monster : public AnimationObject {
     public:
       Monster(const size_t size,const std::string &Path) : AnimationObject(size,Path) {};

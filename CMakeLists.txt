@@ -130,6 +130,9 @@ add_executable(${PROJECT_NAME}
         include/TImeAndScore/Timer.hpp
         include/TImeAndScore/Score.hpp
         src/Monster/EatFlower.cpp
+        include/Monsters/Blue_Mushroom.hpp
+        src/Monster/Blue_Mushroom.cpp
+        include/Monsters/BlueTurtle.hpp
 )
 
 if(MSVC)

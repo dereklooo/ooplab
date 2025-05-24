@@ -85,7 +85,12 @@ void MonsterManager::HandleMonsterCollision(const std::shared_ptr<Monster>& mons
             break;
             case MonsterType::Turtle_Type:{
                 const auto temp = std::dynamic_pointer_cast<Turtle>(monster);
-                if (temp->GetTurtleTye() == Inside || temp->GetTurtleTye() == OutSide) {
+                if(_monster->GetType() == Turtle_Type) {
+                    if(std::dynamic_pointer_cast<Turtle>(_monster)->GetTurtleTye() == Rolling) {
+                        break;
+                    }
+                }
+                if ((temp->GetTurtleTye() == Inside || temp->GetTurtleTye() == OutSide)) {
                     if (_monster->LeftCollision(monster)) {
                         _monster->SetWay(Way::Right);
                         monster->SetWay(Way::Left);

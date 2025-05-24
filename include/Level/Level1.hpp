@@ -49,9 +49,6 @@ class Level1 : public Level{
                 this->GameOver = true;
                 return;
             }
-            if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-                std::cout<<m_Background->GetPosition().x<<std::endl;
-            }
             std::vector<std::shared_ptr<Monster>> _temp;
             switch (Condition_num) {
                 case 1:
