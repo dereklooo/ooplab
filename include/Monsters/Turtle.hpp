@@ -11,7 +11,7 @@ class Turtle : public Monster{
             this->type = MonsterType::Turtle_Type;
             this->Turtle_type = TurtleType::OutSide;
             this->SetWay(way);
-            this->SetSize({1.5,1.5});
+            this->SetSize({1.2,1.25});
             this->SetZIndex(100);
             this->SetPosition(position);
         };
@@ -20,7 +20,7 @@ class Turtle : public Monster{
         TurtleType GetTurtleTye() const {
             return Turtle_type;
         }
-    private:
+    protected:
         TurtleType Turtle_type;
 
         std::shared_ptr<Util::Animation> WalkDrawable = Turtle::GenerateAnimation(2,RESOURCE_DIR "/image/character/monster/turtle/walk",200,100);

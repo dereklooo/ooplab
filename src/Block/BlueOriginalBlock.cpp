@@ -9,6 +9,11 @@ void BlueOriginalBlock::ChangeState() {
     this->SetDrawable(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/Level1/Block/LuckyBlock_.png"));
 }
 void BlueOriginalBlock::hit(const std::shared_ptr<Mario> &Mario) {
+    if(this->Bouncing == false && this->GotHit == false) {
+        this->Bouncing = true;
+        this->BouncingPos_y = this->GetPosition().y;
+        this->BouncingTimer = Util::Time::GetElapsedTimeMs();
+    }
     if(Item == nullptr && GotHit == false) {
         if(!Mario->GetType() == Small) {
             this->SetSize({0,0});

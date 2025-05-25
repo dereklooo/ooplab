@@ -7,11 +7,11 @@ void Turtle::Action() {
         if(Turtle_type == OutSide) {
             if(this->way == Way::Left) {
                 this->SetPosition({this->GetPosition().x - 1.5,this->GetPosition().y});
-                this->SetSize({-1.5,1.5});
+                this->SetSize({-1.3,1.25});
             }
             else if(this->way == Way::Right) {
                 this->SetPosition({this->GetPosition().x + 1.5,this->GetPosition().y});
-                this->SetSize({1.5,1.5});
+                this->SetSize({1.3,1.25});
             }
         }
         else if(Turtle_type == Inside) {
@@ -22,16 +22,16 @@ void Turtle::Action() {
                 this->SetDrawable(WalkDrawable);
                 this->Turtle_type = OutSide;
             }
-            this->SetSize({1.5,1.5});
+            this->SetSize({1.3,1.25});
         }
         else if(Turtle_type == Rolling) {
             if(this->way == Way::Left) {
                 this->SetPosition({this->GetPosition().x - 5,this->GetPosition().y});
-                this->SetSize({-1.5,1.5});
+                this->SetSize({-1.3,1.25});
             }
             else if(this->way == Way::Right) {
                 this->SetPosition({this->GetPosition().x + 5,this->GetPosition().y});
-                this->SetSize({1.5,1.5});
+                this->SetSize({1.3,1.25});
             }
         }
     }

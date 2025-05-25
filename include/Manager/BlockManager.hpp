@@ -22,6 +22,8 @@
 #include "Block/FlagBall.hpp"
 #include "Block/FlagPole.hpp"
 #include "Block/Elevator.hpp"
+#include "Block/OriginalCoin.hpp"
+#include "Block/BlueOriginalCoin.hpp"
 class BlockManager {
 public:
     BlockManager(
@@ -33,6 +35,7 @@ public:
     void SetFloor(const std::vector<glm::vec2>& Position,const std::vector<glm::vec2>& Size) const;
     void SetBlock(std::vector<glm::vec2> &positions, BlockType type) const;
     void SetAnotherMap(const std::vector<glm::vec2> &positions,const std::vector<glm::vec2> &positions_) const;
+    void Update() const;
 private:
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;
 

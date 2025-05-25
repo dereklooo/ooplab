@@ -133,6 +133,10 @@ add_executable(${PROJECT_NAME}
         include/Monsters/Blue_Mushroom.hpp
         src/Monster/Blue_Mushroom.cpp
         include/Monsters/BlueTurtle.hpp
+        include/Block/OriginalCoin.hpp
+        src/Block/OriginalCoin.cpp
+        include/Block/BlueOriginalCoin.hpp
+        src/Block/BlueOriginalCoin.cpp
 )
 
 if(MSVC)

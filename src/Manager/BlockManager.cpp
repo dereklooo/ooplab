@@ -36,6 +36,7 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
         switch (type) {
             case BlockType::Lucky: block = std::make_shared<LuckyBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Original: block = std::make_shared<OriginalBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
+            case BlockType::OriginalCoin: block = std::make_shared<OriginalCoin>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Foot: block = std::make_shared<FootBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Pipe_64_64: block = std::make_shared<Pipe64_64>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
             case BlockType::Pipe_64_96: block = std::make_shared<Pipe64_96>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48)); break;
@@ -49,6 +50,7 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::Blue_Floor: block = std::make_shared<BlueFloorBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::Blue_Foot: block = std::make_shared<BlueFootBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::Blue_Original: block = std::make_shared<BlueOriginalBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::Blue_OriginalCoin : block = std::make_shared<BlueOriginalCoin>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::flag: block = std::make_shared<Flag>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::flagball: block = std::make_shared<FlagBall>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::flagpole: block = std::make_shared<FlagPole>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
@@ -75,5 +77,12 @@ void BlockManager::SetFloor(const std::vector<glm::vec2>& Position,const std::ve
         BigAirBlock->SetSize({Size[i].x * 1.5,Size[i].y* 1.5});
         BigAirBlock->SetZIndex(100);
         AddBlock(BigAirBlock);
+    }
+}
+void BlockManager::Update() const {
+    for(auto& [Type,blocks] : *(Blocks)) {
+        for(const auto & block : blocks) {
+            block->Bounce();
+        }
     }
 }

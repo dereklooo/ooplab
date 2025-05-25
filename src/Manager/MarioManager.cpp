@@ -183,6 +183,9 @@ void MarioManager::HandleMonster() const {
                         }
                         case Turtle_Type: {
                             const auto temp = std::dynamic_pointer_cast<Turtle>(monster);
+                            if(temp->GetWCollision() == false) {
+                                break;
+                            }
                             if(temp->GetTurtleTye() == Inside) {
                                 if(Mario_->RightCollision(monster)) {
                                     monster->SetWay(Right);
@@ -194,10 +197,7 @@ void MarioManager::HandleMonster() const {
                                 }
                                 monster->Hurt();
                             }
-                            else if(temp->GetTurtleTye() == OutSide){
-                                Mario_->Hurt();
-                            }
-                            else if(temp->GetTurtleTye() == Rolling) {
+                            else if(temp->GetTurtleTye() == OutSide || temp->GetTurtleTye() == Rolling){
                                 Mario_->Hurt();
                             }
                             break;
@@ -299,7 +299,7 @@ void MarioManager::MarioInputCtl() const {
     }
 
     if (Util::Input::IsKeyDown(Util::Keycode::E)) {
-        Mario_->SetPosition({850, -180});
+        Mario_->SetPosition({Mario_->GetPosition().x + 1000,Mario_->GetPosition().y});
     }
     Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());

@@ -69,6 +69,7 @@ class ManagerManager {
     }
     void Update() const{
         FlagManager_->Update();
+        BlockManager_->Update();
         ItemManager_->Update();
         MonsterManager_->Update();
         GravityManager_->Update();

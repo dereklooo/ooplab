@@ -54,7 +54,7 @@ class Level1 : public Level{
                 case 1:
                     if (m_Background->GetPosition().x <= -600 && m_Background->GetPosition().x >= -650) {
                         _temp.clear();
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-220),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(650,-220),Left));
                         _temp.push_back(std::make_shared<Turtle>(glm::vec2(600,-220),Left)); // 測試用之後記得刪掉
                         m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
