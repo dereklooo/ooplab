@@ -306,9 +306,8 @@ void MarioManager::MarioInputCtl() const {
 }
 void MarioManager::MarioInitialize() const {
     Mario_ = std::make_shared<Mario>();
-    Mario_->SetGravity(-2.0f);
     Mario_->SetFallingTime(Util::Time::GetElapsedTimeMs());
-    Mario_->SetPosition({-620,-150});
+    Mario_->SetPosition({-620,0});
     Mario_->UpDateCurrentState(Stand);
 
     Mario_->SetZIndex(50);

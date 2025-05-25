@@ -137,6 +137,9 @@ add_executable(${PROJECT_NAME}
         src/Block/OriginalCoin.cpp
         include/Block/BlueOriginalCoin.hpp
         src/Block/BlueOriginalCoin.cpp
+        include/Level/Level4.hpp
+        include/Block/WhiteBlock.hpp
+        src/Block/WhiteBlock.cpp
 )
 
 if(MSVC)

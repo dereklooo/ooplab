@@ -24,6 +24,7 @@
 #include "Block/Elevator.hpp"
 #include "Block/OriginalCoin.hpp"
 #include "Block/BlueOriginalCoin.hpp"
+#include "Block/WhiteBlock.hpp"
 class BlockManager {
 public:
     BlockManager(

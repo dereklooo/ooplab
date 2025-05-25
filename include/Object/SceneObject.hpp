@@ -28,6 +28,7 @@ enum class BlockType {
     flagpole,
     OriginalCoin,
     Blue_OriginalCoin,
+    White_Block
 };
 
 class SceneObject : public StillObject{

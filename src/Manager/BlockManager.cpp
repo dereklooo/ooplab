@@ -54,6 +54,7 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::flag: block = std::make_shared<Flag>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::flagball: block = std::make_shared<FlagBall>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::flagpole: block = std::make_shared<FlagPole>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::White_Block : block = std::make_shared<WhiteBlock>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
         }
         block->SetZIndex(100);
         if(type == BlockType::Blue_Floor || type == BlockType::Pipe_64_64 || type == BlockType::Pipe_64_96 || type == BlockType::Pipe_64_128 || type == BlockType::LongPipe || type == BlockType::HorizontalPipe_64_64) {

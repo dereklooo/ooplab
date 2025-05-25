@@ -14,6 +14,7 @@
 #include "Level/Level1.hpp"
 #include "Level/Level2.hpp"
 #include "Level/Level3.hpp"
+#include "Level/Level4.hpp"
 
 #include "Monsters/Black_turtle.hpp"
 #include "Monsters/Eat_flower.hpp"

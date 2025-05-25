@@ -47,12 +47,13 @@ private:
 
     std::shared_ptr<Level> m_level3;
 
+    std::shared_ptr<Level> m_level4;
 
     std::shared_ptr <Util::Renderer> m_renderer;
 
     State m_CurrentState = State::Title;
 
-    size_t level = 2;
+    size_t level = 4;
 
 };
 #endif
