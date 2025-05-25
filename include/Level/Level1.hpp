@@ -25,6 +25,7 @@ class Level1 : public Level{
             m_ManagerManager->SetBlock(Pipe_64_128, BlockType::Pipe_64_128);
             m_ManagerManager->SetBlock(BlueFloorBlock,BlockType::Blue_Floor);
             m_ManagerManager->SetBlock(BlueOriginalBlock, BlockType::Blue_Original);
+            m_ManagerManager->SetBlock(OriginalBlock_Coins, BlockType::OriginalCoin);
             //m_ManagerManager->SetBlock(AirBlock, BlockType::Air);
             m_ManagerManager->SetBlock(HorizontalPipe_64_64,BlockType::HorizontalPipe_64_64);
             m_ManagerManager->SetBlock(LongPipe,BlockType::LongPipe);
@@ -32,6 +33,7 @@ class Level1 : public Level{
             m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
             m_ManagerManager->SetItem(Item_FireFlower, ItemType::Item_FireFlower);
             m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
+            m_ManagerManager->SetItem(Item_Coins, ItemType::Item_Coins);
             m_ManagerManager->SetItem(Item_Star,ItemType::Item_Star);
             m_ManagerManager->SetItem(Item_OutSideCoin, ItemType::Item_OutSideCoin);
 
@@ -117,10 +119,10 @@ class Level1 : public Level{
                     }
                     break;
                 case 8:
-                    if(m_Background->GetPosition().x <= -7400 && m_Background->GetPosition().x >= -7450) {
+                    if(m_Background->GetPosition().x <= -7200 && m_Background->GetPosition().x >= -7250) {
                         _temp.clear();
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(600,-247),Left));
-                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(650,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(800,-247),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(850,-247),Left));
                         m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
@@ -137,7 +139,8 @@ class Level1 : public Level{
        std::vector<glm::vec2> LuckyBlockPosition = {{16.5,-9.5},{22.5,-5.5},{21.5,-9.5},{23.5,-9.5},{78.5,-9.5},{94.5,-5.5},{106.5,-9.5},{109.5,-9.5},{109.5,-5.5},{112.5,-9.5},{129.5,-5.5},{130.5,-5.5},{170.5,-9.5}};
        std::vector<glm::vec2>OriginBlock = {{20.5,-9.5} , {22.5,-9.5} , {24.5,-9.5} , {77.5,-9.5} , {79.5,-9.5} , {80.5,-5.5} , {81.5,-5.5} , {82.5,-5.5} , {83.5,-5.5} , {84.5,-5.5} , {85.5,-5.5} , {86.5,-5.5} , {87.5,-5.5} , {91.5,-5.5} ,
        {92.5,-5.5} , {93.5,-5.5} , {100.5,-9.5} , {118.5,-9.5} , {121.5 , -5.5} , {122.5 , -5.5} , {123.5,-5.5},{128.5 , -5.5} ,{129.5,-9.5},{130.5,-9.5}, {131.5 , -5.5} , {168.5,-9.5},{169.5 , -9.5} , {171.5 , -9.5}   ,{101.5,-9.5}};
-       std::vector<glm::vec2> FootBlock = {{134.5, -12.5},{135.5, -12.5},{135.5, -11.5},{136.5, -12.5},{136.5, -11.5},{136.5, -10.5},{137.5, -12.5},{137.5, -11.5},{137.5, -10.5},{137.5, -9.5},{143.5, -12.5}, {142.5, -12.5}, {142.5, -11.5}, {141.5, -12.5}, {141.5, -11.5}, {141.5, -10.5}, {140.5, -12.5}, {140.5, -11.5}, {140.5, -10.5}, {140.5, -9.5},
+        std::vector<glm::vec2> OriginalBlock_Coins = {{94.5,-9.5}};
+        std::vector<glm::vec2> FootBlock = {{134.5, -12.5},{135.5, -12.5},{135.5, -11.5},{136.5, -12.5},{136.5, -11.5},{136.5, -10.5},{137.5, -12.5},{137.5, -11.5},{137.5, -10.5},{137.5, -9.5},{143.5, -12.5}, {142.5, -12.5}, {142.5, -11.5}, {141.5, -12.5}, {141.5, -11.5}, {141.5, -10.5}, {140.5, -12.5}, {140.5, -11.5}, {140.5, -10.5}, {140.5, -9.5},
     {148.5, -12.5}, {149.5, -12.5}, {150.5, -12.5}, {151.5, -12.5}, {152.5, -12.5}, {149.5, -11.5}, {150.5, -11.5}, {151.5, -11.5}, {152.5, -11.5}, {150.5, -10.5}, {151.5, -10.5}, {152.5, -10.5}, {151.5, -9.5}, {152.5, -9.5},{158.5, -12.5}, {157.5, -12.5}, {156.5, -12.5}, {155.5, -12.5}, {157.5, -11.5}, {156.5, -11.5}, {155.5, -11.5}, {156.5, -10.5}, {155.5, -10.5}, {155.5, -9.5},
     {181.5, -12.5}, {182.5, -12.5}, {183.5, -12.5}, {184.5, -12.5}, {185.5, -12.5}, {186.5, -12.5}, {187.5, -12.5}, {188.5, -12.5}, {189.5, -12.5}, {182.5, -11.5}, {183.5, -11.5}, {184.5, -11.5}, {185.5, -11.5}, {186.5, -11.5}, {187.5, -11.5}, {188.5, -11.5}, {189.5, -11.5}, {183.5, -10.5}, {184.5, -10.5}, {185.5, -10.5}, {186.5, -10.5}, {187.5, -10.5}, {188.5, -10.5}, {189.5, -10.5}, {184.5, -9.5}, {185.5, -9.5}, {186.5, -9.5}, {187.5, -9.5}, {188.5, -9.5}, {189.5, -9.5}, {185.5, -8.5}, {186.5, -8.5}, {187.5, -8.5}, {188.5, -8.5}, {189.5, -8.5}, {186.5, -7.5}, {187.5, -7.5}, {188.5, -7.5}, {189.5, -7.5}, {187.5, -6.5}, {188.5, -6.5}, {189.5, -6.5}, {188.5, -5.5}, {189.5, -5.5}, {189.5, -4.5}
        ,{198.5, -12.5}};
@@ -177,6 +180,7 @@ class Level1 : public Level{
         std::vector<glm::vec2> Item_Mushroom = {{21.5f,-9.5f},{78.5f,-9.5f}};
         std::vector<glm::vec2> Item_FireFlower = {{109.5f,-5.5f}};
         std::vector<glm::vec2> Item_Coin = {{16.5f,-9.5},{22.5,-5.5f},{23.5f,-9.5f},{94.5f,-5.5f},{94.5f,-9.5f},{106.5f,-9.5f},{109.5f,-9.5f},{112.5f,-9.5f},{129.5f,-5.5f},{130.5f,-5.5f},{170.5f,-9.5f}};
+        std::vector<glm::vec2> Item_Coins = {{94.5,-9.5},{94.5,-9.5},{94.5,-9.5},{94.5,-9.5},{94.5,-9.5}};
         std::vector<glm::vec2> Item_Star = {{101.5,-9.5}};
         std::vector<glm::vec2> Item_OutSideCoin = {
         {59.5, -20.5}, {60.5, -20.5}, {61.5, -20.5}, {62.5, -20.5}, {63.5, -20.5}, {64.5, -20.5}, {65.5, -20.5},

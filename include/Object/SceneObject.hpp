@@ -45,13 +45,13 @@ class SceneObject : public StillObject{
         BlockType virtual GetType() = 0;
         void Bounce() {
             if(this->Bouncing == true) {
-                if(Util::Time::GetElapsedTimeMs() - this->BouncingTimer <= 200) {
-                    this->SetPosition({this->GetPosition().x,this->GetPosition().y + 85.0f * Util::Time::GetDeltaTimeMs() / 1000});
+                if(Util::Time::GetElapsedTimeMs() - this->BouncingTimer <= 150) {
+                    this->SetPosition({this->GetPosition().x,this->GetPosition().y + 185.0f * Util::Time::GetDeltaTimeMs() / 1000});
                 }
-                else if(Util::Time::GetElapsedTimeMs() - this->BouncingTimer <= 400){
-                    this->SetPosition({this->GetPosition().x,this->GetPosition().y - 85.0f * Util::Time::GetDeltaTimeMs() / 1000});
+                else if(Util::Time::GetElapsedTimeMs() - this->BouncingTimer <= 300){
+                    this->SetPosition({this->GetPosition().x,this->GetPosition().y - 185.0f * Util::Time::GetDeltaTimeMs() / 1000});
                 }
-                else if(Util::Time::GetElapsedTimeMs() - this->BouncingTimer > 400) {
+                else if(Util::Time::GetElapsedTimeMs() - this->BouncingTimer > 250) {
                     this->Bouncing = false;
                     this->SetPosition({this->GetPosition().x,this->BouncingPos_y});
                 }

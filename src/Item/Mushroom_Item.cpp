@@ -35,6 +35,7 @@ void Mushroom_Item::Action(){
 }
 void Mushroom_Item::ChangeMarioState(std::shared_ptr<Mario>& mario) {
     if(mario->GetType() == Small) {
+        mario->SetPosition({mario->GetPosition().x,mario->GetPosition().y + 10});
         mario->SetType(Big);
         mario->UpDateCurrentState(Stand);
     }

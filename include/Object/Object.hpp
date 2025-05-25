@@ -76,7 +76,7 @@ class Object : public Util::GameObject{
             float y = this->GetPosition().y;
 
             glm::vec2 top = {x, y + halfHeight - 10};
-            glm::vec2 mid = {x, y};
+            glm::vec2 mid = {x, y - halfHeight + 20};
 
             return other->Collision(top) || other->Collision(mid);
         }
@@ -88,7 +88,7 @@ class Object : public Util::GameObject{
             float y = this->GetPosition().y;
 
             glm::vec2 top = {x, y + halfHeight - 10};
-            glm::vec2 mid = {x, y};
+            glm::vec2 mid = {x, y - halfHeight + 20};
 
             return other->Collision(top) || other->Collision(mid);
         }

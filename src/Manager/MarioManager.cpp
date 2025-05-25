@@ -211,7 +211,7 @@ void MarioManager::HandleMonster() const {
                     monster->Hurt();
                     Mario_->AddScore(200);
                     Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
-                    Mario_->SetGravity(-2.0f);
+                    Mario_->SetGravity(-5.5f);
                 }
             }
         }
