@@ -25,7 +25,6 @@ void TrapFireBallManager::Update(){
 void TrapFireBallManager::SetFireball(const std::vector<glm::vec2>& Positions, const std::shared_ptr<Util::Renderer>& Render) {
     for(auto &pos : Positions) {
         for(float i = 0.0; i <= 6 ;i += 1.0f) {
-            std::cout << i << std::endl;
             auto temp = std::make_shared<TrapFireBall>(glm::vec2(mapPos.x + pos.x * 48, mapPos.y + pos.y * 48),i * 20);
             temp->SetSize({2.5,2.5});
             temp->SetZIndex(50);
@@ -36,7 +35,7 @@ void TrapFireBallManager::SetFireball(const std::vector<glm::vec2>& Positions, c
 }
 void TrapFireBallManager::HandleMarioCollision() {
     for (auto &Fireball : Fireballs) {
-        if((Mario_->LeftCollision(Fireball) || Mario_->RightCollision(Fireball) || Mario_->UpCollision(Fireball) || Mario_->DownCollision(Fireball)) && Mario_->GetHurting() == false && Mario_->GetAnimating() == false) {
+        if((Mario_->LeftCollision(Fireball) || Mario_->RightCollision(Fireball) || Mario_->UpCollision(Fireball) || Mario_->DownCollision(Fireball)) && Mario_->GetHurting() == false && Mario_->GetWCollision() == true) {
             Mario_->Hurt();
         }
     }

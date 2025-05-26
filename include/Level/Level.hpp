@@ -21,7 +21,7 @@ public:
 
     Level()= default;
     bool GetNextLevelFlag (){return NextLevelFlag;}
-    void SetNextLevelFlag(bool flag){NextLevelFlag = flag;}
+    void SetNextLevelFlag(const bool flag){NextLevelFlag = flag;}
     void SetBackGround(std::shared_ptr<StillObject> Background);
     void SetSceneObject(std::shared_ptr<SceneObject> SceneObject);
     virtual void Update() = 0;
