@@ -5,22 +5,28 @@
 #ifndef LEVEL4_HPP
 #define LEVEL4_HPP
 #include "Level/Level.hpp"
+#include "Manager/TrapFireBallManager.hpp"
 class Level4 : public Level {
 public:
     Level4() : Level() {
         m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level4/level_4.png",glm::vec2(-2561,240),glm::vec2(-640,360));
         m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
+        TrapFireBallManager_ = std::make_shared<TrapFireBallManager>(m_Mario,m_Background->GetPosition(),m_Background->GetScaledSize());
         m_ManagerManager->SetFloor(FloorBlock, FloorBlockSize);
         m_ManagerManager->SetBlock(AirBlock,BlockType::Air);
         m_ManagerManager->SetBlock(LuckyBLock,BlockType::Lucky);
+        TrapFireBallManager_->SetFireball(TrapFireBallCenter,m_renderer);
+
     }
     void Update() override{
         if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false) {
             this->GameOver = true;
             return;
         }
+        TrapFireBallManager_->Update();
     }
 private:
+    std::shared_ptr<TrapFireBallManager> TrapFireBallManager_;
     std::vector<glm::vec2> FloorBlock = {{6.5,-12.5},{20.5,-12.5}};
     std::vector<glm::vec2> FloorBlockSize = {{13.0f,5.0f},{11.0f,5.0f}};
     std::vector<glm::vec2> AirBlock={{23.5,-2.5} , {24.5,-2.5} , {25.5,-2.5} , {26.5,-2.5} , {27.5,-2.5} , {28.5,-2.5} , {29.5,-2.5} , {30.5,-2.5} , {31.5,-2.5} , {32.5,-2.5} , {33.5,-2.5} , {34.5,-2.5} , {35.5,-2.5} , {36.5,-2.5} , {37.5,-2.5} , {103.5,-2.5} , {104.5,-2.5} , {105.5,-2.5} , {106.5,-2.5} , {107.5,-2.5} , {108.5,-2.5} , {109.5,-2.5} , {110.5,-2.5} , {111.5,-2.5} , {112.5,-2.5} , {113.5,-2.5} , {114.5,-2.5} , {115.5,-2.5} , {116.5,-2.5} , {117.5,-2.5} , {122.5,-2.5} , {123.5,-2.5} , {133.5,-2.5} , {134.5,-2.5} , {135.5,-2.5} , {136.5,-2.5} , {137.5,-2.5} , {138.5,-2.5} , {139.5,-2.5} , {140.5,-2.5} , {141.5,-2.5} , {142.5,-2.5} ,
@@ -34,6 +40,7 @@ private:
     {29.5,-12.5} , {31.5,-12.5} , {35.5,-12.5} , {103.5,-12.5} , {116.5,-12.5} , {119.5,-12.5} , {123.5,-12.5} , {127.5,-12.5} , {141.5,-12.5} ,
     {29.5,-13.5} , {31.5,-13.5} , {35.5,-13.5} , {103.5,-13.5} , {104.5,-13.5} , {105.5,-13.5} , {106.5,-13.5} , {107.5,-13.5} , {108.5,-13.5} , {109.5,-13.5} , {110.5,-13.5} , {111.5,-13.5} , {112.5,-13.5} , {113.5,-13.5} , {114.5,-13.5} , {115.5,-13.5} , {116.5,-13.5} , {119.5,-13.5} , {120.5,-13.5} , {121.5,-13.5} , {122.5,-13.5} , {123.5,-13.5} , {127.5,-13.5} , {141.5,-13.5} ,
     {29.5,-14.5} , {31.5,-14.5} , {35.5,-14.5} , {141.5,-14.5}};
+    std::vector<glm::vec2> TrapFireBallCenter = {{30.5,-10.5}};
     std::vector<glm::vec2> LuckyBLock = {{107.5,-5.5} , {110.5,-5.5},{113.5,-5.5},{30.5,-6.5} ,{106.5,-9.5} , {109.5,-9.5} , {112.5,-9.5}};
 };
 

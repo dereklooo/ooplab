@@ -140,6 +140,10 @@ add_executable(${PROJECT_NAME}
         include/Level/Level4.hpp
         include/Block/WhiteBlock.hpp
         src/Block/WhiteBlock.cpp
+        include/Trap/TrapFireBall.hpp
+        src/Trap/TrapFireBall.cpp
+        include/Manager/TrapFireBallManager.hpp
+        src/Manager/TrapFireBallManager.cpp
 )
 
 if(MSVC)
