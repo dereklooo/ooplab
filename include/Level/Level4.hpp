@@ -36,7 +36,7 @@ public:
         }
         if(m_Background->GetPosition().x <= -5500 && Condition_num == 1) {
             std::vector<std::shared_ptr<Monster>> _temp;
-            auto T = std::make_shared<Kooper>(glm::vec2(1250,0),m_Mario);
+            auto T = std::make_shared<Kooper>(glm::vec2(1100,0),m_Mario);
             _temp.push_back(T);
             m_ManagerManager->AddMonster(_temp,m_renderer);
             m_renderer->AddChild(T->GetFireBall());

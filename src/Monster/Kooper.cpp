@@ -26,7 +26,7 @@ void Kooper::Action() {
         this->ActionTimer = Util::Time::GetElapsedTimeMs();
     }
     if(Mario_->GetCurrentState() == Jump && this->GetGravity() == 0) {
-        this->SetGravity(-5.0f);
+        this->SetGravity(-7.0f);
         this->SetFallingTime(Util::Time::GetElapsedTimeMs());
     }
     if((Mario_->LeftCollision(Fireball) || Mario_->RightCollision(Fireball) || Mario_->UpCollision(Fireball) || Mario_->DownCollision(Fireball)) && Mario_->GetHurting() == false && Mario_->GetWCollision() == true) {

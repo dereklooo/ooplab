@@ -9,10 +9,10 @@ KooperFireBall::KooperFireBall(const std::shared_ptr<Mario>& mario,const glm::ve
     this->SetZIndex(100);
 }
 void KooperFireBall::Action() {
-    if(this->GetPosition().y <= mario->GetPosition().y) {
+    if(this->GetPosition().y <= mario->GetPosition().y && this->GetPosition().x >= mario->GetPosition().x) {
         this->SetPosition({this->GetPosition().x,this->GetPosition().y + 100 *Util::Time::GetDeltaTimeMs() /1000});
     }
-    if(this->GetPosition().y >= mario->GetPosition().y) {
+    if(this->GetPosition().y >= mario->GetPosition().y && this->GetPosition().x >= mario->GetPosition().x) {
         this->SetPosition({this->GetPosition().x,this->GetPosition().y - 100 *Util::Time::GetDeltaTimeMs() /1000});
     }
     if (mario->GetPosition().x >= 0) {
