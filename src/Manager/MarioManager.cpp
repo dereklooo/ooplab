@@ -208,6 +208,7 @@ void MarioManager::HandleMonster() const {
                     }
                 }
                 else if(Mario_->DownCollision(monster) && !monster->GetDie()) {
+                    if(monster->GetType() == MonsterType::Kooper_Type){Mario_->Hurt();}
                     monster->Hurt();
                     Mario_->AddScore(200);
                     Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});

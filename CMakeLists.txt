@@ -148,6 +148,9 @@ add_executable(${PROJECT_NAME}
         src/Block/Bridge.cpp
         include/Item/Axe.hpp
         src/Item/Axe.cpp
+        include/Trap/KooperFireBall.hpp
+        src/Monster/Kooper.cpp
+        src/Trap/KooperFireBall.cpp
 )
 
 if(MSVC)

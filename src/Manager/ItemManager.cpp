@@ -32,6 +32,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
             auto temp = std::make_shared<Axe>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
             temp->SetSize({1.5,1.5});
             temp->SetVisible(true);
+            temp->SetZIndex(100);
             const auto T = std::static_pointer_cast<Axe>(temp);
             for(auto &bridge : (*Blocks)[BlockType::Bridge]) {
                 T->ConnectToBlock(bridge);

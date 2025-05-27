@@ -2,11 +2,10 @@
 // Created by Benson on 2025/5/27.
 //
 #include "Item/Axe.hpp"
-Axe::Axe(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/Background/Level4/Block/Bridge.png"){
+Axe::Axe(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/character/Item/Axe.png"){
 
 }
 void Axe::Action() {
-    this->SetVisible(true);
     this->SetWCollision(true);
     if(this->Collision == true){
         float DeltaTime = Util::Time::GetElapsedTimeMs() - this->StartCollision;

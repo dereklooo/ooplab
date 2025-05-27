@@ -7,7 +7,7 @@
 #include "Monsters/Monster.hpp"
 class Blue_Mushroom : public Monster{
 public:
-    Blue_Mushroom(glm::vec2 position,Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/Blue_mushroom/mushroom_walk") {
+    Blue_Mushroom(const glm::vec2 position, const Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/Blue_mushroom/mushroom_walk") {
         this->type = Mushroom_Type;
         this->SetWay(way);
         this->SetZIndex(100);

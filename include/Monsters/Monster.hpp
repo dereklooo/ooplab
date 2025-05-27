@@ -12,7 +12,7 @@ enum MonsterType {
     Black_turtle,
     Eat_flower,
     Fly_turtle,
-    Kooper,
+    Kooper_Type,
     Jump_turtle,
     Mushroom_Type,
     Turtle_Type
