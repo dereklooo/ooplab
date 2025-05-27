@@ -15,6 +15,10 @@ public:
         m_ManagerManager->SetFloor(FloorBlock, FloorBlockSize);
         m_ManagerManager->SetBlock(AirBlock,BlockType::Air);
         m_ManagerManager->SetBlock(LuckyBLock,BlockType::Lucky);
+        m_ManagerManager->SetBlock(Bridge,BlockType::Bridge);
+        m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
+        m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
+        m_ManagerManager->SetItem(Item_Axe,ItemType::Item_Axe);
         TrapFireBallManager_->SetFireball(TrapFireBallCenter,m_renderer);
 
         std::vector<std::shared_ptr<Monster>> _temp;
@@ -44,11 +48,15 @@ private:
     {29.5,-12.5} , {31.5,-12.5} , {35.5,-12.5} , {103.5,-12.5} , {116.5,-12.5} , {119.5,-12.5} , {123.5,-12.5} , {127.5,-12.5} , {141.5,-12.5} ,
     {29.5,-13.5} , {31.5,-13.5} , {35.5,-13.5} , {103.5,-13.5} , {104.5,-13.5} , {105.5,-13.5} , {106.5,-13.5} , {107.5,-13.5} , {108.5,-13.5} , {109.5,-13.5} , {110.5,-13.5} , {111.5,-13.5} , {112.5,-13.5} , {113.5,-13.5} , {114.5,-13.5} , {115.5,-13.5} , {116.5,-13.5} , {119.5,-13.5} , {120.5,-13.5} , {121.5,-13.5} , {122.5,-13.5} , {123.5,-13.5} , {127.5,-13.5} , {141.5,-13.5} ,
     {29.5,-14.5} , {31.5,-14.5} , {35.5,-14.5} , {141.5,-14.5}};
+    std::vector<glm::vec2> Bridge = {{128.5,-10.5} , {129.5,-10.5} , {130.5,-10.5} , {131.5,-10.5} , {132.5,-10.5} , {133.5,-10.5} , {134.5,-10.5} , {135.5,-10.5} , {136.5,-10.5} , {137.5,-10.5} , {138.5,-10.5} , {139.5,-10.5} , {140.5,-10.5}};
     std::vector<glm::vec2> TrapFireBallCenter = {{88.5,-4.5} ,
-{49.5,-6.5} , {60.5,-6.5} , {67.5,-6.5} ,
-{76.5,-9.5} , {84.5,-9.5} ,
-{30.5,-10.5}};
+    {49.5,-6.5} , {60.5,-6.5} , {67.5,-6.5} ,
+    {76.5,-9.5} , {84.5,-9.5} ,
+    {30.5,-10.5}};
     std::vector<glm::vec2> LuckyBLock = {{107.5,-5.5} , {110.5,-5.5},{113.5,-5.5},{30.5,-6.5} ,{106.5,-9.5} , {109.5,-9.5} , {112.5,-9.5}};
+    std::vector<glm::vec2> Item_Coin = {{107.5,-5.5} , {110.5,-5.5} , {113.5,-5.5} , {106.5,-9.5} , {109.5,-9.5} , {112.5,-9.5}};
+    std::vector<glm::vec2> Item_Axe = {{141.5,-8.5}};
+    std::vector<glm::vec2> Item_Mushroom ={{30.5,-6.5}};
 };
 
 #endif //LEVEL4_HPP

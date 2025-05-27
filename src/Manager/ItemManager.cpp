@@ -28,8 +28,20 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
             (*Items)[type].push_back(temp);
             continue;
         }
+        if(type == Item_Axe) {
+            auto temp = std::make_shared<Axe>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
+            temp->SetSize({1.5,1.5});
+            temp->SetVisible(true);
+            const auto T = std::static_pointer_cast<Axe>(temp);
+            for(auto &bridge : (*Blocks)[BlockType::Bridge]) {
+                T->ConnectToBlock(bridge);
+            }
+            (*Items)[type].push_back(temp);
+            continue;
+        }
         for(const auto &[type_B,blocks] : (*Blocks)) {
             for(auto &block : blocks) {
+
                 if(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48) == block->GetPosition()) {
                     std::shared_ptr<ItemObject> temp = nullptr;
                     switch(type) {

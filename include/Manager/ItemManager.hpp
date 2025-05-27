@@ -13,6 +13,7 @@
 #include "Object/SceneObject.hpp"
 #include "Item/FireFlower_Item.hpp"
 #include "Item/OutSideCoin_Item.hpp"
+#include "Item/Axe.hpp"
 
 #include "Monsters/Monster.hpp"
 

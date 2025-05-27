@@ -144,6 +144,10 @@ add_executable(${PROJECT_NAME}
         src/Trap/TrapFireBall.cpp
         include/Manager/TrapFireBallManager.hpp
         src/Manager/TrapFireBallManager.cpp
+        "include/Block/ Bridge.hpp"
+        src/Block/Bridge.cpp
+        include/Item/Axe.hpp
+        src/Item/Axe.cpp
 )
 
 if(MSVC)

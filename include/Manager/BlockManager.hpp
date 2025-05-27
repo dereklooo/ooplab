@@ -25,6 +25,7 @@
 #include "Block/OriginalCoin.hpp"
 #include "Block/BlueOriginalCoin.hpp"
 #include "Block/WhiteBlock.hpp"
+#include "Block/ Bridge.hpp"
 class BlockManager {
 public:
     BlockManager(

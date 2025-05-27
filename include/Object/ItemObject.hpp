@@ -18,7 +18,8 @@ enum ItemType {
     Item_Star,
     Item_Coin,
     Item_Coins,
-    Item_OutSideCoin
+    Item_OutSideCoin,
+    Item_Axe
 };
 class ItemObject : public StillObject {
 public:
