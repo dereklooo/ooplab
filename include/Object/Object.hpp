@@ -50,7 +50,7 @@ class Object : public Util::GameObject{
     // 向下碰撞
     bool DownCollision(const std::shared_ptr<Object> &other) const {
             float x = this->GetPosition().x;
-            float y = this->GetPosition().y - std::abs(this->GetScaledSize().y / 2.0f) - 3;
+            float y = this->GetPosition().y - std::abs(this->GetScaledSize().y / 2.0f) - 5;
 
             glm::vec2 p1 = {x + 15, y};
             glm::vec2 p2 = {x - 15, y};
@@ -61,7 +61,7 @@ class Object : public Util::GameObject{
     // 向上碰撞
     bool UpCollision(const std::shared_ptr<Object> &other) const {
             float x = this->GetPosition().x;
-            float y = this->GetPosition().y + std::abs(this->GetScaledSize().y / 2.0f) + 10;
+            float y = this->GetPosition().y + std::abs(this->GetScaledSize().y / 2.0f) + 5;
 
             glm::vec2 p1 = {x + 10, y};
             glm::vec2 p2 = {x - 10, y};
@@ -71,7 +71,7 @@ class Object : public Util::GameObject{
 
     // 向左碰撞
     bool LeftCollision(const std::shared_ptr<Object> &other) const {
-            float x = this->GetPosition().x - std::abs(this->GetScaledSize().x / 2.0f) - 10;
+            float x = this->GetPosition().x - std::abs(this->GetScaledSize().x / 2.0f) - 3;
             float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
             float y = this->GetPosition().y;
 
@@ -83,7 +83,7 @@ class Object : public Util::GameObject{
 
     // 向右碰撞（上、中、下三點檢測）
     bool RightCollision(const std::shared_ptr<Object> &other) const {
-            float x = this->GetPosition().x + std::abs(this->GetScaledSize().x / 2.0f) + 6;
+            float x = this->GetPosition().x + std::abs(this->GetScaledSize().x / 2.0f) + 3;
             float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
             float y = this->GetPosition().y;
 
