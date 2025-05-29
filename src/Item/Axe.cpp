@@ -56,6 +56,9 @@ void Axe::Action() {
 void Axe::ChangeMarioState(std::shared_ptr<Mario> &mario) {
     Mario_ = mario;
     mario->SetCanMove(false);
+    mario->UpDateCurrentState(Stand);
+    mario->SetPosition(this->GetPosition());
+    mario->SetAcceleration(0.0f);
     this->SetSize({0,0});
     this->StartCollision = Util::Time::GetElapsedTimeMs();
     this->Collision = true;

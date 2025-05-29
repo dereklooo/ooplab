@@ -22,11 +22,9 @@ void GravityManager::Update() {
         this->Combination();
         for(auto &object : GravityObject) {
             if(IsFalling(object)) {
-                const float deltaTime = (Util::Time::GetElapsedTimeMs() - object->GetFallingTime()) / 1000.0f;
-                const float gravityNow = object->GetGravity();
-                const float gravityNext = gravityNow + gravity * deltaTime;
+                const float deltaTime = Util::Time::GetDeltaTimeMs() / 1000.0f;
 
-                object->SetGravity(gravityNext);
+                object->SetGravity(object->GetGravity() + gravity * deltaTime * 2.5);
                 object->SetFalling(true);
             }
             else {

@@ -43,6 +43,9 @@ public:
         }
     }
     void update() {
+        if (Util::Input::IsKeyDown(Util::Keycode::E)) {
+            m_Mario->SetPosition({m_Mario->GetPosition().x + 1000,m_Mario->GetPosition().y});
+        }
         this->Update();
         m_ManagerManager->Update();
         m_renderer->Update();

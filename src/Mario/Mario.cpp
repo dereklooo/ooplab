@@ -129,7 +129,7 @@ void Mario::Hurt() {
         this->SetZIndex(2);
         this->SetWCollision(false);
         this->UpDateCurrentState(Die);
-        this->SetGravity(-2.0f);
+        this->SetGravity(-6.0);
         this->SetCanMove(false);
     }
     else if(this->Type == Big) {
@@ -183,7 +183,7 @@ void Mario::LeftMove() {
 void Mario::Jump() {
     if(!this->GetFalling()) {
         this->SetPosition({this->GetPosition().x,this->GetPosition().y + 4});
-        this->SetGravity(-11.0f);
+        this->SetGravity(-17.0f);
     }
 }
 void Mario::Shoot() {
@@ -202,7 +202,5 @@ void Mario::Brakes() {
             this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
         }
         else{SetAcceleration(0);}
-
-
     }
 }

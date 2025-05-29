@@ -20,11 +20,11 @@ MarioManager::MarioManager(
 
             }
 void MarioManager::HandleBlock() const {
+    if(Mario_->GetWCollision() == false) {
+        return;
+    }
     for (const auto& [type, blocks] : *Blocks) {   // 注意這裡，blocks 是 vector
         for (const auto& block : blocks) {
-            if(Mario_->GetWCollision() == false) {
-                return;
-            }
             if(Mario_->LeftCollision(block) &&  Mario_->GetTouchFlagFlag()==false) {
                 if(Mario_->GetAnimating()) {
                     if(Mario_->GetAnimationWay() == Right) {
@@ -299,9 +299,6 @@ void MarioManager::MarioInputCtl() const {
         }
     }
 
-    if (Util::Input::IsKeyDown(Util::Keycode::E)) {
-        Mario_->SetPosition({Mario_->GetPosition().x + 1000,Mario_->GetPosition().y});
-    }
     Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());
 }
