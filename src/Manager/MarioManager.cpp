@@ -93,7 +93,7 @@ void MarioManager::HandleBlock() const {
                 block->hit(Mario_);
                 std::cout<<Mario_->GetScore()<<std::endl;
             }
-            else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0 && (Mario_->GetTouchFlagFlag()==false ) ){
+            else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0 && (Mario_->GetTouchFlagFlag()==false ) && block->GetSize() != glm::vec2(0,0)){
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
                 if(block->GetType() == BlockType::Pipe_64_96 || block->GetType() == BlockType::Pipe_64_128 || block->GetType() == BlockType::Pipe_64_64) {
                     auto temp = std::dynamic_pointer_cast<Pipe>(block);
@@ -134,7 +134,7 @@ void MarioManager::HandleMonster() const {
                         monster->SetKnockAway(true);
                         monster->SetWCollision(false);
                         monster->SetSize({monster->GetSize().x, monster->GetSize().y * -1});
-                        monster->SetGravity(-2.0f);
+                        monster->SetGravity(-10.0f);
                         Mario_->AddScore(200);
                 }
                 if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() < 10000) {
@@ -151,9 +151,10 @@ void MarioManager::HandleMonster() const {
             else if (Mario_->GetHurting()) {
                 float elapsed = Util::Time::GetElapsedTimeMs() - Mario_->GetHurtingTime();
                 if (elapsed < 1500.0f) {
-                    Mario_->SetGravity(0.0f);
+                    Mario_->SetGravity(-0.75f);
                 }
                 else if (elapsed < 6500.0f) {
+                    Mario_->SetWCollision(true);
                     Mario_->SetType(Small);
                     Mario_->SetCanMove(true);
                     if ((static_cast<int>(elapsed) / 200) % 2 == 0 && Mario_->GetVisible()) {
@@ -164,7 +165,7 @@ void MarioManager::HandleMonster() const {
                     if(Mario_->DownCollision(monster) && !monster->GetDie()) {
                         monster->Hurt();
                         Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
-                        Mario_->SetGravity(-2.0f);
+                        Mario_->SetGravity(-5.5f);
                     }
                 }
                 else {

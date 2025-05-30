@@ -53,7 +53,7 @@ public:
         std::vector<std::shared_ptr<Monster>> _temp;
         switch (Condition_num) {
             case 1:
-                if (m_Background->GetPosition().x <= -700 && m_Background->GetPosition().x >= -750 && !m_Mario->GetAnimating()) {
+                if (m_Background->GetPosition().x <= -645 && m_Background->GetPosition().x >= -708 && !m_Mario->GetAnimating()) {
                     _temp.clear();
                     _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(490,-240),Left));
                     _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(540,-240),Left));
@@ -170,7 +170,7 @@ private:
     };
     std::vector<glm::vec2> Item_Coins = {
         {38.5,-25.5},{38.5,-25.5},{38.5,-25.5},{38.5,-25.5},{38.5,-25.5},
-        //{82.5,-25.5}, {82.5,-25.5},{82.5,-25.5},{82.5,-25.5},{82.5,-25.5}
+        {82.5,-25.5}, {82.5,-25.5},{82.5,-25.5},{82.5,-25.5},{82.5,-25.5}
     };
     std::vector<glm::vec2> Item_Mushroom = {
         {78.5,-25.5} , {159.5,-25.5} , {19.5,-26.5}
@@ -224,14 +224,14 @@ private:
     };
 
     std::vector<glm::vec2> Pipe_64_128 = {
-    {13.0,-11.0} , {119.0f,-28.0f}
+     {119.0f,-28.0f}
 };
 
     std::vector<glm::vec2> AnotherMapPos = {
     {11.0,-12.0}, {113.0,-28.5},{123,-46},{176,-26}
 };
     std::vector<glm::vec2> LongPipe = {
-        {125,-41.5},{178,-21.5}
+        {13.0,-10},{125,-41.5},{178,-21}
     };
     std::vector<glm::vec2> NextPipePos = {
         {0,0},{0,0},{125.5,-29},{163.0,-12.5}

@@ -38,7 +38,7 @@ void FireBallManager::HandleMonsterCollision(const std::shared_ptr<FireBall> &Fi
                 monster->SetKnockAway(true);
                 monster->SetWCollision(false);
                 monster->SetSize({monster->GetSize().x, monster->GetSize().y * -1});
-                monster->SetGravity(-2.0f);
+                monster->SetGravity(-8.0f);
             }
         }
     }

@@ -2,6 +2,10 @@
 // Created by benson on 2025/5/8.
 //
 #include "BLock/BlueOriginalBlock.hpp"
+
+#include <iostream>
+#include <ostream>
+
 BlueOriginalBlock::BlueOriginalBlock(glm::vec2 Position) : SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/BlueOriginalBlock.png",Position) {
 
 }
@@ -17,6 +21,7 @@ void BlueOriginalBlock::hit(const std::shared_ptr<Mario> &Mario) {
     if(Item == nullptr && GotHit == false) {
         if(!Mario->GetType() == Small) {
             this->SetSize({0,0});
+            this->SetPosition({this->GetPosition().x,this->GetPosition().y - 10000});
             this->SetVisible(false);
         }
     }

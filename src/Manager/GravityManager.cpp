@@ -21,20 +21,28 @@ GravityManager::GravityManager(
 void GravityManager::Update() {
         this->Combination();
         for(auto &object : GravityObject) {
+            const float deltaTime = Util::Time::GetDeltaTimeMs() / 1000.0f;
             if(IsFalling(object)) {
-                const float deltaTime = Util::Time::GetDeltaTimeMs() / 1000.0f;
+                object->SetFalling(true);
                 if(object->GetGravity() >= 35) {
                     object->SetGravity(35);
                 }
                 else {
                     object->SetGravity(object->GetGravity() + gravity * deltaTime * 2.5);
                 }
-                object->SetFalling(true);
             }
             else {
-                if(object->GetWCollision()) {
-                    object->SetGravity(0.0f);
+                if(object->GetWCollision() == true) {
+                    object->SetGravity(0);
                     object->SetFalling(false);
+                }
+                else {
+                    if(object->GetGravity() >= 35) {
+                        object->SetGravity(35);
+                    }
+                    else {
+                        object->SetGravity(object->GetGravity() + gravity * deltaTime * 2.5);
+                    }
                 }
             }
             object->SetFallingTime(Util::Time::GetElapsedTimeMs());
@@ -64,6 +72,7 @@ void GravityManager::Combination() {
     }
 }
 bool GravityManager::IsFalling(const std::shared_ptr<Object> &object) const {
+    if(object->GetWCollision() == false) return false;
     float gravity = object->GetGravity();
     if (gravity <= 0.0f) return true;
 
@@ -80,33 +89,45 @@ bool GravityManager::IsFalling(const std::shared_ptr<Object> &object) const {
 
             float blockTop = block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f);
 
-            // 是否會穿越地面
-            if (bottomY > blockTop && nextBottomY <= blockTop) {
-                float dx = std::abs(object->GetPosition().x - block->GetPosition().x);
-                float maxDx = std::abs(object->GetScaledSize().x / 2.0f) + std::abs(block->GetScaledSize().x / 2.0f);
+            for (const auto& [type, blocks] : *Blocks) {
+                for (const auto& block : blocks) {
+                    if (block->GetType() == BlockType::flag || block->GetType() == BlockType::flagpole)
+                        continue;
+                    if (!block->GetVisible() || block->GetScaledSize().x < 0.1f || block->GetScaledSize().y < 0.1f)
+                        continue;
 
-                if (dx <= maxDx) {
-                    // 修正落地位置，避免穿透
-                    object->SetPosition({
-                        object->GetPosition().x,
-                        block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f) + std::abs(object->GetScaledSize().y / 2.0f) + 0.5f
-                    });
+                    float blockTop = block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f);
 
-                    object->SetGravity(0.0f);
-                    object->SetFalling(false);
-                    return false;
+                    // ✅ 預測落地：重力導致位置變化是否會「穿越方塊上邊界」
+                    if (bottomY > blockTop && nextBottomY <= blockTop) {
+                        float dx = std::abs(object->GetPosition().x - block->GetPosition().x);
+                        float maxDx = std::abs(object->GetScaledSize().x / 2.0f) + std::abs(block->GetScaledSize().x / 2.0f);
+
+                        if (dx <= maxDx) {
+                            // ✅ 修正落地位置，避免穿透
+                            object->SetPosition({
+                                object->GetPosition().x,
+                                block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f) + std::abs(object->GetScaledSize().y / 2.0f) + 0.5f
+                            });
+
+                            object->SetGravity(0.0f);
+                            object->SetFalling(false);
+                            return false;
+                        }
+                    }
+
+
+                    // 原本的簡單 DownCollision 邏輯保留，避免極小 gravity 跳過機制時沒偵測到
+                    if ((object->DownCollision(block) || (Mario_->GetTouchFlagFlag() && !Mario_->GetMarioGoDoorFlag())) &&
+                        block->GetType() != BlockType::flag && block->GetType() != BlockType::flagpole) {
+                        object->SetFalling(false);
+                        return false;
+                        }
                 }
             }
 
-            // 原本的簡單 DownCollision 邏輯保留，避免極小 gravity 跳過機制時沒偵測到
-            if ((object->DownCollision(block) || (Mario_->GetTouchFlagFlag() && !Mario_->GetMarioGoDoorFlag())) &&
-                block->GetType() != BlockType::flag && block->GetType() != BlockType::flagpole) {
-                object->SetFalling(false);
-                return false;
-                }
+            object->SetFalling(true);
+            return true;
         }
     }
-
-    object->SetFalling(true);
-    return true;
 }

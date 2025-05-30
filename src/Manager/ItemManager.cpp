@@ -61,7 +61,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
                         case(Item_Coins):{
                             const auto Temp = std::dynamic_pointer_cast<OriginalCoin>(block);
                             const auto Coin = std::make_shared<Coin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
-                            Coin->SetZIndex(100);
+                            Coin->SetZIndex(500);
                             Coin->SetSize({1.5,1.5});
                             Coin->SetVisible(false);
                             Coin->SetWCollision(false);

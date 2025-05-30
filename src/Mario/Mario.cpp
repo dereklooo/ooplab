@@ -129,7 +129,7 @@ void Mario::Hurt() {
         this->SetZIndex(2);
         this->SetWCollision(false);
         this->UpDateCurrentState(Die);
-        this->SetGravity(-6.0);
+        this->SetGravity(-10.0);
         this->SetCanMove(false);
     }
     else if(this->Type == Big) {
