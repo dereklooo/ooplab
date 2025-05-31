@@ -25,7 +25,8 @@ void OriginalCoin::hit(const std::shared_ptr<Mario> &Mario) {
         if(this->GotHit == false) {
             this->Coins[Coin-1]->SetVisible(true);
             this->Coins[Coin-1]->SetState(ItemState::PoppingUp);
-            this->Coins[Coin-1]->SetGravity(-10.0f);
+            this->Coins[Coin-1]->SetGravity(-20.0f);
+            this->Coins[Coin-1]->SetPosition(this->GetPosition());
             this->Coins[Coin-1]->SetFallingTime(Util::Time::GetElapsedTimeMs());
             this->Coins[Coin-1]->SetStartPopTime(Util::Time::GetElapsedTimeMs());
             Coin -= 1;

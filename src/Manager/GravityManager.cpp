@@ -4,6 +4,7 @@
 #include "Manager/GravityManager.hpp"
 
 #include "Block/Flag.hpp"
+#include "spdlog/async_logger.h"
 
 GravityManager::GravityManager(
     std::shared_ptr<Mario>& mario,
@@ -79,6 +80,8 @@ bool GravityManager::IsFalling(const std::shared_ptr<Object> &object) const {
     float curY = object->GetPosition().y;
     float nextY = curY - gravity;
 
+    float curX = object->GetPosition().x;
+
     float bottomY = curY - std::abs(object->GetScaledSize().y / 2.0f);
     float nextBottomY = nextY - std::abs(object->GetScaledSize().y / 2.0f);
 
@@ -97,9 +100,9 @@ bool GravityManager::IsFalling(const std::shared_ptr<Object> &object) const {
                         continue;
 
                     float blockTop = block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f);
-
+                    float blockX = block->GetPosition().x;
                     // ✅ 預測落地：重力導致位置變化是否會「穿越方塊上邊界」
-                    if (bottomY > blockTop && nextBottomY <= blockTop) {
+                    if (bottomY > blockTop && nextBottomY <= blockTop && curX <= blockX + block->GetScaledSize().x / 2 && curY >= blockX - block->GetScaledSize().x / 2) {
                         float dx = std::abs(object->GetPosition().x - block->GetPosition().x);
                         float maxDx = std::abs(object->GetScaledSize().x / 2.0f) + std::abs(block->GetScaledSize().x / 2.0f);
 
