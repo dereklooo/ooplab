@@ -21,6 +21,11 @@
 #include "Block/Flag.hpp"
 #include "Block/FlagBall.hpp"
 #include "Block/FlagPole.hpp"
+#include "Block/GrassFloorRight.hpp"
+#include "Block/GrassFloorMid.hpp"
+#include "Block/GrassFloorLeft.hpp"
+#include "Block/TreeWall.hpp"
+
 class BlockManager {
 public:
     BlockManager(

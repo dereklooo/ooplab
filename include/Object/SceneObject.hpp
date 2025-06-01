@@ -23,7 +23,11 @@ enum class BlockType {
     Air,
     flag,
     flagball,
-    flagpole
+    flagpole,
+    GrassFloorLeft,
+    GrassFloorMid,
+    GrassFloorRight,
+    TreeWall
 };
 
 class SceneObject : public StillObject{

@@ -125,6 +125,14 @@ add_executable(${PROJECT_NAME}
         src/Block/FlagBall.cpp
         include/Block/Flag.hpp
         src/Block/Flag.cpp
+        include/Block/GrassFloorLeft.hpp
+        include/Block/grassfloormid.hpp
+        include/Block/GrassFloorRight.hpp
+        src/Block/GrassFloorRight.cpp
+        src/Block/GrassFloorLeft.cpp
+        src/Block/GrassFloorMid.cpp
+        include/Block/TreeWall.hpp
+        src/Block/TreeWall.cpp
 )
 
 if(MSVC)

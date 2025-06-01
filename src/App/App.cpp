@@ -55,6 +55,7 @@ void App::Start() {
             break;
         case 3:
             m_level3 = std::make_shared<Level3>();
+        m_level3->Start();
             break;
             default:
                 break;

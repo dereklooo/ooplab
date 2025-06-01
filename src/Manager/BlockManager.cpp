@@ -50,6 +50,10 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::flag: block = std::make_shared<Flag>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::flagball: block = std::make_shared<FlagBall>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::flagpole: block = std::make_shared<FlagPole>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::GrassFloorRight: block = std::make_shared<GrassFloorRight>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::GrassFloorMid: block = std::make_shared<GrassFloorMid>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::GrassFloorLeft: block = std::make_shared<GrassFloorLeft>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::TreeWall: block = std::make_shared<TreeWall>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
         }
         block->SetZIndex(100);
         block->SetSize({1.65,1.5});
