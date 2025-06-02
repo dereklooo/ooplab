@@ -77,8 +77,6 @@ void FlagManager::Update() {
         else if(MarioMoveFlag==true) {
 	        Mario_->SetPosition({Mario_->GetPosition().x, Mario_->GetPosition().y-2.0});
         	for(const auto &block : (*Blocks)[BlockType::flag]) {
-
-
         				glm::vec2 FlagPosition = block->GetPosition();
         				FlagPosition.y -= 2.0;
         				block->SetPosition(FlagPosition);

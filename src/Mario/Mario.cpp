@@ -30,7 +30,7 @@
         this->FireDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/fire/run/run",80,60)); //run
         this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/jump/jump",400,100)); // jump
         this->FireDrawable.push_back(Mario::GenerateAnimation(3,RESOURCE_DIR"/image/character/mario/big/BigToSmall/big_to_small",800,200)); //FireToSmall
-        this->BigDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/down/down",800,200)); //down
+        this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/down/down",800,200)); //down
         this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/stop/stop",400,100)); //stop;
         this->FireDrawable.push_back(Mario::GenerateAnimation(1,RESOURCE_DIR"/image/character/mario/fire/Hugflag/Hug",400,100)); //hugflag
 
@@ -183,7 +183,7 @@ void Mario::LeftMove() {
 void Mario::Jump() {
     if(!this->GetFalling()) {
         this->SetPosition({this->GetPosition().x,this->GetPosition().y + 4});
-        this->SetGravity(-17.0f);
+        this->SetGravity(-17.5f);
     }
 }
 void Mario::Shoot() {
