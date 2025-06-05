@@ -75,7 +75,7 @@ void GravityManager::Combination() {
 bool GravityManager::IsFalling(const std::shared_ptr<Object> &object) const {
     if(object->GetWCollision() == false) return false;
     float gravity = object->GetGravity();
-    if (gravity <= 0.0f) return true;
+    if (gravity < 0.0f) return true;
 
     float curY = object->GetPosition().y;
     float nextY = curY - gravity;
