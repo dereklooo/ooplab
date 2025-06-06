@@ -73,8 +73,7 @@ void GravityManager::Combination() {
     }
 }
 bool GravityManager::IsFalling(const std::shared_ptr<Object> &object) const {
-    if (!object->GetWCollision()) return false;
-
+    if (object->GetWCollision() == false) return false;
     float gravity = object->GetGravity();
     if (gravity < 0.0f) return true;
 
@@ -82,46 +81,50 @@ bool GravityManager::IsFalling(const std::shared_ptr<Object> &object) const {
     float nextY = curY - gravity;
     float curX = object->GetPosition().x;
 
-    float objHalfHeight = std::abs(object->GetScaledSize().y / 2.0f);
-    float objHalfWidth  = std::abs(object->GetScaledSize().x / 2.0f);
+    float objHalfW = std::abs(object->GetScaledSize().x / 2.0f);
+    float objHalfH = std::abs(object->GetScaledSize().y / 2.0f);
 
-    float bottomY     = curY - objHalfHeight;
-    float nextBottomY = nextY - objHalfHeight;
+    float bottomY = curY - objHalfH;
+    float nextBottomY = nextY - objHalfH;
 
     for (const auto& [type, blocks] : *Blocks) {
         for (const auto& block : blocks) {
-            if (!block->GetVisible() ||
-                block->GetScaledSize().x < 0.1f ||
-                block->GetScaledSize().y < 0.1f ||
-                block->GetType() == BlockType::flag ||
-                block->GetType() == BlockType::flagpole)
+            if (block->GetType() == BlockType::flag || block->GetType() == BlockType::flagpole)
+                continue;
+            if (!block->GetVisible() || block->GetScaledSize().x < 0.1f || block->GetScaledSize().y < 0.1f)
                 continue;
 
-            float blockTop    = block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f);
-            float blockLeft   = block->GetPosition().x - std::abs(block->GetScaledSize().x / 2.0f);
-            float blockRight  = block->GetPosition().x + std::abs(block->GetScaledSize().x / 2.0f);
+            float blockTop = block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f);
+            float blockX = block->GetPosition().x;
+            float blockHalfW = std::abs(block->GetScaledSize().x / 2.0f);
 
-            // 檢查：Y軸下落貫穿 & X軸重疊
+            // 角色腳底預測會"穿過"方塊頂部 & X軸「重疊區」才會落地，不會因為側邊碰撞誤判
+            float objLeft  = curX - objHalfW + 0.5f;
+            float objRight = curX + objHalfW - 0.5f;
+            float blockLeft  = blockX - blockHalfW;
+            float blockRight = blockX + blockHalfW;
+
             if (
                 bottomY > blockTop &&
                 nextBottomY <= blockTop &&
-                (curX + objHalfWidth) > blockLeft &&
-                (curX - objHalfWidth) < blockRight
+                objRight > blockLeft &&
+                objLeft < blockRight
             ) {
-                // 落地修正
+                // 落地矯正
                 object->SetPosition({
                     object->GetPosition().x,
-                    blockTop + objHalfHeight + 0.5f
+                    blockTop + objHalfH + 0.5f
                 });
-                object->SetGravity(0.0f);
                 object->SetFalling(false);
                 return false;
             }
 
-            // 落地的額外保險（DownCollision）
-            if ((object->DownCollision(block) ||
+            // DownCollision 只會發生在腳底（你的 MarioManager 裡 DownCollision 實作已經是正確底邊判斷）
+            if (
+                (object->DownCollision(block) ||
                  (Mario_->GetTouchFlagFlag() && !Mario_->GetMarioGoDoorFlag())) &&
-                block->GetType() != BlockType::flag && block->GetType() != BlockType::flagpole) {
+                block->GetType() != BlockType::flag && block->GetType() != BlockType::flagpole
+            ) {
                 object->SetFalling(false);
                 return false;
             }

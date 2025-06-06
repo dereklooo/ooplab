@@ -22,8 +22,8 @@ class MarioManager {
         void MarioCollision() const;
         void MarioInputCtl() const;
         void Update() const {
-            MarioCollision();
             MarioInputCtl();
+            MarioCollision();
         };
     private:
         void HandleMonster() const;

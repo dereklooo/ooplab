@@ -20,11 +20,11 @@ void Elevator::Move() {
         else {
             this->SetPosition({this->GetPosition().x,this->GetPosition().y + 3});
         }
-        if (this->GetPosition().y >= 500) {
-            this->SetPosition({this->GetPosition().x,-499.0f});
+        if (this->GetPosition().y >= 400) {
+            this->SetPosition({this->GetPosition().x,-399.0f});
         }
-        else if(this->GetPosition().y <= -500){
-            this->SetPosition({this->GetPosition().x,499.0f});
+        else if(this->GetPosition().y <= -400){
+            this->SetPosition({this->GetPosition().x,399.0f});
         }
     }
 }
