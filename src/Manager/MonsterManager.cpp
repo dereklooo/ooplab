@@ -1,7 +1,6 @@
 #include "Manager/MonsterManager.hpp"
 
 #include <iostream>
-#include <__filesystem/file_type.h>
 
 MonsterManager::MonsterManager(
     std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>>& Monsters,
