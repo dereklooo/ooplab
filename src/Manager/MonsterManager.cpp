@@ -23,25 +23,13 @@ void MonsterManager::AddMonster(const std::vector<std::shared_ptr<Monster>>& mon
 void MonsterManager::MonsterCollision() const {
     for (const auto &[type_M,monsters] : (*Monsters)) {
         for(const auto &monster : monsters) {
-            bool DownCollision=0;
+
             for (const auto &[type_B,blocks] : (*Blocks)) {
                 for(const auto &block : blocks) {
                     HandleBlockCollision(type_M,monster,block);
-                    if (type_M==MonsterType::Red_turtle && monster->DownCollision(block)==true ) {
-                        DownCollision=1;
-
-                    }
-                }
-                if ( DownCollision == true && monster->GetWay()==Left && type_M==MonsterType::Red_turtle) {
-                    monster->SetWay(Right);
-                    monster->SetPosition({monster->GetPosition().x + 1.5,monster->GetPosition().y});
 
                 }
-                else if ( DownCollision == true && monster->GetWay()==Left&& type_M==MonsterType::Red_turtle) {
-                    monster->SetWay(Left);
-                    monster->SetPosition({monster->GetPosition().x - 1.5,monster->GetPosition().y});
 
-                }
             }
             for (const auto &[type_M,_monsters] : (*Monsters)) {
                 for(const auto &_monster : _monsters) {
@@ -78,7 +66,31 @@ void MonsterManager::HandleBlockCollision(
                 break;
         }
         if (monster->DownCollision(block)) {
-            monster->SetPosition({monster->GetPosition().x,block->GetPosition().y+ abs(block->GetScaledSize().y / 2)+ abs(monster->GetScaledSize().y / 2) + 1});
+
+
+
+
+               monster->SetPosition({monster->GetPosition().x,block->GetPosition().y+ abs(block->GetScaledSize().y / 2)+ abs(monster->GetScaledSize().y / 2) + 1});
+                std::cout<<monster->GetWay()<< std::endl;
+
+            }
+        if (monster->GetFalling()) {
+            if (monster->GetType()==MonsterType::Red_turtle) {
+                std::cout<<"1"<< std::endl;
+
+                if (  monster->GetWay()==Left ) {
+                    std::cout<<"2"<< std::endl;
+                    monster->SetWay(Right);
+                    monster->SetPosition({monster->GetPosition().x + 1.5,monster->GetPosition().y});
+
+                }
+                else if ( monster->GetWay()==Right) {
+                    std::cout<<"3"<< std::endl;
+                    monster->SetWay(Left);
+                    monster->SetPosition({monster->GetPosition().x - 1.5,monster->GetPosition().y});
+
+                }
+            }
         }
     }
 }

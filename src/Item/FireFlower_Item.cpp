@@ -3,19 +3,25 @@
 //
 #include "Item/FireFlower_Item.hpp"
 
+#include <iostream>
+#include <ostream>
+
+#include <iostream>
 
 FireFlower::FireFlower(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/character/Item/Fire.png"){
 
 }
 void FireFlower::Action() {
-    const float DeltaTime = (Util::Time::GetElapsedTimeMs() - LastTime) / 1000.0f;
+    std::cout<<this->GetGravity()<<std::endl;
+    const float DeltaTime = Util::Time::GetDeltaTimeMs() / 1000.0f;
     switch(state) {
         case ItemState::Hidden:
             break;
         case ItemState::Collected:
             break;
         case ItemState::Walking:
-            return;
+            this->SetGravity(0);
+            SetWCollision(true);
             break;
         case ItemState::PoppingUp:
             this->SetWCollision(false);
@@ -28,7 +34,6 @@ void FireFlower::Action() {
         }
         break;
     }
-    LastTime = Util::Time::GetElapsedTimeMs();
 }
 void FireFlower::ChangeMarioState(std::shared_ptr<Mario> &mario) {
     if(mario->GetType() == Small || mario->GetType() == Big) {

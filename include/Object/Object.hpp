@@ -71,7 +71,7 @@ class Object : public Util::GameObject{
 
     // 向左碰撞
     bool LeftCollision(const std::shared_ptr<Object> &other) const {
-            float x = this->GetPosition().x - std::abs(this->GetScaledSize().x / 2.0f) - 1.5;
+            float x = this->GetPosition().x - std::abs(this->GetScaledSize().x / 2.0f) - 1;
             float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
             float y = this->GetPosition().y;
 
@@ -83,7 +83,7 @@ class Object : public Util::GameObject{
 
     // 向右碰撞（上、中、下三點檢測）
     bool RightCollision(const std::shared_ptr<Object> &other) const {
-            float x = this->GetPosition().x + std::abs(this->GetScaledSize().x / 2.0f) + 1.5;
+            float x = this->GetPosition().x + std::abs(this->GetScaledSize().x / 2.0f) + 1;
             float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
             float y = this->GetPosition().y;
 

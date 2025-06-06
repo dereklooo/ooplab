@@ -18,14 +18,14 @@ void Star_Item::Action() {
                 this->SetPosition({this->GetPosition().x - 3,this->GetPosition().y});
                 if(!this->GetFalling()) {
                     this->SetPosition({this->GetPosition().x,this->GetPosition().y + 3.5f});
-                    this->SetGravity(-6.0f);
+                    this->SetGravity(-10.0f);
                 }
             }
             else if(this->way == Right) {
                 this->SetPosition({this->GetPosition().x + 3,this->GetPosition().y});
                 if(!this->GetFalling()) {
                     this->SetPosition({this->GetPosition().x,this->GetPosition().y + 3.5f});
-                    this->SetGravity(-6.0f);
+                    this->SetGravity(-10.0f);
                 }
             }
             SetWCollision(true);
