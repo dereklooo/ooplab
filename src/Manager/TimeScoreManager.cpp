@@ -13,8 +13,9 @@ Mario_(Mario){
     for (int i = 0;i < 5 ; i++) {
         auto temp2 = std::make_shared<Timer>();
         temp2->SetPosition({-75 + 30 * i,340});
+        temp2->SetOriginPosition({-75 + 30 * i,340});
         temp2->SetSize({1.5,2});
-        temp2->SetZIndex(500);
+        temp2->SetZIndex(100);
         Timers.push_back(temp2);
     }
 }
@@ -23,6 +24,7 @@ void TimeScoreManager::Update() const {
     const float timer = this->GetTimer() / 1000;
     for (int i = 4;i >= 0 ; i--) {
         int temp = static_cast<int>(timer /pow(10,i));
+        this->Timers[4 - i]->SetPosition(Timers[4-i]->GetOriginPosition());
         this->Timers[4 - i]->SetTime(temp % 10);
     }
 }

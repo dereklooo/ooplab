@@ -113,7 +113,7 @@ void ItemManager::HandleBlockCollision(const ItemType type, const std::shared_pt
                    break;
 
                    default:
-                       if(item->DownCollision(block)) {
+                       if(item->DownCollision(block) && item->GetType() != Item_OutSideCoin) {
                            item->SetPosition({item->GetPosition().x,block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(item->GetScaledSize().y / 2) + 2});
                        }
                        break;

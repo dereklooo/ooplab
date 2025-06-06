@@ -68,13 +68,14 @@ class ManagerManager {
         BlockManager_->SetAnotherMap(positions,positions_);
     }
     void Update() const{
+        MarioManager_->Update();
         FlagManager_->Update();
         BlockManager_->Update();
         ItemManager_->Update();
         MonsterManager_->Update();
+
         GravityManager_->Update();
         MapManager_->Update();
-        MarioManager_->Update();
         FireBallManager_->Update();
         ElevatorManager_->Update();
         TimeScoreManager_->Update();
