@@ -30,6 +30,7 @@ public:
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
             std::cout<<m_Background->GetPosition().x<<std::endl;
         }
+        TrapFireBallManager_->Update();
         if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false) {
             this->GameOver = true;
             return;
@@ -42,7 +43,6 @@ public:
             m_renderer->AddChild(T->GetFireBall());
             Condition_num += 1;
         }
-        TrapFireBallManager_->Update();
     }
 private:
     std::shared_ptr<TrapFireBallManager> TrapFireBallManager_;

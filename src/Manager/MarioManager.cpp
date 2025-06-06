@@ -40,7 +40,7 @@ void MarioManager::HandleBlock() const {
                     }
                 }
                 else {
-                    Mario_->SetPosition({block->GetPosition().x + abs(block->GetScaledSize().x / 2) + abs(Mario_->GetScaledSize().x / 2) + 5, Mario_->GetPosition().y});
+                    Mario_->SetPosition({block->GetPosition().x + abs(block->GetScaledSize().x / 2) + abs(Mario_->GetScaledSize().x / 2) + 2, Mario_->GetPosition().y});
                     if(block->GetType() == BlockType::HorizontalPipe_64_64) {
                         auto temp = std::dynamic_pointer_cast<Pipe>(block);
                             if(temp->GetHasAnotherMap()){
@@ -71,7 +71,7 @@ void MarioManager::HandleBlock() const {
                     }
                 }
                 else {
-                    Mario_->SetPosition({block->GetPosition().x - abs(block->GetScaledSize().x / 2) - abs(Mario_->GetScaledSize().x / 2) - 5, Mario_->GetPosition().y});
+                    Mario_->SetPosition({block->GetPosition().x - abs(block->GetScaledSize().x / 2) - abs(Mario_->GetScaledSize().x / 2) - 2, Mario_->GetPosition().y});
                     if(block->GetType() == BlockType::HorizontalPipe_64_64) {
                         auto temp = std::dynamic_pointer_cast<HorizontalPipe_64_64>(block);
                         if(temp->GetHasAnotherMap()) {
@@ -153,9 +153,11 @@ void MarioManager::HandleMonster() const {
                 if (elapsed < 1500.0f) {
                     Mario_->SetGravity(-0.75f);
                 }
+                else if(elapsed < 1750.0) {
+                    Mario_->SetType(Small);
+                }
                 else if (elapsed < 6500.0f) {
                     Mario_->SetWCollision(true);
-                    Mario_->SetType(Small);
                     Mario_->SetCanMove(true);
                     if ((static_cast<int>(elapsed) / 200) % 2 == 0 && Mario_->GetVisible()) {
                         Mario_->SetVisible(false);

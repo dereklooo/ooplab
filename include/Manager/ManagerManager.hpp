@@ -14,6 +14,7 @@
 #include "Manager/FireBallManager.hpp"
 #include "Manager/FlagManager.hpp"
 #include "Manager/TImeScoreManager.hpp"
+#include "Manager/TrapFireBallManager.hpp"
 
 class ManagerManager {
     public:
@@ -102,7 +103,7 @@ class ManagerManager {
         std::shared_ptr<FireBallManager> FireBallManager_;
         std::shared_ptr<ElevatorManager> ElevatorManager_;
         std::shared_ptr<TimeScoreManager> TimeScoreManager_;
-
+        std::shared_ptr<TrapFireBallManager> TrapFireBallManager_;
 
 };
 #endif //MANAGERMANAGER_HPP
