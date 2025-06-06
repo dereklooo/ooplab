@@ -73,64 +73,60 @@ void GravityManager::Combination() {
     }
 }
 bool GravityManager::IsFalling(const std::shared_ptr<Object> &object) const {
-    if(object->GetWCollision() == false) return false;
+    if (!object->GetWCollision()) return false;
+
     float gravity = object->GetGravity();
     if (gravity < 0.0f) return true;
 
     float curY = object->GetPosition().y;
     float nextY = curY - gravity;
-
     float curX = object->GetPosition().x;
 
-    float bottomY = curY - std::abs(object->GetScaledSize().y / 2.0f);
-    float nextBottomY = nextY - std::abs(object->GetScaledSize().y / 2.0f);
+    float objHalfHeight = std::abs(object->GetScaledSize().y / 2.0f);
+    float objHalfWidth  = std::abs(object->GetScaledSize().x / 2.0f);
+
+    float bottomY     = curY - objHalfHeight;
+    float nextBottomY = nextY - objHalfHeight;
 
     for (const auto& [type, blocks] : *Blocks) {
         for (const auto& block : blocks) {
-            if (block->GetType() == BlockType::flag || block->GetType() == BlockType::flagpole)
+            if (!block->GetVisible() ||
+                block->GetScaledSize().x < 0.1f ||
+                block->GetScaledSize().y < 0.1f ||
+                block->GetType() == BlockType::flag ||
+                block->GetType() == BlockType::flagpole)
                 continue;
 
-            float blockTop = block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f);
+            float blockTop    = block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f);
+            float blockLeft   = block->GetPosition().x - std::abs(block->GetScaledSize().x / 2.0f);
+            float blockRight  = block->GetPosition().x + std::abs(block->GetScaledSize().x / 2.0f);
 
-            for (const auto& [type, blocks] : *Blocks) {
-                for (const auto& block : blocks) {
-                    if (block->GetType() == BlockType::flag || block->GetType() == BlockType::flagpole)
-                        continue;
-                    if (!block->GetVisible() || block->GetScaledSize().x < 0.1f || block->GetScaledSize().y < 0.1f)
-                        continue;
-
-                    float blockTop = block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f);
-                    float blockX = block->GetPosition().x;
-                    // ✅ 預測落地：重力導致位置變化是否會「穿越方塊上邊界」
-                    if (bottomY > blockTop && nextBottomY <= blockTop && curX <= blockX + block->GetScaledSize().x / 2 && curY >= blockX - block->GetScaledSize().x / 2) {
-                        float dx = std::abs(object->GetPosition().x - block->GetPosition().x);
-                        float maxDx = std::abs(object->GetScaledSize().x / 2.0f) + std::abs(block->GetScaledSize().x / 2.0f);
-
-                        if (dx <= maxDx) {
-                            // ✅ 修正落地位置，避免穿透
-                            object->SetPosition({
-                                object->GetPosition().x,
-                                block->GetPosition().y + std::abs(block->GetScaledSize().y / 2.0f) + std::abs(object->GetScaledSize().y / 2.0f) + 0.5f
-                            });
-
-                            object->SetGravity(0.0f);
-                            object->SetFalling(false);
-                            return false;
-                        }
-                    }
-
-
-                    // 原本的簡單 DownCollision 邏輯保留，避免極小 gravity 跳過機制時沒偵測到
-                    if ((object->DownCollision(block) || (Mario_->GetTouchFlagFlag() && !Mario_->GetMarioGoDoorFlag())) &&
-                        block->GetType() != BlockType::flag && block->GetType() != BlockType::flagpole) {
-                        object->SetFalling(false);
-                        return false;
-                        }
-                }
+            // 檢查：Y軸下落貫穿 & X軸重疊
+            if (
+                bottomY > blockTop &&
+                nextBottomY <= blockTop &&
+                (curX + objHalfWidth) > blockLeft &&
+                (curX - objHalfWidth) < blockRight
+            ) {
+                // 落地修正
+                object->SetPosition({
+                    object->GetPosition().x,
+                    blockTop + objHalfHeight + 0.5f
+                });
+                object->SetGravity(0.0f);
+                object->SetFalling(false);
+                return false;
             }
 
-            object->SetFalling(true);
-            return true;
+            // 落地的額外保險（DownCollision）
+            if ((object->DownCollision(block) ||
+                 (Mario_->GetTouchFlagFlag() && !Mario_->GetMarioGoDoorFlag())) &&
+                block->GetType() != BlockType::flag && block->GetType() != BlockType::flagpole) {
+                object->SetFalling(false);
+                return false;
+            }
         }
     }
+    object->SetFalling(true);
+    return true;
 }

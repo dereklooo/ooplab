@@ -3,7 +3,7 @@
 //
 #include "Item/OutSideCoin_Item.hpp"
 OutSideCoin_Item::OutSideCoin_Item(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/character/Item/Coin.png"){
-
+    type = Item_OutSideCoin;
 }
 void OutSideCoin_Item::Action() {
 

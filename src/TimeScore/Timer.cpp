@@ -55,3 +55,9 @@ void Timer::SetTime(const int Time) {
             break;
     }
 }
+void Timer::SetOriginPosition(const glm::vec2 Pos) {
+    this->originPosition = Pos;
+}
+glm::vec2 Timer::GetOriginPosition() const{
+    return originPosition;;
+}

@@ -11,8 +11,11 @@ class Timer final : public StillObject {
         explicit Timer();
         int GetTime() const;
         void SetTime(int Time);
+        void SetOriginPosition(glm::vec2 Pos);
+        glm::vec2 GetOriginPosition() const;
     private:
         int time;
+        glm::vec2 originPosition;
         std::vector<std::shared_ptr<Util::Image>> images;
 };
 #endif //TIMER_HPP
