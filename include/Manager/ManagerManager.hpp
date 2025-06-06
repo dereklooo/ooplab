@@ -72,9 +72,9 @@ class ManagerManager {
         BlockManager_->Update();
         ItemManager_->Update();
         MonsterManager_->Update();
+        MarioManager_->Update();
         GravityManager_->Update();
         MapManager_->Update();
-        MarioManager_->Update();
         FireBallManager_->Update();
         ElevatorManager_->Update();
         TimeScoreManager_->Update();
