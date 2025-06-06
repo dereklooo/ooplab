@@ -144,10 +144,10 @@ void Mario::Hurt() {
     }
 }
 void Mario::RightMove() {
-    if (GetAcceleration()<=4.0f && GetAcceleration()>=0.0f) {
-        SetAcceleration(GetAcceleration()+0.1f);
-        if (GetAcceleration()>4.0) {
-            SetAcceleration(4.0);
+    if (GetAcceleration()<=5.5f && GetAcceleration()>=0.0f) {
+        SetAcceleration(GetAcceleration()+0.15f);
+        if (GetAcceleration()>5.5) {
+            SetAcceleration(5.5);
         }
         this->SetSize({1.35,1.2});
         this->UpDateCurrentState(Run);
@@ -162,10 +162,10 @@ void Mario::RightMove() {
 
 }
 void Mario::LeftMove() {
-        if (GetAcceleration()>=-4.0f && GetAcceleration()<=0.0f) {
-            SetAcceleration(GetAcceleration()-0.1f);
-            if (GetAcceleration()<-4.0) {
-                SetAcceleration(-4.0);
+        if (GetAcceleration()>=-5.5f && GetAcceleration()<=0.0f) {
+            SetAcceleration(GetAcceleration()-0.15f);
+            if (GetAcceleration()<-5.5) {
+                SetAcceleration(-5.5);
             }
             this->SetSize({-1.35,1.2});
             this->UpDateCurrentState(Run);

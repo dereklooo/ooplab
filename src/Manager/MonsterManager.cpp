@@ -70,21 +70,21 @@ void MonsterManager::HandleBlockCollision(
 
 
                monster->SetPosition({monster->GetPosition().x,block->GetPosition().y+ abs(block->GetScaledSize().y / 2)+ abs(monster->GetScaledSize().y / 2) + 1});
-                std::cout<<monster->GetWay()<< std::endl;
+                //std::cout<<monster->GetWay()<< std::endl;
 
             }
         if (monster->GetFalling()) {
             if (monster->GetType()==MonsterType::Red_turtle) {
-                std::cout<<"1"<< std::endl;
+                //std::cout<<"1"<< std::endl;
 
                 if (  monster->GetWay()==Left ) {
-                    std::cout<<"2"<< std::endl;
+                    //std::cout<<"2"<< std::endl;
                     monster->SetWay(Right);
                     monster->SetPosition({monster->GetPosition().x + 1.5,monster->GetPosition().y});
 
                 }
                 else if ( monster->GetWay()==Right) {
-                    std::cout<<"3"<< std::endl;
+                   // std::cout<<"3"<< std::endl;
                     monster->SetWay(Left);
                     monster->SetPosition({monster->GetPosition().x - 1.5,monster->GetPosition().y});
 
