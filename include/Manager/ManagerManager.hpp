@@ -4,6 +4,7 @@
 
 #ifndef MANAGERMANAGER_HPP
 #define MANAGERMANAGER_HPP
+#include "Manager/ElevatorManager.hpp"
 #include "Manager/MapManager.hpp"
 #include "Manager/ItemManager.hpp"
 #include "Manager/GravityManager.hpp"
@@ -12,6 +13,7 @@
 #include "Manager/MonsterManager.hpp"
 #include "Manager/FireBallManager.hpp"
 #include "Manager/FlagManager.hpp"
+#include "Manager/TImeScoreManager.hpp"
 
 class ManagerManager {
     public:
@@ -37,13 +39,15 @@ class ManagerManager {
             ItemManager_ = std::make_shared<ItemManager>(Background->GetPosition(), Background->GetScaledSize(),Blocks,Items,Monsters);
             MapManager_ = std::make_shared<MapManager>(Mario,Background,FireBalls,Blocks,Monsters,Items);
             FireBallManager_ = std::make_shared<FireBallManager>(Mario,Renderer,FireBalls,Blocks,Monsters);
-            FlagManager_=std::make_shared<FlagManager>(Mario,Renderer,Blocks,Background);
+            FlagManager_= std::make_shared<FlagManager>(Mario,Renderer,Blocks,Background);
+            ElevatorManager_ = std::make_shared<ElevatorManager>(Blocks,Mario);
+            TimeScoreManager_ = std::make_shared<TimeScoreManager>(Mario,Util::Time::GetElapsedTimeMs());
     };
     void SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const{
         BlockManager_->SetBlock(positions, type);
     }
-    void SetFloor(std::vector<float> &Position, const float Floor_y) const {
-        BlockManager_->SetFloor(Position,Floor_y);
+    void SetFloor(const std::vector<glm::vec2>& Position,const std::vector<glm::vec2>& Size) const {
+        BlockManager_->SetFloor(Position,Size);
     }
     void SetItem(std::vector<glm::vec2>& Position, const ItemType type) const{
         ItemManager_->SetItem(Position, type);
@@ -54,6 +58,9 @@ class ManagerManager {
     void MarioInitialize() const {
         MarioManager_->MarioInitialize();
     }
+    void TimeScoreManagerInitialize(const std::shared_ptr<Util::Renderer> &renderer) const{
+        TimeScoreManager_->TimeScoreManagerInitialize(renderer);
+    }
     void FireballsInitialize() const {
         FireBallManager_->FireballsInitialize();
     }
@@ -61,14 +68,18 @@ class ManagerManager {
         BlockManager_->SetAnotherMap(positions,positions_);
     }
     void Update() const{
-
         FlagManager_->Update();
+        BlockManager_->Update();
         ItemManager_->Update();
         MonsterManager_->Update();
         GravityManager_->Update();
         MapManager_->Update();
         MarioManager_->Update();
         FireBallManager_->Update();
+        ElevatorManager_->Update();
+        TimeScoreManager_->Update();
+        std::cout<< Background->GetPosition().x << ' '<< Background->GetPosition().y << " damario "<< Mario->GetPosition().x<< ' '<< Mario->GetPosition().y << std::endl;
+
     }
 
 
@@ -88,6 +99,9 @@ class ManagerManager {
         std::shared_ptr<MonsterManager> MonsterManager_;
         std::shared_ptr<ItemManager> ItemManager_;
         std::shared_ptr<FireBallManager> FireBallManager_;
+        std::shared_ptr<ElevatorManager> ElevatorManager_;
+        std::shared_ptr<TimeScoreManager> TimeScoreManager_;
+
 
 };
 #endif //MANAGERMANAGER_HPP

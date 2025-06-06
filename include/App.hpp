@@ -47,6 +47,7 @@ private:
 
     std::shared_ptr<Level> m_level3;
 
+    std::shared_ptr<Level> m_level4;
 
     std::shared_ptr <Util::Renderer> m_renderer;
 

@@ -92,8 +92,6 @@ add_executable(${PROJECT_NAME}
         src/Block/Pipe64_128.cpp
         include/Block/FloorBlock.hpp
         src/Block/FloorBlock.cpp
-        include/TimeScore/Timer.hpp
-        include/TimeScore/Score.hpp
         include/Manager/TImeScoreManager.hpp
         src/Manager/TimeScoreManager.cpp
         src/TimeScore/Timer.cpp
@@ -125,6 +123,34 @@ add_executable(${PROJECT_NAME}
         src/Block/FlagBall.cpp
         include/Block/Flag.hpp
         src/Block/Flag.cpp
+        include/Block/Elevator.hpp
+        src/Block/Elevator.cpp
+        include/Manager/ElevatorManager.hpp
+        src/Manager/ElevatorManager.cpp
+        include/TImeAndScore/Timer.hpp
+        include/TImeAndScore/Score.hpp
+        src/Monster/EatFlower.cpp
+        include/Monsters/Blue_Mushroom.hpp
+        src/Monster/Blue_Mushroom.cpp
+        include/Monsters/BlueTurtle.hpp
+        include/Block/OriginalCoin.hpp
+        src/Block/OriginalCoin.cpp
+        include/Block/BlueOriginalCoin.hpp
+        src/Block/BlueOriginalCoin.cpp
+        include/Level/Level4.hpp
+        include/Block/WhiteBlock.hpp
+        src/Block/WhiteBlock.cpp
+        include/Trap/TrapFireBall.hpp
+        src/Trap/TrapFireBall.cpp
+        include/Manager/TrapFireBallManager.hpp
+        src/Manager/TrapFireBallManager.cpp
+        "include/Block/ Bridge.hpp"
+        src/Block/Bridge.cpp
+        include/Item/Axe.hpp
+        src/Item/Axe.cpp
+        include/Trap/KooperFireBall.hpp
+        src/Monster/Kooper.cpp
+        src/Trap/KooperFireBall.cpp
         include/Block/GrassFloorLeft.hpp
         include/Block/grassfloormid.hpp
         include/Block/GrassFloorRight.hpp
@@ -133,6 +159,8 @@ add_executable(${PROJECT_NAME}
         src/Block/GrassFloorMid.cpp
         include/Block/TreeWall.hpp
         src/Block/TreeWall.cpp
+        include/Monsters/Red_turtle.hpp
+        src/Monster/Red_Turtle.cpp
 )
 
 if(MSVC)

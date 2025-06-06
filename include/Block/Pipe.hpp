@@ -5,6 +5,7 @@
 #ifndef PIPE_HPP
 #define PIPE_HPP
 #include "Object/SceneObject.hpp"
+#include "Monsters/Eat_flower.hpp"
 class Pipe : public SceneObject {
     public:
         Pipe(const std::string& Path, const glm::vec2 position) : SceneObject(Path,position) {
@@ -24,6 +25,7 @@ class Pipe : public SceneObject {
         }
     private:
         bool HasAnotherMap = false;
+        std::shared_ptr<EatFlower> eat_flower = nullptr;
         glm::vec2 next_position;
 };
 #endif //PIPE_HPP

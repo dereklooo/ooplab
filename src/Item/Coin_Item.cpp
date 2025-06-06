@@ -12,8 +12,8 @@ void Coin_Item::Action() {
         case ItemState::Hidden:
             break;
         case ItemState::Collected:
-            this->SetPosition({this->GetPosition().x,this->GetPosition().y - DeltaTime * 250.0f});
-        if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 2000) {
+            this->SetPosition({this->GetPosition().x,this->GetPosition().y - DeltaTime * 500.0f});
+        if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 600) {
             this->SetVisible(false);
             this->state = Walking;
         }
@@ -23,15 +23,14 @@ void Coin_Item::Action() {
         break;
         case ItemState::PoppingUp:
             this->SetWCollision(false);
-        this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 250.0f});
-        if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 1000) {
-            this->state = Collected;
-        }
-        break;
+            this->SetPosition({this->GetPosition().x,this->GetPosition().y + DeltaTime * 500.0f});
+            if(Util::Time::GetElapsedTimeMs() - StartPopTime >= 300) {
+                this->state = Collected;
+            }
+            break;
     }
     LastTime = Util::Time::GetElapsedTimeMs();
 }
 void Coin_Item::ChangeMarioState(std::shared_ptr<Mario> &mario) {
         mario->AddCoin(1);
-        mario->AddScore(200);
 }

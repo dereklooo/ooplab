@@ -4,6 +4,8 @@
 
 #include "Manager/ItemManager.hpp"
 
+#include "Block/OriginalCoin.hpp"
+
 ItemManager::ItemManager(const glm::vec2 MapPosition,
                          const glm::vec2 MapSize,
                          std::shared_ptr<std::unordered_map<BlockType,std::vector<std::shared_ptr<SceneObject>>>> &Blocks,
@@ -26,9 +28,22 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
             (*Items)[type].push_back(temp);
             continue;
         }
+        if(type == Item_Axe) {
+            auto temp = std::make_shared<Axe>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
+            temp->SetSize({1.5,1.5});
+            temp->SetVisible(true);
+            temp->SetZIndex(100);
+            const auto T = std::static_pointer_cast<Axe>(temp);
+            for(auto &bridge : (*Blocks)[BlockType::Bridge]) {
+                T->ConnectToBlock(bridge);
+            }
+            (*Items)[type].push_back(temp);
+            continue;
+        }
         for(const auto &[type_B,blocks] : (*Blocks)) {
             for(auto &block : blocks) {
-                if(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48) == block->GetPosition() ) {
+
+                if(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48) == block->GetPosition()) {
                     std::shared_ptr<ItemObject> temp = nullptr;
                     switch(type) {
                         case(Item_Mushroom):
@@ -43,6 +58,17 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
                         case(Item_Coin):
                             temp = std::make_shared<Coin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
                             break;
+                        case(Item_Coins):{
+                            const auto Temp = std::dynamic_pointer_cast<OriginalCoin>(block);
+                            const auto Coin = std::make_shared<Coin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
+                            Coin->SetZIndex(100);
+                            Coin->SetSize({1.5,1.5});
+                            Coin->SetVisible(false);
+                            Coin->SetWCollision(false);
+                            (*Items)[type].push_back(Coin);
+                            Temp->SetCoins(Coin);
+                            continue;
+                        }
                         default:
                             break;
                     }

@@ -12,12 +12,18 @@ enum MonsterType {
     Black_turtle,
     Eat_flower,
     Fly_turtle,
-    Kooper,
+    Kooper_Type,
     Jump_turtle,
     Mushroom_Type,
-    Turtle_Type
+    Turtle_Type,
+    Red_turtle
 };
 
+enum TurtleType {
+    OutSide,
+    Inside,
+    Rolling,
+};
 class Monster : public AnimationObject {
     public:
       Monster(const size_t size,const std::string &Path) : AnimationObject(size,Path) {};

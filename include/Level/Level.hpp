@@ -21,13 +21,14 @@ public:
 
     Level()= default;
     bool GetNextLevelFlag (){return NextLevelFlag;}
-    void SetNextLevelFlag(bool flag){NextLevelFlag = flag;}
+    void SetNextLevelFlag(const bool flag){NextLevelFlag = flag;}
     void SetBackGround(std::shared_ptr<StillObject> Background);
     void SetSceneObject(std::shared_ptr<SceneObject> SceneObject);
     virtual void Update() = 0;
     void Start() const {
         m_ManagerManager->MarioInitialize();
         m_ManagerManager->FireballsInitialize();
+        m_ManagerManager->TimeScoreManagerInitialize(m_renderer);
         m_renderer->AddChild(m_Background);
         m_renderer->AddChild(m_Mario);
         for (auto &[type,blocks] : *Blocks) {
@@ -42,6 +43,9 @@ public:
         }
     }
     void update() {
+        if (Util::Input::IsKeyDown(Util::Keycode::E)) {
+            m_Mario->SetPosition({m_Mario->GetPosition().x + 1000,m_Mario->GetPosition().y});
+        }
         this->Update();
         m_ManagerManager->Update();
         m_renderer->Update();

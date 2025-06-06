@@ -5,7 +5,7 @@
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 #include "Util/GameObject.hpp"
-enum Way {Right ,Left};
+enum Way {Right ,Left,up,down};
 class Object : public Util::GameObject{
     public:
         Object() = default;
@@ -50,7 +50,7 @@ class Object : public Util::GameObject{
     // 向下碰撞
     bool DownCollision(const std::shared_ptr<Object> &other) const {
             float x = this->GetPosition().x;
-            float y = this->GetPosition().y - std::abs(this->GetScaledSize().y / 2.0f) - 2;
+            float y = this->GetPosition().y - std::abs(this->GetScaledSize().y / 2.0f) - 5;
 
             glm::vec2 p1 = {x + 15, y};
             glm::vec2 p2 = {x - 15, y};
@@ -61,7 +61,7 @@ class Object : public Util::GameObject{
     // 向上碰撞
     bool UpCollision(const std::shared_ptr<Object> &other) const {
             float x = this->GetPosition().x;
-            float y = this->GetPosition().y + std::abs(this->GetScaledSize().y / 2.0f) + 2;
+            float y = this->GetPosition().y + std::abs(this->GetScaledSize().y / 2.0f) + 5;
 
             glm::vec2 p1 = {x + 10, y};
             glm::vec2 p2 = {x - 10, y};
@@ -71,26 +71,24 @@ class Object : public Util::GameObject{
 
     // 向左碰撞
     bool LeftCollision(const std::shared_ptr<Object> &other) const {
-            float x = this->GetPosition().x - std::abs(this->GetScaledSize().x / 2.0f) - 4;
+            float x = this->GetPosition().x - std::abs(this->GetScaledSize().x / 2.0f) - 1.5;
             float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
             float y = this->GetPosition().y;
 
             glm::vec2 top = {x, y + halfHeight - 10};
-            glm::vec2 mid = {x, y};
-            glm::vec2 bottom = {x, y - halfHeight + 2};
+            glm::vec2 mid = {x, y - halfHeight + 20};
 
             return other->Collision(top) || other->Collision(mid);
         }
 
     // 向右碰撞（上、中、下三點檢測）
     bool RightCollision(const std::shared_ptr<Object> &other) const {
-            float x = this->GetPosition().x + std::abs(this->GetScaledSize().x / 2.0f) + 4;
+            float x = this->GetPosition().x + std::abs(this->GetScaledSize().x / 2.0f) + 1.5;
             float halfHeight = std::abs(this->GetScaledSize().y / 2.0f);
             float y = this->GetPosition().y;
 
             glm::vec2 top = {x, y + halfHeight - 10};
-            glm::vec2 mid = {x, y};
-            glm::vec2 bottom = {x, y - halfHeight + 2};
+            glm::vec2 mid = {x, y - halfHeight + 20};
 
             return other->Collision(top) || other->Collision(mid);
         }

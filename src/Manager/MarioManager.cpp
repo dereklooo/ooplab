@@ -20,11 +20,11 @@ MarioManager::MarioManager(
 
             }
 void MarioManager::HandleBlock() const {
+    if(Mario_->GetWCollision() == false) {
+        return;
+    }
     for (const auto& [type, blocks] : *Blocks) {   // 注意這裡，blocks 是 vector
         for (const auto& block : blocks) {
-            if(Mario_->GetWCollision() == false) {
-                return;
-            }
             if(Mario_->LeftCollision(block) &&  Mario_->GetTouchFlagFlag()==false) {
                 if(Mario_->GetAnimating()) {
                     if(Mario_->GetAnimationWay() == Right) {
@@ -91,8 +91,9 @@ void MarioManager::HandleBlock() const {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
                 Mario_->SetGravity(2);
                 block->hit(Mario_);
+                std::cout<<Mario_->GetScore()<<std::endl;
             }
-            else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0 && (Mario_->GetTouchFlagFlag()==false ) ){
+            else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0 && (Mario_->GetTouchFlagFlag()==false ) && block->GetSize() != glm::vec2(0,0)){
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
                 if(block->GetType() == BlockType::Pipe_64_96 || block->GetType() == BlockType::Pipe_64_128 || block->GetType() == BlockType::Pipe_64_64) {
                     auto temp = std::dynamic_pointer_cast<Pipe>(block);
@@ -118,6 +119,8 @@ void MarioManager::HandleItem() const {
                 item->SetVisible(false);
                 item->SetWCollision(false);
                 item->ChangeMarioState(Mario_);
+                item->SetPosition({item->GetPosition().x,item->GetPosition().y - 40000});
+                Mario_->AddScore(300);
             }
         }
     }
@@ -131,7 +134,8 @@ void MarioManager::HandleMonster() const {
                         monster->SetKnockAway(true);
                         monster->SetWCollision(false);
                         monster->SetSize({monster->GetSize().x, monster->GetSize().y * -1});
-                        monster->SetGravity(-2.0f);
+                        monster->SetGravity(-10.0f);
+                        Mario_->AddScore(200);
                 }
                 if(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime() < 10000) {
                     if ((static_cast<int>(Util::Time::GetElapsedTimeMs() - Mario_->GetStartShiningTime()) / 200) % 2 == 0) {
@@ -147,9 +151,10 @@ void MarioManager::HandleMonster() const {
             else if (Mario_->GetHurting()) {
                 float elapsed = Util::Time::GetElapsedTimeMs() - Mario_->GetHurtingTime();
                 if (elapsed < 1500.0f) {
-                    Mario_->SetGravity(0.0f);
+                    Mario_->SetGravity(-0.75f);
                 }
                 else if (elapsed < 6500.0f) {
+                    Mario_->SetWCollision(true);
                     Mario_->SetType(Small);
                     Mario_->SetCanMove(true);
                     if ((static_cast<int>(elapsed) / 200) % 2 == 0 && Mario_->GetVisible()) {
@@ -160,7 +165,7 @@ void MarioManager::HandleMonster() const {
                     if(Mario_->DownCollision(monster) && !monster->GetDie()) {
                         monster->Hurt();
                         Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
-                        Mario_->SetGravity(-2.0f);
+                        Mario_->SetGravity(-5.5f);
                     }
                 }
                 else {
@@ -179,6 +184,9 @@ void MarioManager::HandleMonster() const {
                         }
                         case Turtle_Type: {
                             const auto temp = std::dynamic_pointer_cast<Turtle>(monster);
+                            if(temp->GetWCollision() == false) {
+                                break;
+                            }
                             if(temp->GetTurtleTye() == Inside) {
                                 if(Mario_->RightCollision(monster)) {
                                     monster->SetWay(Right);
@@ -190,10 +198,7 @@ void MarioManager::HandleMonster() const {
                                 }
                                 monster->Hurt();
                             }
-                            else if(temp->GetTurtleTye() == OutSide){
-                                Mario_->Hurt();
-                            }
-                            else if(temp->GetTurtleTye() == Rolling) {
+                            else if(temp->GetTurtleTye() == OutSide || temp->GetTurtleTye() == Rolling){
                                 Mario_->Hurt();
                             }
                             break;
@@ -204,9 +209,11 @@ void MarioManager::HandleMonster() const {
                     }
                 }
                 else if(Mario_->DownCollision(monster) && !monster->GetDie()) {
+                    if(monster->GetType() == MonsterType::Kooper_Type){Mario_->Hurt();}
                     monster->Hurt();
+                    Mario_->AddScore(200);
                     Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
-                    Mario_->SetGravity(-2.0f);
+                    Mario_->SetGravity(-5.5f);
                 }
             }
         }
@@ -293,19 +300,14 @@ void MarioManager::MarioInputCtl() const {
         }
     }
 
-    if (Util::Input::IsKeyDown(Util::Keycode::E)) {
-        Mario_->SetPosition({850, -180});
-    }
     Mario_->Brakes();
     Mario_->UpDateCurrentState(Mario_->GetCurrentState());
 }
 void MarioManager::MarioInitialize() const {
-    Mario_ = std::make_shared<Mario>();
-    Mario_->SetGravity(-2.0f);
     Mario_->SetFallingTime(Util::Time::GetElapsedTimeMs());
-    Mario_->SetPosition({-620,-150});
+    Mario_->SetPosition({-620,0});
     Mario_->UpDateCurrentState(Stand);
-
+    Mario_->SetGravity(-2.0f);
     Mario_->SetZIndex(50);
     Mario_->SetSize({1.35,1.2});
 }

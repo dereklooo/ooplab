@@ -32,6 +32,7 @@ void FireFlower::Action() {
 }
 void FireFlower::ChangeMarioState(std::shared_ptr<Mario> &mario) {
     if(mario->GetType() == Small || mario->GetType() == Big) {
+        mario->SetPosition({mario->GetPosition().x,mario->GetPosition().y + 10});
         mario->SetType(Fire);
         mario->UpDateCurrentState(Stand);
     }

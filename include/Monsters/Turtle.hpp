@@ -5,18 +5,13 @@
 #ifndef TURTLE_HPP
 #define TURTLE_HPP
 #include "Monster.hpp"
-enum TurtleType {
-    OutSide,
-    Inside,
-    Rolling,
-};
-class Turtle final : public Monster{
+class Turtle : public Monster{
     public:
         Turtle(const glm::vec2 position, const Way way) : Monster(2,RESOURCE_DIR"/image/character/monster/turtle/walk") {
             this->type = MonsterType::Turtle_Type;
             this->Turtle_type = TurtleType::OutSide;
             this->SetWay(way);
-            this->SetSize({1.5,1.5});
+            this->SetSize({1.2,1.25});
             this->SetZIndex(100);
             this->SetPosition(position);
         };
@@ -25,7 +20,7 @@ class Turtle final : public Monster{
         TurtleType GetTurtleTye() const {
             return Turtle_type;
         }
-    private:
+    protected:
         TurtleType Turtle_type;
 
         std::shared_ptr<Util::Animation> WalkDrawable = Turtle::GenerateAnimation(2,RESOURCE_DIR "/image/character/monster/turtle/walk",200,100);

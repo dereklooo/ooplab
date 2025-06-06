@@ -11,7 +11,9 @@
 #include "Monsters/Fly_turtle.hpp"
 #include "Monsters/Kooper.hpp"
 #include "Monsters/Jump_turtle.hpp"
-
+#include "Monsters/Blue_Mushroom.hpp"
+#include "Monsters/BlueTurtle.hpp"
+#include "Monsters/Red_turtle.hpp"
 #include "Util/Renderer.hpp"
 #include "Object/SceneObject.hpp"
 #include <iostream>

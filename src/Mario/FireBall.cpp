@@ -20,10 +20,10 @@ FireBall::FireBall(const glm::vec2 position) : AnimationObject(4,RESOURCE_DIR"/i
 
 void FireBall::Rolling() {
     if(this->way == Right) {
-        this->SetPosition({this->GetPosition().x + 8,this->GetPosition().y,});
+        this->SetPosition({this->GetPosition().x + 12,this->GetPosition().y,});
     }
     else {
-        this->SetPosition({this->GetPosition().x - 8,this->GetPosition().y,});
+        this->SetPosition({this->GetPosition().x - 12,this->GetPosition().y,});
     }
 
 }

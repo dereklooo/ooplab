@@ -13,8 +13,6 @@ class OriginalBlock : public SceneObject {
     void hit(const std::shared_ptr<Mario> &Mario) override;
     BlockType GetType() override {return BlockType::Original;};
     private:
-        float BouncingTimer = 0;
-        bool Bouncing = false;
         std::shared_ptr<Util::Time> time;
 };
 #endif //ORIGINALBLOCK_HPP
