@@ -18,8 +18,8 @@ void TrapFireBallManager::Update(){
     std::cout<<Mario_->GetPosition().x<<Mario_->GetPosition().y<<std::endl;
     if (Mario_->GetPosition().x >= 0) {
         for(const auto &fireball : Fireballs) {
-            fireball->SetPosition({fireball->GetPosition().x - 4, fireball->GetPosition().y});
-            fireball->SetCenter({fireball->GetCenter().x - 4,fireball->GetCenter().y});
+            fireball->SetPosition({fireball->GetPosition().x - 5.5, fireball->GetPosition().y});
+            fireball->SetCenter({fireball->GetCenter().x - 5.5,fireball->GetCenter().y});
         }
     }
 }

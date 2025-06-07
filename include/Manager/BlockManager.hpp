@@ -29,6 +29,7 @@
 #include "Block/GrassFloorMid.hpp"
 #include "Block/GrassFloorLeft.hpp"
 #include "Block/TreeWall.hpp"
+#include "Block/ Bridge.hpp"
 
 class BlockManager {
 public:

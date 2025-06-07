@@ -91,7 +91,7 @@ public:
             case 5:
                 if(m_Background->GetPosition().x <= -3400 && m_Background->GetPosition().x >= -3450) {
                     _temp.clear();
-                    _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(600,210),Left));
+                    _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(570,210),Left));
                     _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(800,70),Left));
                     _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(850,70),Left));
                     m_ManagerManager->AddMonster(_temp,m_renderer);

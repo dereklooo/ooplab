@@ -167,7 +167,7 @@ void Mario::LeftMove() {
             if (GetAcceleration()<-5.5) {
                 SetAcceleration(-5.5);
             }
-            this->SetSize({-1.35,1.2});
+            this->SetSize({-1.4,1.2});
             this->UpDateCurrentState(Run);
             CurrentState = Run;
         }
@@ -175,7 +175,7 @@ void Mario::LeftMove() {
             SetAcceleration(GetAcceleration()-0.2f);
             this->UpDateCurrentState(Stop);
             CurrentState = Stop;
-            this->SetSize({-1.35,1.2});
+            this->SetSize({-1.4,1.2});
         }
     this->SetPosition({this->GetPosition().x + GetAcceleration(),this->GetPosition().y});
 

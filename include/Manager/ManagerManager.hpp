@@ -74,7 +74,6 @@ class ManagerManager {
         BlockManager_->Update();
         ItemManager_->Update();
         MonsterManager_->Update();
-
         GravityManager_->Update();
         MapManager_->Update();
         FireBallManager_->Update();

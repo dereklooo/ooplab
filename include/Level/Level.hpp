@@ -46,7 +46,6 @@ public:
         if (Util::Input::IsKeyDown(Util::Keycode::E)) {
             m_Mario->SetPosition({m_Mario->GetPosition().x + 1000,m_Mario->GetPosition().y});
         }
-        std::cout<<Util::Time::GetElapsedTimeMs()<<std::endl;
         this->Update();
         m_ManagerManager->Update();
         m_renderer->Update();

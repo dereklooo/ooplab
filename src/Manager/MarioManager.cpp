@@ -68,6 +68,7 @@ void MarioManager::HandleBlock() const {
                         Mario_->SetWCollision(false);
                         Mario_->SetAnimation(true);
                         Mario_->SetGravity(2);
+                        Mario_->SetAcceleration(0);
                     }
                 }
                 else {
@@ -80,7 +81,7 @@ void MarioManager::HandleBlock() const {
                             Mario_->SetAnimationWay(Right);
                             Mario_->SetCurrentState(Stand);
                             Mario_->SetCanMove(false);
-                            Mario_->SetAcceleration(0.5);
+                            Mario_->SetAcceleration(0);
                             Mario_->SetNextPosition(temp->GetNextPosition());
                         }
                     }
