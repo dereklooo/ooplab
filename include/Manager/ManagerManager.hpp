@@ -43,6 +43,7 @@ class ManagerManager {
             FlagManager_= std::make_shared<FlagManager>(Mario,Renderer,Blocks,Background);
             ElevatorManager_ = std::make_shared<ElevatorManager>(Blocks,Mario);
             TimeScoreManager_ = std::make_shared<TimeScoreManager>(Mario,Util::Time::GetElapsedTimeMs());
+            TrapFireBallManager_ = std::make_shared<TrapFireBallManager>(Mario,Background->GetPosition(),Background->GetScaledSize());
     };
     void SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const{
         BlockManager_->SetBlock(positions, type);
@@ -68,6 +69,9 @@ class ManagerManager {
     void SetAnotherMap(const std::vector<glm::vec2> &positions,const std::vector<glm::vec2> &positions_) const {
         BlockManager_->SetAnotherMap(positions,positions_);
     }
+    void SetFireball(const std::vector<glm::vec2>& Positions, const std::shared_ptr<Util::Renderer>& Render) {
+        TrapFireBallManager_->SetFireball(Positions,Render);
+    }
     void Update() const{
         MarioManager_->Update();
         FlagManager_->Update();
@@ -75,6 +79,7 @@ class ManagerManager {
         ItemManager_->Update();
         MonsterManager_->Update();
         GravityManager_->Update();
+        TrapFireBallManager_->Update();
         MapManager_->Update();
         FireBallManager_->Update();
         ElevatorManager_->Update();

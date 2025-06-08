@@ -25,7 +25,7 @@ void MapManager::GameObject_Move() const {
     if(Mario_->GetPosition().x - 1 <= -620) {
         Mario_->SetPosition({-620,Mario_->GetPosition().y});
     }
-    if (Mario_->GetPosition().x > 0) {
+    if (Mario_->GetPosition().x >= 0) {
         Background->SetPosition({Background->GetPosition().x - 5.5,Background->GetPosition().y});
         Mario_->SetPosition({Mario_->GetPosition().x - 5.5,Mario_->GetPosition().y});
         for(const auto& [type,monsters] : (*Monsters)) {

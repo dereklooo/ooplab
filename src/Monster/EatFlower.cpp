@@ -22,15 +22,14 @@ void EatFlower::Action() {
     if(this->Die == false) {
         float Time = Util::Time::GetElapsedTimeMs() - this->delta;
         this->SetGravity(0);
-        std::cout<<Time<<std::endl;
         if(Time <= 1000) {
             this->SetPosition(this->OriginalPosition);
         }
         else if(Time <= 2500) {
-            this->SetPosition({this->GetPosition().x,this->GetPosition().y + 9 * Util::Time::GetDeltaTimeMs() / 100});
+            this->SetPosition({this->GetPosition().x,this->GetPosition().y + 10 * Util::Time::GetDeltaTimeMs() / 100});
         }
         else if(Time <= 3500) {
-            this->SetPosition({OriginalPosition.x,OriginalPosition.y + 65});
+            this->SetPosition({OriginalPosition.x,OriginalPosition.y + 85});
         }
         else if(Time <= 4500) {
             this->SetPosition({this->GetPosition().x,this->GetPosition().y - 3.5 * Util::Time::GetDeltaTimeMs() / 100});

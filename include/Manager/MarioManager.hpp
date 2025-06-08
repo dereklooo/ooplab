@@ -19,14 +19,15 @@ class MarioManager {
             std::shared_ptr<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>& Monsters,
             std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>& Items);
         void MarioInitialize() const;
-        void MarioCollision() const;
+        void MarioCollision();
         void MarioInputCtl() const;
-        void Update() const {
+        void Update() {
             MarioInputCtl();
-            MarioCollision();
+            this->MarioCollision();
         };
     private:
-        void HandleMonster() const;
+        float LastHurtingTime = 0.0f;
+        void HandleMonster();
         void HandleBlock() const;
         void HandleItem() const;
         std::shared_ptr<Mario>& Mario_;

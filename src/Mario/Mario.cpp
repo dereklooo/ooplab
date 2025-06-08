@@ -76,9 +76,12 @@ void Mario::UpDateCurrentState(const Action act) {
             case Action::Jump:
                 this->SetDrawable(this->BigDrawable[2]);
             break;
-            case Action::BigToSmall:
+            case Action::BigToSmall: {
+                auto temp = std::dynamic_pointer_cast<Util::Animation>(BigDrawable[3]);
+                temp->SetCurrentFrame(0);
                 this->SetDrawable(this->BigDrawable[3]);
                 break;
+            }
             case Action::BigToFire:
                 this->SetDrawable(this->BigDrawable[4]);
             break;
@@ -106,9 +109,12 @@ void Mario::UpDateCurrentState(const Action act) {
             case Action::Jump:
                 this->SetDrawable(this->FireDrawable[2]);
                 break;
-            case Action::BigToSmall:
+            case Action::BigToSmall: {
+                auto temp = std::dynamic_pointer_cast<Util::Animation>(FireDrawable[3]);
+                temp->SetCurrentFrame(0);
                 this->SetDrawable(this->FireDrawable[3]);
                 break;
+            }
             case Action::Down:
                 this->SetDrawable(this->FireDrawable[4]);
                 break;
@@ -132,7 +138,7 @@ void Mario::Hurt() {
         this->SetGravity(-10.0);
         this->SetCanMove(false);
     }
-    else if(this->Type == Big) {
+    else if(this->Type == Big){
         this->UpDateCurrentState(BigToSmall);
         this->SetHurting(true,Util::Time::GetElapsedTimeMs());
         this->CanMove = false;

@@ -15,7 +15,6 @@ void TrapFireBallManager::Update(){
         Fireball->Rotate();
     }
     HandleMarioCollision();
-    //std::cout<<Mario_->GetPosition().x<<Mario_->GetPosition().y<<std::endl;
     if (Mario_->GetPosition().x >= 0) {
         for(const auto &fireball : Fireballs) {
             fireball->SetPosition({fireball->GetPosition().x - 5.5, fireball->GetPosition().y});

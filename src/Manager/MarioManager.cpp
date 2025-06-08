@@ -126,7 +126,7 @@ void MarioManager::HandleItem() const {
         }
     }
 }
-void MarioManager::HandleMonster() const {
+void MarioManager::HandleMonster(){
     for(auto &[type,monsters] : *Monsters) {
         for(auto &monster : monsters) {
             if(Mario_->GetStaring()) {
@@ -157,13 +157,20 @@ void MarioManager::HandleMonster() const {
                 else if(elapsed < 1750.0) {
                     Mario_->SetType(Small);
                 }
-                else if (elapsed < 6500.0f) {
+                else if(elapsed < 1800) {
                     Mario_->SetWCollision(true);
                     Mario_->SetCanMove(true);
-                    if ((static_cast<int>(elapsed) / 200) % 2 == 0 && Mario_->GetVisible()) {
-                        Mario_->SetVisible(false);
-                    } else {
+                    LastHurtingTime = elapsed;
+                }
+                else if (elapsed >= 1800.0f && elapsed <= 6500.0f) {
+                    if(elapsed - LastHurtingTime <= 150.0f ) {
                         Mario_->SetVisible(true);
+                    }
+                    else if(elapsed - LastHurtingTime <= 300.0f ){
+                        Mario_->SetVisible(false);
+                    }
+                    else if(elapsed - LastHurtingTime > 300.0f ) {
+                        LastHurtingTime = elapsed;
                     }
                     if(Mario_->DownCollision(monster) && !monster->GetDie()) {
                         monster->Hurt();
@@ -311,10 +318,10 @@ void MarioManager::MarioInitialize() const {
     Mario_->SetZIndex(50);
     Mario_->SetSize({1.35,1.2});
 }
-void MarioManager::MarioCollision() const {
+void MarioManager::MarioCollision() {
     if(Mario_->GetWCollision()) {
         HandleItem();
         HandleBlock();
-        HandleMonster();
+        this->HandleMonster();
     }
 }
