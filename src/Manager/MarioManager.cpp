@@ -92,7 +92,7 @@ void MarioManager::HandleBlock() const {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
                 Mario_->SetGravity(2);
                 block->hit(Mario_);
-                std::cout<<Mario_->GetScore()<<std::endl;
+                //std::cout<<Mario_->GetScore()<<std::endl;
             }
             else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0 && (Mario_->GetTouchFlagFlag()==false ) && block->GetSize() != glm::vec2(0,0)){
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y + abs(block->GetScaledSize().y / 2) + abs(Mario_->GetScaledSize().y / 2) + 1});
@@ -179,12 +179,6 @@ void MarioManager::HandleMonster() const {
             else {
                 if((Mario_->RightCollision(monster) || Mario_->LeftCollision(monster))) {
                     switch(type) {
-                        case Mushroom_Type: {
-                            if(!monster->GetDie()) {
-                                Mario_->Hurt();
-                            }
-                            break;
-                        }
                         case Turtle_Type: {
                             const auto temp = std::dynamic_pointer_cast<Turtle>(monster);
                             if(temp->GetWCollision() == false) {
@@ -207,12 +201,15 @@ void MarioManager::HandleMonster() const {
                             break;
                         }
                         default: {
+                            if(!monster->GetDie()) {
+                                Mario_->Hurt();
+                            }
                             break;
                         }
                     }
                 }
                 else if(Mario_->DownCollision(monster) && Mario_->GetGravity() > 0 && !monster->GetDie()) {
-                    if(monster->GetType() == MonsterType::Kooper_Type){Mario_->Hurt();}
+                    if(monster->GetType() == MonsterType::Kooper_Type || monster->GetType() == Eat_flower){Mario_->Hurt();}
                     monster->Hurt();
                     Mario_->AddScore(200);
                     Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
@@ -225,12 +222,12 @@ void MarioManager::HandleMonster() const {
 void MarioManager::MarioInputCtl() const {
     if(Mario_->GetCanMove() == false) {
         if(Util::Input::IsKeyDown(Util::Keycode::SPACE)) {
-            std::cout<<Mario_->GetPosition().x<<" "<<Mario_->GetPosition().y<<std::endl;
+            //std::cout<<Mario_->GetPosition().x<<" "<<Mario_->GetPosition().y<<std::endl;
         }
         return;
     }
     if(Util::Input::IsKeyDown(Util::Keycode::SPACE)) {
-        std::cout<<Mario_->GetPosition().x<<" "<<Mario_->GetPosition().y<<std::endl;
+        //std::cout<<Mario_->GetPosition().x<<" "<<Mario_->GetPosition().y<<std::endl;
     }
     if(Mario_->GetType() == Small) {
         if(Util::Input::IsKeyDown(Util::Keycode::Z)) {  // test

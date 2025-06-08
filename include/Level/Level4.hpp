@@ -28,7 +28,7 @@ public:
     }
     void Update() override{
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-            std::cout<<m_Background->GetPosition().x<<std::endl;
+            //std::cout<<m_Background->GetPosition().x<<std::endl;
         }
         TrapFireBallManager_->Update();
         if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false) {

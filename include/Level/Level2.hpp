@@ -46,9 +46,8 @@ public:
             return;
         }
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-            std::cout<<m_Background->GetPosition().x<<std::endl;
-            std::cout<<(m_Background->GetPosition().x - m_Mario->GetPosition().x) / 48<<std::endl;
-            std::cout<<(m_Background->GetPosition().y - m_Mario->GetPosition().y) / 48<<std::endl;
+            //std::cout<<(m_Background->GetPosition().x - m_Mario->GetPosition().x) / 48<<std::endl;
+            //std::cout<<(m_Background->GetPosition().y - m_Mario->GetPosition().y) / 48<<std::endl;
         }
         std::vector<std::shared_ptr<Monster>> _temp;
         switch (Condition_num) {
