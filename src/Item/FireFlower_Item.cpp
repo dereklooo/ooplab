@@ -12,7 +12,7 @@ FireFlower::FireFlower(const glm::vec2 &position) : ItemObject(position,RESOURCE
 
 }
 void FireFlower::Action() {
-    std::cout<<this->GetGravity()<<std::endl;
+    //std::cout<<this->GetGravity()<<std::endl;
     const float DeltaTime = Util::Time::GetDeltaTimeMs() / 1000.0f;
     switch(state) {
         case ItemState::Hidden:

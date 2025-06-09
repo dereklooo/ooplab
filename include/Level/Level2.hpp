@@ -46,9 +46,8 @@ public:
             return;
         }
         if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {
-            std::cout<<m_Background->GetPosition().x<<std::endl;
-            std::cout<<(m_Background->GetPosition().x - m_Mario->GetPosition().x) / 48<<std::endl;
-            std::cout<<(m_Background->GetPosition().y - m_Mario->GetPosition().y) / 48<<std::endl;
+            //std::cout<<(m_Background->GetPosition().x - m_Mario->GetPosition().x) / 48<<std::endl;
+            //std::cout<<(m_Background->GetPosition().y - m_Mario->GetPosition().y) / 48<<std::endl;
         }
         std::vector<std::shared_ptr<Monster>> _temp;
         switch (Condition_num) {
@@ -91,7 +90,7 @@ public:
             case 5:
                 if(m_Background->GetPosition().x <= -3400 && m_Background->GetPosition().x >= -3450) {
                     _temp.clear();
-                    _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(600,210),Left));
+                    _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(580,210),Left));
                     _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(800,70),Left));
                     _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(850,70),Left));
                     m_ManagerManager->AddMonster(_temp,m_renderer);
@@ -110,6 +109,14 @@ public:
                 }
             break;
             case 7:
+                if(m_Background->GetPosition().x <= -5000 && m_Background->GetPosition().x >= -5350) {
+                    _temp.clear();
+                    _temp.push_back(std::make_shared<EatFlower>(glm::vec2(712,-125),m_Mario));
+                    m_ManagerManager->AddMonster(_temp,m_renderer);
+                    Condition_num += 1;
+                }
+                break;
+            case 8:
                 if(m_Background->GetPosition().x <= -6200 && m_Background->GetPosition().x >= -6250) {
                     _temp.clear();
                     _temp.push_back(std::make_shared<Blue_Mushroom>(glm::vec2(750,-120),Left));

@@ -57,7 +57,6 @@ void FireBallManager::Update() const {
     if(Mario_->GetShooting()) {
         for(const auto& Fireball : FireBalls){
             if(Fireball->GetSize().x == 0) {
-                std::cout<<"Fireballs "<<std::endl;
                 Fireball->SetPosition(Mario_->GetPosition());
                 Fireball->SetSize({1.5,1.5});
                 Fireball->SetFallingTime(Util::Time::GetElapsedTimeMs());

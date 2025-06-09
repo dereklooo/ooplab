@@ -31,6 +31,7 @@
 #include "Block/TreeWall.hpp"
 #include "Block/HorizontalElevator.hpp"
 #include "Block/VerticalElevator.hpp"
+#include "Block/ Bridge.hpp"
 
 class BlockManager {
 public:

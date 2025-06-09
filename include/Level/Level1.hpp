@@ -7,7 +7,7 @@
 #include "Level.hpp"
 #include "Monsters/Mushroom.hpp"
 #include "Monsters/Turtle.hpp"
-
+#include "Monsters/Eat_flower.hpp"
 class Level1 : public Level{
       public:
         Level1() : Level() {
@@ -59,6 +59,7 @@ class Level1 : public Level{
                         _temp.clear();
                         _temp.push_back(std::make_shared<Mushroom>(glm::vec2(650,-220),Left));
                         _temp.push_back(std::make_shared<Turtle>(glm::vec2(600,-220),Left)); // 測試用之後記得刪掉
+                        _temp.push_back(std::make_shared<EatFlower>(glm::vec2(752,-220),m_Mario));  // 測試用之後記得刪掉
                         m_ManagerManager->AddMonster(_temp,m_renderer);
                         Condition_num += 1;
                     }
