@@ -60,6 +60,22 @@ void MonsterManager::HandleBlockCollision(
                     monster->SetWay(Way::Left);
                 }
                 break;
+            case MonsterType::Red_turtle:
+                if (monster->LeftCollision(block)) {
+                    monster->SetWay(Way::Right);
+                }
+                else if (monster->RightCollision(block)) {
+                    monster->SetWay(Way::Left);
+                }
+            break;
+            case MonsterType::Fly_turtle:
+                if (monster->LeftCollision(block)) {
+                    monster->SetWay(Way::Right);
+                }
+                else if (monster->RightCollision(block)) {
+                    monster->SetWay(Way::Left);
+                }
+            break;
 
             default:
                 break;
@@ -73,24 +89,7 @@ void MonsterManager::HandleBlockCollision(
                 //std::cout<<monster->GetWay()<< std::endl;
 
             }
-        if (monster->GetFalling()) {
-            if (monster->GetType()==MonsterType::Red_turtle) {
-                //std::cout<<"1"<< std::endl;
 
-                if (  monster->GetWay()==Left ) {
-                    //std::cout<<"2"<< std::endl;
-                    monster->SetWay(Right);
-                    monster->SetPosition({monster->GetPosition().x + 1.5,monster->GetPosition().y});
-
-                }
-                else if ( monster->GetWay()==Right) {
-                   // std::cout<<"3"<< std::endl;
-                    monster->SetWay(Left);
-                    monster->SetPosition({monster->GetPosition().x - 1.5,monster->GetPosition().y});
-
-                }
-            }
-        }
     }
 }
 void MonsterManager::HandleMonsterCollision(const std::shared_ptr<Monster>& monster, const std::shared_ptr<Monster>& _monster) {
@@ -139,7 +138,62 @@ void MonsterManager::HandleMonsterCollision(const std::shared_ptr<Monster>& mons
                 }
                 break;
             }
-
+            case MonsterType::Red_turtle:{
+                const auto temp = std::dynamic_pointer_cast<RedTurtle>(monster);
+                if(_monster->GetType() == Red_turtle) {
+                    if(std::dynamic_pointer_cast<Turtle>(_monster)->GetTurtleTye() == Rolling) {
+                        break;
+                    }
+                }
+                if ((temp->GetTurtleTye() == Inside || temp->GetTurtleTye() == OutSide)) {
+                    if (_monster->LeftCollision(monster)) {
+                        _monster->SetWay(Way::Right);
+                        monster->SetWay(Way::Left);
+                    }
+                    else if (_monster->RightCollision(monster)) {
+                        _monster->SetWay(Way::Left);
+                        monster->SetWay(Way::Right);
+                    }
+                }
+                else if(temp->GetTurtleTye() == Rolling) {
+                    if (_monster->LeftCollision(monster) || _monster->RightCollision(monster) || _monster->DownCollision(monster) || _monster->UpCollision(monster)) {
+                        _monster->SetDie(true);
+                        _monster->SetKnockAway(true);
+                        _monster->SetWCollision(false);
+                        _monster->SetSize({_monster->GetSize().x, _monster->GetSize().y * -1});
+                        _monster->SetGravity(-2.0f);
+                    }
+                }
+                break;
+            }
+            case MonsterType::Fly_turtle:{
+                const auto temp = std::dynamic_pointer_cast<FlyTurtle>(monster);
+                if(_monster->GetType() == Fly_turtle) {
+                    if(std::dynamic_pointer_cast<FlyTurtle>(_monster)->GetTurtleTye() == Rolling) {
+                        break;
+                    }
+                }
+                if ((temp->GetTurtleTye() == Inside || temp->GetTurtleTye() == OutSide)) {
+                    if (_monster->LeftCollision(monster)) {
+                        _monster->SetWay(Way::Right);
+                        monster->SetWay(Way::Left);
+                    }
+                    else if (_monster->RightCollision(monster)) {
+                        _monster->SetWay(Way::Left);
+                        monster->SetWay(Way::Right);
+                    }
+                }
+                else if(temp->GetTurtleTye() == Rolling) {
+                    if (_monster->LeftCollision(monster) || _monster->RightCollision(monster) || _monster->DownCollision(monster) || _monster->UpCollision(monster)) {
+                        _monster->SetDie(true);
+                        _monster->SetKnockAway(true);
+                        _monster->SetWCollision(false);
+                        _monster->SetSize({_monster->GetSize().x, _monster->GetSize().y * -1});
+                        _monster->SetGravity(-2.0f);
+                    }
+                }
+                break;
+            }
             default: {
                 break;
             }

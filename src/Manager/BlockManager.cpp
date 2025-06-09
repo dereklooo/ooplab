@@ -62,7 +62,10 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::GrassFloorMid: block = std::make_shared<GrassFloorMid>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::GrassFloorLeft: block = std::make_shared<GrassFloorLeft>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
             case BlockType::TreeWall: block = std::make_shared<TreeWall>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
-        }
+            case BlockType::VerticalElevator: block = std::make_shared<VerticalElevator>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+            case BlockType::HorizontalElevator: block = std::make_shared<HorizontalElevator>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
+
+           }
         block->SetZIndex(100);
         if(type == BlockType::Blue_Floor || type == BlockType::Pipe_64_64 || type == BlockType::Pipe_64_96 || type == BlockType::Pipe_64_128 || type == BlockType::LongPipe || type == BlockType::HorizontalPipe_64_64) {
             block->SetSize({1.65,1.5});
@@ -86,6 +89,47 @@ void BlockManager::SetFloor(const std::vector<glm::vec2>& Position,const std::ve
         BigAirBlock->SetZIndex(100);
         AddBlock(BigAirBlock);
     }
+}
+void BlockManager::SetElevator(const glm::vec2 &Position,const int MoveLong ,Way way) const{
+    if (way==Way::up) {
+
+        std::shared_ptr<VerticalElevator> Elevator = std::make_shared<VerticalElevator> (glm::vec2({MapPosition.x + Position.x * 48 , MapPosition.y + Position.y * 48}));
+        Elevator->SetMoveLong(MoveLong);
+        Elevator ->SetSize({1.5,1.5});
+        Elevator ->SetZIndex(100);
+        Elevator ->SetWay(way);
+        AddBlock(Elevator );
+
+    }
+    else if (way==Way::down) {
+
+        std::shared_ptr<VerticalElevator> Elevator = std::make_shared<VerticalElevator> (glm::vec2({MapPosition.x + Position.x * 48 , MapPosition.y + Position.y * 48}));
+        Elevator->SetMoveLong(MoveLong);
+        Elevator ->SetSize({1.5,1.5});
+        Elevator ->SetZIndex(100);
+        Elevator ->SetWay(way);
+        AddBlock(Elevator );
+
+    }
+    else if (way==Way::Left) {
+        std::shared_ptr<HorizontalElevator> Elevator = std::make_shared<HorizontalElevator> (glm::vec2({MapPosition.x + Position.x * 48 , MapPosition.y + Position.y * 48}));
+        Elevator->SetMoveLong(MoveLong);
+        Elevator ->SetSize({1.5,1.5});
+        Elevator ->SetZIndex(100);
+        Elevator ->SetWay(way);
+        AddBlock(Elevator );
+    }
+    else if (way==Way::Right) {
+        std::shared_ptr<HorizontalElevator> Elevator = std::make_shared<HorizontalElevator> (glm::vec2({MapPosition.x + Position.x * 48 , MapPosition.y + Position.y * 48}));
+        Elevator->SetMoveLong(MoveLong);
+        Elevator ->SetSize({1.5,1.5});
+        Elevator ->SetZIndex(100);
+        Elevator ->SetWay(way);
+        AddBlock(Elevator );
+    }
+
+
+
 }
 void BlockManager::Update() const {
     for(auto& [Type,blocks] : *(Blocks)) {

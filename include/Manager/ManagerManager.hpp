@@ -15,6 +15,7 @@
 #include "Manager/FlagManager.hpp"
 #include "Manager/TImeScoreManager.hpp"
 #include "Manager/TrapFireBallManager.hpp"
+#include "Object/SceneObject.hpp"
 
 class ManagerManager {
     public:
@@ -46,6 +47,9 @@ class ManagerManager {
     };
     void SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const{
         BlockManager_->SetBlock(positions, type);
+    }
+    void SetElevator(const glm::vec2 positions, const int MoveLong,Way way) const{
+        BlockManager_->SetElevator(positions,MoveLong,way);
     }
     void SetFloor(const std::vector<glm::vec2>& Position,const std::vector<glm::vec2>& Size) const {
         BlockManager_->SetFloor(Position,Size);
@@ -80,7 +84,7 @@ class ManagerManager {
         FireBallManager_->Update();
         ElevatorManager_->Update();
         TimeScoreManager_->Update();
-        //std::cout<< Background->GetPosition().x << ' '<< Background->GetPosition().y << " damario "<< Mario->GetPosition().x<< ' '<< Mario->GetPosition().y << std::endl;
+        std::cout<< Background->GetPosition().x << ' '<< Background->GetPosition().y << " damario "<< Mario->GetPosition().x<< ' '<< Mario->GetPosition().y << std::endl;
 
     }
 

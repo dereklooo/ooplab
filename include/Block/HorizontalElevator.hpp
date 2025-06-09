@@ -2,13 +2,15 @@
 // Created by benson on 2025/5/17.
 //
 
-#ifndef ELEVATOR_HPP
-#define ELEVATOR_HPP
+#ifndef HORIZONTALELEVATOR_HPP
+#define HORIZONTALELEVATOR_HPP
+#warning "HorizontalElevator.cpp is being compiled"
 #include "Object/SceneObject.hpp"
 
-class Elevator final : public SceneObject {
+
+class HorizontalElevator final : public SceneObject {
     public:
-        explicit Elevator(const glm::vec2 &position,Way way);
+        explicit HorizontalElevator(const glm::vec2 &position);
         void Move();
         Way GetWay() const {
             return way;
@@ -22,17 +24,19 @@ class Elevator final : public SceneObject {
         void SetMove(const bool M) {
             Moving = M;
         }
+        void SetMoveLong(const int L){
+            MoveLong = L;
+        }
         BlockType GetType() override {
-            if(this->way == Left) {
-                return BlockType::Elevator_Down;
-            }
-            else {
-                return BlockType::Elevator_Up;
-            }
+
+                return BlockType::HorizontalElevator;
+
         };
         void hit(const std::shared_ptr<Mario> &Mario) override;
     private:
         Way way = Way::Left;
         bool Moving = false;
+        int MoveLong = 48*5;
+        int movecenter = 48*5;
 };
-#endif //ELEVATOR_HPP
+#endif //HORIZONTALELEVATOR_HPP

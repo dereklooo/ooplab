@@ -7,6 +7,8 @@
 #include "Level.hpp"
 #include "Monsters/Mushroom.hpp"
 #include "Monsters/Turtle.hpp"
+#include "Monsters/Red_turtle.hpp"
+#include "Monsters/Fly_turtle.hpp"
 class Level3 : public Level {
 public:
     Level3() : Level() {
@@ -22,9 +24,13 @@ public:
         m_ManagerManager->SetBlock(Flag,BlockType::flag);
         m_ManagerManager->SetBlock(FlagBall,BlockType::flagball);
         m_ManagerManager->SetBlock(FlagPole,BlockType::flagpole);
+        //m_ManagerManager->SetBlock(elevator,BlockType::HorizontalElevator);
         m_ManagerManager->SetItem(Item_OutSideCoin, ItemType::Item_OutSideCoin);
         m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
-
+        m_ManagerManager->SetElevator({56.5,-4.5},240,Way::up);
+        m_ManagerManager->SetElevator({88.5,-8.5},48*3,Way::Left);
+        m_ManagerManager->SetElevator({94.5,-9.5},48*3,Way::Right);
+        m_ManagerManager->SetElevator({132.5,-6.5},48*5,Way::Right);
         //m_Background->SetPosition({m_Mario->GetPosition().x,m_Mario->GetPosition().y});
         }
 
@@ -46,6 +52,46 @@ public:
                     }
 
                     break;
+                case 2:
+                if (m_Background->GetPosition().x <= -1330 && m_Background->GetPosition().x >= -1350 && !m_Mario->GetAnimating()) {
+                    _temp.clear();
+                    _temp.push_back(std::make_shared<Mushroom>(glm::vec2(700,190),Left));
+                    _temp.push_back(std::make_shared<Mushroom>(glm::vec2(760,190),Left));
+                    m_ManagerManager->AddMonster(_temp,m_renderer);
+                    Condition_num += 1;
+                }
+
+                break;
+                case 3:
+                    if (m_Background->GetPosition().x <= -2870 && m_Background->GetPosition().x >= -2900 && !m_Mario->GetAnimating()) {
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<FlyTurtle>(glm::vec2(700,140),Left));
+                        _temp.push_back(std::make_shared<Mushroom>(glm::vec2(900,95),Left));
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
+                        Condition_num += 1;
+                    }
+
+                break;
+
+                case 4:
+                    if (m_Background->GetPosition().x <= -4500 && m_Background->GetPosition().x >= -4550 && !m_Mario->GetAnimating()) {
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<RedTurtle>(glm::vec2(700,45),Left));
+                        _temp.push_back(std::make_shared<FlyTurtle>(glm::vec2(1000,140),Left));
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
+                        Condition_num += 1;
+                    }
+
+                break;
+                case 5:
+                    if (m_Background->GetPosition().x <= -5700 && m_Background->GetPosition().x >= -5750 && !m_Mario->GetAnimating()) {
+                        _temp.clear();
+                        _temp.push_back(std::make_shared<RedTurtle>(glm::vec2(700,-220),Left));
+                        m_ManagerManager->AddMonster(_temp,m_renderer);
+                        Condition_num += 1;
+                    }
+
+                break;
                 default:
                     break;
             }
@@ -121,6 +167,7 @@ public:
 {113.5,-12.5} , {114.5,-12.5} , {115.5,-12.5} };
     std::vector<glm::vec2> LuckyBlockPosition = {{59.5,-10.5}};
     std::vector<glm::vec2> Item_Mushroom = {{59.5,-10.5}};
+    std::vector<glm::vec2> elevator = {{56.5,-7.5},{87.5,-8.5},{95.5,-9.5},{132.5,-6.5}};
 
 
 };

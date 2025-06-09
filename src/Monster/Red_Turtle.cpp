@@ -13,6 +13,21 @@ void RedTurtle::Action() {
                 this->SetPosition({this->GetPosition().x + 1.5,this->GetPosition().y});
                 this->SetSize({1.3,1.25});
             }
+
+            if (this->GetFalling() ) {
+                if (  this->GetWay()==Left ) {
+                    //std::cout<<"2"<< std::endl;
+                    this->SetWay(Right);
+                    this->SetPosition({this->GetPosition().x + 3,this->GetPosition().y+1.55});
+
+                }
+                else if ( this->GetWay()==Right) {
+                    // std::cout<<"3"<< std::endl;
+                    this->SetWay(Left);
+                    this->SetPosition({this->GetPosition().x - 3,this->GetPosition().y+1.55});
+
+                }
+            }
         }
         else if(Turtle_type == Inside) {
             if(Util::Time::GetElapsedTimeMs() - StartHurtTimer >= 5000 && Util::Time::GetElapsedTimeMs() - StartHurtTimer < 10000) {
@@ -37,5 +52,28 @@ void RedTurtle::Action() {
     }
     else {
         return;
+    }
+
+
+
+
+
+
+
+
+}
+
+void RedTurtle::Hurt() {
+    if(Turtle_type == OutSide) {
+        this->SetDrawable(this->DieDrawable1);
+        this->StartHurtTimer = Util::Time::GetElapsedTimeMs();
+        this->Turtle_type = Inside;
+    }
+    else if(Turtle_type == Inside) {
+        this->Turtle_type = Rolling;
+    }
+    else if(Turtle_type == Rolling) {
+        this->StartHurtTimer = Util::Time::GetElapsedTimeMs();
+        this->Turtle_type = Inside;
     }
 }

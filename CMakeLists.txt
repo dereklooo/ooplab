@@ -37,6 +37,8 @@ add_executable(${PROJECT_NAME}
         src/Mario/Mario.cpp
         src/Monster/Mushroom.cpp
         src/Monster/Turtle.cpp
+        src/Monster/Fly_turtle.cpp
+        src/Monster/Red_Turtle.cpp
 
         include/Object/SceneObject.hpp
         include/Object/Object.hpp
@@ -161,6 +163,12 @@ add_executable(${PROJECT_NAME}
         src/Block/TreeWall.cpp
         include/Monsters/Red_turtle.hpp
         src/Monster/Red_Turtle.cpp
+        src/Block/VerticalElevator.cpp
+        src/Block/HorizontalElevator.cpp
+        include/Block/HorizontalElevator.hpp
+        include/Block/VerticalElevator.hpp
+
+
 )
 
 if(MSVC)

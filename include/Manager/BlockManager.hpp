@@ -29,6 +29,8 @@
 #include "Block/GrassFloorMid.hpp"
 #include "Block/GrassFloorLeft.hpp"
 #include "Block/TreeWall.hpp"
+#include "Block/HorizontalElevator.hpp"
+#include "Block/VerticalElevator.hpp"
 
 class BlockManager {
 public:
@@ -41,6 +43,7 @@ public:
     void SetFloor(const std::vector<glm::vec2>& Position,const std::vector<glm::vec2>& Size) const;
     void SetBlock(std::vector<glm::vec2> &positions, BlockType type) const;
     void SetAnotherMap(const std::vector<glm::vec2> &positions,const std::vector<glm::vec2> &positions_) const;
+    void SetElevator(const glm::vec2  &Position,const int MoveLong,Way way) const;
     void Update() const;
 private:
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>& Blocks;

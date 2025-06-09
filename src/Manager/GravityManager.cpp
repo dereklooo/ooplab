@@ -47,7 +47,7 @@ void GravityManager::Update() {
                 }
             }
             object->SetFallingTime(Util::Time::GetElapsedTimeMs());
-            if (Mario_->GetTouchFlagFlag()==false || Mario_->GetMarioGoDoorFlag()==true) {
+            if (Mario_->GetTouchFlagFlag()==false || Mario_->GetMarioGoDoorFlag()==true ) {
                 object->SetPosition({object->GetPosition().x,object->GetPosition().y - object->GetGravity()});
             }
 

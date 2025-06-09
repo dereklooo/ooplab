@@ -33,7 +33,10 @@ enum class BlockType {
     GrassFloorLeft,
 GrassFloorMid,
 GrassFloorRight,
-TreeWall
+TreeWall,
+    VerticalElevator,
+    HorizontalElevator,
+
 };
 
 class SceneObject : public StillObject{

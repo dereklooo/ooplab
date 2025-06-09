@@ -7,6 +7,8 @@
 #include <Monsters/Turtle.hpp>
 #include "Block/Flag.hpp"
 #include "Block/HorizontalPipe_64_64.hpp"
+#include "Monsters/Red_turtle.hpp"
+#include "Monsters/Fly_turtle.hpp"
 
 MarioManager::MarioManager(
             std::shared_ptr<Mario> &Mario,
@@ -186,6 +188,48 @@ void MarioManager::HandleMonster() const {
                         }
                         case Turtle_Type: {
                             const auto temp = std::dynamic_pointer_cast<Turtle>(monster);
+                            if(temp->GetWCollision() == false) {
+                                break;
+                            }
+                            if(temp->GetTurtleTye() == Inside) {
+                                if(Mario_->RightCollision(monster)) {
+                                    monster->SetWay(Right);
+                                    monster->SetPosition({monster->GetPosition().x + 20,monster->GetPosition().y});
+                                }
+                                else if(Mario_->LeftCollision(monster)) {
+                                    monster->SetWay(Left);
+                                    monster->SetPosition({monster->GetPosition().x - 20,monster->GetPosition().y});
+                                }
+                                monster->Hurt();
+                            }
+                            else if(temp->GetTurtleTye() == OutSide || temp->GetTurtleTye() == Rolling){
+                                Mario_->Hurt();
+                            }
+                            break;
+                        }
+                        case Red_turtle: {
+                            const auto temp = std::dynamic_pointer_cast<RedTurtle>(monster);
+                            if(temp->GetWCollision() == false) {
+                                break;
+                            }
+                            if(temp->GetTurtleTye() == Inside) {
+                                if(Mario_->RightCollision(monster)) {
+                                    monster->SetWay(Right);
+                                    monster->SetPosition({monster->GetPosition().x + 20,monster->GetPosition().y});
+                                }
+                                else if(Mario_->LeftCollision(monster)) {
+                                    monster->SetWay(Left);
+                                    monster->SetPosition({monster->GetPosition().x - 20,monster->GetPosition().y});
+                                }
+                                monster->Hurt();
+                            }
+                            else if(temp->GetTurtleTye() == OutSide || temp->GetTurtleTye() == Rolling){
+                                Mario_->Hurt();
+                            }
+                            break;
+                        }
+                        case Fly_turtle: {
+                            const auto temp = std::dynamic_pointer_cast<FlyTurtle>(monster);
                             if(temp->GetWCollision() == false) {
                                 break;
                             }

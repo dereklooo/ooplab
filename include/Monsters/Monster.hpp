@@ -23,6 +23,7 @@ enum TurtleType {
     OutSide,
     Inside,
     Rolling,
+    Flying
 };
 class Monster : public AnimationObject {
     public:
