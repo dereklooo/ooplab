@@ -9,7 +9,7 @@ class Level2 final : public Level {
 public:
     Level2() : Level() {
         m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level2/level_2.png",glm::vec2(-3216,784),glm::vec2(-640,360));
-
+        m_Bgm=std::make_shared<Util::BGM>(RESOURCE_DIR "/sound/02. Underground Theme.mp3");
         m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
 
          m_ManagerManager->SetFloor(FloorBlock, FloorBlockSize);
@@ -39,6 +39,9 @@ public:
         // m_ManagerManager->SetBlock(FlagPole,BlockType::flagpole);
 
         m_ManagerManager->SetAnotherMap(AnotherMapPos,NextPipePos);
+        m_Bgm->Play(-1);
+        m_Bgm->SetVolume(40);
+        //std::cout<< m_Bgm->GetVolume()<< std::endl;
     }
     void Update() override {
         if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false) {

@@ -13,7 +13,7 @@
 #include "Manager/MonsterManager.hpp"
 #include "Manager/FlagManager.hpp"
 #include "Util/Renderer.hpp"
-
+#include "Util/BGM.hpp"
 
 class Level{
 public:
@@ -64,7 +64,7 @@ protected:
     std::shared_ptr<Util::Renderer> m_renderer = std::make_shared<Util::Renderer>();
     std::shared_ptr<Mario> m_Mario = std::make_shared<Mario>();
     std::shared_ptr<Map> m_Background;
-
+    std::shared_ptr<Util::BGM> m_Bgm;
     std::shared_ptr<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>> Items = std::make_shared<std::unordered_map<ItemType, std::vector<std::shared_ptr<ItemObject>>>>();
     std::shared_ptr<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>> Blocks = std::make_shared<std::unordered_map<BlockType, std::vector<std::shared_ptr<SceneObject>>>>();
     std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>> Monsters = std::make_shared<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>();

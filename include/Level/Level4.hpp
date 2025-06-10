@@ -19,11 +19,14 @@
             m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
             m_ManagerManager->SetItem(Item_Axe,ItemType::Item_Axe);
             m_ManagerManager->SetFireball(TrapFireBallCenter,m_renderer);
+            m_Bgm=std::make_shared<Util::BGM>(RESOURCE_DIR "/sound/04. Castle Theme.mp3");
 
             std::vector<std::shared_ptr<Monster>> _temp;
             _temp.push_back(std::make_shared<Mushroom>(glm::vec2(0,-22000),Left));
             m_ManagerManager->AddMonster(_temp,m_renderer);
 
+            m_Bgm->Play(-1);
+            m_Bgm->SetVolume(40);
         }
         void Update() override{
             if(Util::Input::IsKeyPressed(Util::Keycode::SPACE)) {

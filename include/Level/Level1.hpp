@@ -11,9 +11,12 @@
 class Level1 : public Level{
       public:
         Level1() : Level() {
+
             //m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level3/level_3.png",glm::vec2(-2624,480),glm::vec2(-640,360));
             m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level1/level_1.png",glm::vec2(-3584,480),glm::vec2(-640,360));
             //m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level2/level_2.png",glm::vec2(-3216,720),glm::vec2(-640,360));
+            m_Bgm=std::make_shared<Util::BGM>(RESOURCE_DIR "/sound/01. Ground Theme.mp3");
+
             m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
 
             m_ManagerManager->SetFloor(FloorBlock, FloorSize);
@@ -43,6 +46,10 @@ class Level1 : public Level{
             m_ManagerManager->SetBlock(FlagPole,BlockType::flagpole);
 
             m_ManagerManager->SetAnotherMap(AnotherMapPos,NextPipePos);
+
+            m_Bgm->Play(-1);
+            m_Bgm->SetVolume(40);
+            std::cout<< m_Bgm->GetVolume()<< std::endl;
 
         }
 

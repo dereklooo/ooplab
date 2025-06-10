@@ -88,7 +88,7 @@ class ManagerManager {
         FireBallManager_->Update();
         ElevatorManager_->Update();
         TimeScoreManager_->Update();
-        std::cout<< Background->GetPosition().x << ' '<< Background->GetPosition().y << " damario "<< Mario->GetPosition().x<< ' '<< Mario->GetPosition().y << std::endl;
+        //std::cout<< Background->GetPosition().x << ' '<< Background->GetPosition().y << " damario "<< Mario->GetPosition().x<< ' '<< Mario->GetPosition().y << std::endl;
 
     }
 

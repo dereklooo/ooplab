@@ -15,6 +15,7 @@ public:
         m_Background = std::make_shared<Map>(RESOURCE_DIR"/image/Background/Level3/level_3.png",glm::vec2(-2816,240),glm::vec2(-640,360));
         //m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level1/level_1.png",glm::vec2(-3584,480),glm::vec2(-640,360));
             m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
+        m_Bgm=std::make_shared<Util::BGM>(RESOURCE_DIR "/sound/01. Ground Theme.mp3");
 
         m_ManagerManager->SetBlock(LuckyBlockPosition, BlockType::Lucky);
         m_ManagerManager->SetBlock(GrassFloorLeft, BlockType::GrassFloorLeft);
@@ -32,6 +33,10 @@ public:
         m_ManagerManager->SetElevator({94.5,-9.5},48*3,Way::Right);
         m_ManagerManager->SetElevator({132.5,-6.5},48*5,Way::Right);
         //m_Background->SetPosition({m_Mario->GetPosition().x,m_Mario->GetPosition().y});
+
+        m_Bgm->Play(-1);
+        m_Bgm->SetVolume(40);
+
         }
 
         void Update() override {

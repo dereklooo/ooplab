@@ -19,6 +19,13 @@ MarioManager::MarioManager(
             Blocks(Blocks),
             Monsters(Monsters),
             Items(Items) {
+    Coin_sound->SetVolume(40);
+    upGrade_sound->SetVolume(40);
+    inpipe_sound->SetVolume(40);
+    hitmonster_sound->SetVolume(40);
+    bigjump_sound->SetVolume(40);
+    smalljump_sound->SetVolume(40);
+    shoot_sound->SetVolume(40);
 
             }
 void MarioManager::HandleBlock() const {
@@ -53,7 +60,9 @@ void MarioManager::HandleBlock() const {
                                 Mario_->SetCanMove(false);
                                 Mario_->SetAcceleration(0.5);
                                 Mario_->SetNextPosition(temp->GetNextPosition());
+                                inpipe_sound->Play();
                         }
+
                     }
                 }
             }
@@ -85,6 +94,7 @@ void MarioManager::HandleBlock() const {
                             Mario_->SetCanMove(false);
                             Mario_->SetAcceleration(0);
                             Mario_->SetNextPosition(temp->GetNextPosition());
+                            inpipe_sound->Play();
                         }
                     }
                 }
@@ -94,6 +104,10 @@ void MarioManager::HandleBlock() const {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
                 Mario_->SetGravity(2);
                 block->hit(Mario_);
+                if (block->GetType() == BlockType::Lucky && (block->GetItem()->GetType()==Item_Coins||block->GetItem()->GetType()==Item_Coin)) {
+                    Coin_sound->Play();
+                }
+
                 //std::cout<<Mario_->GetScore()<<std::endl;
             }
             else if(Mario_->DownCollision(block) && Mario_->GetGravity() <= 0 && (Mario_->GetTouchFlagFlag()==false ) && block->GetSize() != glm::vec2(0,0)){
@@ -109,6 +123,7 @@ void MarioManager::HandleBlock() const {
                         Mario_->SetGravity(0.65f);
                         Mario_->SetZIndex(1.5);
                         Mario_->SetNextPosition(temp->GetNextPosition());
+                        inpipe_sound->Play();
                     }
                 }
             }
@@ -124,6 +139,13 @@ void MarioManager::HandleItem() const {
                 item->ChangeMarioState(Mario_);
                 item->SetPosition({item->GetPosition().x,item->GetPosition().y - 40000});
                 Mario_->AddScore(300);
+                if (item->GetType()==ItemType::Item_Coins || item->GetType()==ItemType::Item_Coin ||item->GetType()==ItemType::Item_OutSideCoin) {
+                    Coin_sound->Play(0);
+                }
+                else if (item->GetType()==ItemType::Item_Mushroom|item->GetType()==ItemType::Item_FireFlower) {
+                    upGrade_sound->Play(0);
+                }
+
             }
         }
     }
@@ -261,10 +283,14 @@ void MarioManager::HandleMonster(){
                 }
                 else if(Mario_->DownCollision(monster) && Mario_->GetGravity() > 0 && !monster->GetDie()) {
                     if(monster->GetType() == MonsterType::Kooper_Type || monster->GetType() == Eat_flower){Mario_->Hurt();}
+                    else {
+                        hitmonster_sound->Play();
+                    }
                     monster->Hurt();
                     Mario_->AddScore(200);
                     Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
                     Mario_->SetGravity(-7.5f);
+
                 }
             }
         }
@@ -297,9 +323,13 @@ void MarioManager::MarioInputCtl() const {
         if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
             Mario_->SetCurrentState(Stand);
         }
+        if(Util::Input::IsKeyDown(Util::Keycode::W)) {
+            smalljump_sound->Play();
+        }
         if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
+
         }
         if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
             Mario_->SetCurrentState(Down);
@@ -317,9 +347,13 @@ void MarioManager::MarioInputCtl() const {
         else if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
             Mario_->SetCurrentState(Stand);
         }
+        if(Util::Input::IsKeyDown(Util::Keycode::W)) {
+            bigjump_sound->Play();
+        }
         if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
+
         }
         if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
             Mario_->SetCurrentState(Down);
@@ -338,9 +372,17 @@ void MarioManager::MarioInputCtl() const {
         else if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
             Mario_->SetCurrentState(Stand);
         }
+        if(Util::Input::IsKeyDown(Util::Keycode::W)) {
+            bigjump_sound->Play();
+        }
         if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
+
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
+
+
+
+
         }
         if(Util::Input::IsKeyPressed(Util::Keycode::S)) {
             Mario_->SetCurrentState(Down);
@@ -348,6 +390,7 @@ void MarioManager::MarioInputCtl() const {
         }
         if(Util::Input::IsKeyDown(Util::Keycode::J)) {
             Mario_->Shoot();
+            shoot_sound->Play();
         }
     }
 
