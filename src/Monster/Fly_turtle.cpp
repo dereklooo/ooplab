@@ -70,7 +70,7 @@ void FlyTurtle::Action() {
 
     if (this->GetFalling()) {
 
-        if (this->GetType()==MonsterType::Red_turtle && this->GetTurtleTye()==TurtleType::OutSide) {
+        if (this->GetType()==MonsterType::Fly_turtle && this->GetTurtleTye()==TurtleType::OutSide) {
             std::cout<<"1"<< std::endl;
 
             if (  this->GetWay()==Left ) {

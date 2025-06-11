@@ -141,7 +141,7 @@ void MonsterManager::HandleMonsterCollision(const std::shared_ptr<Monster>& mons
             case MonsterType::Red_turtle:{
                 const auto temp = std::dynamic_pointer_cast<RedTurtle>(monster);
                 if(_monster->GetType() == Red_turtle) {
-                    if(std::dynamic_pointer_cast<Turtle>(_monster)->GetTurtleTye() == Rolling) {
+                    if(std::dynamic_pointer_cast<RedTurtle>(_monster)->GetTurtleTye() == Rolling) {
                         break;
                     }
                 }

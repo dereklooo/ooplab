@@ -35,6 +35,7 @@
             if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false && this->GameOver == false) {
                 this->GameOver = true;
                 GameOvertime=Util::Time::GetElapsedTimeMs();
+                m_Mario->SetCanMove(false);
                 m_Bgm->LoadMedia(RESOURCE_DIR "/sound/08. Lost a Life.mp3");
                 m_Bgm->SetVolume(40);
                 m_Bgm->Play(-1);

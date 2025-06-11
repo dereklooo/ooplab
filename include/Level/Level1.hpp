@@ -57,7 +57,7 @@ class Level1 : public Level{
 
             if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false && this->GameOver==false) {
                 this->GameOver = true;
-
+                m_Mario->SetCanMove(false);
                 GameOvertime=Util::Time::GetElapsedTimeMs();
                 m_Bgm->LoadMedia(RESOURCE_DIR "/sound/08. Lost a Life.mp3");
                 m_Bgm->SetVolume(40);

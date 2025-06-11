@@ -147,7 +147,7 @@ void MarioManager::HandleItem() const {
                 item->ChangeMarioState(Mario_);
                 item->SetPosition({item->GetPosition().x,item->GetPosition().y - 40000});
                 Mario_->AddScore(300);
-                if (item->GetType()==ItemType::Item_Coins || item->GetType()==ItemType::Item_Coin ||item->GetType()==ItemType::Item_OutSideCoin) {
+                if ((item->GetType()==ItemType::Item_Coins || item->GetType()==ItemType::Item_Coin ||item->GetType()==ItemType::Item_OutSideCoin)&& item->GetState()==Walking) {
                     Coin_sound->Play(0);
                 }
                 else if (item->GetType()==ItemType::Item_Mushroom|item->GetType()==ItemType::Item_FireFlower) {

@@ -19,7 +19,7 @@ void Coin_Item::Action() {
         }
         break;
         case ItemState::Walking:
-            SetWCollision(true);
+            SetWCollision(false);
         break;
         case ItemState::PoppingUp:
             this->SetWCollision(false);
