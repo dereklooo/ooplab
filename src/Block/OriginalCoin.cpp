@@ -3,7 +3,7 @@
 //
 #include "Block/OriginalCoin.hpp"
 OriginalCoin::OriginalCoin(const glm::vec2 &Position) : SceneObject(RESOURCE_DIR"/image/Background/Level1/Block/OriginalBlock.png",Position){
-
+    SetItem(std::make_shared<Coin_Item>(glm::vec2({999,999})));
 }
 
 

@@ -3,7 +3,7 @@
 //
 #include "Item/Coin_Item.hpp"
 Coin_Item::Coin_Item(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/character/Item/Coin.png") {
-
+    type=Item_Coin;
 }
 void Coin_Item::Action() {
     this->SetGravity(0.0f);

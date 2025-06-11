@@ -41,8 +41,12 @@ public:
 
         void Update() override {
         //m_Mario->SetPosition(m_Background->GetPosition());
-            if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false) {
+            if(m_Mario->GetPosition().y <= -400 && m_Mario->GetAnimating() == false && this->GameOver == false) {
                 this->GameOver = true;
+                GameOvertime=Util::Time::GetElapsedTimeMs();
+                m_Bgm->LoadMedia(RESOURCE_DIR "/sound/08. Lost a Life.mp3");
+                m_Bgm->SetVolume(40);
+                m_Bgm->Play(-1);
                 return;
             }
             std::vector<std::shared_ptr<Monster>> _temp;

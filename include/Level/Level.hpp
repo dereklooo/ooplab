@@ -14,7 +14,7 @@
 #include "Manager/FlagManager.hpp"
 #include "Util/Renderer.hpp"
 #include "Util/BGM.hpp"
-
+#include "Util/time.hpp"
 class Level{
 public:
     virtual ~Level() = default;
@@ -26,6 +26,7 @@ public:
     void SetSceneObject(std::shared_ptr<SceneObject> SceneObject);
     virtual void Update() = 0;
     void Start() const {
+
         m_ManagerManager->MarioInitialize();
         m_ManagerManager->FireballsInitialize();
         m_ManagerManager->TimeScoreManagerInitialize(m_renderer);
@@ -57,6 +58,10 @@ public:
     bool GetGameOverState() const {
         return GameOver;
     }
+
+    float GetGameOverTime() {
+        return GameOvertime;
+    }
 protected:
     bool GameOver = false;
     bool NextLevelFlag = false;
@@ -70,8 +75,10 @@ protected:
     std::shared_ptr<std::unordered_map<MonsterType,std::vector<std::shared_ptr<Monster>>>> Monsters = std::make_shared<std::unordered_map<MonsterType, std::vector<std::shared_ptr<Monster>>>>();
 
     std::vector<std::shared_ptr<FireBall>> FireBalls = std::vector<std::shared_ptr<FireBall>>();
-
+    float GameOvertime=0.0;
     std::shared_ptr<ManagerManager> m_ManagerManager;
     size_t Condition_num = 1;
+
+
 };
 #endif //LEVEL_HPP

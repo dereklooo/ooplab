@@ -1,5 +1,5 @@
 #include "App.hpp"
-
+#include "Util/Time.hpp"
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
@@ -75,7 +75,7 @@ void App::Update() {
     switch(level) {
         case 1:
             m_level1->update();
-            if(m_level1->GetGameOverState() == true) {
+            if(m_level1->GetGameOverState() == true && ((Util::Time::GetElapsedTimeMs() - m_level1->GetGameOverTime() )>3000.0) ) {
                 m_level1 = std::make_shared<Level1>();
                 m_CurrentState = State::START;
             }
@@ -87,7 +87,7 @@ void App::Update() {
             break;
         case 2:
             m_level2->update();
-            if(m_level2->GetGameOverState() == true) {
+            if(m_level2->GetGameOverState() == true && ((Util::Time::GetElapsedTimeMs() - m_level2->GetGameOverTime() )>3000.0)) {
                 m_level2 = std::make_shared<Level2>();
                 m_CurrentState = State::START;
             }
@@ -98,7 +98,7 @@ void App::Update() {
             break;
         case 3:
             m_level3->update();
-            if(m_level3->GetGameOverState() == true) {
+            if(m_level3->GetGameOverState() == true && ((Util::Time::GetElapsedTimeMs() - m_level3->GetGameOverTime() )>3000.0)) {
                 m_level3 = std::make_shared<Level3>();
                 m_CurrentState = State::START;
             }
@@ -110,7 +110,7 @@ void App::Update() {
             break;
         case 4:
             m_level4->update();
-            if(m_level4->GetGameOverState() == true) {
+            if(m_level4->GetGameOverState() == true && ((Util::Time::GetElapsedTimeMs() - m_level4->GetGameOverTime() )>3000.0)) {
                 m_level4 = std::make_shared<Level4>();
                 m_CurrentState = State::START;
             }

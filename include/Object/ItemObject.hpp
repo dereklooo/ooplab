@@ -19,7 +19,8 @@ enum ItemType {
     Item_Coin,
     Item_Coins,
     Item_OutSideCoin,
-    Item_Axe
+    Item_Axe,
+    null
 };
 class ItemObject : public StillObject {
 public:
@@ -49,6 +50,9 @@ public:
     }
     ItemType GetType() const {
         return type;
+    }
+    void SetType(const ItemType type) {
+        this->type = type;
     }
     virtual void ChangeMarioState(std::shared_ptr<Mario> &mario) = 0;
 protected:

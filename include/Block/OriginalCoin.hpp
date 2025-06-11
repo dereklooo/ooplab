@@ -16,5 +16,7 @@ class OriginalCoin : public SceneObject {
     private:
         int Coin = 0;
         std::vector<std::shared_ptr<Coin_Item>> Coins;
+
+
 };
 #endif //ORIGINALCOIN_HPP

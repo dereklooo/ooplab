@@ -36,7 +36,7 @@
 
         this->SetSize({1.4,1.4});
         this->Type = Small;
-        hurt_sound->SetVolume(40);
+
     };
 void Mario::UpDateCurrentState(const Action act) {
     if(Type == Small) {
@@ -138,7 +138,7 @@ void Mario::Hurt() {
         this->UpDateCurrentState(Die);
         this->SetGravity(-10.0);
         this->SetCanMove(false);
-        hurt_sound->Play();
+
     }
     else if(this->Type == Big){
         this->UpDateCurrentState(BigToSmall);

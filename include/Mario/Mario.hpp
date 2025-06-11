@@ -168,7 +168,6 @@ class Mario final : public AnimationObject{
         Action CurrentState;
         Type Type;
         float horizontalAcceleration = 0.0f;
-    std::shared_ptr<Util::SFX> hurt_sound=std::make_shared<Util::SFX>(RESOURCE_DIR "/sound/08. Lost a Life.mp3");
 
 };
 #endif //m_MARIO_HPP

@@ -42,5 +42,7 @@ class MarioManager {
     std::shared_ptr<Util::SFX> bigjump_sound=std::make_shared<Util::SFX>(RESOURCE_DIR "/sound/bigjump.mp3");
     std::shared_ptr<Util::SFX> smalljump_sound=std::make_shared<Util::SFX>(RESOURCE_DIR "/sound/smalljump.mp3");
     std::shared_ptr<Util::SFX> shoot_sound=std::make_shared<Util::SFX>(RESOURCE_DIR "/sound/fireball.mp3");
+    std::shared_ptr<Util::SFX> breakblock_sound=std::make_shared<Util::SFX>(RESOURCE_DIR "/sound/breakblock.mp3");
+
 };
 #endif //MARIOMANAGER_HPP

@@ -23,5 +23,7 @@ void LuckyBlock::hit(const std::shared_ptr<Mario> &Mario) {
                 this->Item->SetFallingTime(Util::Time::GetElapsedTimeMs());
                 this->Item->SetStartPopTime(Util::Time::GetElapsedTimeMs());
                 this->GotHit = true;
+                //this->Item->SetType(null);
+
         }
 }

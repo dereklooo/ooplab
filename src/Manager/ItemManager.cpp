@@ -47,6 +47,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
                     std::shared_ptr<ItemObject> temp = nullptr;
                     switch(type) {
                         case(Item_Mushroom):
+
                             temp = std::make_shared<Mushroom_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
                             break;
                         case(Item_FireFlower):

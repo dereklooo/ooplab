@@ -66,6 +66,9 @@ class SceneObject : public StillObject{
                 }
             }
         };
+        bool GetGotHit() {
+            return this->GotHit;
+        };
     protected:
         bool GotHit = false;
         float BouncingTimer = 0;

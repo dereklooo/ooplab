@@ -9,6 +9,8 @@
 #include "Block/HorizontalPipe_64_64.hpp"
 #include "Monsters/Red_turtle.hpp"
 #include "Monsters/Fly_turtle.hpp"
+#include "Mario/Mario.hpp"
+
 
 MarioManager::MarioManager(
             std::shared_ptr<Mario> &Mario,
@@ -26,7 +28,7 @@ MarioManager::MarioManager(
     bigjump_sound->SetVolume(40);
     smalljump_sound->SetVolume(40);
     shoot_sound->SetVolume(40);
-
+    breakblock_sound->SetVolume(40);
             }
 void MarioManager::HandleBlock() const {
     if(Mario_->GetWCollision() == false) {
@@ -103,10 +105,16 @@ void MarioManager::HandleBlock() const {
             else if((Mario_->UpCollision(block) && Mario_->GetGravity() <= 0) && Mario_->GetTouchFlagFlag()==false) {
                 Mario_->SetPosition({Mario_->GetPosition().x, block->GetPosition().y - abs(block->GetScaledSize().y / 2) - abs(Mario_->GetScaledSize().y / 2) - 5});
                 Mario_->SetGravity(2);
-                block->hit(Mario_);
-                if (block->GetType() == BlockType::Lucky && (block->GetItem()->GetType()==Item_Coins||block->GetItem()->GetType()==Item_Coin)) {
-                    Coin_sound->Play();
+                if (block->GetType() == BlockType::Lucky &&(block->GetItem()->GetType()==Item_Coins||block->GetItem()->GetType()==Item_Coin)&& block->GetGotHit()==false) {
+
+                        Coin_sound->Play();
+
                 }
+                else if ((Mario_->GetType()==Big|| Mario_->GetType()==Fire) && (block->GetType() == BlockType::Original ||block->GetType() == BlockType::Blue_Original)) {
+                    breakblock_sound->Play();
+                }
+                block->hit(Mario_);
+
 
                 //std::cout<<Mario_->GetScore()<<std::endl;
             }
