@@ -25,7 +25,7 @@ public:
     void Action() override;
     void Hurt() override;
 private:
-    TurtleType Turtle_type;
+
     std::shared_ptr<Util::Animation> FlyDrawable = Turtle::GenerateAnimation(2,RESOURCE_DIR "/image/character/monster/fly_turtle/fly",200,100);
 
 };

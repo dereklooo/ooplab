@@ -147,7 +147,7 @@ void MarioManager::HandleItem() const {
                 item->ChangeMarioState(Mario_);
                 item->SetPosition({item->GetPosition().x,item->GetPosition().y - 40000});
                 Mario_->AddScore(300);
-                if ((item->GetType()==ItemType::Item_Coins || item->GetType()==ItemType::Item_Coin ||item->GetType()==ItemType::Item_OutSideCoin)&& item->GetState()==Walking) {
+                if ((item->GetType()==ItemType::Item_OutSideCoin)) {
                     Coin_sound->Play(0);
                 }
                 else if (item->GetType()==ItemType::Item_Mushroom|item->GetType()==ItemType::Item_FireFlower) {
@@ -204,7 +204,7 @@ void MarioManager::HandleMonster(){
                     else if(elapsed - LastHurtingTime > 300.0f ) {
                         LastHurtingTime = elapsed;
                     }
-                    if(Mario_->DownCollision(monster) && !monster->GetDie()) {
+                    if(Mario_->DownCollision(monster) && !monster->GetDie() && Mario_->GetGravity()>0) {
                         monster->Hurt();
                         Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
                         Mario_->SetGravity(-5.5f);
@@ -241,9 +241,11 @@ void MarioManager::HandleMonster(){
                         }
                         case Red_turtle: {
                             const auto temp = std::dynamic_pointer_cast<RedTurtle>(monster);
+                            std::cout << temp->GetTurtleTye() << std::endl;
                             if(temp->GetWCollision() == false) {
                                 break;
                             }
+                            //std::cout << temp->GetTurtleTye() << std::endl;
                             if(temp->GetTurtleTye() == Inside) {
                                 if(Mario_->RightCollision(monster)) {
                                     monster->SetWay(Right);
@@ -268,11 +270,11 @@ void MarioManager::HandleMonster(){
                             if(temp->GetTurtleTye() == Inside) {
                                 if(Mario_->RightCollision(monster)) {
                                     monster->SetWay(Right);
-                                    monster->SetPosition({monster->GetPosition().x + 20,monster->GetPosition().y});
+                                    monster->SetPosition({monster->GetPosition().x + 40,monster->GetPosition().y});
                                 }
                                 else if(Mario_->LeftCollision(monster)) {
                                     monster->SetWay(Left);
-                                    monster->SetPosition({monster->GetPosition().x - 20,monster->GetPosition().y});
+                                    monster->SetPosition({monster->GetPosition().x - 40,monster->GetPosition().y});
                                 }
                                 monster->Hurt();
                             }
@@ -295,10 +297,14 @@ void MarioManager::HandleMonster(){
                         hitmonster_sound->Play();
                     }
                     monster->Hurt();
+
                     Mario_->AddScore(200);
                     Mario_->SetPosition({Mario_->GetPosition().x,Mario_->GetPosition().y + 10});
                     Mario_->SetGravity(-7.5f);
 
+                }
+                else if (Mario_->UpCollision(monster) ) {
+                    Mario_->Hurt();
                 }
             }
         }

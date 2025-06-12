@@ -3,7 +3,7 @@
 //
 #include "Item/Axe.hpp"
 Axe::Axe(const glm::vec2 &position) : ItemObject(position,RESOURCE_DIR"/image/character/Item/Axe.png"){
-
+type=Item_Axe;
 }
 void Axe::Action() {
     this->SetWCollision(true);

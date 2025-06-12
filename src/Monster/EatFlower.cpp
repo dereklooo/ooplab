@@ -7,7 +7,7 @@
 EatFlower::EatFlower(glm::vec2 position,std::shared_ptr<Mario>& Mario) : Monster(2,RESOURCE_DIR"/image/character/monster/EatFlower/EatFlower") {
     this->type = Eat_flower;
     this->mario = Mario;
-    this->SetZIndex(100);
+    this->SetZIndex(99);
     this->SetPosition(position);
     this->SetWCollision(false);
     this->OriginalPosition = position;

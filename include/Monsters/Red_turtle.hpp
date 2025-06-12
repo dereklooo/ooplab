@@ -22,8 +22,7 @@ public:
     };
     void Action() override;
     void Hurt() override;
-private:
-    TurtleType Turtle_type;
+
 };
 
 #endif //RED_TURTLE_HPP

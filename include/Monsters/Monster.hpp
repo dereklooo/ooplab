@@ -20,7 +20,7 @@ enum MonsterType {
 };
 
 enum TurtleType {
-    OutSide,
+    OutSide=0,
     Inside,
     Rolling,
     Flying

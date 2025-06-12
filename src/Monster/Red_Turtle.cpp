@@ -2,7 +2,12 @@
 // Created by 羅健文 on 2025/6/2.
 //
 #include "Monsters/Red_Turtle.hpp"
+
+#include <iostream>
+#include <ostream>
+
 void RedTurtle::Action() {
+    //std::cout << this->Turtle_type << std::endl;
     if(this->Die == false) {
         if(Turtle_type == OutSide) {
             if(this->way == Way::Left) {
@@ -76,4 +81,5 @@ void RedTurtle::Hurt() {
         this->StartHurtTimer = Util::Time::GetElapsedTimeMs();
         this->Turtle_type = Inside;
     }
+    std::cout << this->Turtle_type << std::endl;
 }
