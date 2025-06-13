@@ -66,7 +66,7 @@ void BlockManager::SetBlock(std::vector<glm::vec2> &positions, const BlockType t
             case BlockType::HorizontalElevator: block = std::make_shared<HorizontalElevator>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));break;
 
            }
-        block->SetZIndex(100);
+        block->SetZIndex(99);
         if(type == BlockType::Blue_Floor || type == BlockType::Pipe_64_64 || type == BlockType::Pipe_64_96 || type == BlockType::Pipe_64_128 || type == BlockType::LongPipe || type == BlockType::HorizontalPipe_64_64) {
             block->SetSize({1.65,1.5});
         }

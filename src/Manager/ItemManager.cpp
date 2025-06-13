@@ -24,7 +24,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
             const auto temp = std::make_shared<OutSideCoin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
             temp->SetSize({1.5,1.5});
             temp->SetVisible(true);
-            temp->SetZIndex(100);
+            temp->SetZIndex(99);
             (*Items)[type].push_back(temp);
             continue;
         }
@@ -32,7 +32,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
             auto temp = std::make_shared<Axe>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
             temp->SetSize({1.5,1.5});
             temp->SetVisible(true);
-            temp->SetZIndex(100);
+            temp->SetZIndex(99);
             const auto T = std::static_pointer_cast<Axe>(temp);
             for(auto &bridge : (*Blocks)[BlockType::Bridge]) {
                 T->ConnectToBlock(bridge);
@@ -62,7 +62,7 @@ void ItemManager::SetItem(std::vector<glm::vec2>& Position, const ItemType type)
                         case(Item_Coins):{
                             const auto Temp = std::dynamic_pointer_cast<OriginalCoin>(block);
                             const auto Coin = std::make_shared<Coin_Item>(glm::vec2(MapPosition.x + pos.x * 48 , MapPosition.y + pos.y * 48));
-                            Coin->SetZIndex(100);
+                            Coin->SetZIndex(99);
                             Coin->SetSize({1.5,1.5});
                             Coin->SetVisible(false);
                             Coin->SetWCollision(false);
