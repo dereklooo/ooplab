@@ -62,6 +62,9 @@ public:
     float GetGameOverTime() {
         return GameOvertime;
     }
+    void SetCurrentLives(const int lives) {
+        Live=lives;
+    }
 protected:
     bool GameOver = false;
     bool NextLevelFlag = false;
@@ -78,7 +81,7 @@ protected:
     float GameOvertime=0.0;
     std::shared_ptr<ManagerManager> m_ManagerManager;
     size_t Condition_num = 1;
-
+    int Live;
 
 };
 #endif //LEVEL_HPP

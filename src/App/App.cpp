@@ -78,51 +78,83 @@ void App::Update() {
             if(m_level1->GetGameOverState() == true && ((Util::Time::GetElapsedTimeMs() - m_level1->GetGameOverTime() )>3000.0) ) {
                 m_level1 = std::make_shared<Level1>();
                 m_CurrentState = State::START;
+                live--;
             }
              if (m_level1->GetNextLevelFlag()==true) {
                  level++;
                  m_renderer=std::make_shared<Util::Renderer>();
                  m_CurrentState = State::START;
              }
+            m_level1->SetCurrentLives(live);
             break;
         case 2:
             m_level2->update();
             if(m_level2->GetGameOverState() == true && ((Util::Time::GetElapsedTimeMs() - m_level2->GetGameOverTime() )>3000.0)) {
                 m_level2 = std::make_shared<Level2>();
                 m_CurrentState = State::START;
+                live--;
             }
             if (m_level2->GetNextLevelFlag()==true) {
                 level++;
                 m_CurrentState = State::START;
             }
+        m_level2->SetCurrentLives(live);
             break;
         case 3:
             m_level3->update();
             if(m_level3->GetGameOverState() == true && ((Util::Time::GetElapsedTimeMs() - m_level3->GetGameOverTime() )>3000.0)) {
                 m_level3 = std::make_shared<Level3>();
                 m_CurrentState = State::START;
+                live--;
             }
             if (m_level3->GetNextLevelFlag()==true) {
 
                 level++;
                 m_CurrentState = State::START;
             }
+        m_level3->SetCurrentLives(live);
             break;
         case 4:
             m_level4->update();
             if(m_level4->GetGameOverState() == true && ((Util::Time::GetElapsedTimeMs() - m_level4->GetGameOverTime() )>3000.0)) {
                 m_level4 = std::make_shared<Level4>();
                 m_CurrentState = State::START;
+                live--;
             }
             if (m_level4->GetNextLevelFlag()==true) {
 
                 level++;
                 m_CurrentState = State::START;
             }
+        m_level4->SetCurrentLives(live);
+            break;
+        case 5:
+            m_Background = std::make_shared<StillObject> (RESOURCE_DIR "/image/Background/END/gameover.png");
+        m_Background->SetPosition({0,0});
+        m_Background->SetZIndex(49);
+        m_Background->SetSize({1.6,1.2});
+        m_renderer = std::make_shared<Util::Renderer>();
+        m_renderer->AddChild(m_Background);
+
+        m_renderer->Update();
+        if (Util::Time::GetElapsedTimeMs()-EndTime>=5000.0) {
+            EndTime = 0.0;
+            m_level1 = std::make_shared<Level1>();
+            m_CurrentState = State::START;
+            live=3;
+            level=1;
+        }
             break;
         default: ;
     }
 
+    if (live==0 & EndTime==0.0) {
+        level=5;
+        END_BGM->SetVolume(40);
+        END_BGM->Play();
+        EndTime = Util::Time::GetElapsedTimeMs();
+
+    }
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
         m_CurrentState = State::END;

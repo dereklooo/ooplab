@@ -13,9 +13,14 @@
         this->images.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/TimerandScore/7.png"));
         this->images.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/TimerandScore/8.png"));
         this->images.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/TimerandScore/9.png"));
+        this->images.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/TimerandScore/L.png"));
+        this->images.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/TimerandScore/I.png"));
+        this->images.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/TimerandScore/V.png"));
+        this->images.push_back(std::make_shared<Util::Image>(RESOURCE_DIR"/image/Background/TimerandScore/E.png"));
 
 
-        this->score = 0;
+
+
         this->SetZIndex(50);
 }
 void Score::SetScore(const int score) {
@@ -50,11 +55,20 @@ void Score::SetScore(const int score) {
         case 9:
             this->SetDrawable(this->images[9]);
             break;
+        case 10:
+            this->SetDrawable(this->images[10]);
+        break;
+        case 11:
+            this->SetDrawable(this->images[11]);
+        break;
+        case 12:
+            this->SetDrawable(this->images[12]);
+        break;
+        case 13:
+            this->SetDrawable(this->images[13]);
+        break;
         default:
             break;
     }
-    this->score = score;
-}
-int Score::GetScore() const {
-    return score;
+
 }

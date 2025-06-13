@@ -9,9 +9,9 @@ class Score final : public StillObject{
     public:
         Score();
         void SetScore(int score);
-        int GetScore() const;
+
     private:
-        int score;
+
         std::vector<std::shared_ptr<Util::Image>> images;
 };
 #endif //SCORE_HPP

@@ -26,14 +26,16 @@ class ManagerManager {
         std::vector<std::shared_ptr<FireBall>>& FireBalls,
         std::shared_ptr<Mario> &Mario,
         std::shared_ptr<Util::Renderer>& Renderer,
-        std::shared_ptr<Map> &Background) :
+        std::shared_ptr<Map> &Background,
+        int* Live) :
         Items(Items),
         Blocks(Blocks),
         FireBalls(FireBalls),
         Monsters(Monsters),
         Background(Background),
         Renderder_(Renderer),
-        Mario(Mario){
+        Mario(Mario),
+        Lives(Live){
             GravityManager_ = std::make_shared<GravityManager>(Mario,FireBalls,Blocks,Monsters,Items);
             BlockManager_ = std::make_shared<BlockManager>(Background->GetPosition(), Background->GetScaledSize(),Blocks);
             MarioManager_ = std::make_shared<MarioManager>(Mario,Blocks,Monsters,Items);
@@ -43,8 +45,9 @@ class ManagerManager {
             FireBallManager_ = std::make_shared<FireBallManager>(Mario,Renderer,FireBalls,Blocks,Monsters);
             FlagManager_= std::make_shared<FlagManager>(Mario,Renderer,Blocks,Background);
             ElevatorManager_ = std::make_shared<ElevatorManager>(Blocks,Mario);
-            TimeScoreManager_ = std::make_shared<TimeScoreManager>(Mario,Util::Time::GetElapsedTimeMs());
-            TrapFireBallManager_ = std::make_shared<TrapFireBallManager>(Mario,Background->GetPosition(),Background->GetScaledSize());
+            TimeScoreManager_ = std::make_shared<TimeScoreManager>(Mario,Util::Time::GetElapsedTimeMs(),Lives);
+            TrapFireBallManager_ = std::make_shared<TrapFireBallManager>(Mario,Background->GetPosition(),Background->GetScaledSize()
+                );
     };
     void SetBlock(std::vector<glm::vec2> &positions, const BlockType type) const{
         BlockManager_->SetBlock(positions, type);
@@ -112,6 +115,6 @@ class ManagerManager {
         std::shared_ptr<ElevatorManager> ElevatorManager_;
         std::shared_ptr<TimeScoreManager> TimeScoreManager_;
         std::shared_ptr<TrapFireBallManager> TrapFireBallManager_;
-
+    int* Lives;
 };
 #endif //MANAGERMANAGER_HPP

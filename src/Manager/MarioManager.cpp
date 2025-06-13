@@ -337,12 +337,13 @@ void MarioManager::MarioInputCtl() const {
         if (Mario_->GetAcceleration()==0 && !Mario_->GetFalling()) {
             Mario_->SetCurrentState(Stand);
         }
-        if(Util::Input::IsKeyDown(Util::Keycode::W)) {
-            smalljump_sound->Play();
-        }
+
         if(Util::Input::IsKeyPressed(Util::Keycode::W)) {
             Mario_->Jump();
             Mario_->SetCurrentState(Action::Jump);
+            if(Mario_->GetFalling()==false) {
+            smalljump_sound->Play();
+        }
 
         }
         if(Util::Input::IsKeyPressed(Util::Keycode::S)) {

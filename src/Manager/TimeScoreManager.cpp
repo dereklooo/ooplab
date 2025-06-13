@@ -6,10 +6,11 @@
 #include <iostream>
 #include <ostream>
 
-TimeScoreManager::TimeScoreManager(const std::shared_ptr<Mario> &Mario, const float GameStartTime) :
+TimeScoreManager::TimeScoreManager(const std::shared_ptr<Mario> &Mario, const float GameStartTime,int* Live) :
 GameStartTime(GameStartTime),
 Score_(0),
-Mario_(Mario){
+Mario_(Mario),
+Lives( Live){
     for (int i = 0;i < 5 ; i++) {
         auto temp2 = std::make_shared<Timer>();
         temp2->SetPosition({-75 + 30 * i,340});
@@ -18,6 +19,21 @@ Mario_(Mario){
         temp2->SetZIndex(100);
         Timers.push_back(temp2);
     }
+
+    for (int i = 0;i < 4 ; i++) {
+        auto temp2 = std::make_shared<Score>();
+        temp2->SetPosition({145 + 30 * i,340});
+        temp2->SetSize({1.5,2});
+        temp2->SetZIndex(100);
+        Scores.push_back(temp2);
+    }
+    auto temp2 = std::make_shared<Score>();
+    temp2->SetPosition({145 + 30 * 5,340});
+    temp2->SetSize({1.5,2});
+    temp2->SetZIndex(100);
+    Scores.push_back(temp2);
+
+
 }
 
 void TimeScoreManager::Update() const {
@@ -27,6 +43,12 @@ void TimeScoreManager::Update() const {
         this->Timers[4 - i]->SetPosition(Timers[4-i]->GetOriginPosition());
         this->Timers[4 - i]->SetTime(temp % 10);
     }
+    for (int i = 0;i < 4 ; i++) {
+        this->Scores[i]->SetScore(10+i);
+    }
+    if (Lives != NULL) {Scores[4]->SetScore(*Lives);}
+
+
 }
 
 float TimeScoreManager::GetTimer() const {

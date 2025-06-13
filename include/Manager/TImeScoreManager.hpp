@@ -11,7 +11,7 @@
 
 class TimeScoreManager {
     public:
-        explicit TimeScoreManager(const std::shared_ptr<Mario> &Mario,float GameStartTime);
+        explicit TimeScoreManager(const std::shared_ptr<Mario> &Mario,float GameStartTime,int* Live);
         void Update() const;
         float GetTimer() const;
         int GetScore() const;
@@ -22,6 +22,7 @@ class TimeScoreManager {
         std::shared_ptr<Mario> Mario_;
         std::vector<std::shared_ptr<Score>> Scores;
         std::vector<std::shared_ptr<Timer>> Timers;
+    int* Lives;
 
 };
 #endif //TIMESCOREMANAGER_HPP

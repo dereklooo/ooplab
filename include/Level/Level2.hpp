@@ -10,7 +10,7 @@ public:
     Level2() : Level() {
         m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level2/level_2.png",glm::vec2(-3216,784),glm::vec2(-640,360));
         m_Bgm=std::make_shared<Util::BGM>(RESOURCE_DIR "/sound/02. Underground Theme.mp3");
-        m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
+        m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background,&Live);
 
          m_ManagerManager->SetFloor(FloorBlock, FloorBlockSize);
         m_ManagerManager->SetBlock(LuckyBLock, BlockType::Lucky);

@@ -10,7 +10,7 @@
     public:
         Level4() : Level() {
             m_Background = std::make_shared<Map>(RESOURCE_DIR "/image/Background/Level4/level_4.png",glm::vec2(-2561,240),glm::vec2(-640,360));
-            m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background);
+            m_ManagerManager = std::make_shared<ManagerManager>(Items,Blocks,Monsters,FireBalls,m_Mario,m_renderer,m_Background,&Live);
             m_ManagerManager->SetFloor(FloorBlock, FloorBlockSize);
             m_ManagerManager->SetBlock(AirBlock,BlockType::Air);
             m_ManagerManager->SetBlock(LuckyBLock,BlockType::Lucky);
@@ -50,6 +50,7 @@
                 m_renderer->AddChild(T->GetFireBall());
                 Condition_num += 1;
             }
+
         }
     private:
         std::vector<glm::vec2> FloorBlock = {{6.5,-12.5},{20.5,-12.5}};

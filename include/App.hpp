@@ -2,6 +2,7 @@
 #define APP_HPP
 
 #include "AllInclude.hpp"
+#include "Util/BGM.hpp"
 namespace Util::Logger {
     enum class Level;
 }
@@ -53,7 +54,11 @@ private:
 
     State m_CurrentState = State::Title;
 
-    size_t level = 4;
+    size_t level = 1;
 
+    int live=3;
+
+        std::shared_ptr<Util::BGM> END_BGM =std::make_shared<Util::BGM>(RESOURCE_DIR "/sound/09. Game Over.mp3");
+    float EndTime = 0.0f;
 };
 #endif

@@ -50,6 +50,7 @@ void Axe::Action() {
         }
         else if(DeltaTime > 6500) {
             Mario_->SetCanMove(true);
+
         }
     }
 }
