@@ -26,6 +26,9 @@ public:
         m_ManagerManager->SetBlock(Elevator_Up,BlockType::Elevator_Up);
         m_ManagerManager->SetBlock(HorizontalPipe_64_64,BlockType::HorizontalPipe_64_64);
         m_ManagerManager->SetBlock(LongPipe,BlockType::LongPipe);
+        m_ManagerManager->SetBlock(Flag,BlockType::flag);
+        m_ManagerManager->SetBlock(FlagBall,BlockType::flagball);
+        m_ManagerManager->SetBlock(FlagPole,BlockType::flagpole);
 
         m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
         m_ManagerManager->SetItem(Item_Coins, ItemType::Item_Coins);
@@ -252,6 +255,11 @@ private:
     std::vector<glm::vec2> NextPipePos = {
         {0,0},{0,0},{125.5,-29},{163.0,-12.5}
     };
+
+    std::vector<glm::vec2> Flag = {{181, -2.5}};
+    std::vector<glm::vec2> FlagBall = {{181.5, -1.5}};
+    std::vector<glm::vec2> FlagPole = {{181.5, -11.5},{181.5 ,-10.5},{181.5, -9.5},{181.5, -8.5},{181.5, -7.5},{181.5, -6.5},{181.5, -5.5},{181.5, -4.5},{181.5, -3.5},{181.5, -2.5}};
+
 
 };
 #endif //LEVEL2_HPP
