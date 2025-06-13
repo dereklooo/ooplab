@@ -15,6 +15,7 @@
             m_ManagerManager->SetBlock(AirBlock,BlockType::Air);
             m_ManagerManager->SetBlock(LuckyBLock,BlockType::Lucky);
             m_ManagerManager->SetBlock(Bridge,BlockType::Bridge);
+            m_ManagerManager->SetElevator({136.5,-6.5},48*3,Way::Left);
             m_ManagerManager->SetItem(Item_Coin, ItemType::Item_Coin);
             m_ManagerManager->SetItem(Item_Mushroom, ItemType::Item_Mushroom);
             m_ManagerManager->SetItem(Item_Axe,ItemType::Item_Axe);
