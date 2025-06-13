@@ -23,7 +23,7 @@ Lives( Live){
     for (int i = 0;i < 4 ; i++) {
         auto temp2 = std::make_shared<Score>();
         temp2->SetPosition({145 + 30 * i,340});
-        temp2->SetSize({1.5,2});
+        temp2->SetSize({1.25,1.75});
         temp2->SetZIndex(100);
         Scores.push_back(temp2);
     }
